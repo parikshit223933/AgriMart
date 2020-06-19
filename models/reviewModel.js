@@ -1,4 +1,4 @@
-const mongoose   = require("mongoose");
+const mongoose = require("mongoose");
 
 //Reviw Schema
 let reviewSchema = new mongoose.Schema({
@@ -16,13 +16,10 @@ let reviewSchema = new mongoose.Schema({
         type: String
     },
 
-    // author id and username fields
+    // author
     author: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        username: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
 
     // Product associated with the review
