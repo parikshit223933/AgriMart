@@ -10,6 +10,9 @@ let productSchema = new mongoose.Schema({
     
     description: String,
 
+    category: String,
+    
+    minimumOrderQuantity : Number,
     //rating of the product
     rating: {
         type: Number,

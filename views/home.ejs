@@ -1,1 +1,18 @@
 <h1>This will be the home page.</h1>
+ 
+<div class= "container">
+    <a class="btn btn-primary" href="/products/new">Add new product</a>
+ <div class="row">
+  <% products.forEach(function(product){ %>
+    <div class="col-md-3 col-sm-6">
+       <p> Product name: <%= product.name %> </p>
+       <img src="<%= product.image %> " alt="">
+      
+       <p> Category: <%= product.category %>  </p>
+       <p> Description: <%= product.description %>  </p>
+       <p> Price: <%= product.price%>  </p>
+       <p> Minimum quantity <%= product. minimumOrderQuantity%>  </p>
+    </div> 
+  <% }); %> 
+ </div>
+</div> 
