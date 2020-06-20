@@ -1,4 +1,5 @@
 var Product = require("../models/productModel");
+const { render } = require("ejs");
 
 module.exports.newProduct = async (req, res)=>
 {
@@ -24,4 +25,21 @@ module.exports.postNewProduct = async (req, res)=>
     catch(err){
         console.log(`there is an errr ${err}`);
     } 
+}
+
+module.exports.showPageProduct = async (req, res)=>
+{
+  try{
+      var product = await Product.findById(req.params.id);
+      var options =
+      {
+        title: "AgriMart",
+        product : product
+      };
+     
+      return res.render('products/showPageProduct', options);
+  }
+  catch(err){
+      console.log(`there is an errr ${err}`);
+  } 
 }

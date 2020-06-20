@@ -4,15 +4,15 @@
     <a class="btn btn-primary" href="/products/new">Add new product</a>
  <div class="row">
   <% products.forEach(function(product){ %>
-    <div class="col-md-3 col-sm-6">
-       <p> Product name: <%= product.name %> </p>
-       <img src="<%= product.image %> " alt="">
-      
-       <p> Category: <%= product.category %>  </p>
-       <p> Description: <%= product.description %>  </p>
-       <p> Price: <%= product.price%>  </p>
-       <p> Minimum quantity <%= product. minimumOrderQuantity%>  </p>
-    </div> 
+   <div class="col-md-3 col-sm-6 ">
+      <div class="card" style="width: 16rem;  margin-right:10px;">
+          <img class="card-img-top" src="<%= product.image %>" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"> <%= product.name %> </h5>
+            <a href="/products/<%=product._id %>" class="btn btn-primary">more info</a>
+          </div>
+        </div>
+  </div> 
   <% }); %> 
  </div>
 </div> 
