@@ -1,43 +1,42 @@
-const mongoose   = require("mongoose");
+const mongoose = require("mongoose");
 
 //Product Schema
 let productSchema = new mongoose.Schema({
-    name: String,
-
-    image: String,
-
-    price: Number,
-    
-    description: String,
-
-    category: String,
-    
-    minimumOrderQuantity : Number,
-    //rating of the product
+    name: {
+        type: String
+    },
+    image: {
+        type: String
+    },
+    price: {
+        type: Number
+    },
+    description: {
+        type: String
+    },
+    category: {
+        type: String
+    },
+    minimumOrderQuantity: {
+        type: Number
+    },
     rating: {
         type: Number,
         default: 0,
         min: 0,
         max: 5,
     },
-
-    //reviews of the product
     reviews: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Review"
         }
     ],
-
-    //seller of the produt
-    seller: 
+    seller:
     {
-        id:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        email: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }
 });
 
-module.exports = mongoose.model("Product",productSchema);
+module.exports = mongoose.model("Product", productSchema);
