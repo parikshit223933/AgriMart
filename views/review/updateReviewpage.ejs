@@ -1,0 +1,12 @@
+<form action="/product/<%= product._id %>/review/<%= review._id %>/update?_method=PUT" 
+      method="POST"
+>
+  <label for="">Comment: </label> 
+  <input type="text" name="review[comment]" value="<%= review.comment %>">
+
+  <label for="">Rate: </label>
+  <input type="number" name="review[rating]" step="0.1" value="<%= review.rate %> ">
+
+  <button type="submit" class="btn btn-success">Submit</button>
+
+</form>

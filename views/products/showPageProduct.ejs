@@ -5,10 +5,44 @@
         <p> Product name: <%= product.name %> </p>
         <img src="<%= product.image %> " alt="">
        
+        <p> Rating: <%= product.rating %>  </p>
         <p> Category: <%= product.category %>  </p>
         <p> Description: <%= product.description %>  </p>
         <p> Price: <%= product.price%>  </p>
         <p> Minimum quantity <%= product. minimumOrderQuantity%>  </p>
        
-     </div> 
+    </div> 
+    <div class="card bg-light" id="review_card">
+      <div class="card-body">
+        <h3 class="card-title">REVIEWS</h3>
+        <hr>
+      </div> 
+      <form action="/product/<%= product._id %>/review/add" method="POST">
+        <label for="">Comment: </label> 
+        <input type="text" name="review[comment]">
+        <label for="">Rate: </label>
+        <input type="number" name="review[rating]" min="0.1" max="5" step="0.1">
+        <button>Submit</button>
+      </form>
+      <hr>
+        <% product.reviews.forEach((review) => { %> 
+          <div class="row">
+            <div class="col-md-12">
+              <!-- <strong> <span style="font-style: italic;"> <%= //review.author.email %> </span> </strong>
+              <span class="float-right"><%= //moment(review.createdAt).fromNow() %></span> -->
+              <p> <%= review.comment %> </p>
+              <p>Rate: <%= review.rating %> </p>
+              <% //if(currentUser &&  review.author.id.equals(currentUser._id)) { %> 
+                <a href="/product/<%= product._id %>/review/<%= review._id %>/edit">
+                  <button class="btn btn-sm btn-warning">Edit</button>
+                </a>
+                <form id="deleteComment" action="/product/<%= product._id %>/review/<%= review._id %>/delete?_method=DELETE" method="POST">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button class="btn btn-sm btn-danger">Delete</button> 
+                </form>
+              <% //} %> 
+            </div>
+          </div>
+        <% }) %>
+      </div>
 </div> 

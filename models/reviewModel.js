@@ -2,18 +2,18 @@ const mongoose = require("mongoose");
 
 //Reviw Schema
 let reviewSchema = new mongoose.Schema({
+    // comment and rating 
+    comment: {
+        type: String,
+        required: true
+    },
+
     rating: {
         type: Number,
         required: true,
-        // Defining min and max values
+        // Define min and max values
         min: 1,
         max: 5
-    },
-
-    // review text
-    text: {
-        required: true,
-        type: String
     },
 
     // author
@@ -23,7 +23,7 @@ let reviewSchema = new mongoose.Schema({
     },
 
     // Product associated with the review
-    Product: {
+    product: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product"
     }

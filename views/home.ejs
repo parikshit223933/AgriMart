@@ -1,7 +1,7 @@
 <h1>This will be the home page.</h1>
  
 <div class= "container">
-    <a class="btn btn-primary" href="/products/new">Add new product</a>
+    <a class="btn btn-primary" href="/product/new">Add new product</a>
  <div class="row">
   <% products.forEach(function(product){ %>
    <div class="col-md-3 col-sm-6 ">
@@ -9,7 +9,7 @@
           <img class="card-img-top" src="<%= product.image %>" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"> <%= product.name %> </h5>
-            <a href="/products/<%=product._id %>" class="btn btn-primary">more info</a>
+            <a href="/product/<%=product._id %>" class="btn btn-primary">more info</a>
           </div>
         </div>
   </div> 

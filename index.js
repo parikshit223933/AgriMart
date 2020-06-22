@@ -1,15 +1,16 @@
-const express=require('express');
-const cookieParser=require('cookie-parser');
-const app=express();
-const port=8000;
-const routes=require('./routes');
-const expressLayouts=require('express-ejs-layouts');
-const db=require('./config/mongoose');
+const express               = require('express');
+const cookieParser          = require('cookie-parser');
+const app                   = express();
+const port                  = 8000;
+const methodOverride        = require("method-override"); //support PUT or DELETE
+const routes                = require('./routes');
+const expressLayouts        = require('express-ejs-layouts');
+const db                    = require('./config/mongoose');
 /* used for session cookie */
-const session=require('express-session');
-const flash=require('connect-flash');
-const mongoStore=require('connect-mongo')(session);
-const sassMiddleware=require('node-sass-middleware');
+const session               = require('express-session');
+const flash                 = require('connect-flash');
+const mongoStore            = require('connect-mongo')(session);
+const sassMiddleware        = require('node-sass-middleware');
 
 /* conversion of sass to css */
 app.use(sassMiddleware(
@@ -46,6 +47,7 @@ app.use(session(
 ));
 
 app.use(express.urlencoded({extended:true}));
+app.use(methodOverride("_method"));
 app.use(cookieParser());
 app.use(expressLayouts);
 

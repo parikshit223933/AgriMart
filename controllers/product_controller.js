@@ -19,7 +19,7 @@ module.exports.postNewProduct = async (req, res)=>
     try{
         var newProduct = req.body.product;
         var product = await Product.create(newProduct);
-        console.log(product);
+        console.log("******NEW PRODUCT******", product);
         return res.redirect('/');
     }
     catch(err){
@@ -30,7 +30,7 @@ module.exports.postNewProduct = async (req, res)=>
 module.exports.showPageProduct = async (req, res)=>
 {
   try{
-      var product = await Product.findById(req.params.id);
+      var product = await Product.findById(req.params.product_id).populate("reviews").exec();
       var options =
       {
         title: "AgriMart",
