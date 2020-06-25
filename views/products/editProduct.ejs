@@ -1,0 +1,24 @@
+<form action="/product/<%= product._id %>/update?_method=PUT" method="POST" style="width :30%;">
+    <input type="hidden" name="_method" value="PUT">
+    <div class="form-group">
+        <input class="form-control" type="text" name="product[name]" value="<%= product.name %>">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="number" name="product[price]" value="<%= product.price %>" min="0.01" step="0.01">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" name="product[image]" value="<%= product.image %>">
+    </div>
+    <div class="form-group">
+    <input class="form-control" type="text" name="product[description]" value="<%= product.description %>" placeholder="description">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" name="product[category]" value="<%= product.category %>"  placeholder="category">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="number" name="product[minimumOrderQuantity]" value="<%= product.minimumOrderQuantity %>" placeholder="Minimum Order Quantity">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+    </div>
+</form>

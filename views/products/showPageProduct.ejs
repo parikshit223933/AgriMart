@@ -9,8 +9,12 @@
         <p> Category: <%= product.category %>  </p>
         <p> Description: <%= product.description %>  </p>
         <p> Price: <%= product.price%>  </p>
-        <p> Minimum quantity <%= product. minimumOrderQuantity%>  </p>
-       
+        <p> Minimum quantity <%= product.minimumOrderQuantity%>  </p>
+        <a class="btn btn-warning" href="/product/<%= product._id %>/edit">Edit</a>
+        <form action="/product/<%=product._id%>/delete?_method=DELETE" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <button class='btn btn-danger' >Delete</button>
+        </form>
     </div> 
     <div class="card bg-light" id="review_card">
       <div class="card-body">
