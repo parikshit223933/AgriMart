@@ -1,1 +1,14 @@
 <h1>This is the header</h1>
+<div style="border:2px solid black">
+    <h1>Passport controls</h1>
+    <div>
+        <%if(locals.user){%>
+            <p style="background-color:yellow">Hello <%=locals.user.name%></p>
+            <a type="button" href="/users/sign_out" class="btn btn-primary">Sign Out</a> 
+            <a type="button" href="/users/profile" class="btn btn-primary">User's Profile</a>    
+        <%}else{%>
+        <a type="button" href="/users/sign_in" class="btn btn-primary">Sign In</a>
+        <a type="button" href="/users/sign_up" class="btn btn-primary">Sign Up</a>
+        <%}%>
+    </div>
+</div>

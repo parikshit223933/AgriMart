@@ -1,3 +1,17 @@
 <h1>
     This is user's profile page.
 </h1>
+<h3>
+    User Data:
+</h3>
+<div>
+    <p>
+        Name: <%=locals.user.name%>
+    </p>
+    <p>
+        Email <%=locals.user.email%>
+    </p>
+    <p>
+        locals.user is present globally now (thanks to passport). you can use it on any page. it will contain all the details of currently logged in user from the suers model.
+    </p>
+</div>

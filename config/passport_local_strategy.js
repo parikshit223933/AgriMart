@@ -43,4 +43,27 @@ passport.deserializeUser(function(id, done)
     });
 });
 
+/* now we want to send the decrypted data of currently logged in user to the views */
+/* here we need to check if the user is authenticated. only then we will send the data to views */
+/* isAuthenticated is a function provided by passport, using this we can check if the request we are recieving is authenticated or not. */
+passport.checkAuthentication=(req, res, next)=>/* yes you guessed it right! this is a middleware! :) we'll be using this function as a middleware in routes */
+{
+    if(req.isAuthenticated())
+    {
+        return next();/*  if the user is authenticated, then proceed to the next function (controller's action) */
+    }
+    /* if the user is not signed in, redirect it to the sign in page. */
+    return res.redirect('/users/sign_in');
+}
+
+passport.setAuthenticatedUser=(req, res, next)=>
+{
+    if(req.isAuthenticated())
+    {
+        /* req.user contains the current signed in user. from the session cookie. and we are just sending this to the locals for the views.*/
+        res.locals.user=req.user
+    }
+    next();
+}
+
 module.exports=passport;

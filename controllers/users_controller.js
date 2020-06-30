@@ -1,23 +1,30 @@
-const User=require('../models/userModel');
+const User = require('../models/userModel');
 
-module.exports.sign_up=(req, res)=>
+module.exports.sign_up = (req, res) =>
 {
-    console.log('hello');
+    if (req.isAuthenticated())/* sign up page wont be available when the user is already logged in */
+    {
+        return res.redirect('/users/profile');
+    }
     return res.render('sign_up', {
-        title:'sign_up | Agrimart'
+        title: 'sign_up | Agrimart'
     });
 }
-module.exports.sign_in=(req, res)=>
+module.exports.sign_in = (req, res) =>
 {
+    if (req.isAuthenticated())/* sign in page wont be available when the user is already logged in */
+    {
+        return res.redirect('/users/profile');
+    }
     return res.render('sign_in', {
-        title:'sign_in | Agrimart'
+        title: 'sign_in | Agrimart'
     });
 }
 
-module.exports.user_profile=(req, res)=>
+module.exports.user_profile = (req, res) =>
 {
     return res.render('user_profile', {
-        title:'User Profile'
+        title: 'User Profile'
     });
 }
 module.exports.create = (req, res) =>
@@ -54,7 +61,14 @@ module.exports.create = (req, res) =>
     })
 
 }
-module.exports.create_session=(req, res)=>
+module.exports.create_session = (req, res) =>
 {
-       
+    return res.redirect('/');
+}
+
+module.exports.destroy_session = (req, res) =>
+{
+    /* the log out function is given to request by passport.js */
+    req.logout();//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    return res.redirect('/users/sign_in');
 }
