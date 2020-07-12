@@ -1,18 +1,27 @@
 import React from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import "../App.css";
-import { Navbar, SignIn, SignUp, Home } from "./";
+import { Navbar, SignIn, SignUp, Home, Cart, Page404, Profile, Categories, Sell, MoreInfo } from "./";
 
 class App extends React.Component {
 	render() {
 		return (
 			<Router>
 				<div className="App">
-					<Navbar />{/* this will be common in all the pages */}
-                    <Route path="/" exact component={Home}/>
-                    <Route path="/sign-in" component={SignIn}/>
-					<Route path="/sign-up" component={SignUp}/>
+					<Navbar />
+					<Switch>
+						<Route path="/" exact component={Home} />
+						<Route path="/profile" exact component={Profile} />
+						<Route path="/sign-in" component={SignIn} />
+						<Route path="/sign-up" component={SignUp} />
+						<Route path="/cart" component={Cart} />
+						<Route path="/categories" component={Categories} />
+						<Route path="/sell" component={Sell} />
+						<Route path="/sell" component={Sell} />
+						<Route path="/more-info" component={MoreInfo} />
+						<Route component={Page404} />
+					</Switch>
 				</div>
 			</Router>
 		);
