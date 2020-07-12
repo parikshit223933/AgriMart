@@ -82,7 +82,7 @@
 	margin: 20px 0px 10px 0px;
 	overflow: hidden;
 }
-.buttons-container-exposed > div {
+.buttons-container-exposed > a {
 	height: 10%;
 	width: 100%;
 	display: flex;
@@ -95,15 +95,23 @@
 	transition: background-color ease-in-out 0.1s;
 }
 
-.buttons-container-exposed > div:hover {
-	background-color: #2d2d46;
-	cursor: default;
+.buttons-container-exposed > a:hover {
+    background-color: #2d2d46;
+    color:orangered;
+    text-shadow: none;
+    cursor: default;
+    text-decoration: none;
 }
 
 .exposed {
 	transform: translate(0rem);
 }
 /* SIGN UP COMPONENT /////////////////////////////////////////////////////////////////// */
+
+.custom-sign-box
+{
+    box-shadow: 0px 0px 1px 1px rgb(223, 223, 223);
+}
 
 .sign-up
 {

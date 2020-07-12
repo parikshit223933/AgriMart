@@ -6,7 +6,7 @@ class SignUp extends React.Component {
 			<div className="sign-up">
 				<div className="container">
 					<div className="row">
-						<div className="col-xl-8 offset-xl-2 col-md-10 offset-md-2 col-sm-12 bg-light mt-5 p-5">
+						<div className="col-xl-8 offset-xl-2 col-md-10 offset-md-2 col-sm-12 bg-light mt-5 p-5 custom-sign-box">
 							<h1 className="text-center">Sign Up</h1>
 							<form>
                             <div className="form-group">
@@ -29,7 +29,8 @@ class SignUp extends React.Component {
 										type="email"
 										className="form-control"
 										id="email"
-										aria-describedby="email"
+                                        aria-describedby="email"
+                                        placeholder="abc@example.com"
 									/>
 									<small
 										id="email"
@@ -46,7 +47,8 @@ class SignUp extends React.Component {
 									<input
 										type="password"
 										className="form-control"
-										id="password"
+                                        id="password"
+                                        placeholder="Enter a new password!"
 									/>
 								</div>
                                 <div className="form-group">
@@ -56,7 +58,8 @@ class SignUp extends React.Component {
 									<input
 										type="password"
 										className="form-control"
-										id="confirm-password"
+                                        id="confirm-password"
+                                        placeholder="Re-enter your password here!"
 									/>
 								</div>
 								<button type="submit" className="btn btn-primary">

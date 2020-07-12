@@ -6,7 +6,7 @@ class SignIn extends React.Component {
 			<div className="sign-in">
 				<div className="container">
 					<div className="row">
-						<div className="col-xl-8 offset-xl-2 col-md-10 offset-md-2 col-sm-12 bg-light mt-5 p-5">
+						<div className="col-xl-8 offset-xl-2 col-md-10 offset-md-2 col-sm-12 bg-light mt-5 p-5 custom-sign-box">
 							<h1 className="text-center">Sign In</h1>
 							<form>
 								<div className="form-group">
@@ -23,7 +23,8 @@ class SignIn extends React.Component {
 									<input
 										type="password"
 										className="form-control"
-										id="password"
+                                        id="password"
+                                        placeholder="Enter your password here!"
 									/>
 								</div>
 								<button
