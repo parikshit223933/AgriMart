@@ -1,14 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import '../App.css';
-import {Navbar} from './';
+import "../App.css";
+import { Navbar, SignIn, SignUp } from "./";
 
-function App() {
-  return (
-    <div className="App">
-        <Navbar/>
-    </div>
-  );
+class App extends React.Component {
+	render() {
+		return (
+			<div className="App">
+				<Navbar />
+                <SignUp/>
+			</div>
+		);
+	}
 }
 
 export default App;
