@@ -1,14 +1,25 @@
 import React from "react";
+import * as $ from "jquery";
 
 class Navbar extends React.Component {
-    componentDidMount()
-    {
-        this.addHoverToNavbar();
-    }
-    addHoverToNavbar=()=>
-    {
-        console.log('hello');
-    }
+	componentDidMount() {
+		this.addHoverToNavbar();
+	}
+	addHoverToNavbar = () => {
+		$(".custom-navbar").mouseenter(function () {
+			$(".exposed-navbar").addClass("exposed");
+		});
+		$(".custom-navbar").mouseleave(function () {
+			$(".exposed-navbar").removeClass("exposed");
+		});
+
+		$(".exposed-navbar").mouseenter(function () {
+			$(".exposed-navbar").addClass("exposed");
+		});
+		$(".exposed-navbar").mouseleave(function () {
+			$(".exposed-navbar").removeClass("exposed");
+		});
+	};
 	render() {
 		return (
 			<React.Fragment>
@@ -38,9 +49,7 @@ class Navbar extends React.Component {
 					</div>
 				</div>
 				<div className="exposed-navbar">
-					<div className="website-name">
-						Agrimart
-					</div>
+					<div className="website-name">Agrimart</div>
 					<div className="buttons-container-exposed">
 						<div className="home-exposed">
 							<div>Home</div>
