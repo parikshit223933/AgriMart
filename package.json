@@ -19,6 +19,7 @@
   "homepage": "https://github.com/parikshit223933/AgriMart#readme",
   "dependencies": {
     "@types/jquery": "^3.3.38",
+    "@types/mongoose": "^5.7.31",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.5",

@@ -8,8 +8,9 @@ const expressLayouts        = require('express-ejs-layouts');
 const db                    = require('./config/mongoose');
 /* used for session cookie */
 const session               = require('express-session');
-const passport              =require('passport');
-const passportLocal         =require('./config/passport_local_strategy');
+const passport              = require('passport');
+const passportLocal         = require('./config/passport_local_strategy');
+const passportJwt           =require('./config/passport-jwt-strategy');
 const flash                 = require('connect-flash');
 const mongoStore            = require('connect-mongo')(session);/* connect mongo is used to store the session information in the database so that the session information dosen't get lost if the server is restarted. */
 const sassMiddleware        = require('node-sass-middleware');
