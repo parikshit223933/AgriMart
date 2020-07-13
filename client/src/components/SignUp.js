@@ -1,7 +1,19 @@
 import React from "react";
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
+import { clearAuthState } from "../actions/auth";
 
 class SignUp extends React.Component {
+    componentWillUnmount()
+    {
+        this.props.dispatch(clearAuthState())//setting error=null when navigating away from the sign up page
+    }
 	render() {
+        const {isLoggedIn}=this.props.auth;
+        if(isLoggedIn)//instead of using private route, I'll just redirect the user to the home page if he is already logged in.
+        {
+            return <Redirect to="/"/>
+        }
 		return (
 			<div className="sign-up">
 				<div className="container">
@@ -73,5 +85,8 @@ class SignUp extends React.Component {
 		);
 	}
 }
-
-export default SignUp;
+function mapStateToProps({auth})
+{
+    return{auth};
+}
+export default connect(mapStateToProps)(SignUp);

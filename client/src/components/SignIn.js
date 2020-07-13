@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
-import { login } from "../actions/auth";
+import {Redirect} from 'react-router-dom'
+import { login, clearAuthState } from "../actions/auth";
 
 class SignIn extends React.Component {
     constructor(props)
@@ -10,6 +11,10 @@ class SignIn extends React.Component {
             email:'',
             password:''
         }
+    }
+    componentWillUnmount()
+    {
+        this.props.dispatch(clearAuthState())//setting error=null when navigating away from the sign in page
     }
     handleEmailChange=(event)=>
     {
@@ -34,7 +39,11 @@ class SignIn extends React.Component {
         }
     }
 	render() {
-        const {inProgress, error}=this.props.auth;
+        const {inProgress, error, isLoggedIn}=this.props.auth;
+        if(isLoggedIn)//instead of using private route, I'll redirect the user to the home page if he is already logged in
+        {
+            return <Redirect to="/"/>
+        }
 		return (
 			<div className="sign-in">
 				<div className="container">

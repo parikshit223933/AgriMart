@@ -34,8 +34,7 @@ class Navbar extends React.Component {
         this.props.dispatch(logout());
     }
 	render() {
-		console.log("this.props.auth", this.props.auth);
-		const { inProgress, isLoggedIn, user } = this.props.auth;
+		const { isLoggedIn } = this.props.auth;
 		return (
 			<React.Fragment>
 				<div className="custom-navbar">

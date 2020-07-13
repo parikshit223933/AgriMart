@@ -1,4 +1,4 @@
-import { LOGIN_START, LOGIN_FAILURE, LOGIN_SUCCESS, AUTHENTICATE_USER, LOG_OUT } from "./actionTypes";
+import { LOGIN_START, LOGIN_FAILURE, LOGIN_SUCCESS, AUTHENTICATE_USER, LOG_OUT, CLEAR_AUTH_STATE } from "./actionTypes";
 import { API_URLS } from "../helpers/urls";
 import { getFormBody } from "../helpers/utils";
 
@@ -68,5 +68,11 @@ export function logout()
     {
         dispatch(logoutUser())
         localStorage.removeItem('token');
+    }
+}
+export function clearAuthState()
+{
+    return {
+        type:CLEAR_AUTH_STATE
     }
 }
