@@ -1,25 +1,29 @@
-import { LOGIN_START, LOGIN_FAILURE, LOGIN_SUCCESS } from "./actionTypes";
+import { LOGIN_START, LOGIN_FAILURE, LOGIN_SUCCESS, AUTHENTICATE_USER, LOG_OUT } from "./actionTypes";
 import { API_URLS } from "../helpers/urls";
 import { getFormBody } from "../helpers/utils";
 
+/* logging in the existing user */
 export function startLogin() {
 	return {
 		type: LOGIN_START
 	};
 }
-export function loginSuccess() {
+export function loginSuccess(user) {
 	return {
-		type: LOGIN_SUCCESS
+        type: LOGIN_SUCCESS,
+        user
 	};
 }
-export function loginFailure() {
+export function loginFailure(error) {
 	return {
-		type: LOGIN_FAILURE
+        type: LOGIN_FAILURE,
+        error
 	};
 }
 
 export function login(email, password) {
 	return (dispatch) => {
+        dispatch(startLogin());
 		let url = API_URLS.login();
 		fetch(url, {
 			method: "POST",
@@ -30,7 +34,29 @@ export function login(email, password) {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data);
+                if(data.success)
+                {
+                    localStorage.setItem('token', data.data.token);
+                    dispatch(loginSuccess(data.data.user));
+                    return;
+                }
+                dispatch(loginFailure(data.message));
 			});
 	};
+}
+
+/* authenticating the user on page refresh from the token in the local storage */
+
+export function  authenticateUser(user)
+{
+    return{
+        type:AUTHENTICATE_USER,
+        user
+    }
+}
+export function logoutUser()
+{
+    return{
+        type:LOG_OUT
+    }
 }

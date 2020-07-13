@@ -1,10 +1,28 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import * as jwtDecode from 'jwt-decode';
 
 import "../App.css";
 import { Navbar, SignIn, SignUp, Home, Cart, Page404, Profile, Categories, Sell, MoreInfo } from "./";
+import { getAuthTokenFromStorage } from "../helpers/utils";
+import {connect} from "react-redux";
+import { authenticateUser } from "../actions/auth";
 
 class App extends React.Component {
+    componentDidMount()
+    {
+        const token=getAuthTokenFromStorage();
+        if(token)
+        {
+            const user=jwtDecode(token);
+            this.props.dispatch(authenticateUser({
+                name:user.name,
+                email:user.email,
+                _id:user._id
+            }));
+
+        }
+    }
 	render() {
 		return (
 			<Router>
@@ -28,4 +46,9 @@ class App extends React.Component {
 	}
 }
 
-export default App;
+function mapStateToProps({auth})
+{
+    return {auth};
+}
+
+export default connect(mapStateToProps)(App);

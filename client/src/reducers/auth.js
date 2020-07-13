@@ -1,7 +1,9 @@
 import {
 	LOGIN_START,
 	LOGIN_SUCCESS,
-	LOGIN_FAILURE
+	LOGIN_FAILURE,
+    AUTHENTICATE_USER,
+    LOG_OUT
 } from "../actions/actionTypes";
 
 let initialAuthState = {
@@ -15,14 +17,15 @@ export default function auth(state = initialAuthState, action) {
 		case LOGIN_START:
 			return {
 				...state,
-				inProgress: true
+                inProgress: true,
+                error:false
 			};
 		case LOGIN_SUCCESS:
 			return {
 				...state,
 				user: action.user,
 				inProgress: false,
-				error: null,
+				error: false,
 				isLoggedIn: true
 			};
 
@@ -32,7 +35,21 @@ export default function auth(state = initialAuthState, action) {
 				error: action.error,
 				isLoggedIn: false,
 				inProgress: false
-			};
+            };
+        case AUTHENTICATE_USER:
+            return{
+                ...state,
+                user: action.user,
+				inProgress: false,
+				error: false,
+				isLoggedIn: true
+            }
+        case LOG_OUT:
+            return {
+                ...state,
+                user:{},
+                isLoggedIn:false,
+            }
 		default:
 			return state;
 	}
