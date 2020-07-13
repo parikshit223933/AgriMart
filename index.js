@@ -14,6 +14,7 @@ const passportJwt           =require('./config/passport-jwt-strategy');
 const flash                 = require('connect-flash');
 const mongoStore            = require('connect-mongo')(session);/* connect mongo is used to store the session information in the database so that the session information dosen't get lost if the server is restarted. */
 const sassMiddleware        = require('node-sass-middleware');
+const cors=require('cors');
 
 /* conversion of sass to css */
 app.use(sassMiddleware(
@@ -64,6 +65,7 @@ app.use(passport.session());/* it will maintain the session for us */
 app.use(passport.setAuthenticatedUser);//An authentication check will be made on each passport session initialization and user details will be given to res.locals to pass them further to views (check the setAuthenticatedUser function in passport_local_strategy file in configs folder.)
 /* Now there is an issue, with what i have done uptill here. authentication and all will be checked properly, but whenever I re start the server, the user will be logged out automatically. here mongostore comes to the rescue... */
 
+app.use(cors());
 app.use('/', routes);
 app.use(express.static('./assets'));
 
