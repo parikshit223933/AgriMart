@@ -1,6 +1,31 @@
 import React from "react";
 
 class SignIn extends React.Component {
+    constructor(props)
+    {
+        super(props);
+        this.state={
+            email:'',
+            password:''
+        }
+    }
+    handleEmailChange=(event)=>
+    {
+        this.setState({
+            email:event.target.value
+        });
+    }
+    handlePasswordChange=(event)=>
+    {
+        this.setState({
+            password:event.target.value
+        });
+    }
+    handleSubmit=(event)=>
+    {
+        event.preventDefault();
+        console.log(this.state);
+    }
 	render() {
 		return (
 			<div className="sign-in">
@@ -15,7 +40,9 @@ class SignIn extends React.Component {
 										type="email"
 										className="form-control"
 										id="email"
-										aria-describedby="email"
+                                        aria-describedby="email"
+                                        onChange={this.handleEmailChange}
+                                        value={this.state.email}
 									/>
 								</div>
 								<div className="form-group">
@@ -25,11 +52,14 @@ class SignIn extends React.Component {
 										className="form-control"
                                         id="password"
                                         placeholder="Enter your password here!"
+                                        onChange={this.handlePasswordChange}
+                                        value={this.state.password}
 									/>
 								</div>
 								<button
 									type="submit"
-									className="btn btn-primary"
+                                    className="btn btn-primary"
+                                    onClick={this.handleSubmit}
 								>
 									Submit
 								</button>
