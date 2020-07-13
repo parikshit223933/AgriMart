@@ -30,7 +30,6 @@ class Navbar extends React.Component {
     };
     logouthandler=(event)=>
     {
-        event.preventDefault();
         this.props.dispatch(logout());
     }
 	render() {
@@ -99,9 +98,9 @@ class Navbar extends React.Component {
 						{!isLoggedIn&&<Link to="/sign-up" className="signup-button-exposed">
 							<div>Sign Up</div>
 						</Link>}
-						{isLoggedIn&&<a onClick={this.logouthandler} className="log-out-exposed">
+						{isLoggedIn&&<Link to="/sign-in" onClick={this.logouthandler} className="log-out-exposed">
 							<div>Log Out</div>
-						</a>}
+						</Link>}
 						<Link to="/cart" className="cart-exposed">
 							<div>Cart</div>
 						</Link>

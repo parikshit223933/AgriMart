@@ -18,12 +18,12 @@ module.exports.create_session = async (req, res) => {
 			success: true,
 			data: {
 				token: jwt.sign(user.toJSON(), "secret"), //secret key should be same as used in the passport jwt strategy config.
-				user:{
-                    name:user.name,
-                    email:user.email,
-                    avatar:user.avatar,
-                    _id:user._id
-                }
+				user: {
+					name: user.name,
+					email: user.email,
+					avatar: user.avatar,
+					_id: user._id
+				}
 			}
 		});
 	} catch (error) {
@@ -36,4 +36,58 @@ module.exports.create_session = async (req, res) => {
 			success: false
 		});
 	}
+};
+
+/* action for signing up */
+module.exports.createUser = (req, res) => {
+	if (req.body.password != req.body.confirm_password) {
+		//if the passwords entered in the "password" and confirm password" field are not same, then the user will be redirected back to the page he came from.
+		return res.json(401, {
+			success: false,
+			message:
+				"The password in the password field does not match with the password in the confirm password field!"
+		});
+	}
+	User.findOne({ email: req.body.email }, (error, user) => {
+		if (error) {
+			console.log(
+				"There was an error in finding the user from the database. (signing up)",
+				error
+			);
+			return res.json(401, {
+				success: false,
+				message:
+					"There was an error in finding the user from the database. (signing up)"
+			});
+		}
+		if (!user) {
+			//if the user does not exists in the database, then we'll need to create the user
+			User.create(
+				{
+					name: req.body.name,
+					email: req.body.email,
+					password: req.body.password
+				},
+				(error, user) => {
+					if (error) {
+						return res.json(400, {
+							success: false,
+							message:
+								"There was an error in creating a new user in the database!"
+						});
+					}
+					return res.json(200, {
+						success: true,
+						message: "User Signed up successfully",
+					});
+				}
+			);
+		} //the user who is trying to sign up, is already present in the database (his email)
+		else {
+			return res.json(400, {
+				success: false,
+				message: "User already exists!"
+			});
+		}
+	});
 };
