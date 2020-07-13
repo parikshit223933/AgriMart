@@ -17,9 +17,7 @@ module.exports.create_session = async (req, res) => {
 			message: "Sign in successful!",
 			success: true,
 			data: {
-				token: jwt.sign(user.toJSON(), "secret", {
-					expiresIn: 1000 * 60 * 300
-				}), //secret key should be same as used in the passport jwt strategy config.
+				token: jwt.sign(user.toJSON(), "secret"), //secret key should be same as used in the passport jwt strategy config.
 				user:{
                     name:user.name,
                     email:user.email,

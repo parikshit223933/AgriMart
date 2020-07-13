@@ -54,9 +54,19 @@ export function  authenticateUser(user)
         user
     }
 }
+
+/* Logging out the user */
 export function logoutUser()
 {
     return{
         type:LOG_OUT
+    }
+}
+export function logout()
+{
+    return (dispatch)=>
+    {
+        dispatch(logoutUser())
+        localStorage.removeItem('token');
     }
 }

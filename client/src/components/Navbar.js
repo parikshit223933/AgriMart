@@ -1,6 +1,8 @@
 import React from "react";
 import * as $ from "jquery";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../actions/auth";
 
 class Navbar extends React.Component {
 	componentDidMount() {
@@ -25,8 +27,15 @@ class Navbar extends React.Component {
 			$(".exposed-navbar").removeClass("exposed");
 			$(".website-name").removeClass("animate__jello");
 		});
-	};
+    };
+    logouthandler=(event)=>
+    {
+        event.preventDefault();
+        this.props.dispatch(logout());
+    }
 	render() {
+		console.log("this.props.auth", this.props.auth);
+		const { inProgress, isLoggedIn, user } = this.props.auth;
 		return (
 			<React.Fragment>
 				<div className="custom-navbar">
@@ -37,18 +46,26 @@ class Navbar extends React.Component {
 						<div className="home">
 							<i className="fas fa-home"></i>
 						</div>
-						<div className="profile">
-							<i className="fas fa-user-alt"></i>
-						</div>
-						<div className="signin-button">
-							<i className="fas fa-sign-in-alt"></i>
-						</div>
-						<div className="signup-button">
-							<i className="fas fa-user-plus"></i>
-						</div>
-						<div className="log-out">
-							<i className="fas fa-sign-out-alt"></i>
-						</div>
+						{isLoggedIn && (
+							<div className="profile">
+								<i className="fas fa-user-alt"></i>
+							</div>
+						)}
+						{!isLoggedIn && (
+							<div className="signin-button">
+								<i className="fas fa-sign-in-alt"></i>
+							</div>
+						)}
+						{!isLoggedIn && (
+							<div className="signup-button">
+								<i className="fas fa-user-plus"></i>
+							</div>
+						)}
+						{isLoggedIn && (
+							<div className="log-out">
+								<i className="fas fa-sign-out-alt"></i>
+							</div>
+						)}
 						<div className="cart">
 							<i className="fas fa-shopping-cart"></i>
 						</div>
@@ -74,18 +91,18 @@ class Navbar extends React.Component {
 						<Link to="/" className="home-exposed">
 							<div>Home</div>
 						</Link>
-						<Link to="/profile" className="profile-exposed">
+                        {isLoggedIn&&<Link to="/profile" className="profile-exposed">
 							<div>Profile</div>
-						</Link>
-						<Link to="/sign-in" className="signin-button-exposed">
+						</Link>}
+                        {!isLoggedIn&&<Link to="/sign-in" className="signin-button-exposed">
 							<div>Sign In</div>
-						</Link>
-						<Link to="/sign-up" className="signup-button-exposed">
+						</Link>}
+						{!isLoggedIn&&<Link to="/sign-up" className="signup-button-exposed">
 							<div>Sign Up</div>
-						</Link>
-						<Link to="/log-out" className="log-out-exposed">
+						</Link>}
+						{isLoggedIn&&<a onClick={this.logouthandler} className="log-out-exposed">
 							<div>Log Out</div>
-						</Link>
+						</a>}
 						<Link to="/cart" className="cart-exposed">
 							<div>Cart</div>
 						</Link>
@@ -107,5 +124,7 @@ class Navbar extends React.Component {
 		);
 	}
 }
-
-export default Navbar;
+function mapStateToProps({ auth }) {
+	return { auth };
+}
+export default connect(mapStateToProps)(Navbar);
