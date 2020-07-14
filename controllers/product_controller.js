@@ -1,6 +1,5 @@
 var Product = require("../models/productModel");
-const { render } = require("ejs");
-
+/* IT WILL TAKE ME TO A PAGE WHEREI CAN CREATE A NEW PRODUCT /////////////////////////////////////////////////////////////// */
 module.exports.newProduct = async (req, res)=>
 {
     try{
@@ -14,6 +13,7 @@ module.exports.newProduct = async (req, res)=>
         console.log(`there is an errr ${err}`);
     }
 }
+/* FOR CREATING A NEW PRODUCT ////////////////////////////////////////////////////////////////////////////////////////// */
 module.exports.postNewProduct = async (req, res)=>
 {
     try{
@@ -26,7 +26,7 @@ module.exports.postNewProduct = async (req, res)=>
         console.log(`there is an errr ${err}`);
     } 
 }
-
+/* TO GET ALL THE DETAILS OF A PARTICULAR PRODUCT ////////////////////////////////////////////////////////////////////////////// */
 module.exports.showPageProduct = async (req, res)=>
 {
   try{
@@ -43,6 +43,9 @@ module.exports.showPageProduct = async (req, res)=>
       console.log(`there is an errr ${err}`);
   } 
 }
+
+/* TO EDIT A PARTICUALR PRODUCT IT wILL TAKE US TO THE EDIT PRODUCT PAGE //////////////////////////////////////////////////////*/
+
 module.exports.editProduct = async (req, res)=>
 {
     try{
@@ -58,6 +61,8 @@ module.exports.editProduct = async (req, res)=>
         console.log(`there is an errr ${err}`);
     }
 }
+
+/* THE NEW UPDATED PRODUCT IS CREATED HERE AFTER THE EDIT ACTION //////////////////////////////////////////////////////////////// */
 module.exports.updateProduct = async (req, res)=>
 {
     try{
@@ -70,7 +75,7 @@ module.exports.updateProduct = async (req, res)=>
         console.log(`there is an errr ${err}`);
     } 
 }
-
+/* THIS ACTION WILL BE CALLED TO DELETE A PARTICULAR PRODUCT //////////////////////////////////////////////////////////////////// */
 module.exports.deleteProduct = async (req, res)=>
 {
     try{

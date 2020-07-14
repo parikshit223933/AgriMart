@@ -1,10 +1,31 @@
 import React from "react";
 import * as $ from "jquery";
+import { connect } from "react-redux";
+import { createProduct } from "../actions/product";
 
 class Sell extends React.Component {
-	componentDidMount() {
-		this.handleAnimations();
+	constructor(props) {
+		super(props);
+		this.state = {
+			name: "",
+			image: "",
+			price: "",
+			description: "",
+			category: "",
+            minimumOrderQuantity: "",
+		};
 	}
+
+	componentDidMount() {
+        this.handleAnimations();
+	}
+
+	formInputHandler = (property, event) => {
+		this.setState({
+			[property]: event.target.value
+		});
+	};
+
 	handleAnimations = () => {
 		$(".sell-one").removeClass("d-none");
 		setTimeout(function () {
@@ -18,11 +39,18 @@ class Sell extends React.Component {
 		setTimeout(function () {
 			$(".start-selling").addClass("animate__bounceInUp");
 			$(".start-selling").removeClass("d-none");
-		}, 2400);
+		}, 2000);
 	};
+
 	handlescroller = () => {
 		window.scrollTo(0, document.body.scrollHeight);
 	};
+
+	handleSubmit = (event) => {
+		event.preventDefault();
+		this.props.dispatch(createProduct(this.state, this.props.auth.user._id));
+	};
+
 	render() {
 		return (
 			<div className="sell-component">
@@ -59,13 +87,21 @@ class Sell extends React.Component {
 							</h1>
 							<form>
 								<div className="form-group">
-									<label htmlFor="name">Name</label>
+									<label htmlFor="name">Entity Name</label>
 									<input
 										type="text"
 										className="form-control"
 										id="name"
 										aria-describedby="name"
-										placeholder="Enter your name here"
+										placeholder="Enter Entity name here"
+										required
+										onChange={(event) => {
+											this.formInputHandler(
+												"name",
+												event
+											);
+										}}
+										value={this.state.name}
 									/>
 								</div>
 								<div className="form-group">
@@ -76,6 +112,14 @@ class Sell extends React.Component {
 										id="email"
 										aria-describedby="email"
 										placeholder="Price of the entity"
+										required
+										onChange={(event) => {
+											this.formInputHandler(
+												"price",
+												event
+											);
+										}}
+										value={this.state.price}
 									/>
 								</div>
 								<div className="form-group">
@@ -86,6 +130,14 @@ class Sell extends React.Component {
 										id="image"
 										aria-describedby="image"
 										placeholder="URL of the image"
+										required
+										onChange={(event) => {
+											this.formInputHandler(
+												"image",
+												event
+											);
+										}}
+										value={this.state.image}
 									/>
 								</div>
 								<div className="form-group">
@@ -98,6 +150,14 @@ class Sell extends React.Component {
 										id="description"
 										aria-describedby="description"
 										placeholder="Describe this entity"
+										required
+										onChange={(event) => {
+											this.formInputHandler(
+												"description",
+												event
+											);
+										}}
+										value={this.state.description}
 									/>
 								</div>
 								<div className="form-group">
@@ -108,6 +168,14 @@ class Sell extends React.Component {
 										id="category"
 										aria-describedby="category"
 										placeholder="Category of entity"
+										required
+										onChange={(event) => {
+											this.formInputHandler(
+												"category",
+												event
+											);
+										}}
+										value={this.state.category}
 									/>
 								</div>
 								<div className="form-group">
@@ -120,11 +188,20 @@ class Sell extends React.Component {
 										id="min-qty"
 										aria-describedby="min-qty"
 										placeholder="Minimum cost of the entity"
+										required
+										onChange={(event) => {
+											this.formInputHandler(
+												"minimumOrderQuantity",
+												event
+											);
+										}}
+										value={this.state.minimumOrderQuantity}
 									/>
 								</div>
 								<button
 									type="submit"
 									className="btn btn-primary"
+									onClick={this.handleSubmit}
 								>
 									Submit
 								</button>
@@ -137,4 +214,8 @@ class Sell extends React.Component {
 	}
 }
 
-export default Sell;
+function mapStateToProps({ product, auth }) {
+	return { product, auth };
+}
+
+export default connect(mapStateToProps)(Sell);
