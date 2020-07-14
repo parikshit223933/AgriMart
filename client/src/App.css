@@ -1,3 +1,7 @@
+:root
+{
+    --custom-transit:background-color ease-in-out 0.2s;
+}
 .App {
 	width: 100%;
 	height: 100%;
@@ -34,7 +38,8 @@
 	background-color: #1e1e30;
 	box-sizing: border-box;
 	position: fixed;
-	z-index: 2;
+    z-index: 2;
+    transition:var(--custom-transit);
 }
 
 .theme-light-background
@@ -42,7 +47,10 @@
     background-color:#e5e5e5 !important;
     color:#343a40 !important;
 }
-
+.theme-on-hover
+{
+    background-color:#b1b1b1 !important;
+}
 .website-logo {
 	width: 100%;
 	height: 60px;
@@ -64,6 +72,7 @@
 	justify-content: flex-start;
 	align-items: center;
 	color: white;
+    transition:var(--custom-transit);
 }
 
 .buttons-container > div {
@@ -86,6 +95,7 @@
 	padding-left: 5rem;
 	transition: transform ease-in-out 0.2s;
 	transform: translate3d(-12rem, 0, 0);
+    
 }
 
 .buttons-container-exposed {
@@ -97,6 +107,7 @@
 	justify-content: flex-start;
 	align-items: center;
 	color: white;
+    transition:var(--custom-transit);
 }
 .website-name {
 	width: 100%;
@@ -124,7 +135,7 @@
 	padding-left: 10%;
 	box-sizing: border-box;
 	color: white;
-	transition: background-color ease-in-out 0.1s;
+    transition:var(--custom-transit);
 }
 
 .buttons-container-exposed > a:hover {

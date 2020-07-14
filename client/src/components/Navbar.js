@@ -40,6 +40,31 @@ class Navbar extends React.Component {
         $('.exposed-navbar').toggleClass('theme-light-background');
         $('.buttons-container-exposed').toggleClass('theme-light-background')
         $('.buttons-container-exposed>a').toggleClass('theme-light-background')
+        if($('.buttons-container-exposed').hasClass('theme-light-background'))
+        {
+            $('.buttons-container-exposed>a').each(index=>{
+                $($('.buttons-container-exposed>a')[index]).hover(function()
+                {
+                    //when the cursor goes inside
+                    $($('.buttons-container-exposed>a')[index]).addClass('theme-on-hover');
+
+                }, function()
+                {
+                    //when the cursor leaves
+                    $($('.buttons-container-exposed>a')[index]).removeClass('theme-on-hover');
+
+                })
+            })
+            
+        }
+        else
+        {
+            $('.buttons-container-exposed>a').removeClass('theme-on-hover')
+            $('.theme-light-background').removeClass('.theme-light-background');
+            $('.buttons-container-exposed>a').each(index=>{
+                $($('.buttons-container-exposed>a')[index]).unbind('mouseenter mouseleave')
+            })
+        }
     }
 	render() {
 		const { isLoggedIn } = this.props.auth;

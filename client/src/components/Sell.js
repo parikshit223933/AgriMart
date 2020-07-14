@@ -6,29 +6,23 @@ class Sell extends React.Component {
 		this.handleAnimations();
 	}
 	handleAnimations = () => {
-		$(window).on(
-			"load",
-			function () //when all the images are loaded then execute this function
-			{
-				$(".sell-one").removeClass("d-none");
-				setTimeout(function () {
-					$(".sell-two").addClass("animate__fadeInTopLeft");
-					$(".sell-two").removeClass("d-none");
-				}, 800);
-				setTimeout(function () {
-					$(".sell-three").addClass("animate__fadeInTopLeft");
-					$(".sell-three").removeClass("d-none");
-				}, 1600);
-				setTimeout(function () {
-					$(".start-selling").addClass("animate__bounceInUp");
-					$(".start-selling").removeClass("d-none");
-				}, 2400);
-			}
-		);
+		$(".sell-one").removeClass("d-none");
+		setTimeout(function () {
+			$(".sell-two").addClass("animate__fadeInTopLeft");
+			$(".sell-two").removeClass("d-none");
+		}, 800);
+		setTimeout(function () {
+			$(".sell-three").addClass("animate__fadeInTopLeft");
+			$(".sell-three").removeClass("d-none");
+		}, 1600);
+		setTimeout(function () {
+			$(".start-selling").addClass("animate__bounceInUp");
+			$(".start-selling").removeClass("d-none");
+		}, 2400);
 	};
 	handlescroller = () => {
 		window.scrollTo(0, document.body.scrollHeight);
-    };
+	};
 	render() {
 		return (
 			<div className="sell-component">
