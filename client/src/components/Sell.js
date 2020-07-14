@@ -1,6 +1,5 @@
 import React from "react";
 import * as $ from "jquery";
-import ScrollReveal from 'scrollreveal';
 
 class Sell extends React.Component {
 	componentDidMount() {
@@ -13,19 +12,13 @@ class Sell extends React.Component {
 			$(".sell-three").addClass("animate__fadeInTopLeft");
 			$(".sell-three").removeClass("d-none");
         }, 1600);
-        
-        this.activateScrollReveal()
     }
-    activateScrollReveal=()=>
-    {
-        ScrollReveal().reveal('.sell-intro');
-        ScrollReveal().reveal('.container-fluid');
-    }
+    
 	render() {
 		return (
 			<div className="sell-component">
 				<div className="sell-intro">
-					<div className="gradient-wrapper">
+					
 						<div className="sell-one animate__animated animate__fadeInTopLeft d-none">
 							<img
 								src="https://pngimg.com/uploads/welcome/welcome_PNG60.png"
@@ -41,7 +34,7 @@ class Sell extends React.Component {
 								alt="sell"
 							/>
 						</div>
-					</div>
+					
 				</div>
                 {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 				<div className="container-fluid bg-warning">

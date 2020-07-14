@@ -75,7 +75,7 @@
 	width: 17rem;
 	background-color: #1e1e30;
 	box-sizing: border-box;
-	position: absolute;
+	position: fixed;
 	z-index: 1;
 	padding-left: 5rem;
 	transition: transform ease-in-out 0.2s;
@@ -141,7 +141,7 @@
 
 .sign-up {
 	width: 100%;
-	height: 100%;
+	min-height: 100vh;
 	background-image: url("https://images.unsplash.com/photo-1586771107445-d3ca888129ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80");
 	background-position: center;
 	background-repeat: no-repeat;
@@ -152,7 +152,7 @@
 /* SIGN IN COMPONENT ///////////////////////////////////////////////////////////////// */
 .sign-in {
 	width: 100%;
-	height: 100%;
+	min-height: 100vh;
 	background-image: url("https://images.unsplash.com/photo-1586771107445-d3ca888129ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80");
 	background-position: center;
 	background-repeat: no-repeat;
@@ -163,7 +163,7 @@
 /* SELL COMPONENT ///////////////////////////////////////////////////////////////////// */
 .sell-component {
 	width: 100%;
-	height: 100%;
+    height: 100%;
 	padding-left: 5rem;
 }
 .sell-intro {
@@ -177,15 +177,11 @@
     overflow:hidden;
 }
 
-.gradient-wrapper
-{
-    width:100%;
-    height:100%;
-    padding-top:3rem;
-}
+
 .sell-one {
 	position: absolute;
-	left: 10%;
+    left: 10%;
+    top:10%;
 }
 .sell-one>img
 {
