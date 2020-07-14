@@ -32,6 +32,15 @@ class Navbar extends React.Component {
     {
         this.props.dispatch(logout());
     }
+    handleThemeToggler=(event)=>
+    {
+        event.preventDefault();
+        $('.custom-navbar').toggleClass('theme-light-background');
+        $('.buttons-container').toggleClass('theme-light-background');
+        $('.exposed-navbar').toggleClass('theme-light-background');
+        $('.buttons-container-exposed').toggleClass('theme-light-background')
+        $('.buttons-container-exposed>a').toggleClass('theme-light-background')
+    }
 	render() {
 		const { isLoggedIn } = this.props.auth;
 		return (
@@ -107,7 +116,7 @@ class Navbar extends React.Component {
 						<Link to="/categories" className="categories-exposed">
 							<div>Categories</div>
 						</Link>
-						<Link to="" className="toggle-theme-exposed">
+						<Link to="" className="toggle-theme-exposed" onClick={this.handleThemeToggler}>
 							<div>Toggle Theme</div>
 						</Link>
 						<Link to="/sell" className="sell-exposed">
