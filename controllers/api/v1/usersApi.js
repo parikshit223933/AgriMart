@@ -30,7 +30,7 @@ module.exports.create_session = async (req, res) => {
 		console.log(
 			"There was an error in finding the user by email in the database!"
 		);
-		return res.json(200, {
+		return res.json(500, {
 			message:
 				"Internal Server Error. Please try after some time. If the issue persists, Please mail us at agrimartOfficial@gmail.com",
 			success: false
