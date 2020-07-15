@@ -1,6 +1,8 @@
 import React from "react";
 import * as $ from "jquery";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+
 import { createProduct } from "../actions/product";
 
 class Sell extends React.Component {
@@ -31,15 +33,15 @@ class Sell extends React.Component {
 		setTimeout(function () {
 			$(".sell-two").addClass("animate__fadeInTopLeft");
 			$(".sell-two").removeClass("d-none");
-		}, 800);
+		}, 500);
 		setTimeout(function () {
 			$(".sell-three").addClass("animate__fadeInTopLeft");
 			$(".sell-three").removeClass("d-none");
-		}, 1600);
+		}, 700);
 		setTimeout(function () {
 			$(".start-selling").addClass("animate__bounceInUp");
 			$(".start-selling").removeClass("d-none");
-		}, 2000);
+		}, 900);
 	};
 
 	handlescroller = () => {
@@ -52,6 +54,11 @@ class Sell extends React.Component {
 	};
 
 	render() {
+        const {isLoggedIn}=this.props.auth;
+        if(!isLoggedIn)
+        {
+            return <Redirect to="/sign-in"/>
+        }
 		return (
 			<div className="sell-component">
 				<div className="sell-intro">

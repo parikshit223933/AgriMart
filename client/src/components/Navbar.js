@@ -67,7 +67,7 @@ class Navbar extends React.Component {
         }
     }
 	render() {
-		const { isLoggedIn } = this.props.auth;
+        const { isLoggedIn } = this.props.auth;
 		return (
 			<React.Fragment>
 				<div className="custom-navbar">
@@ -107,9 +107,9 @@ class Navbar extends React.Component {
 						<div className="toggle-theme">
 							<i className="fas fa-exchange-alt"></i>
 						</div>
-						<div className="sell">
+						{isLoggedIn&&<div className="sell">
 							<i className="fas fa-rupee-sign"></i>
-						</div>
+						</div>}
 						<div className="more-info">
 							<i className="fas fa-info-circle"></i>
 						</div>
@@ -144,9 +144,9 @@ class Navbar extends React.Component {
 						<Link to="" className="toggle-theme-exposed" onClick={this.handleThemeToggler}>
 							<div>Toggle Theme</div>
 						</Link>
-						<Link to="/sell" className="sell-exposed">
+						{isLoggedIn&&<Link to="/sell" className="sell-exposed">
 							Sell on Agrimart
-						</Link>
+						</Link>}
 						<Link to="/more-info" className="more-info-exposed">
 							<div>More Info</div>
 						</Link>
