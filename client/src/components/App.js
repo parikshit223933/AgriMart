@@ -28,7 +28,23 @@ class App extends React.Component {
 				authenticateUser({
 					name: user.name,
 					email: user.email,
-					_id: user._id
+					avatar: user.avatar,
+					_id: user._id,
+					profession: user.profession,
+					homeTown: user.homeTown,
+					birth: user.birth,
+					contact: user.contact,
+					trusted: user.trusted,
+					upVotes: user.upVotes,
+					bookmarks: user.bookmarks,
+					createdAt: user.createdAt,
+					updatedAt: user.updatedAt,
+					facebook: user.facebook,
+					instagram: user.instagram,
+					googlePlus: user.googlePlus,
+					twitter: user.twitter,
+                    portfilio: user.portfolio,
+                    sex:user.sex,
 				})
 			);
 		}

@@ -22,8 +22,23 @@ module.exports.create_session = async (req, res) => {
 					name: user.name,
 					email: user.email,
 					avatar: user.avatar,
-					_id: user._id
-				}
+					_id: user._id,
+					profession: user.profession,
+					homeTown: user.homeTown,
+					birth: user.birth,
+					contact: user.contact,
+					trusted: user.trusted,
+					upVotes: user.upVotes,
+					bookmarks: user.bookmarks,
+					createdAt: user.createdAt,
+					updatedAt: user.updatedAt,
+					facebook: user.facebook,
+					instagram: user.instagram,
+					googlePlus: user.googlePlus,
+					twitter: user.twitter,
+                    portfilio: user.portfolio,
+                    sex:user.sex
+				} //Not sharing the password
 			}
 		});
 	} catch (error) {
@@ -78,7 +93,7 @@ module.exports.createUser = (req, res) => {
 					}
 					return res.json(200, {
 						success: true,
-						message: "User Signed up successfully",
+						message: "User Signed up successfully"
 					});
 				}
 			);

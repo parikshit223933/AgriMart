@@ -72,6 +72,11 @@
 {
     color:rgb(255, 187, 0);
 }
+.portfolio{
+    color:orangered;
+    border-radius: 50%;
+    overflow:hidden;
+}
 .profile-top
 {
     position: relative;
