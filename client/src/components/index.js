@@ -6,8 +6,32 @@ import Home from "./Home";
 import Cart from "./Cart";
 import Page404 from "./Page404";
 import Profile from "./Profile";
-import Categories from './Categories';
-import Sell from './Sell';
-import MoreInfo from './MoreInfo';
+import Categories from "./Categories";
+import Sell from "./Sell";
+import MoreInfo from "./MoreInfo";
+import ProfileBrief from "./ProfileSubComponents/ProfileBrief";
+import ProfileSummary from './ProfileSubComponents/ProfileSummary';
+import ProfileSoldItems from './ProfileSubComponents/ProfileSoldItems';
+import ProfileUnsoldItems from './ProfileSubComponents/ProfileUnsoldItems';
+import ProfileBookmarkedUsers from './ProfileSubComponents/ProfileBookmarkedUsers';
+import ProfileProductHistory from './ProfileSubComponents/ProfileProductHistory';
 
-export { Navbar, App, SignUp, SignIn, Home, Cart, Page404, Profile, Categories, Sell, MoreInfo };
+export {
+	Navbar,
+	App,
+	SignUp,
+	SignIn,
+	Home,
+	Cart,
+	Page404,
+	Profile,
+	Categories,
+	Sell,
+	MoreInfo,
+    ProfileBrief,
+    ProfileSummary,
+    ProfileSoldItems,
+    ProfileBookmarkedUsers,
+    ProfileUnsoldItems,
+    ProfileProductHistory
+};
