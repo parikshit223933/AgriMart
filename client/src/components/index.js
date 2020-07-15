@@ -10,11 +10,12 @@ import Categories from "./Categories";
 import Sell from "./Sell";
 import MoreInfo from "./MoreInfo";
 import ProfileBrief from "./ProfileSubComponents/ProfileBrief";
-import ProfileSummary from './ProfileSubComponents/ProfileSummary';
-import ProfileSoldItems from './ProfileSubComponents/ProfileSoldItems';
-import ProfileUnsoldItems from './ProfileSubComponents/ProfileUnsoldItems';
-import ProfileBookmarkedUsers from './ProfileSubComponents/ProfileBookmarkedUsers';
-import ProfileProductHistory from './ProfileSubComponents/ProfileProductHistory';
+import ProfileSummary from "./ProfileSubComponents/ProfileSummary";
+import ProfileSoldItems from "./ProfileSubComponents/ProfileSoldItems";
+import ProfileUnsoldItems from "./ProfileSubComponents/ProfileUnsoldItems";
+import ProfileBookmarkedUsers from "./ProfileSubComponents/ProfileBookmarkedUsers";
+import ProfileProductHistory from "./ProfileSubComponents/ProfileProductHistory";
+import ProfileSettings from "./ProfileSubComponents/ProfileSettings";
 
 export {
 	Navbar,
@@ -28,10 +29,11 @@ export {
 	Categories,
 	Sell,
 	MoreInfo,
-    ProfileBrief,
-    ProfileSummary,
-    ProfileSoldItems,
-    ProfileBookmarkedUsers,
-    ProfileUnsoldItems,
-    ProfileProductHistory
+	ProfileBrief,
+	ProfileSummary,
+	ProfileSoldItems,
+	ProfileBookmarkedUsers,
+	ProfileUnsoldItems,
+	ProfileProductHistory,
+	ProfileSettings
 };

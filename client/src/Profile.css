@@ -38,9 +38,10 @@
 }
 .two
 {
-    width:70%;
+    position:relative !important;
+    width:50%;
     left:0%;
-    top:3rem;
+    top:0rem;
     background-color:red !important;
 }
 .social-handle-container
@@ -88,18 +89,25 @@
     right:5%;
     top:3%;
 }
+@media screen and (max-width:992px)
+{
+    .bookmark
+    {
+        top:40%;
+    }
+}
 @media screen and (max-width:767px)
 {
     .bookmark
     {
-        top:26%;
+        top:31%;
     }
 }
 @media screen and (max-width:577px)
 {
     .bookmark
     {
-        top:31%;
+        top:40%;
     }
 }
 .rating
