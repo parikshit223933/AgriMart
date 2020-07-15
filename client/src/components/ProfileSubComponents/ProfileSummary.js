@@ -1,10 +1,16 @@
 import React from "react";
-import {connect} from 'react-redux';
-import {ProfileSoldItems, ProfileBookmarkedUsers, ProfileProductHistory, ProfileUnsoldItems, ProfileSettings} from '../';
+import { connect } from "react-redux";
+import {
+	ProfileSoldItems,
+	ProfileBookmarkedUsers,
+	ProfileProductHistory,
+	ProfileUnsoldItems,
+	ProfileSettings
+} from "../";
 
 class ProfileSummary extends React.Component {
 	render() {
-        const {user}=this.props.auth;
+		const { user } = this.props.auth;
 		return (
 			<div className="col-sm-7 col-lg-8 mt-2">
 				<div className="profile-top">
@@ -13,26 +19,37 @@ class ProfileSummary extends React.Component {
 						<div className="hl two"></div>
 					</div>
 					<div className="name-subtitle">
-                        {user.trusted&&<h4>
-							<i className="fas fa-check"></i> Trusted
-						</h4>}
-						
+						{user.trusted && (
+							<h4>
+								<i className="fas fa-check"></i> Trusted
+							</h4>
+						)}
 					</div>
 					<div className="bookmark">
 						<button type="button" className="btn btn-light">
 							<i className="fas fa-bookmark text-secondary"></i>{" "}
 							Bookmark
-						</button>
+						</button>{/* bookmarks button should be hidden and disabled if the user is viewing his own profile! */}
 					</div>
 					<div className="rankings">
 						<p className="text-muted rating mb-0 mt-4">Rating</p>
 						<div className="stars">
 							<span>{user.upVotes} Upvotes</span>{" "}
-							{user.upVotes>10&&<i className="fas fa-star"></i>}
-							{user.upVotes>100&&<i className="fas fa-star"></i>}
-							{user.upVotes>1000&&<i className="fas fa-star"></i>}
-							{user.upVotes>10000&&<i className="fas fa-star"></i>}
-							{user.upVotes>100000&&<i className="fas fa-star"></i>}
+							{user.upVotes > 10 && (
+								<i className="fas fa-star"></i>
+							)}
+							{user.upVotes > 100 && (
+								<i className="fas fa-star"></i>
+							)}
+							{user.upVotes > 1000 && (
+								<i className="fas fa-star"></i>
+							)}
+							{user.upVotes > 10000 && (
+								<i className="fas fa-star"></i>
+							)}
+							{user.upVotes > 100000 && (
+								<i className="fas fa-star"></i>
+							)}
 						</div>
 					</div>
 				</div>
@@ -40,13 +57,13 @@ class ProfileSummary extends React.Component {
 					<ul className="nav nav-tabs" id="myTab" role="tablist">
 						<li className="nav-item" role="presentation">
 							<a
-								className="nav-link active bg-light"
+								className="nav-link bg-light"
 								id="home-tab"
 								data-toggle="tab"
 								href="#home"
 								role="tab"
 								aria-controls="home"
-								aria-selected="true"
+								aria-selected="false"
 							>
 								sold
 							</a>
@@ -90,15 +107,15 @@ class ProfileSummary extends React.Component {
 								Bookmarks
 							</a>
 						</li>
-                        <li className="nav-item" role="presentation">
+						<li className="nav-item" role="presentation">
 							<a
-								className="nav-link bg-light"
+								className="nav-link active bg-light"
 								id="settings-tab"
 								data-toggle="tab"
 								href="#settings"
 								role="tab"
 								aria-controls="settings"
-								aria-selected="false"
+								aria-selected="true"
 							>
 								Settings
 							</a>
@@ -106,12 +123,12 @@ class ProfileSummary extends React.Component {
 					</ul>
 					<div className="tab-content" id="myTabContent">
 						<div
-							className="tab-pane fade show active"
+							className="tab-pane fade"
 							id="home"
 							role="tabpanel"
 							aria-labelledby="home-tab"
 						>
-							<ProfileSoldItems/>
+							<ProfileSoldItems />
 						</div>
 						<div
 							className="tab-pane fade"
@@ -119,7 +136,7 @@ class ProfileSummary extends React.Component {
 							role="tabpanel"
 							aria-labelledby="profile-tab"
 						>
-							<ProfileUnsoldItems/>
+							<ProfileUnsoldItems />
 						</div>
 						<div
 							className="tab-pane fade"
@@ -127,7 +144,7 @@ class ProfileSummary extends React.Component {
 							role="tabpanel"
 							aria-labelledby="contact-tab"
 						>
-							<ProfileProductHistory/>
+							<ProfileProductHistory />
 						</div>
 						<div
 							className="tab-pane fade"
@@ -135,15 +152,15 @@ class ProfileSummary extends React.Component {
 							role="tabpanel"
 							aria-labelledby="bookmarks-tab"
 						>
-							<ProfileBookmarkedUsers/>
+							<ProfileBookmarkedUsers />
 						</div>
-                        <div
-							className="tab-pane fade"
+						<div
+							className="tab-pane fade active show"
 							id="settings"
 							role="tabpanel"
 							aria-labelledby="settings-tab"
 						>
-							<ProfileSettings/>
+							<ProfileSettings />
 						</div>
 					</div>
 				</div>
@@ -151,8 +168,7 @@ class ProfileSummary extends React.Component {
 		);
 	}
 }
-function mapStateToProps({auth, product})
-{
-    return {auth, product};
+function mapStateToProps({ auth, product }) {
+	return { auth, product };
 }
 export default connect(mapStateToProps)(ProfileSummary);
