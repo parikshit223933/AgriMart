@@ -36,6 +36,13 @@
     right: 0%;
     top: 25px;
 }
+.two
+{
+    width:100%;
+    left:0%;
+    top:3rem;
+    background-color:red !important;
+}
 .social-handle-container
 {
     font-size: 40px;
@@ -60,4 +67,45 @@
 .google-handle
 {
     color:#dc4e41;
+}
+.name-subtitle
+{
+    color:rgb(255, 187, 0);
+}
+.profile-top
+{
+    position: relative;
+    width:100%;
+}
+.bookmark
+{
+    position: absolute;
+    right:5%;
+    top:3%;
+}
+@media screen and (max-width:767px)
+{
+    .bookmark
+    {
+        top:26%;
+    }
+}
+@media screen and (max-width:577px)
+{
+    .bookmark
+    {
+        top:31%;
+    }
+}
+.rating
+{
+    font-size: 15px;
+}
+.stars
+{
+    font-size:25px;
+}
+.stars>svg
+{
+    color:rgb(255, 187, 0);
 }

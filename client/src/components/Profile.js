@@ -23,58 +23,102 @@ class Profile extends React.Component {
 									alt="profile"
 								/>
 							</div>
-							<div className="name-section">
-								<h2 className="text-center">Ramu Kaka</h2>
-							</div>
+
 							<div className="left-section">
-								<h5 className="text-dark">Profession</h5>
+								<h5 className="text-dark">
+									<i className="fas fa-user-tie"></i>{" "}
+									Profession
+								</h5>
 								<div className="hl one"></div>
 								<p>Farmer | Labour</p>
 							</div>
 							<div className="left-section">
-								<h5 className="text-dark">Home Town</h5>
+								<h5 className="text-dark">
+									<i className="fas fa-map-marked"></i> Home
+									Town
+								</h5>
 								<div className="hl one"></div>
 								<p>Rampur, UttarPradesh, India</p>
 							</div>
 							<div className="left-section">
-								<h5 className="text-dark">About Me</h5>
+								<h5 className="text-dark">
+									<i className="fas fa-address-card"></i>{" "}
+									About Me
+								</h5>
 								<div className="hl one"></div>
-								<p>
+								<div>
 									<div>
 										<b className="text-muted">Born on: </b>
 										<span>1 April 1999</span>
 									</div>
 									<div>
-										<b className="text-muted">Joined on: </b>
+										<b className="text-muted">
+											Joined on:{" "}
+										</b>
 										<span>1 July 2020</span>
 									</div>
 									<div>
-										<b className="text-muted">Email Address: </b>
+										<b className="text-muted">
+											Email Address:{" "}
+										</b>
 										<span>1 April 1999</span>
 									</div>
 									<div>
-										<b className="text-muted">Contact Number: </b>
+										<b className="text-muted">
+											Contact Number:{" "}
+										</b>
 										<span>1 April 1999</span>
 									</div>
-								</p>
+								</div>
 							</div>
-							<div className="left-section">
+							<div className="left-section mt-3">
 								<h5 className="text-dark">
+									<i className="fas fa-people-arrows"></i>{" "}
 									Social Handles
 								</h5>
 								<div className="hl one"></div>
 								<div className="social-handle-container">
 									<div className="facebook-handle">
-										<i class="fab fa-facebook"></i>
+										<i className="fab fa-facebook"></i>
 									</div>
 									<div className="instagram-handle">
-										<i class="fab fa-instagram"></i>
+										<i className="fab fa-instagram"></i>
 									</div>
 									<div className="google-handle">
-										<i class="fab fa-google-plus-g"></i>
+										<i className="fab fa-google-plus-g"></i>
 									</div>
 									<div className="twitter-handle">
-										<i class="fab fa-twitter"></i>
+										<i className="fab fa-twitter"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className="col-sm-7 col-lg-8 mt-2">
+							<div className="profile-top">
+								<div className="title-name mt-3">
+									<h1>John Wick</h1>
+                                    <div className="hl two"></div>
+								</div>
+								<div className="name-subtitle">
+									<h4>
+										<i className="fas fa-check"></i> Trusted
+									</h4>
+								</div>
+								<div className="bookmark">
+									<button type="button" className="btn btn-light">
+										<i className="fas fa-bookmark text-secondary"></i>{" "}
+										Bookmark
+									</button>
+								</div>
+								<div className="rankings">
+									<p className="text-muted rating mb-0 mt-4">Rating</p>
+									<div className="stars">
+										<span>860 Upvotes</span>{" "}
+										<i className="fas fa-star"></i>
+										<i className="fas fa-star"></i>
+										<i className="fas fa-star"></i>
+										<i className="fas fa-star"></i>
+										<i className="fas fa-star-half-alt"></i>
 									</div>
 								</div>
 							</div>
