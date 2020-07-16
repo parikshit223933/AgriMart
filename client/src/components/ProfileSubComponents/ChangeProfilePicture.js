@@ -14,8 +14,9 @@ class ChangeProfilePicture extends React.Component {
     {
         event.preventDefault();
         const data=new FormData();
-        data.append('_id', this.props.userId)
-        data.append('file', this.state.file)
+        data.append('_id', this.props.userId);
+        data.append('file', this.state.file);
+        data.append('avatar', this.props.avatar);
         this.props.dispatch(uploadAvatar(data));
     }
     handleChange=(event)=>

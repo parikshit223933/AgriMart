@@ -1,6 +1,7 @@
 const User = require("../../../models/userModel");
 const jwt = require("jsonwebtoken");
 const path = require("path");
+const fs = require("fs");
 
 /* action for signing in */
 module.exports.create_session = async (req, res) => {
@@ -202,8 +203,25 @@ module.exports.uploadAvatar = (req, res) => {
 						message: "No file uploaded!"
 					});
 				}
-                user.avatar = path.join(User.avatarPath , "./" , req.file.filename);
-                console.log(user.avatar);
+				//if user already has an avatar then I'll need to delete it to avoid running out of space in the storage!
+				if (req.body.avatar) {
+					if (
+						fs.existsSync(
+							path.join(__dirname, "../../../", req.body.avatar)
+						)
+					) {
+						fs.unlinkSync(
+							path.join(__dirname, "../../../", req.body.avatar)
+						);
+					}
+				}
+
+				user.avatar = path.join(
+					User.avatarPath,
+					"./",
+					req.file.filename
+				);
+				console.log(user.avatar);
 				user.save();
 
 				let { password, ...expanded_user } = user._doc;

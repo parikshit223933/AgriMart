@@ -39,7 +39,7 @@ class ProfileSettings extends React.Component {
 					></div>
 					<div className="high-actions d-flex flex-row justify-content-between align-items-center flex-wrap">
 						<ChangePassword userId={user._id}/>
-						<ChangeProfilePicture userId={user._id}/>
+						<ChangeProfilePicture userId={user._id} avatar={user.avatar}/>
 					</div>
 					<form className="mt-3">
 						<div className="form-group">
