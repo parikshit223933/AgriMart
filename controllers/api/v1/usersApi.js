@@ -13,37 +13,18 @@ module.exports.create_session = async (req, res) => {
 			});
 		}
 		//if the user is found,
-		return res.json(200, {
+        let { password, ...expanded_user } = user._doc;
+        return res.json(200, {
 			message: "Sign in successful!",
 			success: true,
 			data: {
-				token: jwt.sign(user.toJSON(), "secret"), //secret key should be same as used in the passport jwt strategy config.
-				user: {
-					name: user.name,
-					email: user.email,
-					avatar: user.avatar,
-					_id: user._id,
-					profession: user.profession,
-					homeTown: user.homeTown,
-					birth: user.birth,
-					contact: user.contact,
-					trusted: user.trusted,
-					upVotes: user.upVotes,
-					bookmarks: user.bookmarks,
-					createdAt: user.createdAt,
-					updatedAt: user.updatedAt,
-					facebook: user.facebook,
-					instagram: user.instagram,
-					googlePlus: user.googlePlus,
-					twitter: user.twitter,
-					portfilio: user.portfolio,
-					sex: user.sex
-				} //Not sharing the password
+				token: jwt.sign(expanded_user, "secret"), //secret key should be same as used in the passport jwt strategy config.
+				user: expanded_user //Not sharing the password
 			}
 		});
 	} catch (error) {
 		console.log(
-			"There was an error in finding the user by email in the database!"
+			"There was an error in finding the user by email in the database!", error
 		);
 		return res.json(500, {
 			message:
@@ -107,50 +88,100 @@ module.exports.createUser = (req, res) => {
 	});
 };
 module.exports.update = async (req, res) => {
-	try {
-        let new_credentials = req.body;
-        console.log(new_credentials);
-		let user = await User.findOneAndUpdate(
-			{_id:new_credentials._id},
-            new_credentials,
-            {new:true}
-		);
-        let newToken = await jwt.sign(user.toJSON(), "secret");
-		return await res.json(200, {
-			message: "Update successful!",
-			success: true,
-			data: {
-				token: newToken, //secret key should be same as used in the passport jwt strategy config.
-				user: {
-					name: user.name,
-					email: user.email,
-					avatar: user.avatar,
-					_id: user._id,
-					profession: user.profession,
-					homeTown: user.homeTown,
-					birth: user.birth,
-					contact: user.contact,
-					trusted: user.trusted,
-					upVotes: user.upVotes,
-					bookmarks: user.bookmarks,
-					createdAt: user.createdAt,
-					updatedAt: user.updatedAt,
-					facebook: user.facebook,
-					instagram: user.instagram,
-					googlePlus: user.googlePlus,
-					twitter: user.twitter,
-					portfilio: user.portfolio,
-					sex: user.sex
-				} //Not sharing the password
+	//req.body={oldPassword:..., newPassword:..., confirmNewPassword:...}
+	if (req.body.oldPassword) {
+		//request is to change the password
+		let newParams = req.body;
+		if (Object.keys(newParams).length != 4) {
+			return res.json(422, {
+				success: false,
+				message: "Unprocessable Entity!"
+			});
+		}
+		if (
+			"confirmNewPassword" in newParams &&
+			"oldPassword" in newParams &&
+			"newPassword" in newParams &&
+			"_id" in newParams
+		) {
+			if (newParams.confirmNewPassword != newParams.newPassword) {
+				return res.json(422, {
+					success: false,
+					message: "Input Error by the user!"
+				});
 			}
-        }
-        );
-    } 
-    catch (error) {
-		console.log("There was an error in updating the user in the database!");
-		return res.json(500, {
-			success: false,
-			message: "Internal Server Error!"
-		});
+			try {
+				let user = await User.findById(newParams._id);
+				if (user.password != newParams.oldPassword) {
+					return res.json(422, {
+						success: false,
+						message: "Wrong Old Password!"
+					});
+				}
+				let new_user = await User.findOneAndUpdate(
+					{ _id: newParams._id },
+					{ password: newParams.newPassword },
+					{ new: true }
+                );
+                new_user.save();
+				let { password, ...expanded_user } = new_user._doc;
+				let new_token = await jwt.sign(
+					expanded_user,
+					"secret"
+				);
+				return res.json(200, {
+					message: "Update successful!",
+					success: true,
+					data: {
+						token: new_token, //secret key should be same as used in the passport jwt strategy config.
+						user: expanded_user //Not sharing the password
+					}
+				});
+			} catch (error) {
+				console.log(
+					"There was an error in updating the user in the database!"
+				);
+				return res.json(500, {
+					success: false,
+					message: "Internal Server Error!"
+				});
+			}
+		} else {
+			return res.json(422, {
+				success: false,
+				message: "Required Fields not found!"
+			});
+		}
+	} else {
+		//request to change details except password!
+		try {
+			let new_credentials = req.body;
+			console.log(new_credentials);
+			let user = await User.findOneAndUpdate(
+				{ _id: new_credentials._id },
+				new_credentials,
+				{ new: true }
+            );
+            user.save();
+            let { password, ...expanded_user } = user._doc;
+			let newToken = await jwt.sign(expanded_user, "secret");
+			
+			return res.json(200, {
+				message: "Update successful!",
+				success: true,
+				data: {
+					token: newToken, //secret key should be same as used in the passport jwt strategy config.
+					user: expanded_user //Not sharing the password
+				}
+			});
+		} catch (error) {
+			console.log(
+				"There was an error in updating the user in the database!"
+			);
+			return res.json(500, {
+				success: false,
+				message: "Internal Server Error!"
+			});
+		}
 	}
 };

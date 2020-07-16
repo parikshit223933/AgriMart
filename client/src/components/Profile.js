@@ -4,6 +4,7 @@ import * as $ from "jquery";
 import "../Profile.css";
 import {ProfileBrief} from './';
 import {ProfileSummary} from './';
+import { Redirect } from "react-router-dom";
 
 class Profile extends React.Component {
 	componentDidMount() {
@@ -14,6 +15,10 @@ class Profile extends React.Component {
 		img.height(img.width());
 	};
 	render() {
+        if(!localStorage.getItem('token'))
+        {
+            return <Redirect to="/sign-in"/>
+        }
 		return (
 			<div className="profile-component bg-warning">
 				<div className="container bg-light pb-5">

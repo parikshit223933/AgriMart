@@ -1,6 +1,29 @@
 import React from "react";
+import { updateUser } from "../../actions/auth";
+import {connect} from 'react-redux';
 
 class ChangePassword extends React.Component {
+    constructor(props)
+    {
+        super(props);
+        this.state={
+            oldPassword:'',
+            confirmNewPassword:'',
+            newPassword:''
+        }
+    }
+    handleInputChange(field, event)
+    {
+        this.setState({
+            [field]:event.target.value
+        })
+    }
+    handleSubmit=(event)=>
+    {
+        console.log('hello')
+        event.preventDefault();
+        this.props.dispatch(updateUser(this.state, this.props.userId));
+    }
 	render() {
 		return (
 			<div className="m-2">
@@ -48,7 +71,9 @@ class ChangePassword extends React.Component {
 										<input
 											type="password"
 											className="form-control"
-											id="old-password"
+                                            id="old-password"
+                                            value={this.state.oldPassword}
+                                            onChange={(event)=>{this.handleInputChange('oldPassword', event)}}
 										/>
 									</div>
 									<div className="form-group">
@@ -58,7 +83,10 @@ class ChangePassword extends React.Component {
 										<input
 											type="password"
 											className="form-control"
-											id="new-password"
+                                            id="new-password"
+                                            value={this.state.newPassword}
+                                            onChange={(event)=>{this.handleInputChange('newPassword', event)}}
+                                            
 										/>
 									</div>
 									<div className="form-group">
@@ -68,7 +96,10 @@ class ChangePassword extends React.Component {
 										<input
 											type="password"
 											className="form-control"
-											id="confirm-new-password"
+                                            id="confirm-new-password"
+                                            value={this.state.confirmNewPassword}
+                                            onChange={(event)=>{this.handleInputChange('confirmNewPassword', event)}}
+                                            
 										/>
 									</div>
 								</div>
@@ -81,8 +112,9 @@ class ChangePassword extends React.Component {
 										Close
 									</button>
 									<button
-										type="button"
-										className="btn btn-primary"
+										type="submit"
+                                        className="btn btn-primary"
+                                        onClick={this.handleSubmit}
 									>
 										Save changes
 									</button>
@@ -96,4 +128,4 @@ class ChangePassword extends React.Component {
 		);
 	}
 }
-export default ChangePassword;
+export default connect()(ChangePassword);

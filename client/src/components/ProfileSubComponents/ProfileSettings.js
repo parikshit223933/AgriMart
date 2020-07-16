@@ -38,7 +38,7 @@ class ProfileSettings extends React.Component {
 						className="mb-3"
 					></div>
 					<div className="high-actions d-flex flex-row justify-content-between align-items-center flex-wrap">
-						<ChangePassword />
+						<ChangePassword userId={user._id}/>
 						<div className="m-2">
 							<button type="button" className="btn btn-success">
 								Change Profile Picture
