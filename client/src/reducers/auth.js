@@ -6,7 +6,10 @@ import {
 	LOG_OUT,
 	CLEAR_AUTH_STATE,
 	SIGN_UP_START,
-	SIGN_UP_FAILURE
+	SIGN_UP_FAILURE,
+    UPDATE_USER_START,
+    UPDATE_USER_SUCCESS,
+    UPDATE_USER_FAILED
 } from "../actions/actionTypes";
 
 let initialAuthState = {
@@ -71,7 +74,25 @@ export default function auth(state = initialAuthState, action) {
 				error: action.error,
 				isLoggedIn: false,
 				inProgress: false
-			};
+            };
+        case UPDATE_USER_START:
+            return{
+                ...state,
+                inProgress:true
+            }
+        case UPDATE_USER_SUCCESS:
+            return{
+                ...state,
+                inProgress:false,
+                error:false,
+                user:action.user
+            }
+        case UPDATE_USER_FAILED:
+            return{
+                ...state,
+                inProgress:false,
+                error:action.error
+            }
 		default:
 			return state;
 	}

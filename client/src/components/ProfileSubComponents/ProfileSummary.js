@@ -160,7 +160,7 @@ class ProfileSummary extends React.Component {
 							role="tabpanel"
 							aria-labelledby="settings-tab"
 						>
-							<ProfileSettings />
+							<ProfileSettings user={user}/>
 						</div>
 					</div>
 				</div>

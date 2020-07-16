@@ -1,7 +1,29 @@
 import React from "react";
+import {connect} from 'react-redux';
+import { updateUser } from "../../actions/auth";
 
 class ProfileSettings extends React.Component {
+    constructor(props)
+    {
+        super(props);
+        this.state={
+            sex:'Male'
+        }
+    }
+    handleInputChange=(field, event)=>
+    {
+        this.setState({
+            [field]:event.target.value
+        });
+    }
+    handleSubmit=(event)=>
+    {
+        const {user}=this.props;
+        event.preventDefault();
+        this.props.dispatch(updateUser(this.state, user._id));
+    }
 	render() {
+        const {user}=this.props;
 		return (
 			<div className="pt-3 pr-5">
 				<h3 style={{ fontWeight: "400" }}>Edit Public Profile</h3>
@@ -26,6 +48,8 @@ class ProfileSettings extends React.Component {
 								id="email"
                                 aria-describedby="emailHelp"
                                 placeholder="Enter a new Email Address!"
+                                value={this.state.email||(user.email===undefined?'':user.email)}
+                                onChange={(event)=>{this.handleInputChange('email', event)}}
 							/>
 						</div>
 						<div className="high-actions d-flex flex-row justify-content-between align-items-center">
@@ -48,7 +72,8 @@ class ProfileSettings extends React.Component {
 								className="form-control"
 								id="name"
                                 aria-describedby="name"
-                                placeholder="Enter a new name"
+                                value={this.state.name||(user.name===undefined?'':user.name)}
+                                onChange={(event)=>{this.handleInputChange('name', event)}}
 							/>
 						</div>
 						<div className="form-group">
@@ -58,7 +83,8 @@ class ProfileSettings extends React.Component {
 								className="form-control"
 								id="profession"
                                 aria-describedby="profession"
-                                placeholder="Enter a Profession"
+                                value={this.state.profession||(user.profession===undefined?'':user.profession)}
+                                onChange={(event)=>{this.handleInputChange('profession', event)}}
 							/>
 						</div>
 						<div className="form-group">
@@ -68,7 +94,8 @@ class ProfileSettings extends React.Component {
 								className="form-control"
 								id="homeTown"
                                 aria-describedby="homeTown"
-                                placeholder="Enter your home town"
+                                value={this.state.homeTown||(user.homeTown===undefined?'':user.homeTown)}
+                                onChange={(event)=>{this.handleInputChange('homeTown', event)}}
 							/>
 						</div>
 						<div className="form-group">
@@ -78,6 +105,8 @@ class ProfileSettings extends React.Component {
 								className="form-control"
 								id="birth"
                                 aria-describedby="birth"
+                                value={this.state.birth||((user.birth===undefined||user.birth===null)?'':user.birth)}
+                                onChange={(event)=>{this.handleInputChange('birth', event)}}
 							/>
 						</div>
 						<div className="form-group">
@@ -87,14 +116,17 @@ class ProfileSettings extends React.Component {
 								className="form-control"
 								id="contact"
                                 aria-describedby="contact"
-                                placeholder="Enter a Contact Number"
+                                value={this.state.contact||(user.contact===undefined?'':user.contact)}
+                                onChange={(event)=>{this.handleInputChange('contact', event)}}
 							/>
 						</div>
 						<div className="form-group">
 							<label htmlFor="sex">Sex</label>
-							<select className="custom-select my-1 mr-sm-2" id="sex">
+							<select className="custom-select my-1 mr-sm-2" id="sex"
+                            onChange={(event)=>{this.handleInputChange('sex', event)}}
+                            >
 								<option value="Male">Male</option>
-								<option value="Female">FeMale</option>
+								<option value="Female">Female</option>
 								<option value="Other">Other</option>
 							</select>
 							<small className="form-text text-muted">
@@ -119,7 +151,8 @@ class ProfileSettings extends React.Component {
 								className="form-control"
 								id="facebook-update"
                                 aria-describedby="facebook-update"
-                                placeholder="Enter your Facebook Profile Link"
+                                value={this.state.facebook||(user.facebook===undefined?'':user.facebook)}
+                                onChange={(event)=>{this.handleInputChange('facebook', event)}}
 							/>
 						</div>
 						<div className="form-group">
@@ -129,7 +162,8 @@ class ProfileSettings extends React.Component {
 								className="form-control"
 								id="instagram-update"
                                 aria-describedby="instagram-update"
-                                placeholder="Enter your Instagram Profile Link"
+                                value={this.state.instagram||(user.instagram===undefined?'':user.instagram)}
+                                onChange={(event)=>{this.handleInputChange('instagram', event)}}
 							/>
 						</div>
 						<div className="form-group">
@@ -141,7 +175,8 @@ class ProfileSettings extends React.Component {
 								className="form-control"
 								id="google-plus-update"
                                 aria-describedby="google-plus-update"
-                                placeholder="Enter Your Google Plus Profile Link"
+                                value={this.state.googlePlus||(user.googlePlus===undefined?'':user.googlePlus)}
+                                onChange={(event)=>{this.handleInputChange('googlePlus', event)}}
 							/>
 						</div>
 						<div className="form-group">
@@ -151,7 +186,8 @@ class ProfileSettings extends React.Component {
 								className="form-control"
 								id="twitter-update"
                                 aria-describedby="twitter-update"
-                                placeholder="Enter Your Twitter Handle"
+                                value={this.state.Twitter||(user.Twitter===undefined?'':user.Twitter)}
+                                onChange={(event)=>{this.handleInputChange('Twitter', event)}}
 							/>
 						</div>
 						<div className="form-group">
@@ -163,10 +199,11 @@ class ProfileSettings extends React.Component {
 								className="form-control"
 								id="portfolio-update"
                                 aria-describedby="portfolio-update"
-                                placeholder="Enter your own portfolio profile link"
+                                value={this.state.portfolio||(user.portfolio===undefined?'':user.portfolio)}
+                                onChange={(event)=>{this.handleInputChange('portfolio', event)}}
 							/>
 						</div>
-						<button type="submit" className="btn btn-primary">
+						<button type="submit" onClick={this.handleSubmit} className="btn btn-primary">
 							Update
 						</button>
 					</form>
@@ -175,4 +212,4 @@ class ProfileSettings extends React.Component {
 		);
 	}
 }
-export default ProfileSettings;
+export default connect()(ProfileSettings);

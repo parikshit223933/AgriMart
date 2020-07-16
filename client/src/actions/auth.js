@@ -6,10 +6,13 @@ import {
 	LOG_OUT,
 	CLEAR_AUTH_STATE,
 	SIGN_UP_START,
-	SIGN_UP_FAILURE
+	SIGN_UP_FAILURE,
+    UPDATE_USER_START,
+    UPDATE_USER_SUCCESS,
+    UPDATE_USER_FAILED
 } from "./actionTypes";
 import { API_URLS } from "../helpers/urls";
-import { getFormBody } from "../helpers/utils";
+import { getFormBody, getAuthTokenFromStorage } from "../helpers/utils";
 
 /* logging in the existing user */
 export function startLogin() {
@@ -117,4 +120,55 @@ export function signUp(name, email, password, confirm_password) {
 				dispatch(signUpFailure(data.message));
 			});
 	};
+}
+
+
+/* FOR UPDATING THE USER */
+export function updateUserStart()
+{
+    return{
+        type:UPDATE_USER_START
+    }
+}
+export function updateUserSuccess(user)
+{
+    return{
+        type:UPDATE_USER_SUCCESS,
+        user
+    }
+}
+export function updateUserFailure(error)
+{
+    return{
+        type:UPDATE_USER_FAILED,
+        error
+    }
+}
+export function updateUser(user, userId)
+{
+    return(dispatch)=>
+    {
+        let url=API_URLS.updateUser();
+        dispatch(updateUserStart());
+        fetch(url, {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/x-www-form-urlencoded',
+                Authorization:`Bearer ${getAuthTokenFromStorage()}`
+            },
+            body:getFormBody({...user, _id:userId})
+        })
+        .then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    console.log('dataaaaaaaaaaaaaaaaaaaaaa', data);
+                    localStorage.setItem('token', data.data.token)
+                    dispatch(updateUserSuccess(data.data.user));
+                    return;
+                }
+                dispatch(updateUserFailure(data.message));
+            })
+    }
 }

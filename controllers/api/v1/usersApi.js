@@ -108,13 +108,15 @@ module.exports.createUser = (req, res) => {
 };
 module.exports.update = async (req, res) => {
 	try {
-		let new_credentials = req.body;
-		let user = await User.findByIdAndUpdate(
-			new_credentials._id,
-			new_credentials
+        let new_credentials = req.body;
+        console.log(new_credentials);
+		let user = await User.findOneAndUpdate(
+			{_id:new_credentials._id},
+            new_credentials,
+            {new:true}
 		);
-		let newToken = jwt.sign(user.toJSON(), "secret");
-		return res.json(200, {
+        let newToken = await jwt.sign(user.toJSON(), "secret");
+		return await res.json(200, {
 			message: "Update successful!",
 			success: true,
 			data: {
@@ -141,8 +143,10 @@ module.exports.update = async (req, res) => {
 					sex: user.sex
 				} //Not sharing the password
 			}
-		});
-	} catch (error) {
+        }
+        );
+    } 
+    catch (error) {
 		console.log("There was an error in updating the user in the database!");
 		return res.json(500, {
 			success: false,
