@@ -32,8 +32,8 @@
 }
 .one/* first horizontal line */
 {
-    width: 100%;
-    right: 0%;
+    width: 50%;
+    left: 0%;
     top: 25px;
 }
 .two

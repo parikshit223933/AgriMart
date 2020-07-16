@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import dateformat from "dateformat";
 
 class ProfileBrief extends React.Component {
 	render() {
@@ -42,12 +43,16 @@ class ProfileBrief extends React.Component {
 						<div>
 							<b className="text-muted">Born on: </b>
 							<span>
-								{!user.birth ? "Not Added!" : user.birth}
+								{!user.birth
+									? "Not Added!"
+									: dateformat(user.birth, `dd mmmm yyyy`)}
 							</span>
 						</div>
 						<div>
 							<b className="text-muted">Joined on: </b>
-							<span>{user.createdAt}</span>
+							<span>
+								{dateformat(user.createdAt, `dd mmmm yyyy`)}
+							</span>
 						</div>
 						<div>
 							<b className="text-muted">Email Address: </b>
@@ -73,7 +78,7 @@ class ProfileBrief extends React.Component {
 					user.instagram ? (
 						<div className="social-handle-container">
 							{!user.facebook ? null : (
-								<a href={!user.facebook} target="blank">
+								<a href={user.facebook} target="blank">
 									<div className="facebook-handle">
 										<i className="fab fa-facebook"></i>
 									</div>
@@ -101,7 +106,7 @@ class ProfileBrief extends React.Component {
 								</a>
 							)}
 							{!user.portfolio ? null : (
-								<a href={!user.portfolio} target="blank">
+								<a href={user.portfolio} target="blank">
 									<div className="portfolio">
 										<i className="fas fa-user-tie"></i>
 									</div>

@@ -16,6 +16,7 @@ import ProfileUnsoldItems from "./ProfileSubComponents/ProfileUnsoldItems";
 import ProfileBookmarkedUsers from "./ProfileSubComponents/ProfileBookmarkedUsers";
 import ProfileProductHistory from "./ProfileSubComponents/ProfileProductHistory";
 import ProfileSettings from "./ProfileSubComponents/ProfileSettings";
+import ChangePassword from './ProfileSubComponents/ChangePassword';
 
 export {
 	Navbar,
@@ -35,5 +36,6 @@ export {
 	ProfileBookmarkedUsers,
 	ProfileUnsoldItems,
 	ProfileProductHistory,
-	ProfileSettings
+    ProfileSettings,
+    ChangePassword
 };

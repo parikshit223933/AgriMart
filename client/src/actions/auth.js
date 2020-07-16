@@ -163,7 +163,6 @@ export function updateUser(user, userId)
             {
                 if(data.success)
                 {
-                    console.log('dataaaaaaaaaaaaaaaaaaaaaa', data);
                     localStorage.setItem('token', data.data.token)
                     dispatch(updateUserSuccess(data.data.user));
                     return;
