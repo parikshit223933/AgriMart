@@ -9,7 +9,10 @@ import {
 	SIGN_UP_FAILURE,
     UPDATE_USER_START,
     UPDATE_USER_SUCCESS,
-    UPDATE_USER_FAILED
+    UPDATE_USER_FAILED,
+    UPLOAD_AVATAR_START,
+    UPLOAD_AVATAR_SUCCESS,
+    UPLOAD_AVATAR_FAILURE
 } from "../actions/actionTypes";
 
 let initialAuthState = {
@@ -88,6 +91,24 @@ export default function auth(state = initialAuthState, action) {
                 user:action.user
             }
         case UPDATE_USER_FAILED:
+            return{
+                ...state,
+                inProgress:false,
+                error:action.error
+            }
+        case UPLOAD_AVATAR_START:
+            return{
+                ...state,
+                inProgress:true
+            }
+        case UPLOAD_AVATAR_SUCCESS:
+            return{
+                ...state,
+                inProgress:false,
+                error:false,
+                user:action.user
+            }
+        case UPLOAD_AVATAR_FAILURE:
             return{
                 ...state,
                 inProgress:false,

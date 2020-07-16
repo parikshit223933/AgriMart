@@ -7,12 +7,16 @@ import {
 	CLEAR_AUTH_STATE,
 	SIGN_UP_START,
 	SIGN_UP_FAILURE,
-    UPDATE_USER_START,
-    UPDATE_USER_SUCCESS,
-    UPDATE_USER_FAILED
+	UPDATE_USER_START,
+	UPDATE_USER_SUCCESS,
+	UPDATE_USER_FAILED,
+	UPLOAD_AVATAR_START,
+	UPLOAD_AVATAR_SUCCESS,
+	UPLOAD_AVATAR_FAILURE
 } from "./actionTypes";
 import { API_URLS } from "../helpers/urls";
 import { getFormBody, getAuthTokenFromStorage } from "../helpers/utils";
+const axios = require("axios");
 
 /* logging in the existing user */
 export function startLogin() {
@@ -122,52 +126,73 @@ export function signUp(name, email, password, confirm_password) {
 	};
 }
 
-
 /* FOR UPDATING THE USER */
-export function updateUserStart()
-{
-    return{
-        type:UPDATE_USER_START
-    }
+export function updateUserStart() {
+	return {
+		type: UPDATE_USER_START
+	};
 }
-export function updateUserSuccess(user)
-{
-    return{
-        type:UPDATE_USER_SUCCESS,
-        user
-    }
+export function updateUserSuccess(user) {
+	return {
+		type: UPDATE_USER_SUCCESS,
+		user
+	};
 }
-export function updateUserFailure(error)
-{
-    return{
-        type:UPDATE_USER_FAILED,
-        error
-    }
+export function updateUserFailure(error) {
+	return {
+		type: UPDATE_USER_FAILED,
+		error
+	};
 }
-export function updateUser(user, userId)
-{
-    return(dispatch)=>
-    {
-        let url=API_URLS.updateUser();
-        dispatch(updateUserStart());
-        fetch(url, {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/x-www-form-urlencoded',
-                Authorization:`Bearer ${getAuthTokenFromStorage()}`
-            },
-            body:getFormBody({...user, _id:userId})
-        })
-        .then(response=>response.json())
-        .then(data=>
-            {
-                if(data.success)
-                {
-                    localStorage.setItem('token', data.data.token)
-                    dispatch(updateUserSuccess(data.data.user));
-                    return;
-                }
-                dispatch(updateUserFailure(data.message));
-            })
-    }
+export function updateUser(user, userId) {
+	return (dispatch) => {
+		let url = API_URLS.updateUser();
+		dispatch(updateUserStart());
+		fetch(url, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+				Authorization: `Bearer ${getAuthTokenFromStorage()}`
+			},
+			body: getFormBody({ ...user, _id: userId })
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.success) {
+					localStorage.setItem("token", data.data.token);
+					dispatch(updateUserSuccess(data.data.user));
+					return;
+				}
+				dispatch(updateUserFailure(data.message));
+			});
+	};
+}
+
+export function uploadAvatarStart() {
+	return {
+		type: UPLOAD_AVATAR_START
+	};
+}
+export function uploadAvatarSuccess(user) {
+	return {
+		type: UPLOAD_AVATAR_SUCCESS,
+		user
+	};
+}
+export function uploadAvatarFailure(error) {
+	return {
+		type: UPLOAD_AVATAR_FAILURE,
+		error
+	};
+}
+export function uploadAvatar(data) {
+	return (dispatch) => {
+		dispatch(uploadAvatarStart());
+		let url = API_URLS.uploadAvatar();
+
+		axios
+			.post(url, data, {headers:{Authorization:`Bearer ${getAuthTokenFromStorage()}`}})
+			.then((res) => console.log(res))
+			.catch((error) => console.log(error));
+	};
 }

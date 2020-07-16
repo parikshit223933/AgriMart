@@ -1,5 +1,6 @@
 const User = require("../../../models/userModel");
 const jwt = require("jsonwebtoken");
+const path = require("path");
 
 /* action for signing in */
 module.exports.create_session = async (req, res) => {
@@ -13,8 +14,8 @@ module.exports.create_session = async (req, res) => {
 			});
 		}
 		//if the user is found,
-        let { password, ...expanded_user } = user._doc;
-        return res.json(200, {
+		let { password, ...expanded_user } = user._doc;
+		return res.json(200, {
 			message: "Sign in successful!",
 			success: true,
 			data: {
@@ -24,7 +25,8 @@ module.exports.create_session = async (req, res) => {
 		});
 	} catch (error) {
 		console.log(
-			"There was an error in finding the user by email in the database!", error
+			"There was an error in finding the user by email in the database!",
+			error
 		);
 		return res.json(500, {
 			message:
@@ -122,13 +124,10 @@ module.exports.update = async (req, res) => {
 					{ _id: newParams._id },
 					{ password: newParams.newPassword },
 					{ new: true }
-                );
-                new_user.save();
-				let { password, ...expanded_user } = new_user._doc;
-				let new_token = await jwt.sign(
-					expanded_user,
-					"secret"
 				);
+				new_user.save();
+				let { password, ...expanded_user } = new_user._doc;
+				let new_token = await jwt.sign(expanded_user, "secret");
 				return res.json(200, {
 					message: "Update successful!",
 					success: true,
@@ -161,11 +160,11 @@ module.exports.update = async (req, res) => {
 				{ _id: new_credentials._id },
 				new_credentials,
 				{ new: true }
-            );
-            user.save();
-            let { password, ...expanded_user } = user._doc;
+			);
+			user.save();
+			let { password, ...expanded_user } = user._doc;
 			let newToken = await jwt.sign(expanded_user, "secret");
-			
+
 			return res.json(200, {
 				message: "Update successful!",
 				success: true,
@@ -184,4 +183,16 @@ module.exports.update = async (req, res) => {
 			});
 		}
 	}
+};
+
+module.exports.uploadAvatar = async (req, res) => {
+	User.uploadedAvatar(req, res, function (error) {
+        console.log('Request-----------', req.body);
+        console.log('Request File-----------', req.file);
+        if(error)
+        {
+            return res.json(500, {success:false, message:'SUCCESSFUL'})
+        }
+        return res.json(500, {success:false, message:'perfectlyFailed'});
+	});
 };

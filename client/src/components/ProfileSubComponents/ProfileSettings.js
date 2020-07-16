@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { updateUser } from "../../actions/auth";
-import { ChangePassword } from "../";
+import { ChangePassword, ChangeProfilePicture } from "../";
 
 class ProfileSettings extends React.Component {
 	constructor(props) {
@@ -39,11 +39,7 @@ class ProfileSettings extends React.Component {
 					></div>
 					<div className="high-actions d-flex flex-row justify-content-between align-items-center flex-wrap">
 						<ChangePassword userId={user._id}/>
-						<div className="m-2">
-							<button type="button" className="btn btn-success">
-								Change Profile Picture
-							</button>
-						</div>
+						<ChangeProfilePicture userId={user._id}/>
 					</div>
 					<form className="mt-3">
 						<div className="form-group">
