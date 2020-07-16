@@ -1,10 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import dateformat from "dateformat";
+import {API_URLS} from '../../helpers/urls';
 
 class ProfileBrief extends React.Component {
 	render() {
-		const { user } = this.props.auth;
+        const profilePicture=API_URLS.profilePictureRoot();
+        const { user } = this.props.auth;
+        console.log(user.avatar);
 		return (
 			<div className="col-sm-5 col-lg-4">
 				<div className="user-profile-image ml-auto mr-auto mt-4 mb-4">
@@ -14,7 +17,7 @@ class ProfileBrief extends React.Component {
 								? user.sex === "Male"
 									? "https://www.freeiconspng.com/uploads/flat-user-icon-11.png"
 									: "https://www.pinclipart.com/picdir/big/164-1640717_free-user-icon-flat-189024-download-user-icon.png"
-								: user.avatar
+								: profilePicture+user.avatar
 						}
 						alt="profile"
 					/>

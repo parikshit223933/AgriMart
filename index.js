@@ -68,6 +68,8 @@ app.use(passport.setAuthenticatedUser);//An authentication check will be made on
 app.use(cors());//for cross origin data sharing
 app.use('/', routes);
 app.use(express.static('./assets'));
+app.use('/uploads', express.static(__dirname+'/uploads'));
+//now the uploads folder will be available to use at localhost:8000/uploads
 
 /* making the uploads path available to the browser */
 app.use('/uploads', express.static(__dirname+'/uploads'));

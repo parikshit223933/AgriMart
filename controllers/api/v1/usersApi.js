@@ -185,14 +185,51 @@ module.exports.update = async (req, res) => {
 	}
 };
 
-module.exports.uploadAvatar = async (req, res) => {
-	User.uploadedAvatar(req, res, function (error) {
-        console.log('Request-----------', req.body);
-        console.log('Request File-----------', req.file);
-        if(error)
-        {
-            return res.json(500, {success:false, message:'SUCCESSFUL'})
-        }
-        return res.json(500, {success:false, message:'perfectlyFailed'});
-	});
+module.exports.uploadAvatar = (req, res) => {
+	try {
+		User.uploadedAvatar(req, res, async function (error) {
+			try {
+				let user = await User.findById(req.body._id);
+				if (!user) {
+					return res.json(404, {
+						success: false,
+						message: "User Not Found!"
+					});
+				}
+				if (!req.file) {
+					return res.json(404, {
+						success: false,
+						message: "No file uploaded!"
+					});
+				}
+                user.avatar = path.join(User.avatarPath , "./" , req.file.filename);
+                console.log(user.avatar);
+				user.save();
+
+				let { password, ...expanded_user } = user._doc;
+				let new_token = jwt.sign(expanded_user, "secret");
+
+				return res.json(200, {
+					message: "Update successful!",
+					success: true,
+					data: {
+						token: new_token,
+						user: expanded_user
+					}
+				});
+			} catch (error) {
+				console.log(error);
+				return res.json(500, {
+					success: false,
+					message: "Internal Server Error!"
+				});
+			}
+		});
+	} catch (error) {
+		console.log(error);
+		return res.json(500, {
+			success: false,
+			message: "Internal Server Error!"
+		});
+	}
 };

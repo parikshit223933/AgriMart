@@ -96,7 +96,7 @@ var storage = multer.diskStorage({
 
 //static methods
 // static functions are called upon the whole class. they are not called on the instances of the class
-userSchema.statics.uploadedAvatar=multer({storage:storage}).single('avatar');//single, because I dont want an array of files/avatars
+userSchema.statics.uploadedAvatar=multer({storage:storage}).single('file');//single, because I dont want an array of files/avatars
 userSchema.statics.avatarPath=AVATAR_PATH;
 
 module.exports = mongoose.model("User", userSchema);

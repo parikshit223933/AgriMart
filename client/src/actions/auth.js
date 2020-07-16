@@ -191,8 +191,21 @@ export function uploadAvatar(data) {
 		let url = API_URLS.uploadAvatar();
 
 		axios
-			.post(url, data, {headers:{Authorization:`Bearer ${getAuthTokenFromStorage()}`}})
-			.then((res) => console.log(res))
+			.post(url, data, {
+				headers: {
+					Authorization: `Bearer ${getAuthTokenFromStorage()}`
+				}
+			})
+			.then((res) => {
+                console.log(res.data);
+                if(res.data.success)
+                {
+                    localStorage.setItem('token', res.data.data.token)
+                    dispatch(uploadAvatarSuccess(res.data.data.user));
+                    return;
+                }else
+                dispatch(uploadAvatarFailure(res.data.message));
+			})
 			.catch((error) => console.log(error));
 	};
 }
