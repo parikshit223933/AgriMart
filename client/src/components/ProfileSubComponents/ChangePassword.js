@@ -20,7 +20,6 @@ class ChangePassword extends React.Component {
     }
     handleSubmit=(event)=>
     {
-        console.log('hello')
         event.preventDefault();
         this.props.dispatch(updateUser(this.state, this.props.userId));
     }

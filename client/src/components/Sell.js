@@ -30,21 +30,26 @@ class Sell extends React.Component {
 		}
 	};
 	handleSubmit = (event) => {
-        event.preventDefault();
-        
+		if (this.state.category === "Category") {
+			window.alert(
+				"Please Select a Category. In case your Entity is not mentioned in the list, please select 'Other' option!"
+			);
+			return;
+		}
+
+		event.preventDefault();
+
 		const data = new FormData();
 		data.append("_id", this.props.auth.user._id);
 		data.append("name", this.state.name);
-        data.append("coverImage", this.state.coverImage);
-        data.append('price', this.state.price);
-        data.append('description', this.state.description);
-        data.append('category', this.state.category);
-        data.append('minimumOrderQuantity', this.state.minimumOrderQuantity);
-        data.append('remainingQuantity', this.state.remainingQuantity);
+		data.append("coverImage", this.state.coverImage);
+		data.append("price", this.state.price);
+		data.append("description", this.state.description);
+		data.append("category", this.state.category);
+		data.append("minimumOrderQuantity", this.state.minimumOrderQuantity);
+		data.append("remainingQuantity", this.state.remainingQuantity);
 
-		this.props.dispatch(
-			createProduct(data)
-		);
+		this.props.dispatch(createProduct(data));
 	};
 
 	render() {
@@ -80,12 +85,36 @@ class Sell extends React.Component {
 									/>
 								</div>
 								<div className="form-group">
-									<label htmlFor="email">Price</label>
+									<label htmlFor="price">
+										Price
+									</label>
+									<div className="input-group mb-2">
+										<div className="input-group-prepend">
+											<div className="input-group-text">
+												INR
+											</div>
+										</div>
+										<input
+											type="number"
+											className="form-control"
+											id="price"
+											placeholder="Price of the entity"
+											required
+											onChange={(event) => {
+												this.formInputHandler(
+													"price",
+													event
+												);
+											}}
+											value={this.state.price}
+										/>
+									</div>
+									{/* <label htmlFor="price">Price</label>
 									<input
 										type="number"
 										className="form-control"
-										id="email"
-										aria-describedby="email"
+										id="price"
+										aria-describedby="price"
 										placeholder="Price of the entity"
 										required
 										onChange={(event) => {
@@ -95,10 +124,12 @@ class Sell extends React.Component {
 											);
 										}}
 										value={this.state.price}
-									/>
+									/> */}
 								</div>
 								<div className="form-group">
-									<label htmlFor="cover-image">Cover Image</label>
+									<label htmlFor="cover-image">
+										Cover Image
+									</label>
 									<input
 										type="file"
 										className="form-control-file"
@@ -151,7 +182,40 @@ class Sell extends React.Component {
 									/>
 								</div>
 								<div className="form-group">
-									<label htmlFor="category">Category</label>
+									<select
+										className="custom-select"
+										defaultValue="1"
+										onChange={(event) => {
+											this.formInputHandler(
+												"category",
+												event
+											);
+										}}
+									>
+										<option value="Category">
+											Category
+										</option>
+										<option value="Cereals and Pulses">
+											Cereals and Pulses
+										</option>
+										<option value="Seeds">Seeds</option>
+										<option value="Spices">Spices</option>
+										<option value="Fruits">Fruits</option>
+										<option value="Vegetables">
+											Vegetables
+										</option>
+										<option value="Dry Fruits">
+											Dry Fruits
+										</option>
+										<option value="Edible Oils">
+											Edible Oils
+										</option>
+										<option value="Dairy Products">
+											Dairy Products
+										</option>
+										<option value="Other">Other</option>
+									</select>
+									{/* <label htmlFor="category">Category</label>
 									<input
 										type="text"
 										className="form-control"
@@ -166,10 +230,36 @@ class Sell extends React.Component {
 											);
 										}}
 										value={this.state.category}
-									/>
+									/> */}
 								</div>
 								<div className="form-group">
-									<label htmlFor="total-quantity">
+									<label
+										htmlFor="total-quantity"
+									>
+										Total Quantity
+									</label>
+									<div className="input-group mb-2">
+										<div className="input-group-prepend">
+											<div className="input-group-text">
+												Grams or Units
+											</div>
+										</div>
+										<input
+											type="number"
+											className="form-control"
+											id="total-quantity"
+											placeholder="Initial Total Amount of the entity"
+											required
+											onChange={(event) => {
+												this.formInputHandler(
+													"remainingQuantity",
+													event
+												);
+											}}
+											value={this.state.remainingQuantity}
+										/>
+									</div>
+									{/* <label htmlFor="total-quantity">
 										Total Quantity
 									</label>
 									<input
@@ -186,10 +276,38 @@ class Sell extends React.Component {
 											);
 										}}
 										value={this.state.remainingQuantity}
-									/>
+									/> */}
 								</div>
 								<div className="form-group">
-									<label htmlFor="min-qty">
+									<label
+										htmlFor="minimum-order-quantity"
+									>
+										Minimum Order Quantity
+									</label>
+									<div className="input-group mb-2">
+										<div className="input-group-prepend">
+											<div className="input-group-text">
+												INR
+											</div>
+										</div>
+										<input
+											type="number"
+											className="form-control"
+											id="minimum-order-quantity"
+											placeholder="Minimum cost of the entity"
+											required
+											onChange={(event) => {
+												this.formInputHandler(
+													"minimumOrderQuantity",
+													event
+												);
+											}}
+											value={
+												this.state.minimumOrderQuantity
+											}
+										/>
+									</div>
+									{/* <label htmlFor="min-qty">
 										Minimum Order Quantity
 									</label>
 									<input
@@ -206,11 +324,11 @@ class Sell extends React.Component {
 											);
 										}}
 										value={this.state.minimumOrderQuantity}
-									/>
+									/> */}
 								</div>
 								<button
 									type="submit"
-									className="btn btn-primary"
+									className="btn btn-success"
 									onClick={this.handleSubmit}
 								>
 									Submit

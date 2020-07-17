@@ -35,7 +35,7 @@ export function createProduct(data)
             method:'POST',
             headers:{
                 Authorization:`Bearer ${getAuthTokenFromStorage()}`
-            },
+            },//not mentioning content type because it is multipart data (it will be set up automatically by the browser!)
             body:data
         })
         .then(response=>response.json())
