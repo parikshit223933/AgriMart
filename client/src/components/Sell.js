@@ -13,26 +13,45 @@ class Sell extends React.Component {
 			price: "",
 			description: "",
 			category: "",
-            minimumOrderQuantity: "",
+			minimumOrderQuantity: "",
+			remainingQuantity: ""
 		};
 	}
 
 	formInputHandler = (property, event) => {
-		this.setState({
-			[property]: event.target.value
-		});
+		if (property === "coverImage") {
+			this.setState({
+				coverImage: event.target.files[0]
+			});
+		} else {
+			this.setState({
+				[property]: event.target.value
+			});
+		}
 	};
 	handleSubmit = (event) => {
-		event.preventDefault();
-		this.props.dispatch(createProduct(this.state, this.props.auth.user._id));
+        event.preventDefault();
+        
+		const data = new FormData();
+		data.append("_id", this.props.auth.user._id);
+		data.append("name", this.state.name);
+        data.append("coverImage", this.state.coverImage);
+        data.append('price', this.state.price);
+        data.append('description', this.state.description);
+        data.append('category', this.state.category);
+        data.append('minimumOrderQuantity', this.state.minimumOrderQuantity);
+        data.append('remainingQuantity', this.state.remainingQuantity);
+
+		this.props.dispatch(
+			createProduct(data)
+		);
 	};
 
 	render() {
-        const {isLoggedIn}=this.props.auth;
-        if(!isLoggedIn)
-        {
-            return <Redirect to="/sign-in"/>
-        }
+		const { isLoggedIn } = this.props.auth;
+		if (!isLoggedIn) {
+			return <Redirect to="/sign-in" />;
+		}
 		return (
 			<div className="sell-component">
 				<div className="container-fluid bg-warning">
@@ -79,6 +98,21 @@ class Sell extends React.Component {
 									/>
 								</div>
 								<div className="form-group">
+									<label htmlFor="cover-image">Cover Image</label>
+									<input
+										type="file"
+										className="form-control-file"
+										id="cover-image"
+										required
+										onChange={(event) => {
+											this.formInputHandler(
+												"coverImage",
+												event
+											);
+										}}
+									/>
+								</div>
+								{/* <div className="form-group">
 									<label htmlFor="image">Image Url</label>
 									<input
 										type="text"
@@ -95,7 +129,7 @@ class Sell extends React.Component {
 										}}
 										value={this.state.coverImage}
 									/>
-								</div>
+								</div> */}
 								<div className="form-group">
 									<label htmlFor="description">
 										Description
@@ -132,6 +166,26 @@ class Sell extends React.Component {
 											);
 										}}
 										value={this.state.category}
+									/>
+								</div>
+								<div className="form-group">
+									<label htmlFor="total-quantity">
+										Total Quantity
+									</label>
+									<input
+										type="number"
+										className="form-control"
+										id="total-quantity"
+										aria-describedby="total-quantity"
+										placeholder="Initial Total Amount of the entity"
+										required
+										onChange={(event) => {
+											this.formInputHandler(
+												"remainingQuantity",
+												event
+											);
+										}}
+										value={this.state.remainingQuantity}
 									/>
 								</div>
 								<div className="form-group">

@@ -77,7 +77,13 @@ let userSchema = new mongoose.Schema(
 		portfolio: {
 			type: String,
 			default: ""
-		}
+        },
+        cart:[
+            {
+                type:mongoose.Schema.Types.ObjectId,
+                ref:"Product"
+            }
+        ]
 	},
 	{
 		timestamps: true
