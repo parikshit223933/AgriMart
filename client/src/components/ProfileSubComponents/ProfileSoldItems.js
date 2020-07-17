@@ -5,7 +5,7 @@ class ProfileSoldItems extends React.Component
 {
     render()
     {
-        return<MultiProductContainer/>
+        return<MultiProductContainer products={this.props.products}/>
     }
 }
 

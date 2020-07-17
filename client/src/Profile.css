@@ -126,5 +126,33 @@
 /* MULTI PRODUCT CONTAINER //////////////////////////////////////////////////////// */
 .MPC
 {
-    border:2px solid black;
+    box-shadow: 0px 0px 2px 1px rgb(221, 221, 221);
+}
+.single-product
+{
+    width:280px;
+    /* height:100px; */
+    box-shadow: 0px 0px 2px 1px rgb(221, 221, 221);
+    box-sizing: border-box;
+}
+.image-container-left-section
+{
+    /* height:100px; */
+    width:100px;
+    box-sizing:border-box;
+}
+.image-container-left-section>img
+{
+    width:inherit;
+    height:inherit;
+}
+.details-container
+{
+    width:180px;
+    word-wrap: break-word;
+}
+.details-container>div:nth-child(1)
+{
+    text-transform: capitalize;
+    
 }

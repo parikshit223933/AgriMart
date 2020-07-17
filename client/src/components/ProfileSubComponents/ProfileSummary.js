@@ -22,7 +22,8 @@ class ProfileSummary extends React.Component {
         }
     }
 	render() {
-		const { user } = this.props.auth;
+        const { user } = this.props.auth;
+        const {allProducts}=this.props.product;
 		return (
 			<div className="col-sm-7 col-lg-8 mt-2 animate__animated animate__fadeInRight">
 				<div className="profile-top">
@@ -69,13 +70,13 @@ class ProfileSummary extends React.Component {
 					<ul className="nav nav-tabs" id="myTab" role="tablist">
 						<li className="nav-item" role="presentation">
 							<a
-								className="nav-link bg-light"
+								className="nav-link active bg-light"
 								id="home-tab"
 								data-toggle="tab"
 								href="#home"
 								role="tab"
 								aria-controls="home"
-								aria-selected="false"
+								aria-selected="true"
 							>
 								sold
 							</a>
@@ -121,13 +122,13 @@ class ProfileSummary extends React.Component {
 						</li>
 						<li className="nav-item" role="presentation">
 							<a
-								className="nav-link active bg-light"
+								className="nav-link bg-light"
 								id="settings-tab"
 								data-toggle="tab"
 								href="#settings"
 								role="tab"
 								aria-controls="settings"
-								aria-selected="true"
+								aria-selected="false"
 							>
 								Settings
 							</a>
@@ -135,12 +136,12 @@ class ProfileSummary extends React.Component {
 					</ul>
 					<div className="tab-content" id="myTabContent">
 						<div
-							className="tab-pane fade"
+							className="tab-pane fade active show"
 							id="home"
 							role="tabpanel"
 							aria-labelledby="home-tab"
 						>
-							<ProfileSoldItems />
+							<ProfileSoldItems products={allProducts}/>
 						</div>
 						<div
 							className="tab-pane fade"
@@ -148,7 +149,7 @@ class ProfileSummary extends React.Component {
 							role="tabpanel"
 							aria-labelledby="profile-tab"
 						>
-							<ProfileUnsoldItems />
+							<ProfileUnsoldItems products={allProducts}/>
 						</div>
 						<div
 							className="tab-pane fade"
@@ -167,7 +168,7 @@ class ProfileSummary extends React.Component {
 							<ProfileBookmarkedUsers />
 						</div>
 						<div
-							className="tab-pane fade active show"
+							className="tab-pane fade"
 							id="settings"
 							role="tabpanel"
 							aria-labelledby="settings-tab"
