@@ -6,9 +6,15 @@ let productSchema = new mongoose.Schema({
         type: String
     },
 
-    image: {
+    coverImage: {
         type: String
     },
+
+    allImages:[
+        {
+            type:String
+        }
+    ],
 
     price: {
         type: Number

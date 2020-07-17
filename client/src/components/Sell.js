@@ -9,7 +9,7 @@ class Sell extends React.Component {
 		super(props);
 		this.state = {
 			name: "",
-			image: "",
+			coverImage: "",
 			price: "",
 			description: "",
 			category: "",
@@ -89,11 +89,11 @@ class Sell extends React.Component {
 										required
 										onChange={(event) => {
 											this.formInputHandler(
-												"image",
+												"coverImage",
 												event
 											);
 										}}
-										value={this.state.image}
+										value={this.state.coverImage}
 									/>
 								</div>
 								<div className="form-group">
