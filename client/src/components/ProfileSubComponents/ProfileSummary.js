@@ -13,7 +13,7 @@ class ProfileSummary extends React.Component {
         const { user } = this.props.auth;
         const {allProducts}=this.props.product;
 		return (
-			<div className="col-sm-7 col-lg-8 mt-2 animate__animated animate__fadeInRight">
+			<div className="col-sm-7 col-lg-8 mt-2">{/* CAUTION! DO NOT ANDD ANY ANIMATIONS OTHERWISE THE MODALS WONT WORK */}
 				<div className="profile-top">
 					<div className="title-name mt-3">
 						<h1>{user.name}</h1>
