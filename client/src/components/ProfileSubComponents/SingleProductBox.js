@@ -6,7 +6,6 @@ class SingleProduct extends React.Component
 {
     componentDidMount()
     {
-        console.log('hello');
         if(this.props.product)
         {
             const {product}=this.props;
@@ -22,7 +21,6 @@ class SingleProduct extends React.Component
     render()
     {
         const {product}=this.props;
-        console.log(product)
         return(
             <div className="single-product mt-2 mb-2 flex-row d-flex p-2">
                 <div className={`image-container-left-section ${this.props.productId}`}>

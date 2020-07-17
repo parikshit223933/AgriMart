@@ -5,7 +5,7 @@ class ProfileProductHistory extends React.Component
 {
     render()
     {
-        return<MultiProductContainer/>
+        return<MultiProductContainer products={this.props.bought} showQtyBought={true}/>
     }
 }
 export default ProfileProductHistory;

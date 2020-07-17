@@ -11,7 +11,7 @@ import {
 class ProfileSummary extends React.Component {
 	render() {
         const { user } = this.props.auth;
-        const {allProducts}=this.props.product;
+        const {allProducts, boughtProducts}=this.props.product;
 		return (
 			<div className="col-sm-7 col-lg-8 mt-2">{/* CAUTION! DO NOT ANDD ANY ANIMATIONS OTHERWISE THE MODALS WONT WORK */}
 				<div className="profile-top">
@@ -145,7 +145,7 @@ class ProfileSummary extends React.Component {
 							role="tabpanel"
 							aria-labelledby="contact-tab"
 						>
-							<ProfileProductHistory />
+							<ProfileProductHistory bought={boughtProducts} />
 						</div>
 						<div
 							className="tab-pane fade"
