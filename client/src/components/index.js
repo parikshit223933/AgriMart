@@ -18,6 +18,7 @@ import ProfileProductHistory from "./ProfileSubComponents/ProfileProductHistory"
 import ProfileSettings from "./ProfileSubComponents/ProfileSettings";
 import ChangePassword from './ProfileSubComponents/ChangePassword';
 import ChangeProfilePicture from './ProfileSubComponents/ChangeProfilePicture';
+import MultiProductContainer from './ProfileSubComponents/MultiProductContainer';
 
 export {
 	Navbar,
@@ -39,5 +40,6 @@ export {
 	ProfileProductHistory,
     ProfileSettings,
     ChangePassword,
-    ChangeProfilePicture
+    ChangeProfilePicture,
+    MultiProductContainer
 };

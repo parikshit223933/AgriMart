@@ -31,7 +31,7 @@ class ChangeProfilePicture extends React.Component {
 				{/* BUTTON TO TRIGGER MODAL */}
 				<button
 					type="button"
-					className="btn btn-primary"
+					className="btn btn-success"
 					data-toggle="modal"
 					data-target="#change-profile-picture"
 				>

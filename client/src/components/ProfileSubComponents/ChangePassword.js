@@ -28,7 +28,7 @@ class ChangePassword extends React.Component {
 			<div className="m-2">
 				<button
 					type="button"
-					className="btn btn-primary"
+					className="btn btn-danger"
 					data-toggle="modal"
 					data-target="#changePassword"
 				>

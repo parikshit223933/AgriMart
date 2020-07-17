@@ -47,3 +47,26 @@ module.exports.createNewProduct = /* async */ (req, res) => {
 	//     })
 	// }
 };
+
+
+module.exports.getProducts=async (req, res)=>
+{
+    try
+    {
+        console.log(req.body);
+        let allProducts=await Product.find({seller:req.body._id});
+        return res.json(200, {
+            success:true,
+            data:{
+                products:allProducts
+            }
+        })
+    }
+    catch(error)
+    {
+        return res.json(500, {
+            success:false,
+            message:'Internal Server Error!'
+        })
+    }
+}

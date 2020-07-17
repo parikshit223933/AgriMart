@@ -1,14 +1,11 @@
 import React from 'react';
+import { MultiProductContainer } from '..';
 
 class ProfileProductHistory extends React.Component
 {
     render()
     {
-        return(
-            <div>
-                This is ProfileProductHistory component...
-            </div>
-        )
+        return<MultiProductContainer/>
     }
 }
 export default ProfileProductHistory;

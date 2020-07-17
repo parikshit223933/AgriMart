@@ -7,8 +7,20 @@ import {
 	ProfileUnsoldItems,
 	ProfileSettings
 } from "../";
+import { retrieveProducts } from "../../actions/product";
+import { getAuthTokenFromStorage } from "../../helpers/utils";
+import jwtDecode from 'jwt-decode';
 
 class ProfileSummary extends React.Component {
+    componentDidMount()
+    {
+        const token=getAuthTokenFromStorage();
+        if(token)
+        {
+            const {_id}=jwtDecode(token);
+            this.props.dispatch(retrieveProducts(_id));
+        }
+    }
 	render() {
 		const { user } = this.props.auth;
 		return (

@@ -7,4 +7,5 @@ export const API_URLS={
     updateUser:()=>`${API_ROOT}/users/update-user`,
     uploadAvatar:()=>`${API_ROOT}/users/upload-avatar`,
     profilePictureRoot:()=>USER_PROFILE_PICTURE_ROOT,
+    getProducts:()=>`${API_ROOT}/product/get-products`
 }

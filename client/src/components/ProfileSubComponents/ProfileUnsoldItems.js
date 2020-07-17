@@ -1,14 +1,11 @@
 import React from 'react';
+import { MultiProductContainer } from '..';
 
 class ProfileUnsoldItems extends React.Component
 {
     render()
     {
-        return(
-            <div>
-                This is ProfileUnsoldItems component...
-            </div>
-        )
+        return<MultiProductContainer/>
     }
 }
 export default ProfileUnsoldItems;
