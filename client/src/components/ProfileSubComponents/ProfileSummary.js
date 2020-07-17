@@ -12,7 +12,7 @@ class ProfileSummary extends React.Component {
 	render() {
 		const { user } = this.props.auth;
 		return (
-			<div className="col-sm-7 col-lg-8 mt-2">
+			<div className="col-sm-7 col-lg-8 mt-2 animate__animated animate__fadeInRight">
 				<div className="profile-top">
 					<div className="title-name mt-3">
 						<h1>{user.name}</h1>

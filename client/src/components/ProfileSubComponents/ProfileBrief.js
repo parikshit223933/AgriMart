@@ -8,7 +8,7 @@ class ProfileBrief extends React.Component {
         const profilePicture=API_URLS.profilePictureRoot();
         const { user } = this.props.auth;
 		return (
-			<div className="col-sm-5 col-lg-4">
+			<div className="col-sm-5 col-lg-4 animate__animated animate__fadeInLeft">
 				<div className="user-profile-image ml-auto mr-auto mt-4 mb-4">
 					<img
 						src={

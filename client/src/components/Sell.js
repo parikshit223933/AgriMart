@@ -66,7 +66,7 @@ class Sell extends React.Component {
 								Start Selling...
 							</h1>
 							<form>
-								<div className="form-group">
+								<div className="form-group animate__animated animate__fadeInDown">
 									<label htmlFor="name">Entity Name</label>
 									<input
 										type="text"
@@ -84,7 +84,7 @@ class Sell extends React.Component {
 										value={this.state.name}
 									/>
 								</div>
-								<div className="form-group">
+								<div className="form-group animate__animated animate__fadeInLeft">
 									<label htmlFor="price">
 										Price
 									</label>
@@ -126,7 +126,7 @@ class Sell extends React.Component {
 										value={this.state.price}
 									/> */}
 								</div>
-								<div className="form-group">
+								<div className="form-group animate__animated animate__fadeInRight">
 									<label htmlFor="cover-image">
 										Cover Image
 									</label>
@@ -161,7 +161,7 @@ class Sell extends React.Component {
 										value={this.state.coverImage}
 									/>
 								</div> */}
-								<div className="form-group">
+								<div className="form-group animate__animated animate__fadeInUp">
 									<label htmlFor="description">
 										Description
 									</label>
@@ -181,7 +181,7 @@ class Sell extends React.Component {
 										value={this.state.description}
 									/>
 								</div>
-								<div className="form-group">
+								<div className="form-group animate__animated animate__fadeInTopLeft">
 									<select
 										className="custom-select"
 										defaultValue="1"
@@ -232,7 +232,7 @@ class Sell extends React.Component {
 										value={this.state.category}
 									/> */}
 								</div>
-								<div className="form-group">
+								<div className="form-group animate__animated animate__fadeInTopRight">
 									<label
 										htmlFor="total-quantity"
 									>
@@ -278,7 +278,7 @@ class Sell extends React.Component {
 										value={this.state.remainingQuantity}
 									/> */}
 								</div>
-								<div className="form-group">
+								<div className="form-group animate__animated animate__fadeInBottomLeft">
 									<label
 										htmlFor="minimum-order-quantity"
 									>
@@ -328,7 +328,7 @@ class Sell extends React.Component {
 								</div>
 								<button
 									type="submit"
-									className="btn btn-success"
+									className="btn btn-success animate__animated animate__fadeInBottomRight"
 									onClick={this.handleSubmit}
 								>
 									Submit
