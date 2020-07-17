@@ -4,13 +4,17 @@ import {
 	CREATE_PRODUCT_FAILURE,
     RETRIEVE_PRODUCTS_START,
     RETRIEVE_PRODUCTS_SUCCESS,
-    RETRIEVE_PRODUCTS_FAILURE
+    RETRIEVE_PRODUCTS_FAILURE,
+    FETCH_BOUGHT_PRODUCTS_START,
+    FETCH_BOUGHT_PRODUCTS_SUCCESS,
+    FETCH_BOUGHT_PRODUCTS_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
 	allProducts: [],
 	inProgress: null,
-	error: null
+    error: null,
+    boughtProducts:[]
 };
 export default function product(state = initialProductState, action) {
 	switch (action.type) {
@@ -51,6 +55,24 @@ export default function product(state = initialProductState, action) {
                 ...state,
                 inProgress:false,
                 error:action.error,
+            }
+        case FETCH_BOUGHT_PRODUCTS_START:
+            return{
+                ...state,
+                inProgress:true
+            }
+        case FETCH_BOUGHT_PRODUCTS_SUCCESS:
+            return{
+                ...state,
+                inProgress:false,
+                error:false,
+                boughtProducts:[...action.products]
+            }
+        case FETCH_BOUGHT_PRODUCTS_FAILURE:
+            return{
+                ...state,
+                error:action.error,
+                inProgress:false,
             }
 		default:
 			return state;

@@ -18,7 +18,7 @@ import {
 import { getAuthTokenFromStorage } from "../helpers/utils";
 import { connect } from "react-redux";
 import { authenticateUser } from "../actions/auth";
-import { retrieveProducts } from "../actions/product";
+import { retrieveProducts, fetchBoughtProducts } from "../actions/product";
 
 class App extends React.Component {
 	 componentDidMount() {
@@ -28,7 +28,8 @@ class App extends React.Component {
 			 this.props.dispatch(
 				authenticateUser({...user})
             );
-             this.props.dispatch(retrieveProducts(user._id));
+            this.props.dispatch(retrieveProducts(user._id));
+            this.props.dispatch(fetchBoughtProducts(user._id));
 		}
 	}
 	render() {

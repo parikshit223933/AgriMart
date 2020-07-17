@@ -53,7 +53,6 @@ module.exports.getProducts=async (req, res)=>
 {
     try
     {
-        console.log(req.body);
         let allProducts=await Product.find({seller:req.body._id});
         return res.json(200, {
             success:true,
@@ -64,6 +63,31 @@ module.exports.getProducts=async (req, res)=>
     }
     catch(error)
     {
+        return res.json(500, {
+            success:false,
+            message:'Internal Server Error!'
+        })
+    }
+}
+
+
+/* get all the products bought by the user */
+module.exports.getBoughtProducts=async (req, res)=>
+{//req.body._id
+    try
+    {
+        let extractedProducts=await Product.find({'Buyers.user':req.body._id});
+        console.log(req.body._id);
+        return res.json(200, {
+            success:true,
+            data:{
+                products:extractedProducts
+            }
+        });
+    }
+    catch(error)
+    {
+        console.log(error);
         return res.json(500, {
             success:false,
             message:'Internal Server Error!'
