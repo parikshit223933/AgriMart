@@ -44,7 +44,7 @@ export default function product(state = initialProductState, action) {
                 ...state,
                 inProgress:false,
                 error:false,
-                allProducts:[...state.allProducts, ...action.products]
+                allProducts:[...action.products]
             }
         case RETRIEVE_PRODUCTS_FAILURE:
             return{

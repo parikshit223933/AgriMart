@@ -91,7 +91,7 @@ class Sell extends React.Component {
 									<div className="input-group mb-2">
 										<div className="input-group-prepend">
 											<div className="input-group-text">
-												INR
+												INR/STD. UNIT
 											</div>
 										</div>
 										<input
@@ -287,7 +287,7 @@ class Sell extends React.Component {
 									<div className="input-group mb-2">
 										<div className="input-group-prepend">
 											<div className="input-group-text">
-												INR
+                                            Grams or Units
 											</div>
 										</div>
 										<input

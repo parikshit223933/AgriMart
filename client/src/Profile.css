@@ -139,12 +139,8 @@
 {
     /* height:100px; */
     width:100px;
+    min-height:92px;
     box-sizing:border-box;
-}
-.image-container-left-section>img
-{
-    width:inherit;
-    height:inherit;
 }
 .details-container
 {
@@ -155,4 +151,9 @@
 {
     text-transform: capitalize;
     
+}
+hr
+{
+    width:100%;
+    margin:0px;
 }

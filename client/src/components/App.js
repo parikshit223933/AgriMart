@@ -18,15 +18,17 @@ import {
 import { getAuthTokenFromStorage } from "../helpers/utils";
 import { connect } from "react-redux";
 import { authenticateUser } from "../actions/auth";
+import { retrieveProducts } from "../actions/product";
 
 class App extends React.Component {
-	componentDidMount() {
+	 componentDidMount() {
 		const token = getAuthTokenFromStorage();
 		if (token) {
 			const user = jwtDecode(token);
-			this.props.dispatch(
+			 this.props.dispatch(
 				authenticateUser({...user})
-			);
+            );
+             this.props.dispatch(retrieveProducts(user._id));
 		}
 	}
 	render() {

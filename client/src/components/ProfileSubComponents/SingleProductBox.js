@@ -6,39 +6,42 @@ class SingleProduct extends React.Component
 {
     componentDidMount()
     {
+        console.log('hello');
         if(this.props.product)
         {
             const {product}=this.props;
             let firstPart=API_URLS.profilePictureRoot()+'/uploads/products/coverImage-'
             let secondPart=product.coverImage.split('-')[product.coverImage.split('-').length-1];
             let newURI=firstPart+secondPart;
-            console.log(newURI)
-            $('.image-container-left-section').css('background-image', "url('"+newURI+"')");
-            $('.image-container-left-section').css('background-position', "center");
-            $('.image-container-left-section').css('background-repeat', "no-repeat");
-            $('.image-container-left-section').css('background-size', "cover");
+            $(`.${this.props.productId}`).css('background-image', "url('"+newURI+"')");
+            $(`.${this.props.productId}`).css('background-position', "center");
+            $(`.${this.props.productId}`).css('background-repeat', "no-repeat");
+            $(`.${this.props.productId}`).css('background-size', "cover");
         }
     }
     render()
     {
         const {product}=this.props;
+        console.log(product)
         return(
             <div className="single-product mt-2 mb-2 flex-row d-flex p-2">
-                <div className="image-container-left-section">
+                <div className={`image-container-left-section ${this.props.productId}`}>
                 </div>
                 <div className="details-container p-1 d-flex flex-column justify-content-lg-start align-items-start">
                     <div >
-                        {product.name}
+                        {product.name} ({product.category})
                     </div>
+                    <hr/>
                     <div>
-                        ({product.category})
+                        <b>Rs.</b> {product.price}
                     </div>
-                    <div>
-                        Rs. {product.price}
-                    </div>
-                    <div>
-                        Remaining: {product.remainingQuantity}
-                    </div>
+                    <hr/>
+                    {this.props.showRemaining&&<div>
+                        <b>Remaining:</b> {product.remainingQuantity} Standard Units
+                    </div>}
+                    {this.props.showBuyers&&<div>
+                        <b>Buyers:</b> {product.Buyers.length}
+                    </div>}
                 </div>
             </div>
         );
