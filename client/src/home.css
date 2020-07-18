@@ -1,0 +1,57 @@
+.grad-cover {
+	/* height: 70%; */
+	width: 100%;
+	background-image: url("https://images.unsplash.com/photo-1555704574-f9ecf4717298?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: top;
+}
+/* @media screen and (max-width: 750px) {
+	.grad-cover {
+		height: 80%;
+	}
+} */
+.bg-grad {
+	background-image: linear-gradient(
+		0deg,
+		rgb(0 124 15 / 0%) 0%,
+		rgb(255 251 0 / 50%) 100%
+	);
+	height: 100%;
+	width: 100%;
+}
+.home-component {
+	width: 100vw;
+	height: 100vh;
+	padding-left: 5rem;
+}
+.logo {
+	box-sizing: border-box;
+	color: rgb(255, 255, 255);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	font-size: 90px;
+	font-weight: bolder;
+	margin: 0px 0px 10px 0px;
+	overflow: hidden;
+	font-family: "Tangerine";
+}
+.upper-nav {
+	width: 100%;
+}
+.search-bar-container {
+	width: 20vw;
+	min-width: 150px;
+}
+.search-bar-container > input {
+	border-radius: 2px;
+}
+.search-bar-container ~ div > button {
+	border-radius: 2px !important;
+}
+
+.jumbotron {
+	background-color: rgba(255, 255, 255, 0.8);
+}
