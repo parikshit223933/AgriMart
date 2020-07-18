@@ -91,7 +91,9 @@
 	z-index: 2;
 	padding-left: 5rem;
 	transition: transform ease-in-out 0.2s;
-    transform: translate3d(-12rem, 0, 0);
+    /* transform: translate3d(-12rem, 0, 0); */
+    transform-origin: bottom left;
+    transform:rotateY(-90deg);
 }
 
 .buttons-container-exposed {
@@ -143,7 +145,9 @@
 }
 
 .exposed {
-    transform: translate3d(0rem, 0, 0) !important;
+    /* transform: translate3d(0rem, 0, 0) !important; */
+    transform-origin: bottom left !important;
+    transform:rotateY(0deg) !important;
 }
 /* SIGN UP COMPONENT /////////////////////////////////////////////////////////////////// */
 
@@ -232,8 +236,10 @@
 	position: fixed;
 	z-index: 1;
 	padding-left: 17rem;
-    transition: transform ease-in-out 0.1s;
-    transform: translate3d(-29rem, 0, 0);
+    transition: transform ease-in-out 0.2s;
+    /* transform: translate3d(-29rem, 0, 0); */
+    transform-origin: bottom left;
+    transform:rotateY(-90deg);
 }
 .categories-nav-inner-container {
 	width: 100%;
@@ -260,7 +266,7 @@
 .categories-nav-inner-container > a:hover {
 	text-decoration: none;
 	background-color: #37374d;
-	transition: background-color ease-in-out 0.15s;
+	transition: background-color ease-in-out 0.1s;
 }
 .custom-width
 {
