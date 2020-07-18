@@ -35,11 +35,13 @@ class Navbar extends React.Component {
         });
         $('.categories-nav').mouseenter(function()
         {
+			$(".website-name").addClass("animate__jello");
 			$(".categories-nav").addClass("exposed");
 			$(".exposed-navbar").addClass("exposed");
         })
         $('.categories-nav').mouseleave(function()
         {
+			$(".website-name").removeClass("animate__jello");
 			$(".categories-nav").removeClass("exposed");
 			$(".exposed-navbar").removeClass("exposed");
         })
@@ -53,7 +55,9 @@ class Navbar extends React.Component {
 		$(".buttons-container").toggleClass("theme-light-background");
 		$(".exposed-navbar").toggleClass("theme-light-background");
 		$(".buttons-container-exposed").toggleClass("theme-light-background");
-		$(".buttons-container-exposed>a").toggleClass("theme-light-background");
+        $(".buttons-container-exposed>a").toggleClass("theme-light-background");
+        $(".categories-nav-inner-container").toggleClass('change-hover-color')
+        $(".categories-nav").toggleClass('theme-light-background');
 		if (
 			$(".buttons-container-exposed").hasClass("theme-light-background")
 		) {
@@ -80,7 +84,8 @@ class Navbar extends React.Component {
 				$($(".buttons-container-exposed>a")[index]).unbind(
 					"mouseenter mouseleave"
 				);
-			});
+            });
+            this.addHoverToNavbar();//the navbar was not opening due to the theme change and unbinding of all mouseEnter and mouseLeave event listeners thats why we have called it again.
 		}
 	};
 	render() {

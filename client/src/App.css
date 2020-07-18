@@ -94,6 +94,9 @@
     /* transform: translate3d(-12rem, 0, 0); */
     transform-origin: bottom left;
     transform:rotateY(-90deg);
+    transform-style: preserve-3d;
+    perspective: 10000;
+
 }
 
 .buttons-container-exposed {
@@ -148,6 +151,10 @@
     /* transform: translate3d(0rem, 0, 0) !important; */
     transform-origin: bottom left !important;
     transform:rotateY(0deg) !important;
+
+
+    transform-style: preserve-3d;
+    perspective: 10000;
 }
 /* SIGN UP COMPONENT /////////////////////////////////////////////////////////////////// */
 
@@ -240,6 +247,9 @@
     /* transform: translate3d(-29rem, 0, 0); */
     transform-origin: bottom left;
     transform:rotateY(-90deg);
+    transform-style: preserve-3d;
+    perspective: 10000;
+
 }
 .categories-nav-inner-container {
 	width: 100%;
@@ -249,7 +259,7 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	color: white;
+	/* color: white; */
 }
 .categories-nav-inner-container > a {
 	height: 10%;
@@ -262,6 +272,15 @@
 	padding-left: 10%;
 	box-sizing: border-box;
 	color: white;
+}
+.change-hover-color>a>div
+{
+    color:black !important;
+
+}
+.change-hover-color>a:hover
+{
+    background-color: rgb(206, 206, 206) !important;
 }
 .categories-nav-inner-container > a:hover {
 	text-decoration: none;
