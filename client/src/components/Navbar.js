@@ -27,47 +27,64 @@ class Navbar extends React.Component {
 			$(".exposed-navbar").removeClass("exposed");
 			$(".website-name").removeClass("animate__jello");
 		});
-    };
-    logouthandler=(event)=>
-    {
-        this.props.dispatch(logout());
-    }
-    handleThemeToggler=(event)=>
-    {
-        event.preventDefault();
-        $('.custom-navbar').toggleClass('theme-light-background');
-        $('.buttons-container').toggleClass('theme-light-background');
-        $('.exposed-navbar').toggleClass('theme-light-background');
-        $('.buttons-container-exposed').toggleClass('theme-light-background')
-        $('.buttons-container-exposed>a').toggleClass('theme-light-background')
-        if($('.buttons-container-exposed').hasClass('theme-light-background'))
+		$(".categories-exposed").mouseenter(function () {
+			$(".categories-nav").addClass("exposed");
+		});
+		$(".categories-exposed").mouseleave(function () {
+			$(".categories-nav").removeClass("exposed");
+        });
+        $('.categories-nav').mouseenter(function()
         {
-            $('.buttons-container-exposed>a').each(index=>{
-                $($('.buttons-container-exposed>a')[index]).hover(function()
-                {
-                    //when the cursor goes inside
-                    $($('.buttons-container-exposed>a')[index]).addClass('theme-on-hover');
-
-                }, function()
-                {
-                    //when the cursor leaves
-                    $($('.buttons-container-exposed>a')[index]).removeClass('theme-on-hover');
-
-                })
-            })
-            
-        }
-        else
+			$(".categories-nav").addClass("exposed");
+			$(".exposed-navbar").addClass("exposed");
+        })
+        $('.categories-nav').mouseleave(function()
         {
-            $('.buttons-container-exposed>a').removeClass('theme-on-hover')
-            $('.theme-light-background').removeClass('.theme-light-background');
-            $('.buttons-container-exposed>a').each(index=>{
-                $($('.buttons-container-exposed>a')[index]).unbind('mouseenter mouseleave')
-            })
-        }
-    }
+			$(".categories-nav").removeClass("exposed");
+			$(".exposed-navbar").removeClass("exposed");
+        })
+	};
+	logouthandler = (event) => {
+		this.props.dispatch(logout());
+	};
+	handleThemeToggler = (event) => {
+		event.preventDefault();
+		$(".custom-navbar").toggleClass("theme-light-background");
+		$(".buttons-container").toggleClass("theme-light-background");
+		$(".exposed-navbar").toggleClass("theme-light-background");
+		$(".buttons-container-exposed").toggleClass("theme-light-background");
+		$(".buttons-container-exposed>a").toggleClass("theme-light-background");
+		if (
+			$(".buttons-container-exposed").hasClass("theme-light-background")
+		) {
+			$(".buttons-container-exposed>a").each((index) => {
+				$($(".buttons-container-exposed>a")[index]).hover(
+					function () {
+						//when the cursor goes inside
+						$($(".buttons-container-exposed>a")[index]).addClass(
+							"theme-on-hover"
+						);
+					},
+					function () {
+						//when the cursor leaves
+						$($(".buttons-container-exposed>a")[index]).removeClass(
+							"theme-on-hover"
+						);
+					}
+				);
+			});
+		} else {
+			$(".buttons-container-exposed>a").removeClass("theme-on-hover");
+			$(".theme-light-background").removeClass(".theme-light-background");
+			$(".buttons-container-exposed>a").each((index) => {
+				$($(".buttons-container-exposed>a")[index]).unbind(
+					"mouseenter mouseleave"
+				);
+			});
+		}
+	};
 	render() {
-        const { isLoggedIn } = this.props.auth;
+		const { isLoggedIn } = this.props.auth;
 		return (
 			<React.Fragment>
 				<div className="custom-navbar">
@@ -107,48 +124,110 @@ class Navbar extends React.Component {
 						<div className="toggle-theme">
 							<i className="fas fa-exchange-alt"></i>
 						</div>
-						{isLoggedIn&&<div className="sell">
-							<i className="fas fa-rupee-sign"></i>
-						</div>}
+						{isLoggedIn && (
+							<div className="sell">
+								<i className="fas fa-rupee-sign"></i>
+							</div>
+						)}
 						<div className="more-info">
 							<i className="fas fa-info-circle"></i>
 						</div>
 					</div>
 				</div>
 				<div className="exposed-navbar">
-					<div className="website-name animate__animated">
+					<div className="website-name animate__animated pl-4">
 						Agrimart
 					</div>
+                    <hr className="m-0 bg-warning custom-width"/>
 					<div className="buttons-container-exposed">
 						<Link to="/" className="home-exposed">
 							<div>Home</div>
 						</Link>
-                        {isLoggedIn&&<Link to="/profile" className="profile-exposed">
-							<div>Profile</div>
-						</Link>}
-                        {!isLoggedIn&&<Link to="/sign-in" className="signin-button-exposed">
-							<div>Sign In</div>
-						</Link>}
-						{!isLoggedIn&&<Link to="/sign-up" className="signup-button-exposed">
-							<div>Sign Up</div>
-						</Link>}
-						{isLoggedIn&&<Link to="/sign-in" onClick={this.logouthandler} className="log-out-exposed">
-							<div>Log Out</div>
-						</Link>}
+						{isLoggedIn && (
+							<Link to="/profile" className="profile-exposed">
+								<div>Profile</div>
+							</Link>
+						)}
+						{!isLoggedIn && (
+							<Link
+								to="/sign-in"
+								className="signin-button-exposed"
+							>
+								<div>Sign In</div>
+							</Link>
+						)}
+						{!isLoggedIn && (
+							<Link
+								to="/sign-up"
+								className="signup-button-exposed"
+							>
+								<div>Sign Up</div>
+							</Link>
+						)}
+						{isLoggedIn && (
+							<Link
+								to="/sign-in"
+								onClick={this.logouthandler}
+								className="log-out-exposed"
+							>
+								<div>Log Out</div>
+							</Link>
+						)}
 						<Link to="/cart" className="cart-exposed">
 							<div>Cart</div>
 						</Link>
-						<Link to="/categories" className="categories-exposed">
-							<div>Categories</div>
+						<Link to="/categories" className="categories-exposed cat-button">
+							<div>Categories <i className="fas fa-chevron-right float-right"></i></div>
 						</Link>
-						<Link to="" className="toggle-theme-exposed" onClick={this.handleThemeToggler}>
+						<Link
+							to=""
+							className="toggle-theme-exposed"
+							onClick={this.handleThemeToggler}
+						>
 							<div>Toggle Theme</div>
 						</Link>
-						{isLoggedIn&&<Link to="/sell" className="sell-exposed">
-							Sell on Agrimart
-						</Link>}
+						{isLoggedIn && (
+							<Link to="/sell" className="sell-exposed">
+								Sell on Agrimart
+							</Link>
+						)}
 						<Link to="/more-info" className="more-info-exposed">
 							<div>More Info</div>
+						</Link>
+					</div>
+				</div>
+				<div className="categories-nav">
+                <div className="website-name animate__animated pl-4">
+						Categories
+					</div>
+                    <hr className="m-0 bg-danger custom-width"/>
+					<div className="categories-nav-inner-container">
+						<Link to="">
+							<div>Cereals and Pulses</div>
+						</Link>
+						<Link to="">
+							<div>Seeds</div>
+						</Link>
+						<Link to="">
+							<div>Spices</div>
+						</Link>
+						<Link to="">
+							<div>Fruits</div>
+						</Link>
+						<Link to="">
+							<div>Vegetables</div>
+						</Link>
+						<Link to="">
+							<div>Dry Fruits</div>
+						</Link>
+						<Link to="">
+							<div>Edible Oils</div>
+						</Link>
+						<Link to="">
+							<div>Dairy Products</div>
+						</Link>
+						<Link to="">
+							<div>Others</div>
 						</Link>
 					</div>
 				</div>
