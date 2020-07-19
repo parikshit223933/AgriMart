@@ -8,6 +8,7 @@ class ProfileSoldItems extends React.Component {
 				products={this.props.products}
                 showRemaining={false}
                 showBuyers={true}
+                editAllowed={false}
 			/>
 		);
 	}

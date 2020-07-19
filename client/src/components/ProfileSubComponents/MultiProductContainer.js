@@ -23,6 +23,7 @@ class MultiProductContainer extends React.Component {
 							showRemaining={this.props.showRemaining}
                             showBuyers={this.props.showBuyers}
                             productId={product._id}
+                            editAllowed={this.props.editAllowed}
 						/>
 					);
 				})}

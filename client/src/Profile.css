@@ -157,3 +157,33 @@ hr
     width:100%;
     margin:0px;
 }
+
+
+/* Editable products ////////////////////////////////////////////////////////////// */
+
+.editable-single-product
+{
+    position:relative;
+
+}
+.editable-cover
+{
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0%;
+    left:0%;
+    transition:background-color ease-in-out 0.2s;
+    display:none;
+}
+.editable-single-product:hover>.editable-cover
+{
+    display:flex;
+}
+.editable-cover:hover
+{
+    background-color:rgba(0, 0, 0, 0.7);
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}

@@ -1,11 +1,15 @@
-import React from 'react';
-import { MultiProductContainer } from '..';
+import React from "react";
+import { MultiProductContainer } from "..";
 
-class ProfileProductHistory extends React.Component
-{
-    render()
-    {
-        return<MultiProductContainer products={this.props.bought} showQtyBought={true}/>
-    }
+class ProfileProductHistory extends React.Component {
+	render() {
+		return (
+			<MultiProductContainer
+				products={this.props.bought}
+                showQtyBought={true}
+                editAllowed={false}
+			/>
+		);
+	}
 }
 export default ProfileProductHistory;
