@@ -8,6 +8,8 @@ router.post('/get-products', passport.authenticate('jwt', {session:false}), prod
 router.post('/get-bought-items', passport.authenticate('jwt', {session:false}), productApi.getBoughtProducts);
 router.post('/edit-product', passport.authenticate('jwt', {session:false}), productApi.editProduct);
 router.post('/delete-product', passport.authenticate('jwt', {session:false}), productApi.deleteProduct);
+router.post('/get-single-product', passport.authenticate('jwt', {session:false}), productApi.getSingleProduct);
+
 
 //since i dont want the session cookies to be generated so i have written session:false
 module.exports=router;

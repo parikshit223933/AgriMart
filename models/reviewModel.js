@@ -3,9 +3,14 @@ const mongoose = require("mongoose");
 //Reviw Schema
 let reviewSchema = new mongoose.Schema({
     // comment and rating 
-    comment: {
+    reviewText: {
         type: String,
         required: true
+    },
+
+    reviewTitle:{
+        type:String,
+        Default:"" 
     },
 
     rating: {
@@ -14,6 +19,16 @@ let reviewSchema = new mongoose.Schema({
         // Define min and max values
         min: 1,
         max: 5
+    },
+
+    likes:{
+        type:Number,
+        default:0
+    },
+
+    dislikes:{
+        type:Number,
+        default:0
     },
 
     // author
@@ -27,6 +42,9 @@ let reviewSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product"
     }
+},
+{
+    timestamps:true
 });
 
 module.exports = mongoose.model("Review", reviewSchema);

@@ -1,6 +1,6 @@
 import { API_URLS } from "../helpers/urls";
 import { getAuthTokenFromStorage, getFormBody } from "../helpers/utils";
-import { CREATE_PRODUCT_START, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE, RETRIEVE_PRODUCTS_START, RETRIEVE_PRODUCTS_SUCCESS, RETRIEVE_PRODUCTS_FAILURE, FETCH_BOUGHT_PRODUCTS_START, FETCH_BOUGHT_PRODUCTS_SUCCESS, FETCH_BOUGHT_PRODUCTS_FAILURE, EDIT_PRODUCT_START, EDIT_PRODUCT_SUCCESS, EDIT_PRODUCT_FAILURE, DELETE_PRODUCT_START, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE } from "./actionTypes";
+import { CREATE_PRODUCT_START, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE, RETRIEVE_PRODUCTS_START, RETRIEVE_PRODUCTS_SUCCESS, RETRIEVE_PRODUCTS_FAILURE, FETCH_BOUGHT_PRODUCTS_START, FETCH_BOUGHT_PRODUCTS_SUCCESS, FETCH_BOUGHT_PRODUCTS_FAILURE, EDIT_PRODUCT_START, EDIT_PRODUCT_SUCCESS, EDIT_PRODUCT_FAILURE, DELETE_PRODUCT_START, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE, GET_SINGLE_PRODUCT_START, GET_SINGLE_PRODUCT_SUCCESS, GET_SINGLE_PRODUCT_FAILURE } from "./actionTypes";
 
 export function createProductStart()
 {
@@ -246,5 +246,56 @@ export function deleteProduct(productId, userId)
                     dispatch(deleteProductFailure(data.message));
                 }
             })
+    }
+}
+
+/* get single product */
+export function getSingleProductStart()
+{
+    return{
+        type:GET_SINGLE_PRODUCT_START
+    }
+}
+export function getSingleProductSuccess(product)
+{
+    return{
+        type:GET_SINGLE_PRODUCT_SUCCESS,
+        product
+    }
+}
+export function getSingleProductFailure(error)
+{
+    return{
+        type:GET_SINGLE_PRODUCT_FAILURE,
+        error
+    }
+}
+export function getSingleProduct(productId)
+{
+    return(dispatch)=>
+    {
+        dispatch(getSingleProductStart());
+        let url=API_URLS.getSingleProduct();
+
+        fetch(url, {
+            method:'POST',
+            headers:{
+                Authorization:`Bearer ${getAuthTokenFromStorage()}`,
+                'Content-Type':'application/x-www-form-urlencoded',
+            },
+            body:getFormBody({productId})
+        })
+        .then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {   
+                    dispatch(getSingleProductSuccess(data.data.product));
+                    return;
+                }else
+                {
+                    dispatch(getSingleProductFailure(data.message));
+                }
+            });
     }
 }

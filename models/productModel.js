@@ -39,6 +39,31 @@ let productSchema = new mongoose.Schema({
 		min: 0,
 		max: 5
 	},
+    /* Separable Reviews */
+	one: {
+		type: Number,
+		default: 0
+	},
+
+	two: {
+		type: Number,
+
+		default: 0
+	},
+	three: {
+		type: Number,
+		default: 0
+	},
+
+	four: {
+		type: Number,
+		default: 0
+	},
+
+	five: {
+		type: Number,
+		default: 0
+	},
 
 	reviews: [
 		{
@@ -63,6 +88,8 @@ let productSchema = new mongoose.Schema({
 			}
 		}
 	]
+}, {
+    timestamps:true
 });
 
 const storage = multer.diskStorage({

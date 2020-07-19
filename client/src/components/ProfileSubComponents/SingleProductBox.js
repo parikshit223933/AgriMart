@@ -8,13 +8,11 @@ import { connect } from "react-redux";
 class SingleProduct extends React.Component {
 	componentDidMount() {
 		this.handleproductImages();
-		console.log(this.props.product._id);
 	}
 	componentDidUpdate(prevProps, prevState) {
 		this.handleproductImages();
 	}
 	handleDeleteProduct = (productId) => {
-		console.log(productId);
 		this.props.dispatch(deleteProduct(productId, this.props.auth.user._id));
 	};
 	handleproductImages = () => {
@@ -72,7 +70,6 @@ class SingleProduct extends React.Component {
 							to={`/edit-product/${product._id}/${product.seller}`}
 							className="EDIT"
 						>
-							{/* EDIT BUTTON TO TRIGGER MODAL */}
 							<button
 								type="button"
 								className="btn btn-warning"
@@ -81,7 +78,6 @@ class SingleProduct extends React.Component {
 							>
 								Edit
 							</button>
-							{/* EDIT MODAL */}
 						</Link>
 						<div>
 							<button
@@ -93,11 +89,11 @@ class SingleProduct extends React.Component {
 								Delete
 							</button>
 						</div>
-						<div>
+						<Link to={`/view-product/${product._id}/${this.props.auth.user._id}`}>
 							<button type="button" className="btn btn-primary">
 								View
 							</button>
-						</div>
+						</Link>
 					</div>
 					<div
 						className="modal fade"

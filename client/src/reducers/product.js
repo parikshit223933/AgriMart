@@ -13,14 +13,18 @@ import {
     EDIT_PRODUCT_FAILURE,
     DELETE_PRODUCT_START,
     DELETE_PRODUCT_SUCCESS,
-    DELETE_PRODUCT_FAILURE
+    DELETE_PRODUCT_FAILURE,
+    GET_SINGLE_PRODUCT_START,
+    GET_SINGLE_PRODUCT_SUCCESS,
+    GET_SINGLE_PRODUCT_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
 	allProducts: [],
 	inProgress: null,
     error: null,
-    boughtProducts:[]
+    boughtProducts:[],
+    singleProduct:null
 };
 export default function product(state = initialProductState, action) {
 	switch (action.type) {
@@ -92,10 +96,10 @@ export default function product(state = initialProductState, action) {
                 if(product._id===action.product._id)
                 {
                     newProducts.push(action.product);
-                    return;
+                    return product;
                 }
                 newProducts.push(product);
-                return;
+                return product;
             });
             return{
                 ...state,
@@ -123,6 +127,7 @@ export default function product(state = initialProductState, action) {
                 {
                     new_Products.push(product);
                 }
+                return product
             })
             return{
                 ...state,
@@ -131,6 +136,25 @@ export default function product(state = initialProductState, action) {
                 allProducts:new_Products
             }
         case DELETE_PRODUCT_FAILURE:
+            return{
+                ...state,
+                inProgress:false,
+                error:action.error
+            }
+        case GET_SINGLE_PRODUCT_START:
+            return{
+                ...state,
+                inProgress:true,
+                error:false
+            }
+        case GET_SINGLE_PRODUCT_SUCCESS:
+            return{
+                ...state,
+                singleProduct:action.product,
+                inProgress:false,
+                error:false
+            }
+        case GET_SINGLE_PRODUCT_FAILURE:
             return{
                 ...state,
                 inProgress:false,

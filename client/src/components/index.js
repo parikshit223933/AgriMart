@@ -21,6 +21,7 @@ import ChangeProfilePicture from './ProfileSubComponents/ChangeProfilePicture';
 import MultiProductContainer from './ProfileSubComponents/MultiProductContainer';
 import SingleProductBox from './ProfileSubComponents/SingleProductBox';
 import EditProduct from './EditProduct';
+import SingleProduct from './SingleProduct';
 
 export {
 	Navbar,
@@ -45,5 +46,6 @@ export {
     ChangeProfilePicture,
     MultiProductContainer,
     SingleProductBox,
-    EditProduct
+    EditProduct,
+    SingleProduct
 };

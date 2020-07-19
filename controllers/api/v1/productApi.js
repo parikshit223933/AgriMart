@@ -180,8 +180,8 @@ module.exports.deleteProduct = async (req, res) => {
 				success: false,
 				message: "Product not found!"
 			});
-        }
-        
+		}
+
 		if (
 			fs.existsSync(path.join(__dirname, "../../../", product.coverImage))
 		) {
@@ -189,7 +189,7 @@ module.exports.deleteProduct = async (req, res) => {
 				path.join(__dirname, "../../../", product.coverImage)
 			);
 		}
-        
+
 		await Product.findByIdAndDelete(req.body.productId);
 		return res.json(200, {
 			success: true,
@@ -202,6 +202,28 @@ module.exports.deleteProduct = async (req, res) => {
 		return res.json(500, {
 			success: false,
 			message: "Internal Server Error!"
+		});
+	}
+};
+
+/* To get all the details of a single product */
+module.exports.getSingleProduct = async (req, res) => {
+	//product id in request.body
+	try {
+		let product = await Product.findById(req.body.productId)
+			.populate("reviews")
+			.populate("seller");
+		console.log(product);
+		return res.json(200, {
+			success: true,
+			data: {
+				product
+			}
+		});
+	} catch (error) {
+		return res.json(500, {
+			success: false,
+			message: "Internal Server error!"
 		});
 	}
 };

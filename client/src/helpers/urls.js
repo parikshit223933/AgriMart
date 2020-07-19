@@ -11,4 +11,6 @@ export const API_URLS={
     getBoughtProducts:()=>`${API_ROOT}/product/get-bought-items`,
     editProduct:()=>`${API_ROOT}/product/edit-product`,
     deleteProduct:()=>`${API_ROOT}/product/delete-product`,
+    getSingleProduct:()=>`${API_ROOT}/product/get-single-product`,
+
 }

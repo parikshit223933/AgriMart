@@ -70,7 +70,6 @@ class EditProduct extends React.Component {
 		}
 	}
 	render() {
-		console.log(this.state);
 		return (
 			<div className="sell-component">
 				<div className="container-fluid bg-warning">
