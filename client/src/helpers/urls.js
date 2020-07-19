@@ -9,5 +9,6 @@ export const API_URLS={
     profilePictureRoot:()=>USER_PROFILE_PICTURE_ROOT,
     getProducts:()=>`${API_ROOT}/product/get-products`,
     getBoughtProducts:()=>`${API_ROOT}/product/get-bought-items`,
-    editProduct:()=>`${API_ROOT}/product/edit-product`
+    editProduct:()=>`${API_ROOT}/product/edit-product`,
+    deleteProduct:()=>`${API_ROOT}/product/delete-product`,
 }

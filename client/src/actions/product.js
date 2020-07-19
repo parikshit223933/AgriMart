@@ -1,6 +1,6 @@
 import { API_URLS } from "../helpers/urls";
 import { getAuthTokenFromStorage, getFormBody } from "../helpers/utils";
-import { CREATE_PRODUCT_START, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE, RETRIEVE_PRODUCTS_START, RETRIEVE_PRODUCTS_SUCCESS, RETRIEVE_PRODUCTS_FAILURE, FETCH_BOUGHT_PRODUCTS_START, FETCH_BOUGHT_PRODUCTS_SUCCESS, FETCH_BOUGHT_PRODUCTS_FAILURE, EDIT_PRODUCT_START, EDIT_PRODUCT_SUCCESS, EDIT_PRODUCT_FAILURE } from "./actionTypes";
+import { CREATE_PRODUCT_START, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE, RETRIEVE_PRODUCTS_START, RETRIEVE_PRODUCTS_SUCCESS, RETRIEVE_PRODUCTS_FAILURE, FETCH_BOUGHT_PRODUCTS_START, FETCH_BOUGHT_PRODUCTS_SUCCESS, FETCH_BOUGHT_PRODUCTS_FAILURE, EDIT_PRODUCT_START, EDIT_PRODUCT_SUCCESS, EDIT_PRODUCT_FAILURE, DELETE_PRODUCT_START, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE } from "./actionTypes";
 
 export function createProductStart()
 {
@@ -196,5 +196,55 @@ export function editProduct(formData)
                 }
                 dispatch(editProductFailure(data.message));
             });
+    }
+}
+
+/* DELETING A PRODUCT */
+export function deleteProductStart()
+{
+    return{
+        type:DELETE_PRODUCT_START
+    }
+}
+export function deleteProductSuccess(productId)
+{
+    return{
+        type:DELETE_PRODUCT_SUCCESS,
+        productId
+    }
+}
+export function deleteProductFailure(error)
+{
+    return{
+        type:DELETE_PRODUCT_FAILURE,
+        error
+    }
+}
+export function deleteProduct(productId, userId)
+{
+    return (dispatch)=>
+    {
+        dispatch(deleteProductStart());
+        let url=API_URLS.deleteProduct();
+        fetch(url, {
+            method:'POST',
+            headers:{
+                Authorization:`Bearer ${getAuthTokenFromStorage()}`,
+                'Content-Type':'application/x-www-form-urlencoded',
+            },
+            body:getFormBody({productId, userId})
+        })
+        .then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    dispatch(deleteProductSuccess(productId));
+                }
+                else
+                {
+                    dispatch(deleteProductFailure(data.message));
+                }
+            })
     }
 }

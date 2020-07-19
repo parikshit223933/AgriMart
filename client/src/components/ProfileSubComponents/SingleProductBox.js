@@ -2,10 +2,22 @@ import React from "react";
 import { API_URLS } from "../../helpers/urls";
 import * as $ from "jquery";
 import { Link } from "react-router-dom";
+import { deleteProduct } from "../../actions/product";
+import {connect} from 'react-redux';
 
 class SingleProduct extends React.Component {
 	componentDidMount() {
         this.handleproductImages();
+        console.log(this.props.product._id);
+    }
+    componentDidUpdate(prevProps, prevState)
+    {
+        this.handleproductImages();
+    }
+    handleDeleteProduct=(productId)=>
+    {   
+        console.log(productId);
+        this.props.dispatch(deleteProduct(productId, this.props.auth.user._id));
     }
     handleproductImages=()=>
     {
@@ -26,8 +38,9 @@ class SingleProduct extends React.Component {
 			$(`.${this.props.productId}`).css("background-size", "cover");
 		}
     }
+    
 	render() {
-		//if editAllowed is true then i can allow the user to edit the product!
+        //if editAllowed is true then i can allow the user to edit the product!
 		if (this.props.editAllowed) {
 			const { product } = this.props;
 			return (
@@ -71,7 +84,7 @@ class SingleProduct extends React.Component {
                             {/* EDIT MODAL */}
 						</Link>
 						<div>
-							<button type="button" className="btn btn-danger">
+							<button type="button" className="btn btn-danger" id={product._id} onClick={()=>{this.handleDeleteProduct(product._id)}}>
 								Delete
 							</button>
 						</div>
@@ -116,4 +129,10 @@ class SingleProduct extends React.Component {
 		);
 	}
 }
-export default SingleProduct;
+function mapStateToProps({auth})
+{
+    return{
+        auth
+    }
+}
+export default connect(mapStateToProps)(SingleProduct);
