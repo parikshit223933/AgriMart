@@ -13,6 +13,7 @@ class SingleProduct extends React.Component {
 		this.handleproductImages();
 	}
 	handleDeleteProduct = (productId) => {
+        console.log(productId)
 		this.props.dispatch(deleteProduct(productId, this.props.auth.user._id));
 	};
 	handleproductImages = () => {
@@ -84,7 +85,8 @@ class SingleProduct extends React.Component {
 								type="button"
 								className="btn btn-danger"
 								data-toggle="modal"
-								data-target="#deleteProduct"
+                                data-target={`#a${product._id}`}/* it didnt work when the id started from a number so i started it with a alphabet */
+                                id={product._id}
 							>
 								Delete
 							</button>
@@ -97,7 +99,7 @@ class SingleProduct extends React.Component {
 					</div>
 					<div
 						className="modal fade"
-						id="deleteProduct"
+						id={`a${product._id}`}
 						tabIndex="-1"
 						role="dialog"
 						aria-labelledby="deleteProductLabel"
@@ -137,7 +139,8 @@ class SingleProduct extends React.Component {
 									<button
 										type="button"
 										className="btn btn-danger"
-										data-dismiss="modal"
+                                        data-dismiss="modal"
+                                        id={product._id}
 										onClick={() => {
 											this.handleDeleteProduct(
 												product._id

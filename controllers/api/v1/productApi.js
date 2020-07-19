@@ -190,7 +190,8 @@ module.exports.deleteProduct = async (req, res) => {
 			);
 		}
 
-		await Product.findByIdAndDelete(req.body.productId);
+        await Product.findByIdAndDelete(req.body.productId);
+        console.log(req.body.productId)
 		return res.json(200, {
 			success: true,
 			data: {

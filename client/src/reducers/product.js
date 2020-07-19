@@ -90,17 +90,10 @@ export default function product(state = initialProductState, action) {
                 inProgress:true
             }
         case EDIT_PRODUCT_SUCCESS:
-            let newProducts=[]
-            state.allProducts.find((product)=>
+            let newProducts=state.allProducts.filter(function(product)
             {
-                if(product._id===action.product._id)
-                {
-                    newProducts.push(action.product);
-                    return product;
-                }
-                newProducts.push(product);
-                return product;
-            });
+                return product._id===action.product._id
+            })
             return{
                 ...state,
                 inProgress:false,
@@ -120,14 +113,9 @@ export default function product(state = initialProductState, action) {
                 error:false
             }
         case DELETE_PRODUCT_SUCCESS:
-            let new_Products=[];
-            state.allProducts.find((product)=>
+            let new_Products=state.allProducts.filter(function(product)
             {
-                if(product._id!==action.productId)
-                {
-                    new_Products.push(product);
-                }
-                return product
+                return product._id!==action.productId
             })
             return{
                 ...state,
