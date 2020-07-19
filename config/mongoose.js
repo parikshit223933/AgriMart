@@ -1,5 +1,12 @@
 const mongoose=require('mongoose');
-mongoose.connect('mongodb://localhost/agrimart_development', { useNewUrlParser: true,useUnifiedTopology: true });
+
+const LOCAL_DB='mongodb://localhost/agrimart_development';
+const onlineDbName='dbAgrimart';
+const onlineDbPassword='password@123agrimart';
+const ONLINE_DB=`mongodb+srv://dbAgrimart:${onlineDbPassword}@agrimart.r5grp.mongodb.net/${onlineDbName}?retryWrites=true&w=majority`;
+
+
+mongoose.connect(ONLINE_DB, { useNewUrlParser: true,useUnifiedTopology: true });
 const db=mongoose.connection;
 
 db.on('error', console.log.bind('Error in connecting to the Database'));
