@@ -7,7 +7,10 @@ import {
     RETRIEVE_PRODUCTS_FAILURE,
     FETCH_BOUGHT_PRODUCTS_START,
     FETCH_BOUGHT_PRODUCTS_SUCCESS,
-    FETCH_BOUGHT_PRODUCTS_FAILURE
+    FETCH_BOUGHT_PRODUCTS_FAILURE,
+    EDIT_PRODUCT_START,
+    EDIT_PRODUCT_SUCCESS,
+    EDIT_PRODUCT_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -73,6 +76,35 @@ export default function product(state = initialProductState, action) {
                 ...state,
                 error:action.error,
                 inProgress:false,
+            }
+        case EDIT_PRODUCT_START:
+            return{
+                ...state,
+                inProgress:true
+            }
+        case EDIT_PRODUCT_SUCCESS:
+            let newProducts=[]
+            state.allProducts.find((product)=>
+            {
+                if(product._id===action.product._id)
+                {
+                    newProducts.push(action.product);
+                    return;
+                }
+                newProducts.push(product);
+                return;
+            });
+            return{
+                ...state,
+                inProgress:false,
+                error:false,
+                allProducts:newProducts
+            }
+        case EDIT_PRODUCT_FAILURE:
+            return{
+                ...state,
+                inProgress:false,
+                error:action.error
             }
 		default:
 			return state;

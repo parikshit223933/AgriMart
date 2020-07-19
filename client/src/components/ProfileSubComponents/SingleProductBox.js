@@ -1,10 +1,15 @@
 import React from "react";
 import { API_URLS } from "../../helpers/urls";
 import * as $ from "jquery";
+import { Link } from "react-router-dom";
 
 class SingleProduct extends React.Component {
 	componentDidMount() {
-		if (this.props.product) {
+        this.handleproductImages();
+    }
+    handleproductImages=()=>
+    {
+        if (this.props.product) {
 			const { product } = this.props;
 			let firstPart =
 				API_URLS.profilePictureRoot() + "/uploads/products/coverImage-";
@@ -20,7 +25,7 @@ class SingleProduct extends React.Component {
 			$(`.${this.props.productId}`).css("background-repeat", "no-repeat");
 			$(`.${this.props.productId}`).css("background-size", "cover");
 		}
-	}
+    }
 	render() {
 		//if editAllowed is true then i can allow the user to edit the product!
 		if (this.props.editAllowed) {
@@ -53,27 +58,25 @@ class SingleProduct extends React.Component {
 					</div>
 					{/* this is the cover on each product which contains 3 actions, i.e. to delete, edit or view the product. */}
 					<div className="editable-cover">
-						<div>
+						<Link to={`/edit-product/${product._id}/${product.seller}`} className="EDIT">
+                            {/* EDIT BUTTON TO TRIGGER MODAL */}
 							<button
 								type="button"
 								className="btn btn-warning"
+								data-toggle="modal"
+								data-target="#editModal"
 							>
 								Edit
 							</button>
-						</div>
+                            {/* EDIT MODAL */}
+						</Link>
 						<div>
-							<button
-								type="button"
-								className="btn btn-danger"
-							>
+							<button type="button" className="btn btn-danger">
 								Delete
 							</button>
 						</div>
 						<div>
-							<button
-								type="button"
-								className="btn btn-primary"
-							>
+							<button type="button" className="btn btn-primary">
 								View
 							</button>
 						</div>

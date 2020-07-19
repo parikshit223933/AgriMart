@@ -19,7 +19,9 @@ import ProfileSettings from "./ProfileSubComponents/ProfileSettings";
 import ChangePassword from './ProfileSubComponents/ChangePassword';
 import ChangeProfilePicture from './ProfileSubComponents/ChangeProfilePicture';
 import MultiProductContainer from './ProfileSubComponents/MultiProductContainer';
-import SingleProductBox from './ProfileSubComponents/SingleProductBox'
+import SingleProductBox from './ProfileSubComponents/SingleProductBox';
+import EditProduct from './EditProduct';
+
 export {
 	Navbar,
 	App,
@@ -42,5 +44,6 @@ export {
     ChangePassword,
     ChangeProfilePicture,
     MultiProductContainer,
-    SingleProductBox
+    SingleProductBox,
+    EditProduct
 };

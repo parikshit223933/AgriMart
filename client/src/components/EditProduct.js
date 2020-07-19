@@ -1,23 +1,20 @@
 import React from "react";
+import { retrieveProducts, editProduct } from "../actions/product";
+import * as $ from "jquery";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { getAuthTokenFromStorage } from "../helpers/utils";
+import jwtDecode from "jwt-decode";
 
-import { createProduct } from "../actions/product";
-
-class Sell extends React.Component {
+class EditProduct extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			name: "",
-			coverImage: "",
-			price: "",
-			description: "",
-			category: "",
-			minimumOrderQuantity: "",
-			remainingQuantity: ""
-		};
+		this.state = {};
+		this.firstRefresh = false;
 	}
-
+	componentDidMount() {
+		this.handleAPICallsForProducts();
+    }
+    
 	formInputHandler = (property, event) => {
 		if (property === "coverImage") {
 			this.setState({
@@ -29,42 +26,57 @@ class Sell extends React.Component {
 			});
 		}
     };
+    
 	handleSubmit = (event) => {
-		if (this.state.category === "Category") {
-			window.alert(
-				"Please Select a Category. In case your Entity is not mentioned in the list, please select 'Other' option!"
-			);
-			return;
-		}
-
 		event.preventDefault();
+		const { productId, userId } = this.props.match.params;
 
 		const data = new FormData();
-		data.append("_id", this.props.auth.user._id);
-		data.append("name", this.state.name);
-		data.append("coverImage", this.state.coverImage);
-		data.append("price", this.state.price);
-		data.append("description", this.state.description);
-		data.append("category", this.state.category);
-		data.append("minimumOrderQuantity", this.state.minimumOrderQuantity);
-		data.append("remainingQuantity", this.state.remainingQuantity);
 
-		this.props.dispatch(createProduct(data));
-	};
+		data.append("userId", userId);
+		data.append("productId", productId);
 
-	render() {
-		const { isLoggedIn } = this.props.auth;
-		if (!isLoggedIn) {
-			return <Redirect to="/sign-in" />;
+		for (let key in this.state) {
+			data.append(key, this.state[key]);
+        }
+        
+        this.props.dispatch(editProduct(data))
+    };
+    
+	handleAPICallsForProducts = () => {
+		const token = getAuthTokenFromStorage();
+		if (token) {
+			const user = jwtDecode(token);
+			this.props.dispatch(retrieveProducts(user._id));
 		}
+    };
+    
+	componentDidUpdate(prevProps, prevState) {
+		const { productId } = this.props.match.params;
+		if (!this.firstRefresh) {
+			this.props.product.allProducts.forEach((product) => {
+				if (product._id === productId) {
+					$("#name").val(product.name);
+					$("#price").val(product.price);
+					$("#description").val(product.description);
+					$("#category").val(product.category);
+					$("#total-quantity").val(product.remainingQuantity);
+					$("#minimum-order-quantity").val(
+						product.minimumOrderQuantity
+					);
+					this.firstRefresh = true;
+				}
+			});
+		}
+	}
+	render() {
+		console.log(this.state);
 		return (
 			<div className="sell-component">
 				<div className="container-fluid bg-warning">
 					<div className="row">
 						<div className="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-xl-6 offset-xl-3 bg-light my-5 p-5">
-							<h1 className="text-center pb-4">
-								Start Selling...
-							</h1>
+							<h1 className="text-center pb-4">EDIT PRODUCT</h1>
 							<form>
 								<div className="form-group animate__animated animate__fadeInDown">
 									<label htmlFor="name">Entity Name</label>
@@ -81,13 +93,10 @@ class Sell extends React.Component {
 												event
 											);
 										}}
-										value={this.state.name}
 									/>
 								</div>
 								<div className="form-group animate__animated animate__fadeInLeft">
-									<label htmlFor="price">
-										Price
-									</label>
+									<label htmlFor="price">Price</label>
 									<div className="input-group mb-2">
 										<div className="input-group-prepend">
 											<div className="input-group-text">
@@ -106,7 +115,6 @@ class Sell extends React.Component {
 													event
 												);
 											}}
-											value={this.state.price}
 										/>
 									</div>
 									{/* <label htmlFor="price">Price</label>
@@ -178,12 +186,12 @@ class Sell extends React.Component {
 												event
 											);
 										}}
-										value={this.state.description}
 									/>
 								</div>
 								<div className="form-group animate__animated animate__fadeInTopLeft">
 									<select
 										className="custom-select"
+										id="category"
 										defaultValue="1"
 										onChange={(event) => {
 											this.formInputHandler(
@@ -233,9 +241,7 @@ class Sell extends React.Component {
 									/> */}
 								</div>
 								<div className="form-group animate__animated animate__fadeInTopRight">
-									<label
-										htmlFor="total-quantity"
-									>
+									<label htmlFor="total-quantity">
 										Total Quantity
 									</label>
 									<div className="input-group mb-2">
@@ -256,7 +262,6 @@ class Sell extends React.Component {
 													event
 												);
 											}}
-											value={this.state.remainingQuantity}
 										/>
 									</div>
 									{/* <label htmlFor="total-quantity">
@@ -279,15 +284,13 @@ class Sell extends React.Component {
 									/> */}
 								</div>
 								<div className="form-group animate__animated animate__fadeInBottomLeft">
-									<label
-										htmlFor="minimum-order-quantity"
-									>
+									<label htmlFor="minimum-order-quantity">
 										Minimum Order Quantity
 									</label>
 									<div className="input-group mb-2">
 										<div className="input-group-prepend">
 											<div className="input-group-text">
-                                            Grams or Units
+												Grams or Units
 											</div>
 										</div>
 										<input
@@ -302,9 +305,6 @@ class Sell extends React.Component {
 													event
 												);
 											}}
-											value={
-												this.state.minimumOrderQuantity
-											}
 										/>
 									</div>
 									{/* <label htmlFor="min-qty">
@@ -341,9 +341,8 @@ class Sell extends React.Component {
 		);
 	}
 }
-
-function mapStateToProps({ product, auth }) {
-	return { product, auth };
+function mapStateToProps({ product }) {
+	return { product };
 }
 
-export default connect(mapStateToProps)(Sell);
+export default connect(mapStateToProps)(EditProduct);

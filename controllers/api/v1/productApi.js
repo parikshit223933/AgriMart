@@ -1,5 +1,6 @@
 const Product = require("../../../models/productModel");
 const path = require("path");
+const fs=require('fs');
 
 module.exports.createNewProduct = /* async */ (req, res) => {
 	//send all details in req.body and image should be in req.file
@@ -77,7 +78,6 @@ module.exports.getBoughtProducts=async (req, res)=>
     try
     {
         let extractedProducts=await Product.find({'Buyers.user':req.body._id});
-        console.log(req.body._id);
         return res.json(200, {
             success:true,
             data:{
@@ -88,6 +88,81 @@ module.exports.getBoughtProducts=async (req, res)=>
     catch(error)
     {
         console.log(error);
+        return res.json(500, {
+            success:false,
+            message:'Internal Server Error!'
+        })
+    }
+}
+
+/* to edit a product */
+module.exports.editProduct= (req, res)=>
+{
+    try
+    {
+        Product.uploadedImage(req, res, async(error)=>{
+            try{
+                if(error)
+            {
+                return res.json(500, {
+                    success:false,
+                    message:'Internal Server Error!'
+                })
+            }
+            let product=await Product.findById(req.body.productId);
+            if(!product)
+            {
+                return res.json(404, {
+                    success:false,
+                    message:'No such Product Found!'
+                });
+            }
+            if(product.seller!=req.body.userId)
+            {
+                return res.json(401, {
+                    success:false,
+                    message:'Unauthorized user!'
+                });
+            }
+            if (req.file) {
+                if (    
+                    fs.existsSync(
+                        path.join(__dirname, "../../../", product.coverImage)
+                    )
+                ) {
+                    fs.unlinkSync(
+                        path.join(__dirname, "../../../", product.coverImage)
+                    );
+                }
+                product.coverImage=path.join(Product.imagePath, './', req.file.filename);
+            }
+            const {productId, userId, ...changes}=req.body;
+            for(let key in changes)
+            {
+                product[key]=changes[key];
+            }
+            product.save();
+            return res.json(200, {
+                success:true,
+                data:{
+                    product
+                }
+            });
+            }
+            catch(error)
+            {
+                console.log(error)
+                return res.json(500, {
+                    success:false,
+                    message:'Internal Server Error!'
+                })
+            }
+            
+        });
+    }
+    catch(error)
+    {
+        console.log(error)
         return res.json(500, {
             success:false,
             message:'Internal Server Error!'

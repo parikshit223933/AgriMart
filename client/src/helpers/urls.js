@@ -8,5 +8,6 @@ export const API_URLS={
     uploadAvatar:()=>`${API_ROOT}/users/upload-avatar`,
     profilePictureRoot:()=>USER_PROFILE_PICTURE_ROOT,
     getProducts:()=>`${API_ROOT}/product/get-products`,
-    getBoughtProducts:()=>`${API_ROOT}/product/get-bought-items`
+    getBoughtProducts:()=>`${API_ROOT}/product/get-bought-items`,
+    editProduct:()=>`${API_ROOT}/product/edit-product`
 }

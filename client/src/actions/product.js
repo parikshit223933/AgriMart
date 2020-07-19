@@ -1,6 +1,6 @@
 import { API_URLS } from "../helpers/urls";
 import { getAuthTokenFromStorage, getFormBody } from "../helpers/utils";
-import { CREATE_PRODUCT_START, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE, RETRIEVE_PRODUCTS_START, RETRIEVE_PRODUCTS_SUCCESS, RETRIEVE_PRODUCTS_FAILURE, FETCH_BOUGHT_PRODUCTS_START, FETCH_BOUGHT_PRODUCTS_SUCCESS, FETCH_BOUGHT_PRODUCTS_FAILURE } from "./actionTypes";
+import { CREATE_PRODUCT_START, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE, RETRIEVE_PRODUCTS_START, RETRIEVE_PRODUCTS_SUCCESS, RETRIEVE_PRODUCTS_FAILURE, FETCH_BOUGHT_PRODUCTS_START, FETCH_BOUGHT_PRODUCTS_SUCCESS, FETCH_BOUGHT_PRODUCTS_FAILURE, EDIT_PRODUCT_START, EDIT_PRODUCT_SUCCESS, EDIT_PRODUCT_FAILURE } from "./actionTypes";
 
 export function createProductStart()
 {
@@ -148,5 +148,53 @@ export function fetchBoughtProducts(userId)
                     dispatch(fetchBoughtProductsFailure(data.message));
                 }
             })
+    }
+}
+
+/* EDIT A PRODUCT */
+export function editProductStart()
+{
+    return{
+        type:EDIT_PRODUCT_START
+    }
+}
+export function editProductSuccess(product)
+{
+    return{
+        type:EDIT_PRODUCT_SUCCESS,
+        product
+    }
+}
+export function editProductFailure(error)
+{
+    return{
+        type:EDIT_PRODUCT_FAILURE,
+        error
+    }
+}
+export function editProduct(formData)
+{
+    return (dispatch)=>
+    {
+        dispatch(editProductStart());
+        let url=API_URLS.editProduct();
+
+        fetch(url, {
+            method:'POST',
+            headers:{
+                Authorization:`Bearer ${getAuthTokenFromStorage()}`
+            },//not mentioning content type because it is multipart data (it will be set up automatically by the browser!)
+            body:formData
+        })
+        .then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    dispatch(editProductSuccess(data.data.product));
+                    return;
+                }
+                dispatch(editProductFailure(data.message));
+            });
     }
 }
