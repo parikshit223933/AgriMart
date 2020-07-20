@@ -1,5 +1,59 @@
-/* .single-product-component
+.App
 {
-    padding-left:6rem;
-    padding-right:6rem;
-} */
+    overflow-x: inherit !important;
+}/* To enable stick top for left-wrapper calss for the product */
+.single-product-component
+{
+    padding-left:5rem;
+}
+.product-image
+{
+    width:100%;
+}
+.product-image>img
+{
+    width:100%;
+    height:100%;
+}
+.left-wrapper
+{
+    width:100%;
+    z-index:0;
+}
+/* add to cart and buy now action buttons */
+.add-to-cart-button
+{   
+    min-width:165px;
+    width:45%;
+}
+.buy-now-button
+{
+    min-width:165px;
+    width:45%;
+}
+.add-to-cart-button>button
+{
+    width:100%;
+    border-radius: 0px;
+    background-color:#ff9f00;
+    border-color:#ff9f00;
+}
+.add-to-cart-button>button:hover
+{
+    background-color:#ff9f00;
+    border-color:#ff9f00;
+    box-shadow: 0px 5px 12px 1px grey;
+}
+.buy-now-button>button
+{
+    width:100%;
+    border-radius: 0px;
+    background-color: #fb641b;
+    border-color:#fb641b;
+}
+.buy-now-button>button:hover
+{
+    background-color:#fb641b;
+    border-color:#fb641b;
+    box-shadow: 0px 5px 12px 1px grey;
+}
