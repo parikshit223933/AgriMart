@@ -115,3 +115,7 @@
     background-color:rgb(0, 136, 0);
     transition:width ease-in-out 0.5s;
 }
+.apply-shadow
+{
+    box-shadow: 0px 0px 1px 1px rgb(238, 238, 238);
+}

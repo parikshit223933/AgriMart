@@ -4,7 +4,7 @@ import "../singleProduct.css";
 import { getSingleProduct } from "../actions/product";
 import { API_URLS } from "../helpers/urls";
 import dateFormat from "dateformat";
-import { Review, ReviewHeader } from "./";
+import { Review, ReviewHeader, ReviewCreator } from "./";
 
 class SingleProduct extends React.Component {
 	componentDidMount() {
@@ -163,9 +163,13 @@ class SingleProduct extends React.Component {
 							</div>
 							<div className="ratings-and-reviews">
 								<h5>Ratings & Reviews</h5>
-								<div className="review-main p-3">
+								<div className="review-main">
 									<ReviewHeader product={product} />
-									<Review product={product} />
+                                    <ReviewCreator/>
+                                    {product.reviews.map((review, index)=>
+                                    {
+                                        return <Review review={review} key={index}/>
+                                    })}
 								</div>
 							</div>
 						</div>
