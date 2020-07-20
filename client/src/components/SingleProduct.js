@@ -15,7 +15,17 @@ class SingleProduct extends React.Component {
 	render() {
 		const { singleProduct: product } = this.props.product;
 		if (!product) {
-			return <h1>Loading...</h1>;
+			return (
+				<div style={{height:'100vh', width:'100vh'}} className="d-flex flex-column justify-content-center align-items-center ml-auto mr-auto">
+				    <div
+    					className="spinner-border text-danger"
+                        role="status"
+                        style={{width:'10rem', height:'10rem'}}
+    				>
+    					<span className="sr-only">Loading...</span>
+    				</div>
+				</div>
+			);
 		}
 
 		return (
@@ -152,12 +162,10 @@ class SingleProduct extends React.Component {
 								</div>
 							</div>
 							<div className="ratings-and-reviews">
-								<h5>
-									Ratings & Reviews
-								</h5>
+								<h5>Ratings & Reviews</h5>
 								<div className="review-main p-3">
-                                    <ReviewHeader/>
-									<Review />
+									<ReviewHeader product={product} />
+									<Review product={product} />
 								</div>
 							</div>
 						</div>

@@ -93,3 +93,25 @@
 .review-main{
     box-shadow: 0px 0px 1px 1px rgb(219, 219, 219);
 }
+.ratings-desc
+{
+    line-height:1.5;
+}
+.bar
+{
+    position:relative;
+    width:120px;
+    height:5px;
+    border-radius: 100px;
+    background-color: rgb(161, 161, 161);
+    margin:0px 10px 0px 10px;
+}
+.filler
+{
+    position:absolute;
+    top:0;
+    left:0;
+    height:inherit;
+    background-color:rgb(0, 136, 0);
+    transition:width ease-in-out 0.5s;
+}
