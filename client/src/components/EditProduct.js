@@ -13,8 +13,8 @@ class EditProduct extends React.Component {
 	}
 	componentDidMount() {
 		this.handleAPICallsForProducts();
-    }
-    
+	}
+
 	formInputHandler = (property, event) => {
 		if (property === "coverImage") {
 			this.setState({
@@ -25,8 +25,8 @@ class EditProduct extends React.Component {
 				[property]: event.target.value
 			});
 		}
-    };
-    
+	};
+
 	handleSubmit = (event) => {
 		event.preventDefault();
 		const { productId, userId } = this.props.match.params;
@@ -38,19 +38,19 @@ class EditProduct extends React.Component {
 
 		for (let key in this.state) {
 			data.append(key, this.state[key]);
-        }
-        
-        this.props.dispatch(editProduct(data))
-    };
-    
+		}
+
+		this.props.dispatch(editProduct(data));
+	};
+
 	handleAPICallsForProducts = () => {
 		const token = getAuthTokenFromStorage();
 		if (token) {
 			const user = jwtDecode(token);
 			this.props.dispatch(retrieveProducts(user._id));
 		}
-    };
-    
+	};
+
 	componentDidUpdate(prevProps, prevState) {
 		const { productId } = this.props.match.params;
 		if (!this.firstRefresh) {

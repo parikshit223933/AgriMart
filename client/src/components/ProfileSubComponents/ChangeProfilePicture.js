@@ -1,30 +1,27 @@
 import React from "react";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import { uploadAvatar } from "../../actions/auth";
 
 class ChangeProfilePicture extends React.Component {
-    constructor(props)
-    {
-        super(props);
-        this.state={
-            file:'',
-        }
-    }
-    send=(event)=>
-    {
-        event.preventDefault();
-        const data=new FormData();
-        data.append('_id', this.props.userId);
-        data.append('file', this.state.file);
-        data.append('avatar', this.props.avatar);
-        this.props.dispatch(uploadAvatar(data));
-    }
-    handleChange=(event)=>
-    {
-        this.setState({
-            file:event.target.files[0]
-        })
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			file: ""
+		};
+	}
+	send = (event) => {
+		event.preventDefault();
+		const data = new FormData();
+		data.append("_id", this.props.userId);
+		data.append("file", this.state.file);
+		data.append("avatar", this.props.avatar);
+		this.props.dispatch(uploadAvatar(data));
+	};
+	handleChange = (event) => {
+		this.setState({
+			file: event.target.files[0]
+		});
+	};
 	render() {
 		return (
 			<div className="m-2">
@@ -72,12 +69,12 @@ class ChangeProfilePicture extends React.Component {
 											Choose a new Image
 										</label>
 										<input
-                                            type="file"
-                                            name="avatar"
+											type="file"
+											name="avatar"
 											className="form-control-file"
-                                            id="file"
-                                            onChange={this.handleChange}
-                                            accept='.jpg'
+											id="file"
+											onChange={this.handleChange}
+											accept=".jpg"
 										/>
 									</div>
 								</div>
@@ -85,14 +82,14 @@ class ChangeProfilePicture extends React.Component {
 									<button
 										type="button"
 										className="btn btn-secondary"
-                                        data-dismiss="modal"
+										data-dismiss="modal"
 									>
 										Close
 									</button>
 									<button
 										type="button"
-                                        className="btn btn-primary"
-                                        onClick={this.send}
+										className="btn btn-primary"
+										onClick={this.send}
 									>
 										Save changes
 									</button>

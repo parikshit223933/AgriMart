@@ -14,8 +14,8 @@ import {
 	Categories,
 	Sell,
 	MoreInfo,
-    EditProduct,
-    SingleProduct
+	EditProduct,
+	SingleProduct
 } from "./";
 import { getAuthTokenFromStorage } from "../helpers/utils";
 import { connect } from "react-redux";
@@ -44,8 +44,14 @@ class App extends React.Component {
 						<Route path="/sell" component={Sell} />
 						<Route path="/sell" component={Sell} />
 						<Route path="/more-info" component={MoreInfo} />
-                        <Route path='/edit-product/:productId/:userId' component={EditProduct}/>
-                        <Route path="/view-product/:productId/:userId" component={SingleProduct}/>
+						<Route
+							path="/edit-product/:productId/:userId"
+							component={EditProduct}
+						/>
+						<Route
+							path="/view-product/:productId/:userId"
+							component={SingleProduct}
+						/>
 						<Route component={Page404} />
 					</Switch>
 				</div>

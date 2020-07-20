@@ -32,26 +32,24 @@ class Navbar extends React.Component {
 		});
 		$(".categories-exposed").mouseleave(function () {
 			$(".categories-nav").removeClass("exposed");
-        });
-        $('.categories-nav').mouseenter(function()
-        {
+		});
+		$(".categories-nav").mouseenter(function () {
 			$(".website-name").addClass("animate__jello");
 			$(".categories-nav").addClass("exposed");
 			$(".exposed-navbar").addClass("exposed");
-        })
-        $('.categories-nav').mouseleave(function()
-        {
+		});
+		$(".categories-nav").mouseleave(function () {
 			$(".website-name").removeClass("animate__jello");
 			$(".categories-nav").removeClass("exposed");
 			$(".exposed-navbar").removeClass("exposed");
-        })
+		});
 	};
 	logouthandler = (event) => {
 		this.props.dispatch(logout());
 	};
 	handleThemeToggler = (event) => {
 		//To be done later
-    };
+	};
 	render() {
 		const { isLoggedIn } = this.props.auth;
 		return (
@@ -107,7 +105,7 @@ class Navbar extends React.Component {
 					<div className="website-name animate__animated pl-4">
 						Agrimart
 					</div>
-                    <hr className="m-0 bg-warning custom-width"/>
+					<hr className="m-0 bg-warning custom-width" />
 					<div className="buttons-container-exposed">
 						<Link to="/" className="home-exposed">
 							<div>Home</div>
@@ -145,8 +143,14 @@ class Navbar extends React.Component {
 						<Link to="/cart" className="cart-exposed">
 							<div>Cart</div>
 						</Link>
-						<Link to="/categories" className="categories-exposed cat-button">
-							<div>Categories <i className="fas fa-chevron-right float-right"></i></div>
+						<Link
+							to="/categories"
+							className="categories-exposed cat-button"
+						>
+							<div>
+								Categories{" "}
+								<i className="fas fa-chevron-right float-right"></i>
+							</div>
 						</Link>
 						<Link
 							to=""
@@ -166,10 +170,10 @@ class Navbar extends React.Component {
 					</div>
 				</div>
 				<div className="categories-nav">
-                <div className="website-name animate__animated pl-4">
+					<div className="website-name animate__animated pl-4">
 						Categories
 					</div>
-                    <hr className="m-0 bg-danger custom-width"/>
+					<hr className="m-0 bg-danger custom-width" />
 					<div className="categories-nav-inner-container">
 						<Link to="">
 							<div>Cereals and Pulses</div>

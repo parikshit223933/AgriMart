@@ -38,12 +38,17 @@ class ProfileSettings extends React.Component {
 						className="mb-3"
 					></div>
 					<div className="high-actions d-flex flex-row justify-content-between align-items-center flex-wrap">
-						<ChangePassword userId={user._id}/>
-						<ChangeProfilePicture userId={user._id} avatar={user.avatar}/>
+						<ChangePassword userId={user._id} />
+						<ChangeProfilePicture
+							userId={user._id}
+							avatar={user.avatar}
+						/>
 					</div>
 					<form className="mt-3">
 						<div className="form-group">
-							<label htmlFor="email"><b>Email address</b></label>
+							<label htmlFor="email">
+								<b>Email address</b>
+							</label>
 							<input
 								type="email"
 								className="form-control"
@@ -61,7 +66,9 @@ class ProfileSettings extends React.Component {
 						</div>
 
 						<div className="form-group">
-							<label htmlFor="name"><b>Name</b></label>
+							<label htmlFor="name">
+								<b>Name</b>
+							</label>
 							<input
 								type="text"
 								className="form-control"
@@ -77,7 +84,9 @@ class ProfileSettings extends React.Component {
 							/>
 						</div>
 						<div className="form-group">
-							<label htmlFor="profession"><b>Profession</b></label>
+							<label htmlFor="profession">
+								<b>Profession</b>
+							</label>
 							<input
 								type="text"
 								className="form-control"
@@ -95,7 +104,9 @@ class ProfileSettings extends React.Component {
 							/>
 						</div>
 						<div className="form-group">
-							<label htmlFor="homeTown"><b>Home Town</b></label>
+							<label htmlFor="homeTown">
+								<b>Home Town</b>
+							</label>
 							<input
 								type="text"
 								className="form-control"
@@ -113,7 +124,9 @@ class ProfileSettings extends React.Component {
 							/>
 						</div>
 						<div className="form-group">
-							<label htmlFor="birth"><b>Birth Date</b></label>
+							<label htmlFor="birth">
+								<b>Birth Date</b>
+							</label>
 							<input
 								type="date"
 								className="form-control"
@@ -132,7 +145,9 @@ class ProfileSettings extends React.Component {
 							/>
 						</div>
 						<div className="form-group">
-							<label htmlFor="contact"><b>Contact Number</b></label>
+							<label htmlFor="contact">
+								<b>Contact Number</b>
+							</label>
 							<input
 								type="text"
 								className="form-control"
@@ -150,7 +165,9 @@ class ProfileSettings extends React.Component {
 							/>
 						</div>
 						<div className="form-group">
-							<label htmlFor="sex"><b>Sex</b></label>
+							<label htmlFor="sex">
+								<b>Sex</b>
+							</label>
 							<select
 								className="custom-select my-1 mr-sm-2"
 								id="sex"
@@ -238,7 +255,9 @@ class ProfileSettings extends React.Component {
 							/>
 						</div>
 						<div className="form-group">
-							<label htmlFor="twitter-update"><b>Twitter Handle</b></label>
+							<label htmlFor="twitter-update">
+								<b>Twitter Handle</b>
+							</label>
 							<input
 								type="text"
 								className="form-control"

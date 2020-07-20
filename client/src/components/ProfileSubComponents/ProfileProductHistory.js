@@ -6,8 +6,8 @@ class ProfileProductHistory extends React.Component {
 		return (
 			<MultiProductContainer
 				products={this.props.bought}
-                showQtyBought={true}
-                editAllowed={false}
+				showQtyBought={true}
+				editAllowed={false}
 			/>
 		);
 	}

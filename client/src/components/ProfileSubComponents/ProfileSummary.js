@@ -10,10 +10,11 @@ import {
 
 class ProfileSummary extends React.Component {
 	render() {
-        const { user } = this.props.auth;
-        const {allProducts, boughtProducts}=this.props.product;
+		const { user } = this.props.auth;
+		const { allProducts, boughtProducts } = this.props.product;
 		return (
-			<div className="col-sm-7 col-lg-8 mt-2">{/* CAUTION! DO NOT ANDD ANY ANIMATIONS OTHERWISE THE MODALS WONT WORK */}
+			<div className="col-sm-7 col-lg-8 mt-2">
+				{/* CAUTION! DO NOT ANDD ANY ANIMATIONS OTHERWISE THE MODALS WONT WORK */}
 				<div className="profile-top">
 					<div className="title-name mt-3">
 						<h1>{user.name}</h1>
@@ -30,7 +31,8 @@ class ProfileSummary extends React.Component {
 						<button type="button" className="btn btn-light">
 							<i className="fas fa-bookmark text-secondary"></i>{" "}
 							Bookmark
-						</button>{/* bookmarks button should be hidden and disabled if the user is viewing his own profile! */}
+						</button>
+						{/* bookmarks button should be hidden and disabled if the user is viewing his own profile! */}
 					</div>
 					<div className="rankings">
 						<p className="text-muted rating mb-0 mt-4">Rating</p>
@@ -129,7 +131,7 @@ class ProfileSummary extends React.Component {
 							role="tabpanel"
 							aria-labelledby="home-tab"
 						>
-							<ProfileSoldItems products={allProducts}/>
+							<ProfileSoldItems products={allProducts} />
 						</div>
 						<div
 							className="tab-pane fade"
@@ -137,7 +139,7 @@ class ProfileSummary extends React.Component {
 							role="tabpanel"
 							aria-labelledby="profile-tab"
 						>
-							<ProfileUnsoldItems products={allProducts}/>
+							<ProfileUnsoldItems products={allProducts} />
 						</div>
 						<div
 							className="tab-pane fade"
@@ -161,7 +163,7 @@ class ProfileSummary extends React.Component {
 							role="tabpanel"
 							aria-labelledby="settings-tab"
 						>
-							<ProfileSettings user={user}/>
+							<ProfileSettings user={user} />
 						</div>
 					</div>
 				</div>

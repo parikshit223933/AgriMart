@@ -165,7 +165,7 @@ class SingleProduct extends React.Component {
 								<h5>Ratings & Reviews</h5>
 								<div className="review-main">
 									<ReviewHeader product={product} />
-                                    <ReviewCreator/>
+                                    <ReviewCreator {...this.props}/>
                                     {product.reviews.map((review, index)=>
                                     {
                                         return <Review review={review} key={index}/>
@@ -179,7 +179,7 @@ class SingleProduct extends React.Component {
 		);
 	}
 }
-function mapStateToProps({ product }) {
-	return { product };
+function mapStateToProps({ product, auth }) {
+	return { product, auth };
 }
 export default connect(mapStateToProps)(SingleProduct);

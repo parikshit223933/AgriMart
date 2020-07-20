@@ -1,6 +1,6 @@
 import React from "react";
 import "../home.css";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 class Home extends React.Component {
 	render() {
 		return (
@@ -34,15 +34,21 @@ class Home extends React.Component {
 								The Agricultural Ecommerce
 							</h1>
 							<p className="lead">
-								Heart of Pure Agricultural Ecommerce. Made in India, OpenSourced on GITHUB. <span role="img" aria-labelledby="heart">❤️</span> 
+								Heart of Pure Agricultural Ecommerce. Made in
+								India, OpenSourced on GITHUB.{" "}
+								<span role="img" aria-labelledby="heart">
+									❤️
+								</span>
 							</p>
 							<hr className="my-4" />
 							<p>
-								From helping the farmers and distributors, all across
-								India in expanding their business to providing agricultural produce to their customers
-								all across the country, we aim to grow together for a better and a healthy future.
+								From helping the farmers and distributors, all
+								across India in expanding their business to
+								providing agricultural produce to their
+								customers all across the country, we aim to grow
+								together for a better and a healthy future.
 							</p>
-                            
+
 							<Link
 								className="btn btn-primary btn-lg"
 								to="/more-info"

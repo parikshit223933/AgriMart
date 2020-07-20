@@ -7,8 +7,8 @@ class ProfileUnsoldItems extends React.Component {
 			<MultiProductContainer
 				products={this.props.products}
 				showRemaining={true}
-                showBuyers={false}
-                editAllowed={true}
+				showBuyers={false}
+				editAllowed={true}
 			/>
 		);
 	}

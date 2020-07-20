@@ -6,9 +6,9 @@ class ProfileSoldItems extends React.Component {
 		return (
 			<MultiProductContainer
 				products={this.props.products}
-                showRemaining={false}
-                showBuyers={true}
-                editAllowed={false}
+				showRemaining={false}
+				showBuyers={true}
+				editAllowed={false}
 			/>
 		);
 	}

@@ -16,15 +16,15 @@ import ProfileUnsoldItems from "./ProfileSubComponents/ProfileUnsoldItems";
 import ProfileBookmarkedUsers from "./ProfileSubComponents/ProfileBookmarkedUsers";
 import ProfileProductHistory from "./ProfileSubComponents/ProfileProductHistory";
 import ProfileSettings from "./ProfileSubComponents/ProfileSettings";
-import ChangePassword from './ProfileSubComponents/ChangePassword';
-import ChangeProfilePicture from './ProfileSubComponents/ChangeProfilePicture';
-import MultiProductContainer from './ProfileSubComponents/MultiProductContainer';
-import SingleProductBox from './ProfileSubComponents/SingleProductBox';
-import EditProduct from './EditProduct';
-import SingleProduct from './SingleProduct';
-import Review from './Review';
-import ReviewHeader from './ReviewHeader'
-import ReviewCreator from './ReviewCreator';
+import ChangePassword from "./ProfileSubComponents/ChangePassword";
+import ChangeProfilePicture from "./ProfileSubComponents/ChangeProfilePicture";
+import MultiProductContainer from "./ProfileSubComponents/MultiProductContainer";
+import SingleProductBox from "./ProfileSubComponents/SingleProductBox";
+import EditProduct from "./EditProduct";
+import SingleProduct from "./SingleProduct";
+import Review from "./Review";
+import ReviewHeader from "./ReviewHeader";
+import ReviewCreator from "./ReviewCreator";
 
 export {
 	Navbar,
@@ -44,14 +44,14 @@ export {
 	ProfileBookmarkedUsers,
 	ProfileUnsoldItems,
 	ProfileProductHistory,
-    ProfileSettings,
-    ChangePassword,
-    ChangeProfilePicture,
-    MultiProductContainer,
-    SingleProductBox,
-    EditProduct,
-    SingleProduct,
-    Review,
-    ReviewHeader,
-    ReviewCreator
+	ProfileSettings,
+	ChangePassword,
+	ChangeProfilePicture,
+	MultiProductContainer,
+	SingleProductBox,
+	EditProduct,
+	SingleProduct,
+	Review,
+	ReviewHeader,
+	ReviewCreator
 };

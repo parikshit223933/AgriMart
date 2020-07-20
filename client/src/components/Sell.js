@@ -28,7 +28,7 @@ class Sell extends React.Component {
 				[property]: event.target.value
 			});
 		}
-    };
+	};
 	handleSubmit = (event) => {
 		if (this.state.category === "Category") {
 			window.alert(
@@ -85,9 +85,7 @@ class Sell extends React.Component {
 									/>
 								</div>
 								<div className="form-group animate__animated animate__fadeInLeft">
-									<label htmlFor="price">
-										Price
-									</label>
+									<label htmlFor="price">Price</label>
 									<div className="input-group mb-2">
 										<div className="input-group-prepend">
 											<div className="input-group-text">
@@ -233,9 +231,7 @@ class Sell extends React.Component {
 									/> */}
 								</div>
 								<div className="form-group animate__animated animate__fadeInTopRight">
-									<label
-										htmlFor="total-quantity"
-									>
+									<label htmlFor="total-quantity">
 										Total Quantity
 									</label>
 									<div className="input-group mb-2">
@@ -279,15 +275,13 @@ class Sell extends React.Component {
 									/> */}
 								</div>
 								<div className="form-group animate__animated animate__fadeInBottomLeft">
-									<label
-										htmlFor="minimum-order-quantity"
-									>
+									<label htmlFor="minimum-order-quantity">
 										Minimum Order Quantity
 									</label>
 									<div className="input-group mb-2">
 										<div className="input-group-prepend">
 											<div className="input-group-text">
-                                            Grams or Units
+												Grams or Units
 											</div>
 										</div>
 										<input
