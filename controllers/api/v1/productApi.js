@@ -1,4 +1,5 @@
 const Product = require("../../../models/productModel");
+const Review=require('../../../models/reviewModel');
 const path = require("path");
 const fs = require("fs");
 
@@ -189,7 +190,9 @@ module.exports.deleteProduct = async (req, res) => {
 				path.join(__dirname, "../../../", product.coverImage)
 			);
 		}
-
+        //before deleting the product we have to delete all the reviews of that product
+        await Review.deleteMany({_id:{$in:product.reviews}});
+        
         await Product.findByIdAndDelete(req.body.productId);
         console.log(req.body.productId)
 		return res.json(200, {

@@ -14,9 +14,15 @@ class Review extends React.Component {
 					<h5>All Product Reviews</h5>
 					<div className="d-flex flex-row justify-content-start align-items-center">
 						<div className="mr-3">
-							<span className="badge badge-success">
+                            {review.rating>=4&&<span className="badge badge-success text-white">
 								{review.rating} <i className="fas fa-star"></i>
-							</span>
+							</span>}
+							{review.rating<=2&&<span className="badge badge-danger text-white">
+								{review.rating} <i className="fas fa-star"></i>
+							</span>}
+                            {review.rating===3&&<span className="badge badge-warning text-white">
+								{review.rating} <i className="fas fa-star"></i>
+							</span>}
 						</div>
 						<div className="text-capitalize">
 							<b>{review.reviewTitle}</b>
@@ -45,7 +51,7 @@ class Review extends React.Component {
 							</div>
 						</div>
 						<div className="d-flex flex-row ">
-							<div className="d-flex flex-row flex-wrap justify-content-between align-items-center">
+							<div className="d-flex flex-row flex-wrap justify-content-between align-items-center mr-3">
 								<div>
 									<i
 										className="fas fa-thumbs-up"
