@@ -6,6 +6,7 @@ class Review extends React.Component {
         const {review}=this.props;
 		return (
 			<div className="apply-shadow d-flex flex-column justify-content-around align-items-start p-3">
+                <h5>All Product Reviews</h5>
 				<div className="d-flex flex-row justify-content-start align-items-center">
 					<div className="mr-3">
 						<span className="badge badge-success">
