@@ -16,7 +16,10 @@ import {
     DELETE_PRODUCT_FAILURE,
     GET_SINGLE_PRODUCT_START,
     GET_SINGLE_PRODUCT_SUCCESS,
-    GET_SINGLE_PRODUCT_FAILURE
+    GET_SINGLE_PRODUCT_FAILURE,
+    CREATE_REVIEW_START,
+    CREATE_REVIEW_SUCCESS,
+    CREATE_REVIEW_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -143,6 +146,25 @@ export default function product(state = initialProductState, action) {
                 error:false
             }
         case GET_SINGLE_PRODUCT_FAILURE:
+            return{
+                ...state,
+                inProgress:false,
+                error:action.error
+            }
+        case CREATE_REVIEW_START:
+            return{
+                ...state,
+                inProgress:true,
+                error:false
+            }
+        case CREATE_REVIEW_SUCCESS:
+            return{
+                ...state,
+                inProgress:false,
+                singleProduct:action.product,
+                error:false
+            }
+        case CREATE_REVIEW_FAILURE:
             return{
                 ...state,
                 inProgress:false,

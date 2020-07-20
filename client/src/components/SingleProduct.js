@@ -5,15 +5,24 @@ import { getSingleProduct } from "../actions/product";
 import { API_URLS } from "../helpers/urls";
 import dateFormat from "dateformat";
 import { Review, ReviewHeader, ReviewCreator } from "./";
+import { createReview } from "../actions/product";
 
 class SingleProduct extends React.Component {
 	componentDidMount() {
 		this.props.dispatch(
 			getSingleProduct(this.props.match.params.productId)
 		);
-	}
+    }
+
+    handleSubmitInReviewCreator = (event, reviewDetails) => {
+        event.preventDefault();
+        //finally in the state i will have author, product, reviewText, reviewTitle, rating
+        this.props.dispatch(createReview(reviewDetails));
+    };
+    
 	render() {
 		const { singleProduct: product } = this.props.product;
+        console.log(product);
 		if (!product) {
 			return (
 				<div style={{height:'100vh', width:'100vh'}} className="d-flex flex-column justify-content-center align-items-center ml-auto mr-auto">
@@ -165,7 +174,7 @@ class SingleProduct extends React.Component {
 								<h5>Ratings & Reviews</h5>
 								<div className="review-main">
 									<ReviewHeader product={product} />
-                                    <ReviewCreator {...this.props}/>
+                                    <ReviewCreator {...this.props} handleSubmitInReviewCreator={this.handleSubmitInReviewCreator}/>
                                     {product.reviews.map((review, index)=>
                                     {
                                         return <Review review={review} key={index}/>

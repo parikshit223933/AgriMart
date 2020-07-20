@@ -212,10 +212,20 @@ module.exports.getSingleProduct = async (req, res) => {
 	//product id in request.body
 	try {
 		let product = await Product.findById(req.body.productId)
-			.populate("reviews")
-			.populate("seller");// CAUTION: THE PASSWORD IS ALSO SENT ALONG WITH THE RESPONSE WHEN I HAVE POPULATED THE SELLER! PLEASE REMOVE THE PASSWORD FROM THE RESPONSE.
-		console.log(product);
-		return res.json(200, {
+			.populate({
+                path:'reviews',
+                populate:{
+                    path:'likes'
+                },
+                populate:{
+                    path:'dislikes'
+                },
+                populate:{
+                    path:'author'
+                }
+            })
+            .populate("seller");// CAUTION: THE PASSWORD IS ALSO SENT ALONG WITH THE RESPONSE WHEN I HAVE POPULATED THE SELLER! PLEASE REMOVE THE PASSWORD FROM THE RESPONSE.
+            return res.json(200, {
 			success: true,
 			data: {
 				product

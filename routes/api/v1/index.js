@@ -3,9 +3,11 @@ const router=express.Router();
 const home=require('./home');
 const users=require('./users');
 const product=require('./product');
+const review=require('./review');
 
 router.use('/home', home);
 router.use('/users', users);
 router.use('/product', product);
+router.use('/review', review);
 
 module.exports=router;
