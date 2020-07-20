@@ -22,6 +22,8 @@ import MultiProductContainer from './ProfileSubComponents/MultiProductContainer'
 import SingleProductBox from './ProfileSubComponents/SingleProductBox';
 import EditProduct from './EditProduct';
 import SingleProduct from './SingleProduct';
+import Review from './Review';
+import ReviewHeader from './ReviewHeader'
 
 export {
 	Navbar,
@@ -47,5 +49,7 @@ export {
     MultiProductContainer,
     SingleProductBox,
     EditProduct,
-    SingleProduct
+    SingleProduct,
+    Review,
+    ReviewHeader
 };

@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import "../singleProduct.css";
 import { getSingleProduct } from "../actions/product";
 import { API_URLS } from "../helpers/urls";
+import dateFormat from "dateformat";
+import { Review, ReviewHeader } from "./";
+
 class SingleProduct extends React.Component {
 	componentDidMount() {
 		this.props.dispatch(
@@ -54,15 +57,108 @@ class SingleProduct extends React.Component {
 						</div>
 						<div className="col-sm-7 pb-5 pt-4">
 							<div className="product-name text-capitalize">
-								<h3>{product.name} ({product.category})</h3>
+								<h3>
+									{product.name} ({product.category})
+								</h3>
+							</div>
+							<div className="mb-3">
+								Posted on:{" "}
+								{dateFormat(
+									product.createdAt,
+									"dddd, mmmm dS, yyyy"
+								)}
 							</div>
 							<div className="rating-review-batches">
 								<span className="badge badge-success">
-									{product.rating} <i className="fas fa-star"></i>
+									{product.rating}{" "}
+									<i className="fas fa-star"></i>
 								</span>
-								<span> {product.one+product.two+product.three+product.four+product.five} ratings</span>
-                                <span> & </span>
+								<span>
+									{" "}
+									{product.one +
+										product.two +
+										product.three +
+										product.four +
+										product.five}{" "}
+									ratings
+								</span>
+								<span> & </span>
 								<span> {product.reviews.length} reviews</span>
+							</div>
+							<div className="product-cost mt-3">
+								<h3>
+									<i
+										className="fas fa-rupee-sign"
+										style={{ fontSize: "25px" }}
+									></i>{" "}
+									{product.price}{" "}
+									<small>per unit of product</small>
+								</h3>
+							</div>
+							<div className="minimumOrderQty">
+								<p>
+									<b>Minimum Order Quantity: </b>{" "}
+									{product.minimumOrderQuantity} Units
+								</p>
+							</div>
+							<div className="product-description mt-3">
+								<h5>Description:</h5>
+								<p>{product.description}</p>
+							</div>
+							<div>
+								<h5>Seller:</h5>
+
+								<div
+									className="card mb-3"
+									style={{ maxWidth: "540px" }}
+								>
+									<div className="row no-gutters">
+										<div className="col-md-8">
+											<div className="card-body">
+												<div>
+													<h6 className="m-0">
+														{product.seller.name}
+													</h6>
+												</div>
+												<div>
+													<i>
+														{
+															product.seller
+																.profession
+														}
+													</i>
+												</div>
+												{product.seller.trusted && (
+													<div>
+														<b>
+															{
+																product.seller
+																	.trusted
+															}
+														</b>
+													</div>
+												)}
+												<div>
+													{product.seller.upvotes}
+												</div>
+												<div>
+													<p className="m-0">
+														Seller Since
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div className="ratings-and-reviews">
+								<h5>
+									Ratings & Reviews
+								</h5>
+								<div className="review-main p-3">
+                                    <ReviewHeader/>
+									<Review />
+								</div>
 							</div>
 						</div>
 					</div>

@@ -57,3 +57,39 @@
     border-color:#fb641b;
     box-shadow: 0px 5px 12px 1px grey;
 }
+.product-description p
+{
+    border-left:5px solid rgb(255, 153, 0);
+    padding-left:20px;
+    text-align: justify;
+}
+
+/* seller details ////////////////////////////////////////////////////////*/
+.seller-details
+{
+    width:100%;
+    border-radius: 5px;
+}
+.seller-avatar
+{
+    width:30%;
+    margin-right:5%;
+    border-radius: 5px;
+}
+.seller-avatar>img
+{
+    width:100%;
+    border-radius: inherit;
+}
+.seller-details-right
+{
+    height:inherit;
+}
+.col-md-4>img
+{
+    height:100%;
+}
+/* RATINGS AND REVIEWS //////////////////////////////////////////////// */
+.review-main{
+    box-shadow: 0px 0px 1px 1px rgb(219, 219, 219);
+}
