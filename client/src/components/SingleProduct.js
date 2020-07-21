@@ -175,7 +175,7 @@ class SingleProduct extends React.Component {
 							<div className="ratings-and-reviews">
 								<h5>Ratings & Reviews</h5>
 								<div className="review-main">
-									<ReviewHeader />
+									<ReviewHeader revLength={product.reviews.length}/>
 									<ReviewCreator
 										{...this.props}
 										handleSubmitInReviewCreator={

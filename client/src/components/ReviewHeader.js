@@ -5,6 +5,7 @@ import roundTo from "round-to";
 class ReviewHeader extends React.Component {
 	render() {
 		const { singleProduct: product } = this.props.product;
+		const { revLength } = this.props;//length of the reviews array
 		return (
 			<div>
 				<div className="d-flex justify-content-around align-items-center flex-row flex-wrap">
@@ -22,10 +23,16 @@ class ReviewHeader extends React.Component {
 												product.reviews.length,
 											2
 									  )}{" "}
-								<i
-									className="fas fa-star"
-									style={{ color: "#0030c4" }}
-								></i>
+								{!revLength ? (
+									<span>
+										<i className="fas fa-star main-star"></i>
+									</span>
+								) : (
+									<span style={{ color: "#0030c4" }}>
+										{/* when i removed the span and applied color style directly to the "i" tag, the the color didn't change due to some reason. span behaves as a wrapper to the "i" tag, which will definitely change the color of svg inside it!*/}
+										<i className="fas fa-star main-star"></i>
+									</span>
+								)}
 								,
 							</h2>
 						</div>
