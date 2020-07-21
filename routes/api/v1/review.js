@@ -13,5 +13,10 @@ router.post(
 	passport.authenticate("jwt", { session: false }),
 	reviewApi.deleteReview
 );
+router.post(
+	"/update-review",
+	passport.authenticate("jwt", { session: false }),
+	reviewApi.updateReview
+);
 
 module.exports = router;

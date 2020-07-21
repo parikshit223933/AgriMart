@@ -14,4 +14,5 @@ export const API_URLS={
     getSingleProduct:()=>`${API_ROOT}/product/get-single-product`,
     createReview:()=>`${API_ROOT}/review/create-new-review`,
     deleteReview:()=>`${API_ROOT}/review/delete-review`,
+    updateReview:()=>`${API_ROOT}/review/update-review`
 }

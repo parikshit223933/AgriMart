@@ -1,10 +1,29 @@
 import React from "react";
 import { connect } from "react-redux";
 import dateFormat from "dateformat";
-import { deleteReview } from "../actions/product";
+import { deleteReview, updateReview } from "../actions/product";
 
 /* this component contains all the reviews */
 class Review extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
+	inputChangeHandler = (key, event) => {
+		this.setState({
+			[key]: event.target.value
+		});
+	};
+	handleSubmit = (event) => {
+		//send the state, userId, productId and reviewId
+		event.preventDefault();
+		this.props.dispatch(updateReview(
+			this.state,
+			this.props.auth.user._id,
+			this.props.review._id,
+			this.props.review.product
+		));
+	};
 	handleDelete = () => {
 		console.log(this.props.review.product, this.props.review._id);
 		this.props.dispatch(
@@ -16,6 +35,7 @@ class Review extends React.Component {
 		);
 	};
 	render() {
+		console.log(this.state);
 		if (!this.props.review) {
 			return <div>Loading...</div>;
 		} else {
@@ -163,6 +183,15 @@ class Review extends React.Component {
 														className="form-control"
 														id="review-t"
 														placeholder="Write the title of your review here."
+														defaultValue={
+															review.reviewTitle
+														}
+														onChange={(event) => {
+															this.inputChangeHandler(
+																"reviewTitle",
+																event
+															);
+														}}
 													/>
 												</div>
 												<div className="form-group">
@@ -172,6 +201,15 @@ class Review extends React.Component {
 													<select
 														className="form-control"
 														id="review-r"
+														defaultValue={
+															review.rating
+														}
+														onChange={(event) => {
+															this.inputChangeHandler(
+																"rating",
+																event
+															);
+														}}
 													>
 														<option value="1">
 															1
@@ -199,6 +237,15 @@ class Review extends React.Component {
 														id="review-txt"
 														rows="3"
 														placeholder="What do you think about this product?"
+														defaultValue={
+															review.reviewText
+														}
+														onChange={(event) => {
+															this.inputChangeHandler(
+																"reviewText",
+																event
+															);
+														}}
 													></textarea>
 												</div>
 											</div>
@@ -213,6 +260,7 @@ class Review extends React.Component {
 												<button
 													type="submit"
 													className="btn btn-warning"
+													onClick={this.handleSubmit}
 												>
 													Update
 												</button>
