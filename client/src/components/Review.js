@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import dateFormat from "dateformat";
 import { deleteReview, updateReview } from "../actions/product";
+import moment from 'moment';
 
 /* this component contains all the reviews */
 class Review extends React.Component {
@@ -89,12 +90,8 @@ class Review extends React.Component {
 								</p>
 							</div>
 							<div>
-								<p className="m-0">
-									On{" "}
-									{dateFormat(
-										review.createdAt,
-										"dddd, mmmm dS, yyyy"
-									)}
+								<p className="m-0 ml-2">
+									{moment(new Date(review.updatedAt), "YYYYMMDD").fromNow()}
 								</p>
 							</div>
 						</div>

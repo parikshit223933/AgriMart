@@ -6,6 +6,7 @@ import { API_URLS } from "../helpers/urls";
 import dateFormat from "dateformat";
 import { Review, ReviewHeader, ReviewCreator } from "./";
 import { createReview } from "../actions/product";
+import moment from 'moment';
 
 class SingleProduct extends React.Component {
 	componentDidMount() {
@@ -21,7 +22,8 @@ class SingleProduct extends React.Component {
 	};
     
 	render() {
-		const { singleProduct: product } = this.props.product;
+        const { singleProduct: product } = this.props.product;
+
 		if (!product) {
 			return (
 				<div
@@ -38,8 +40,7 @@ class SingleProduct extends React.Component {
 				</div>
 			);
 		}
-
-		return (
+        return (
 			<div className="single-product-component">
 				<div className="container-fluid bg-white">
 					<div className="row">
@@ -164,7 +165,7 @@ class SingleProduct extends React.Component {
 												</div>
 												<div>
 													<p className="m-0">
-														Seller Since
+														Joined Agrimart {moment(new Date(product.seller.createdAt), "YYYYMMDD").fromNow()}
 													</p>
 												</div>
 											</div>
