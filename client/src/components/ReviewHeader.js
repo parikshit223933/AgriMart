@@ -33,7 +33,7 @@ class ReviewHeader extends React.Component {
 										<i className="fas fa-star main-star"></i>
 									</span>
 								)}
-								,
+								
 							</h2>
 						</div>
 						<div>

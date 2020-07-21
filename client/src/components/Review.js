@@ -5,16 +5,21 @@ import { deleteReview } from "../actions/product";
 
 /* this component contains all the reviews */
 class Review extends React.Component {
-    handleDelete=()=>
-    {
-        console.log(this.props.review.product, this.props.review._id);
-        this.props.dispatch(deleteReview(this.props.review.product, this.props.review._id, this.props.auth.user._id));
-    }
+	handleDelete = () => {
+		console.log(this.props.review.product, this.props.review._id);
+		this.props.dispatch(
+			deleteReview(
+				this.props.review.product,
+				this.props.review._id,
+				this.props.auth.user._id
+			)
+		);
+	};
 	render() {
 		if (!this.props.review) {
 			return <div>Loading...</div>;
 		} else {
-            const { review } = this.props;
+			const { review } = this.props;
 			return (
 				<div className="apply-shadow d-flex flex-column justify-content-around align-items-start p-3 position-relative">
 					<div className="d-flex flex-row justify-content-start align-items-center w-75">
@@ -104,10 +109,119 @@ class Review extends React.Component {
 								<i className="fas fa-ellipsis-h"></i>
 							</div>
 							<div className="dropdown-menu p-1">
-								<button className="dropdown-item bg-danger text-white" onClick={this.handleDelete} href="#">
+								<button
+									className="dropdown-item bg-danger text-white"
+									onClick={this.handleDelete}
+								>
 									Delete
 								</button>
+								<button
+									className="dropdown-item bg-warning text-white mt-1"
+									data-toggle="modal"
+									data-target={`#a${review._id}`}
+								>
+									Update
+								</button>
 							</div>
+							{/* MODAL START /////////////////////////////////////////////////////////////////////////////////// */}
+							<div
+								className="modal fade"
+								id={`a${review._id}`}
+								tabIndex="-1"
+								role="dialog"
+								aria-labelledby="exampleModalLabel"
+								aria-hidden="true"
+							>
+								<div className="modal-dialog">
+									<div className="modal-content">
+										<div className="modal-header">
+											<h5
+												className="modal-title"
+												id="exampleModalLabel"
+											>
+												Update Review
+											</h5>
+											<button
+												type="button"
+												className="close"
+												data-dismiss="modal"
+												aria-label="Close"
+											>
+												<span aria-hidden="true">
+													&times;
+												</span>
+											</button>
+										</div>
+										<form>
+											<div className="modal-body">
+												<div className="form-group">
+													<label htmlFor="review-t">
+														<b>Review Title</b>
+													</label>
+													<input
+														type="text"
+														className="form-control"
+														id="review-t"
+														placeholder="Write the title of your review here."
+													/>
+												</div>
+												<div className="form-group">
+													<label htmlFor="review-r">
+														<b>Star Rating</b>
+													</label>
+													<select
+														className="form-control"
+														id="review-r"
+													>
+														<option value="1">
+															1
+														</option>
+														<option value="2">
+															2
+														</option>
+														<option value="3">
+															3
+														</option>
+														<option value="4">
+															4
+														</option>
+														<option value="5">
+															5
+														</option>
+													</select>
+												</div>
+												<div className="form-group">
+													<label htmlFor="review-txt">
+														<b>Review text</b>
+													</label>
+													<textarea
+														className="form-control"
+														id="review-txt"
+														rows="3"
+														placeholder="What do you think about this product?"
+													></textarea>
+												</div>
+											</div>
+											<div className="modal-footer">
+												<button
+													type="button"
+													className="btn btn-secondary"
+													data-dismiss="modal"
+												>
+													Close
+												</button>
+												<button
+													type="submit"
+													className="btn btn-warning"
+												>
+													Update
+												</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							{/* MODAL END  ///////////////////////////////////////////////////////////////////////////////////*/}
 						</div>
 					</div>
 				</div>
@@ -115,8 +229,7 @@ class Review extends React.Component {
 		}
 	}
 }
-function mapStateToProps({auth})
-{
-    return {auth};
+function mapStateToProps({ auth }) {
+	return { auth };
 }
 export default connect(mapStateToProps)(Review);

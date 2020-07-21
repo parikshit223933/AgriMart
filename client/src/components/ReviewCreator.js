@@ -30,10 +30,10 @@ class ReviewCreator extends React.Component {
 						<b>Review Title</b>
 					</label>
 					<input
-						type="email"
+						type="text"
 						className="form-control"
 						id="review-title"
-						placeholder="name@example.com"
+						placeholder="Write the title of your review here."
 						onChange={(event) => {
 							this.inputHandler("reviewTitle", event);
 						}}
