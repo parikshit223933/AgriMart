@@ -236,7 +236,6 @@ module.exports.updateReview = async (req, res) => {
 /* handle toggling likes on reviews */
 module.exports.likeReview = async (req, res) => {
     //req.body={reviewId, userId}
-    console.log('holaaaa');
 	try {
 		let review = await Review.findById(req.body.reviewId);
 		if (review.likes.includes(req.body.userId)) {
@@ -257,7 +256,6 @@ module.exports.likeReview = async (req, res) => {
 				}
 			})
 			.populate("seller");;
-            console.log(product);
 			return res.json(200, {
 				success: true,
 				data: {
@@ -266,6 +264,13 @@ module.exports.likeReview = async (req, res) => {
 				}
 			});
 		} else {
+            //before pushing the user to the likes array, I need to check if the user has disliked the post previously or not
+            if(review.dislikes.includes(req.body.userId))
+            {
+                review.dislikes = await review.dislikes.filter((dislike) => {
+                    return dislike != req.body.userId;
+                });
+            }
 			await review.likes.push(req.body.userId);
 			await review.save();
             let product = await Product.findById(review.product).populate({
@@ -281,7 +286,6 @@ module.exports.likeReview = async (req, res) => {
 				}
 			})
 			.populate("seller");;
-            console.log(product);
 			return res.json(200, {
 				success: true,
 				data: {
@@ -328,6 +332,13 @@ module.exports.dislikeReview = async (req, res) => {
 				}
 			});
 		} else {
+            //before dislikig a review i need to check if the user has liked it previously or not.
+            if(review.likes.includes(req.body.userId))
+            {
+                review.likes = await review.likes.filter((like) => {
+                    return like != req.body.userId;
+                })
+            }
 			await review.dislikes.push(req.body.userId);
 			await review.save();
 			let product = await Product.findById(review.product).populate({
