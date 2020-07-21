@@ -22,7 +22,6 @@ class SingleProduct extends React.Component {
     
 	render() {
 		const { singleProduct: product } = this.props.product;
-        console.log(product);
 		if (!product) {
 			return (
 				<div style={{height:'100vh', width:'100vh'}} className="d-flex flex-column justify-content-center align-items-center ml-auto mr-auto">
@@ -173,7 +172,7 @@ class SingleProduct extends React.Component {
 							<div className="ratings-and-reviews">
 								<h5>Ratings & Reviews</h5>
 								<div className="review-main">
-									<ReviewHeader product={product} />
+									<ReviewHeader />
                                     <ReviewCreator {...this.props} handleSubmitInReviewCreator={this.handleSubmitInReviewCreator}/>
                                     {product.reviews.map((review, index)=>
                                     {

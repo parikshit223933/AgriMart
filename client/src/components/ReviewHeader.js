@@ -1,35 +1,29 @@
 import React from "react";
-import * as $ from "jquery";
+import { connect } from "react-redux";
+import roundTo from "round-to";
 
 class ReviewHeader extends React.Component {
-	componentDidUpdate(prevProps, prevState) {
-		const { product } = this.props;
-		if (product) {
-			$("#five").width((product.five / product.reviews.length) * 120);
-			$("#four").width((product.four / product.reviews.length) * 120);
-			$("#three").width((product.three / product.reviews.length) * 120);
-			$("#two").width((product.two / product.reviews.length) * 120);
-			$("#one").width((product.one / product.reviews.length) * 120);
-		}
-	}
 	render() {
-		const { product } = this.props;
+		const { singleProduct: product } = this.props.product;
 		return (
 			<div>
 				<div className="d-flex justify-content-around align-items-center flex-row flex-wrap">
 					<div className="d-flex justify-content-center align-items-center flex-column ratings-desc m-1 p-2">
 						<div>
-							<p className="m-0">
+							<h2 className="m-0">
 								{!product.reviews.length
 									? 0
-									: (product.one +
-											product.two +
-											product.three +
-											product.four +
-											product.five) /
-									  product.reviews.length}{" "}
-								stars,
-							</p>
+									: roundTo(
+											((product.one*1) +
+												(product.two*2) +
+												(product.three*3) +
+												(product.four*4) +
+												(product.five*5)) /
+												product.reviews.length,
+											2
+									  )}{" "}
+								<i className="fas fa-star"></i>,
+							</h2>
 						</div>
 						<div>
 							<p className="m-0">
@@ -57,7 +51,16 @@ class ReviewHeader extends React.Component {
 							</div>
 							<div>
 								<div className="bar">
-									<div id="five" className="filler"></div>
+									<div
+										id="five"
+										className="filler"
+										style={{
+											width:
+												(product.five /
+													product.reviews.length) *
+												120
+										}}
+									></div>
 								</div>
 							</div>
 							<div>{product.five}</div>
@@ -70,7 +73,16 @@ class ReviewHeader extends React.Component {
 							</div>
 							<div>
 								<div className="bar">
-									<div id="four" className="filler"></div>
+									<div
+										id="four"
+										className="filler"
+										style={{
+											width:
+												(product.four /
+													product.reviews.length) *
+												120
+										}}
+									></div>
 								</div>
 							</div>
 							<div>{product.four}</div>
@@ -83,7 +95,16 @@ class ReviewHeader extends React.Component {
 							</div>
 							<div>
 								<div className="bar">
-									<div id="three" className="filler"></div>
+									<div
+										id="three"
+										className="filler"
+										style={{
+											width:
+												(product.three /
+													product.reviews.length) *
+												120
+										}}
+									></div>
 								</div>
 							</div>
 							<div>{product.three}</div>
@@ -96,7 +117,16 @@ class ReviewHeader extends React.Component {
 							</div>
 							<div>
 								<div className="bar">
-									<div id="two" className="filler"></div>
+									<div
+										id="two"
+										className="filler"
+										style={{
+											width:
+												(product.two /
+													product.reviews.length) *
+												120
+										}}
+									></div>
 								</div>
 							</div>
 							<div>{product.two}</div>
@@ -109,7 +139,16 @@ class ReviewHeader extends React.Component {
 							</div>
 							<div>
 								<div className="bar">
-									<div id="one" className="filler"></div>
+									<div
+										id="one"
+										className="filler"
+										style={{
+											width:
+												(product.one /
+													product.reviews.length) *
+												120
+										}}
+									></div>
 								</div>
 							</div>
 							<div>{product.one}</div>
@@ -120,4 +159,7 @@ class ReviewHeader extends React.Component {
 		);
 	}
 }
-export default ReviewHeader;
+function mapStateToProps({ product }) {
+	return { product };
+}
+export default connect(mapStateToProps)(ReviewHeader);
