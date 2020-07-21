@@ -8,7 +8,9 @@
 }
 .product-image
 {
-    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    width:80%;
 }
 .product-image>img
 {
@@ -112,10 +114,15 @@
     top:0;
     left:0;
     height:inherit;
-    background-color:rgb(0, 136, 0);
+    background-color:#0030c4;
     transition:width ease-in-out 0.5s;
 }
 .apply-shadow
 {
     box-shadow: 0px 0px 1px 1px rgb(238, 238, 238);
+}
+.delete-review{
+    position:absolute;
+    right:15px;
+    top:15px;
 }

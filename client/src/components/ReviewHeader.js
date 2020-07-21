@@ -14,15 +14,19 @@ class ReviewHeader extends React.Component {
 								{!product.reviews.length
 									? 0
 									: roundTo(
-											((product.one*1) +
-												(product.two*2) +
-												(product.three*3) +
-												(product.four*4) +
-												(product.five*5)) /
+											(product.one * 1 +
+												product.two * 2 +
+												product.three * 3 +
+												product.four * 4 +
+												product.five * 5) /
 												product.reviews.length,
 											2
 									  )}{" "}
-								<i className="fas fa-star"></i>,
+								<i
+									className="fas fa-star"
+									style={{ color: "#0030c4" }}
+								></i>
+								,
 							</h2>
 						</div>
 						<div>
@@ -58,7 +62,7 @@ class ReviewHeader extends React.Component {
 											width:
 												(product.five /
 													product.reviews.length) *
-												120
+													120 || 0
 										}}
 									></div>
 								</div>
@@ -80,7 +84,7 @@ class ReviewHeader extends React.Component {
 											width:
 												(product.four /
 													product.reviews.length) *
-												120
+													120 || 0
 										}}
 									></div>
 								</div>
@@ -102,7 +106,7 @@ class ReviewHeader extends React.Component {
 											width:
 												(product.three /
 													product.reviews.length) *
-												120
+													120 || 0
 										}}
 									></div>
 								</div>
@@ -124,7 +128,7 @@ class ReviewHeader extends React.Component {
 											width:
 												(product.two /
 													product.reviews.length) *
-												120
+													120 || 0
 										}}
 									></div>
 								</div>
@@ -146,7 +150,7 @@ class ReviewHeader extends React.Component {
 											width:
 												(product.one /
 													product.reviews.length) *
-												120
+													120 || 0
 										}}
 									></div>
 								</div>

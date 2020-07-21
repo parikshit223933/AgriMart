@@ -12,26 +12,29 @@ class SingleProduct extends React.Component {
 		this.props.dispatch(
 			getSingleProduct(this.props.match.params.productId)
 		);
-    }
+	}
 
-    handleSubmitInReviewCreator = (event, reviewDetails) => {
-        event.preventDefault();
-        //finally in the state i will have author, product, reviewText, reviewTitle, rating
-        this.props.dispatch(createReview(reviewDetails));
-    };
+	handleSubmitInReviewCreator = (event, reviewDetails) => {
+		event.preventDefault();
+		//finally in the state i will have author, product, reviewText, reviewTitle, rating
+		this.props.dispatch(createReview(reviewDetails));
+	};
     
 	render() {
 		const { singleProduct: product } = this.props.product;
 		if (!product) {
 			return (
-				<div style={{height:'100vh', width:'100vh'}} className="d-flex flex-column justify-content-center align-items-center ml-auto mr-auto">
-				    <div
-    					className="spinner-border text-danger"
-                        role="status"
-                        style={{width:'10rem', height:'10rem'}}
-    				>
-    					<span className="sr-only">Loading...</span>
-    				</div>
+				<div
+					style={{ height: "100vh", width: "100vh" }}
+					className="d-flex flex-column justify-content-center align-items-center ml-auto mr-auto"
+				>
+					<div
+						className="spinner-border text-danger"
+						role="status"
+						style={{ width: "10rem", height: "10rem" }}
+					>
+						<span className="sr-only">Loading...</span>
+					</div>
 				</div>
 			);
 		}
@@ -173,11 +176,23 @@ class SingleProduct extends React.Component {
 								<h5>Ratings & Reviews</h5>
 								<div className="review-main">
 									<ReviewHeader />
-                                    <ReviewCreator {...this.props} handleSubmitInReviewCreator={this.handleSubmitInReviewCreator}/>
-                                    {product.reviews.map((review, index)=>
-                                    {
-                                        return <Review review={review} key={index}/>
-                                    })}
+									<ReviewCreator
+										{...this.props}
+										handleSubmitInReviewCreator={
+											this.handleSubmitInReviewCreator
+										}
+									/>
+									<h5 className="m-3">All Product Reviews</h5>
+                                    {product.reviews.length===0&&<p className="font-weight-bold ml-3 mr-3">No Reviews Yet! Be the first one to write a reviews about this product!</p>}
+
+									{product.reviews.map((review, index) => {
+										return (
+											<Review
+												review={review}
+												key={index}
+											/>
+										);
+									})}
 								</div>
 							</div>
 						</div>

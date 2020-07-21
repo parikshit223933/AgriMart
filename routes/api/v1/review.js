@@ -8,5 +8,10 @@ router.post(
 	passport.authenticate("jwt", { session: false }),
 	reviewApi.createReview
 );
+router.post(
+	"/delete-review",
+	passport.authenticate("jwt", { session: false }),
+	reviewApi.deleteReview
+);
 
 module.exports = router;

@@ -1,6 +1,6 @@
 import { API_URLS } from "../helpers/urls";
 import { getAuthTokenFromStorage, getFormBody } from "../helpers/utils";
-import { CREATE_PRODUCT_START, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE, RETRIEVE_PRODUCTS_START, RETRIEVE_PRODUCTS_SUCCESS, RETRIEVE_PRODUCTS_FAILURE, FETCH_BOUGHT_PRODUCTS_START, FETCH_BOUGHT_PRODUCTS_SUCCESS, FETCH_BOUGHT_PRODUCTS_FAILURE, EDIT_PRODUCT_START, EDIT_PRODUCT_SUCCESS, EDIT_PRODUCT_FAILURE, DELETE_PRODUCT_START, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE, GET_SINGLE_PRODUCT_START, GET_SINGLE_PRODUCT_SUCCESS, GET_SINGLE_PRODUCT_FAILURE, CREATE_REVIEW_START, CREATE_REVIEW_SUCCESS, CREATE_REVIEW_FAILURE } from "./actionTypes";
+import { CREATE_PRODUCT_START, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE, RETRIEVE_PRODUCTS_START, RETRIEVE_PRODUCTS_SUCCESS, RETRIEVE_PRODUCTS_FAILURE, FETCH_BOUGHT_PRODUCTS_START, FETCH_BOUGHT_PRODUCTS_SUCCESS, FETCH_BOUGHT_PRODUCTS_FAILURE, EDIT_PRODUCT_START, EDIT_PRODUCT_SUCCESS, EDIT_PRODUCT_FAILURE, DELETE_PRODUCT_START, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE, GET_SINGLE_PRODUCT_START, GET_SINGLE_PRODUCT_SUCCESS, GET_SINGLE_PRODUCT_FAILURE, CREATE_REVIEW_START, CREATE_REVIEW_SUCCESS, CREATE_REVIEW_FAILURE, DELETE_REVIEW_START, DELETE_REVIEW_SUCCESS, DELETE_REVIEW_FAILURE } from "./actionTypes";
 
 export function createProductStart()
 {
@@ -350,5 +350,55 @@ export function createReview(review)
                     dispatch(createReviewFailure(data.message));
                 }
             });
+    }
+}
+export function deleteReviewStart()
+{
+    return{
+        type:DELETE_REVIEW_START
+    }
+}
+export function deleteReviewSuccess(productId, reviewId, product)
+{
+    return{
+        type:DELETE_REVIEW_SUCCESS,
+        productId,
+        reviewId,
+        product
+    }
+}
+export function deleteReviewFailure(error)
+{
+    return{
+        type:DELETE_REVIEW_FAILURE,
+        error
+    }
+}
+export function deleteReview(productId, reviewId, userId)
+{
+    return dispatch=>
+    {
+        dispatch(deleteReviewStart());
+        let url=API_URLS.deleteReview();
+        fetch(url, {
+            method:'POST',
+            headers:{
+                Authorization:`Bearer ${getAuthTokenFromStorage()}`,
+                'Content-Type':'application/x-www-form-urlencoded',
+            },
+            body:getFormBody({productId, reviewId, userId})
+        })
+        .then(res=>res.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    dispatch(deleteReviewSuccess(productId, reviewId, data.data.product));
+                }
+                else
+                {
+                    dispatch(deleteReviewFailure(data.message))
+                }
+            })
     }
 }

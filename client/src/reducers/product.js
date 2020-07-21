@@ -19,7 +19,10 @@ import {
     GET_SINGLE_PRODUCT_FAILURE,
     CREATE_REVIEW_START,
     CREATE_REVIEW_SUCCESS,
-    CREATE_REVIEW_FAILURE
+    CREATE_REVIEW_FAILURE,
+    DELETE_REVIEW_START,
+    DELETE_REVIEW_SUCCESS,
+    DELETE_REVIEW_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -170,6 +173,35 @@ export default function product(state = initialProductState, action) {
                 inProgress:false,
                 error:action.error
             }
+        case DELETE_REVIEW_START:
+            return{
+                ...state,
+                inProgress:true,
+                error:false,
+            }
+        case DELETE_REVIEW_SUCCESS:
+            let newAllProductsArray=state.allProducts.map(product=>
+                {
+                    if(product._id===action.productId)
+                    {
+                        return action.product;
+                    }
+                    return product;
+                })
+            return{
+                ...state,
+                inProgress:false,
+                error:false,
+                allProducts:newAllProductsArray,
+                singleProduct:action.product
+            }
+        case DELETE_REVIEW_FAILURE:
+            return{
+                ...state,
+                error:action.error,
+                inProgress:false
+            }
+
 		default:
 			return state;
 	}
