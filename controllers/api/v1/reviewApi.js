@@ -137,10 +137,16 @@ module.exports.updateReview = async (req, res) => {
 	//if reviewText exists in the req.body, then update the reviw.reviewText
 	//save the review in the db, [review.save]
 	//from the product id get the product and populate its review and all necessary fields
+	// now if rating field is present in the req.body, you also need to update the product.one or two or.... based on the req.body.rating (use the switch case!)
 	//send this product in the response.
 
 	try {
 		let review = await Review.findById(req.body.reviewId);
+
+        let previous_rating = await review.rating;
+        
+        console.log('PREVIOUS RATING', previous_rating);
+
 		if (req.body.userId != review.author) {
 			return res.json(401, {
 				success: false,
@@ -157,7 +163,7 @@ module.exports.updateReview = async (req, res) => {
 		if (req.body.rating) {
 			review.rating = req.body.rating;
 		}
-		review.save();
+		await review.save();
 		let product = await Product.findById(req.body.productId)
 			.populate({
 				path: "reviews",
@@ -168,16 +174,57 @@ module.exports.updateReview = async (req, res) => {
 					path: "dislikes"
 				},
 				populate: {
-					path: "author"//CAUTION: The user's password is also send along with it. Either encrypt the password or remove it from the response
+					path: "author" //CAUTION: The user's password is also send along with it. Either encrypt the password or remove it from the response
 				}
 			})
-            .populate("seller");
-        return res.json(200, {
-            success:true,
-            data:{
-                product
-            }
-        })
+			.populate("seller");
+
+		if (req.body.rating) {
+			// removing the previous rating from the product
+			switch (previous_rating) {
+				case 1:
+					product.one -= 1;
+					break;
+				case 2:
+					product.two -= 1;
+					break;
+				case 3:
+					product.three -= 1;
+					break;
+				case 4:
+					product.four -= 1;
+					break;
+				case 5:
+					product.five -= 1;
+					break;
+			}
+			// Adding the new rating to the product
+			switch (req.body.rating) {
+				case "1":
+					product.one += 1;
+					break;
+				case "2":
+					product.two += 1;
+					break;
+				case "3":
+					product.three += 1;
+					break;
+				case "4":
+					product.four += 1;
+					break;
+				case "5":
+					product.five += 1;
+					break;
+			}
+        }
+        await product.save();
+        console.log(product);
+		return res.json(200, {
+			success: true,
+			data: {
+				product
+			}
+		});
 	} catch (error) {
 		return res.json(500, {
 			success: false,
