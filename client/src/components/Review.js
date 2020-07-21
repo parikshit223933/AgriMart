@@ -120,7 +120,7 @@ class Review extends React.Component {
 									style={{ cursor: "pointer" }}
 								>
 									<i
-										className="fas fa-thumbs-up text-secondary"
+										className="fas fa-thumbs-up text-secondary mr-1"
 										style={{ fontSize: "20px" }}
 									></i>
 								</div>
@@ -132,7 +132,7 @@ class Review extends React.Component {
 									style={{ cursor: "pointer" }}
 								>
 									<i
-										className="fas fa-thumbs-down text-secondary"
+										className="fas fa-thumbs-down text-secondary mr-1"
 										style={{ fontSize: "20px" }}
 									></i>
 								</div>
