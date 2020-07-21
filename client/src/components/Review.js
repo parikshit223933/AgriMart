@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import dateFormat from "dateformat";
-import { deleteReview, updateReview } from "../actions/product";
+import { deleteReview, updateReview, toggleLike, toggleDislike } from "../actions/product";
 import moment from 'moment';
 
 /* this component contains all the reviews */
@@ -34,9 +33,16 @@ class Review extends React.Component {
 				this.props.auth.user._id
 			)
 		);
-	};
+    };
+    handleLikes=()=>
+    {
+        this.props.dispatch(toggleLike(this.props.review._id, this.props.auth.user._id))
+    }
+    handleDislikes=()=>
+    {
+        this.props.dispatch(toggleDislike(this.props.review._id, this.props.auth.user._id))
+    }
 	render() {
-		console.log(this.state);
 		if (!this.props.review) {
 			return <div>Loading...</div>;
 		} else {
@@ -97,7 +103,7 @@ class Review extends React.Component {
 						</div>
 						<div className="d-flex flex-row ">
 							<div className="d-flex flex-row flex-wrap justify-content-between align-items-center mr-3">
-								<div>
+								<div onClick={this.handleLikes} style={{cursor:'pointer'}}>
 									<i
 										className="fas fa-thumbs-up text-secondary"
 										style={{ fontSize: "20px" }}
@@ -106,7 +112,7 @@ class Review extends React.Component {
 								<div>{review.likes.length}</div>
 							</div>
 							<div className="d-flex flex-row ">
-								<div>
+								<div onClick={this.handleDislikes} style={{cursor:'pointer'}}>
 									<i
 										className="fas fa-thumbs-down text-secondary"
 										style={{ fontSize: "20px" }}

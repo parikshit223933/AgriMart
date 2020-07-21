@@ -25,7 +25,13 @@ import {
     DELETE_REVIEW_FAILURE,
     UPDATE_REVIEW_SUCCESS,
     UPDATE_REVIEW_START,
-    UPDATE_REVIEW_FAILURE
+    UPDATE_REVIEW_FAILURE,
+    TOGGLE_LIKE_START,
+    TOGGLE_LIKE_SUCCESS,
+    TOGGLE_LIKE_FAILURE,
+    TOGGLE_DISLIKE_START,
+    TOGGLE_DISLIKE_SUCCESS,
+    TOGGLE_DISLIKE_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -227,6 +233,44 @@ export default function product(state = initialProductState, action) {
                 error:false
             }
         case UPDATE_REVIEW_FAILURE:
+            return{
+                ...state,
+                inProgress:false,
+                error:action.error
+            }
+        case TOGGLE_LIKE_START:
+            return{
+                ...state,
+                inProgress:true,
+                error:false
+            }
+        case TOGGLE_LIKE_SUCCESS:
+            return{
+                ...state,
+                inProgress:false,
+                error:false,
+                singleProduct:action.product
+            }
+        case TOGGLE_LIKE_FAILURE:
+            return{
+                ...state,
+                inProgress:false,
+                error:action.error
+            }
+        case TOGGLE_DISLIKE_START:
+            return{
+                ...state,
+                inProgress:true,
+                error:false
+            }
+        case TOGGLE_DISLIKE_SUCCESS:
+            return{
+                ...state,
+                inProgress:false,
+                error:false,
+                singleProduct:action.product
+            }
+        case TOGGLE_DISLIKE_FAILURE:
             return{
                 ...state,
                 inProgress:false,

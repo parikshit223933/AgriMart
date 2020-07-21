@@ -143,9 +143,9 @@ module.exports.updateReview = async (req, res) => {
 	try {
 		let review = await Review.findById(req.body.reviewId);
 
-        let previous_rating = await review.rating;
-        
-        console.log('PREVIOUS RATING', previous_rating);
+		let previous_rating = await review.rating;
+
+		console.log("PREVIOUS RATING", previous_rating);
 
 		if (req.body.userId != review.author) {
 			return res.json(401, {
@@ -216,9 +216,9 @@ module.exports.updateReview = async (req, res) => {
 					product.five += 1;
 					break;
 			}
-        }
-        await product.save();
-        console.log(product);
+		}
+		await product.save();
+		console.log(product);
 		return res.json(200, {
 			success: true,
 			data: {
@@ -226,6 +226,133 @@ module.exports.updateReview = async (req, res) => {
 			}
 		});
 	} catch (error) {
+		return res.json(500, {
+			success: false,
+			message: "Internal Server Error!"
+		});
+	}
+};
+
+/* handle toggling likes on reviews */
+module.exports.likeReview = async (req, res) => {
+    //req.body={reviewId, userId}
+    console.log('holaaaa');
+	try {
+		let review = await Review.findById(req.body.reviewId);
+		if (review.likes.includes(req.body.userId)) {
+			review.likes = await review.likes.filter((like) => {
+				return like != req.body.userId;
+			});
+			await review.save();
+            let product = await Product.findById(review.product).populate({
+				path: "reviews",
+				populate: {
+					path: "likes"
+				},
+				populate: {
+					path: "dislikes"
+				},
+				populate: {
+					path: "author"
+				}
+			})
+			.populate("seller");;
+            console.log(product);
+			return res.json(200, {
+				success: true,
+				data: {
+					product,
+					status: false //which means "like is removed"
+				}
+			});
+		} else {
+			await review.likes.push(req.body.userId);
+			await review.save();
+            let product = await Product.findById(review.product).populate({
+				path: "reviews",
+				populate: {
+					path: "likes"
+				},
+				populate: {
+					path: "dislikes"
+				},
+				populate: {
+					path: "author"
+				}
+			})
+			.populate("seller");;
+            console.log(product);
+			return res.json(200, {
+				success: true,
+				data: {
+					product,
+					status: true //which means "like is added"
+				}
+			});
+		}
+	} catch (error) {
+        console.log(error);
+		return res.json(500, {
+			success: false,
+			message: "Internal Server Error!"
+		});
+	}
+};
+module.exports.dislikeReview = async (req, res) => {
+	//req.body={reviewId, userId}
+	try {
+		let review = await Review.findById(req.body.reviewId);
+		if (review.dislikes.includes(req.body.userId)) {
+			review.dislikes = await review.dislikes.filter((dislike) => {
+				return dislike != req.body.userId;
+			});
+			await review.save();
+			let product = await Product.findById(review.product).populate({
+				path: "reviews",
+				populate: {
+					path: "likes"
+				},
+				populate: {
+					path: "dislikes"
+				},
+				populate: {
+					path: "author"
+				}
+			})
+			.populate("seller");;
+			return res.json(200, {
+				success: true,
+				data: {
+                    product,
+                    status:false
+				}
+			});
+		} else {
+			await review.dislikes.push(req.body.userId);
+			await review.save();
+			let product = await Product.findById(review.product).populate({
+				path: "reviews",
+				populate: {
+					path: "likes"
+				},
+				populate: {
+					path: "dislikes"
+				},
+				populate: {
+					path: "author"
+				}
+			})
+			.populate("seller");;
+			return res.json(200, {
+				success: true,
+				data: {
+                    product,
+                    status:true
+				}
+			});
+		}
+	} catch (error) {
+        console.log(error);
 		return res.json(500, {
 			success: false,
 			message: "Internal Server Error!"

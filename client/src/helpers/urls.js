@@ -14,5 +14,7 @@ export const API_URLS={
     getSingleProduct:()=>`${API_ROOT}/product/get-single-product`,
     createReview:()=>`${API_ROOT}/review/create-new-review`,
     deleteReview:()=>`${API_ROOT}/review/delete-review`,
-    updateReview:()=>`${API_ROOT}/review/update-review`
+    updateReview:()=>`${API_ROOT}/review/update-review`,
+    toggleLike:()=>`${API_ROOT}/review/toggle-like-review`,
+    toggleDislike:()=>`${API_ROOT}/review/toggle-dislike-review`,
 }

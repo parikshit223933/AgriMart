@@ -1,6 +1,6 @@
 import { API_URLS } from "../helpers/urls";
 import { getAuthTokenFromStorage, getFormBody } from "../helpers/utils";
-import { CREATE_PRODUCT_START, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE, RETRIEVE_PRODUCTS_START, RETRIEVE_PRODUCTS_SUCCESS, RETRIEVE_PRODUCTS_FAILURE, FETCH_BOUGHT_PRODUCTS_START, FETCH_BOUGHT_PRODUCTS_SUCCESS, FETCH_BOUGHT_PRODUCTS_FAILURE, EDIT_PRODUCT_START, EDIT_PRODUCT_SUCCESS, EDIT_PRODUCT_FAILURE, DELETE_PRODUCT_START, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE, GET_SINGLE_PRODUCT_START, GET_SINGLE_PRODUCT_SUCCESS, GET_SINGLE_PRODUCT_FAILURE, CREATE_REVIEW_START, CREATE_REVIEW_SUCCESS, CREATE_REVIEW_FAILURE, DELETE_REVIEW_START, DELETE_REVIEW_SUCCESS, DELETE_REVIEW_FAILURE, UPDATE_REVIEW_START, UPDATE_REVIEW_SUCCESS, UPDATE_REVIEW_FAILURE } from "./actionTypes";
+import { CREATE_PRODUCT_START, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE, RETRIEVE_PRODUCTS_START, RETRIEVE_PRODUCTS_SUCCESS, RETRIEVE_PRODUCTS_FAILURE, FETCH_BOUGHT_PRODUCTS_START, FETCH_BOUGHT_PRODUCTS_SUCCESS, FETCH_BOUGHT_PRODUCTS_FAILURE, EDIT_PRODUCT_START, EDIT_PRODUCT_SUCCESS, EDIT_PRODUCT_FAILURE, DELETE_PRODUCT_START, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE, GET_SINGLE_PRODUCT_START, GET_SINGLE_PRODUCT_SUCCESS, GET_SINGLE_PRODUCT_FAILURE, CREATE_REVIEW_START, CREATE_REVIEW_SUCCESS, CREATE_REVIEW_FAILURE, DELETE_REVIEW_START, DELETE_REVIEW_SUCCESS, DELETE_REVIEW_FAILURE, UPDATE_REVIEW_START, UPDATE_REVIEW_SUCCESS, UPDATE_REVIEW_FAILURE, TOGGLE_LIKE_START, TOGGLE_LIKE_SUCCESS, TOGGLE_LIKE_FAILURE, TOGGLE_DISLIKE_START, TOGGLE_DISLIKE_SUCCESS, TOGGLE_DISLIKE_FAILURE } from "./actionTypes";
 
 export function createProductStart()
 {
@@ -452,5 +452,106 @@ export function updateReview(reviewUpdates, userId, reviewId, productId)
                 dispatch(updateReviewFailure(data.message));
             }
         });
+    }
+}
+
+/* for toggling a like */
+export function toggleLikeStart()
+{
+    return{
+        type:TOGGLE_LIKE_START
+    }
+}
+export function toggleLikeSuccess(product)
+{
+    return{
+        type:TOGGLE_LIKE_SUCCESS,
+        product
+    }
+}
+export function toggleLikeFailure(error)
+{
+    return{
+        type:TOGGLE_LIKE_FAILURE,
+        error
+    }
+}
+export function toggleLike(reviewId, userId)
+{
+    return dispatch=>
+    {
+        dispatch(toggleLikeStart());
+        let url=API_URLS.toggleLike();
+        fetch(url, {
+            method:'POST',
+            headers:{
+                Authorization:`Bearer ${getAuthTokenFromStorage()}`,
+                'Content-Type':'application/x-www-form-urlencoded',
+            },
+            body:getFormBody({reviewId, userId})
+        })
+        .then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    dispatch(toggleLikeSuccess(data.data.product, data.data.status))
+                }
+                else
+                {
+                    dispatch(toggleLikeFailure(data.message));
+                }
+            })
+    }
+}
+
+/* for toggling a dislike */
+/* for toggling a like */
+export function toggleDislikeStart()
+{
+    return{
+        type:TOGGLE_DISLIKE_START
+    }
+}
+export function toggleDislikeSuccess(product)
+{
+    return{
+        type:TOGGLE_DISLIKE_SUCCESS,
+        product
+    }
+}
+export function toggleDislikeFailure(error)
+{
+    return{
+        type:TOGGLE_DISLIKE_FAILURE,
+        error
+    }
+}
+export function toggleDislike(reviewId, userId)
+{
+    return dispatch=>
+    {
+        dispatch(toggleDislikeStart());
+        let url=API_URLS.toggleDislike();
+        fetch(url, {
+            method:'POST',
+            headers:{
+                Authorization:`Bearer ${getAuthTokenFromStorage()}`,
+                'Content-Type':'application/x-www-form-urlencoded',
+            },
+            body:getFormBody({reviewId, userId})
+        })
+        .then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    dispatch(toggleDislikeSuccess(data.data.product, data.data.status))
+                }
+                else
+                {
+                    dispatch(toggleDislikeFailure(data.message));
+                }
+            })
     }
 }

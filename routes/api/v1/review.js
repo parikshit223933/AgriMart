@@ -18,5 +18,15 @@ router.post(
 	passport.authenticate("jwt", { session: false }),
 	reviewApi.updateReview
 );
+router.post(
+	"/toggle-like-review",
+	passport.authenticate("jwt", { session: false }),
+	reviewApi.likeReview
+);
+router.post(
+	"/toggle-dislike-review",
+	passport.authenticate("jwt", { session: false }),
+	reviewApi.dislikeReview
+);
 
 module.exports = router;
