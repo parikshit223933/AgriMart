@@ -1,7 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { deleteReview, updateReview, toggleLike, toggleDislike } from "../actions/product";
-import moment from 'moment';
+import {
+	deleteReview,
+	updateReview,
+	toggleLike,
+	toggleDislike
+} from "../actions/product";
+import moment from "moment";
 
 /* this component contains all the reviews */
 class Review extends React.Component {
@@ -17,12 +22,14 @@ class Review extends React.Component {
 	handleSubmit = (event) => {
 		//send the state, userId, productId and reviewId
 		event.preventDefault();
-		this.props.dispatch(updateReview(
-			this.state,
-			this.props.auth.user._id,
-			this.props.review._id,
-			this.props.review.product
-		));
+		this.props.dispatch(
+			updateReview(
+				this.state,
+				this.props.auth.user._id,
+				this.props.review._id,
+				this.props.review.product
+			)
+		);
 	};
 	handleDelete = () => {
 		console.log(this.props.review.product, this.props.review._id);
@@ -33,15 +40,17 @@ class Review extends React.Component {
 				this.props.auth.user._id
 			)
 		);
-    };
-    handleLikes=()=>
-    {
-        this.props.dispatch(toggleLike(this.props.review._id, this.props.auth.user._id))
-    }
-    handleDislikes=()=>
-    {
-        this.props.dispatch(toggleDislike(this.props.review._id, this.props.auth.user._id))
-    }
+	};
+	handleLikes = () => {
+		this.props.dispatch(
+			toggleLike(this.props.review._id, this.props.auth.user._id)
+		);
+	};
+	handleDislikes = () => {
+		this.props.dispatch(
+			toggleDislike(this.props.review._id, this.props.auth.user._id)
+		);
+	};
 	render() {
 		if (!this.props.review) {
 			return <div>Loading...</div>;
@@ -97,13 +106,19 @@ class Review extends React.Component {
 							</div>
 							<div>
 								<p className="m-0 ml-2">
-									{moment(new Date(review.updatedAt), "YYYYMMDD").fromNow()}
+									{moment(
+										new Date(review.updatedAt),
+										"YYYYMMDD"
+									).fromNow()}
 								</p>
 							</div>
 						</div>
 						<div className="d-flex flex-row ">
 							<div className="d-flex flex-row flex-wrap justify-content-between align-items-center mr-3">
-								<div onClick={this.handleLikes} style={{cursor:'pointer'}}>
+								<div
+									onClick={this.handleLikes}
+									style={{ cursor: "pointer" }}
+								>
 									<i
 										className="fas fa-thumbs-up text-secondary"
 										style={{ fontSize: "20px" }}
@@ -112,7 +127,10 @@ class Review extends React.Component {
 								<div>{review.likes.length}</div>
 							</div>
 							<div className="d-flex flex-row ">
-								<div onClick={this.handleDislikes} style={{cursor:'pointer'}}>
+								<div
+									onClick={this.handleDislikes}
+									style={{ cursor: "pointer" }}
+								>
 									<i
 										className="fas fa-thumbs-down text-secondary"
 										style={{ fontSize: "20px" }}

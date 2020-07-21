@@ -7,12 +7,12 @@ import {
 	CLEAR_AUTH_STATE,
 	SIGN_UP_START,
 	SIGN_UP_FAILURE,
-    UPDATE_USER_START,
-    UPDATE_USER_SUCCESS,
-    UPDATE_USER_FAILED,
-    UPLOAD_AVATAR_START,
-    UPLOAD_AVATAR_SUCCESS,
-    UPLOAD_AVATAR_FAILURE
+	UPDATE_USER_START,
+	UPDATE_USER_SUCCESS,
+	UPDATE_USER_FAILED,
+	UPLOAD_AVATAR_START,
+	UPLOAD_AVATAR_SUCCESS,
+	UPLOAD_AVATAR_FAILURE
 } from "../actions/actionTypes";
 
 let initialAuthState = {
@@ -70,50 +70,50 @@ export default function auth(state = initialAuthState, action) {
 				inProgress: true,
 				error: false
 			};
-        //sign up success is not created because the login action will be called once the user is signed up successfully.
+		//sign up success is not created because the login action will be called once the user is signed up successfully.
 		case SIGN_UP_FAILURE:
-            return {
+			return {
 				...state,
 				error: action.error,
 				isLoggedIn: false,
 				inProgress: false
-            };
-        case UPDATE_USER_START:
-            return{
-                ...state,
-                inProgress:true
-            }
-        case UPDATE_USER_SUCCESS:
-            return{
-                ...state,
-                inProgress:false,
-                error:false,
-                user:action.user
-            }
-        case UPDATE_USER_FAILED:
-            return{
-                ...state,
-                inProgress:false,
-                error:action.error
-            }
-        case UPLOAD_AVATAR_START:
-            return{
-                ...state,
-                inProgress:true
-            }
-        case UPLOAD_AVATAR_SUCCESS:
-            return{
-                ...state,
-                inProgress:false,
-                error:false,
-                user:action.user
-            }
-        case UPLOAD_AVATAR_FAILURE:
-            return{
-                ...state,
-                inProgress:false,
-                error:action.error
-            }
+			};
+		case UPDATE_USER_START:
+			return {
+				...state,
+				inProgress: true
+			};
+		case UPDATE_USER_SUCCESS:
+			return {
+				...state,
+				inProgress: false,
+				error: false,
+				user: action.user
+			};
+		case UPDATE_USER_FAILED:
+			return {
+				...state,
+				inProgress: false,
+				error: action.error
+			};
+		case UPLOAD_AVATAR_START:
+			return {
+				...state,
+				inProgress: true
+			};
+		case UPLOAD_AVATAR_SUCCESS:
+			return {
+				...state,
+				inProgress: false,
+				error: false,
+				user: action.user
+			};
+		case UPLOAD_AVATAR_FAILURE:
+			return {
+				...state,
+				inProgress: false,
+				error: action.error
+			};
 		default:
 			return state;
 	}
