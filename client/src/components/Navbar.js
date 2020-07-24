@@ -175,31 +175,31 @@ class Navbar extends React.Component {
 					</div>
 					<hr className="m-0 bg-danger custom-width" />
 					<div className="categories-nav-inner-container">
-						<Link to="">
+						<Link to="/categories/CerealsAndPulses">
 							<div>Cereals and Pulses</div>
 						</Link>
-						<Link to="">
+						<Link to="/categories/Seeds">
 							<div>Seeds</div>
 						</Link>
-						<Link to="">
+						<Link to="/categories/Spices">
 							<div>Spices</div>
 						</Link>
-						<Link to="">
+						<Link to="/categories/Fruits">
 							<div>Fruits</div>
 						</Link>
-						<Link to="">
+						<Link to="/categories/Vegetables">
 							<div>Vegetables</div>
 						</Link>
-						<Link to="">
+						<Link to="/categories/DryFruits">
 							<div>Dry Fruits</div>
 						</Link>
-						<Link to="">
+						<Link to="/categories/EdibleOils">
 							<div>Edible Oils</div>
 						</Link>
-						<Link to="">
+						<Link to="/categories/DairyProducts">
 							<div>Dairy Products</div>
 						</Link>
-						<Link to="">
+						<Link to="/categories/Others">
 							<div>Others</div>
 						</Link>
 					</div>

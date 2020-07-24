@@ -16,5 +16,6 @@ export const API_URLS = {
 	deleteReview: () => `${API_ROOT}/review/delete-review`,
 	updateReview: () => `${API_ROOT}/review/update-review`,
 	toggleLike: () => `${API_ROOT}/review/toggle-like-review`,
-	toggleDislike: () => `${API_ROOT}/review/toggle-dislike-review`
+    toggleDislike: () => `${API_ROOT}/review/toggle-dislike-review`,
+    categorizedProducts:()=>`${API_ROOT}/product/categorized-products`,
 };

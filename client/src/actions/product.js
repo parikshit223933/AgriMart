@@ -33,7 +33,10 @@ import {
 	TOGGLE_LIKE_FAILURE,
 	TOGGLE_DISLIKE_START,
 	TOGGLE_DISLIKE_SUCCESS,
-	TOGGLE_DISLIKE_FAILURE
+	TOGGLE_DISLIKE_FAILURE,
+    FETCH_CATEGORIZED_PRODUCTS_START,
+    FETCH_CATEGORIZED_PRODUCTS_SUCCESS,
+    FETCH_CATEGORIZED_PRODUCTS_FAILURE
 } from "./actionTypes";
 
 export function createProductStart() {
@@ -515,4 +518,54 @@ export function toggleDislike(reviewId, userId) {
 				}
 			});
 	};
+}
+
+
+/* to fetch the products from a particular category */
+export function fetchCategorizedProductsStart()
+{
+    return {
+        type:FETCH_CATEGORIZED_PRODUCTS_START
+    }
+}
+export function fetchCategorizedProductsSuccess(products)
+{
+    return {
+        type:FETCH_CATEGORIZED_PRODUCTS_SUCCESS,
+        products
+    }
+}
+export function fetchCategorizedProductsFailure(error)
+{
+    return{
+        type:FETCH_CATEGORIZED_PRODUCTS_FAILURE,
+        error
+    }
+}
+export function fetchCategorizedProducts(category)
+{
+    return (dispatch)=>
+    {
+        let url=API_URLS.categorizedProducts();
+        dispatch(fetchCategorizedProductsStart());
+        fetch(url, {
+            method: "POST",
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
+			body: getFormBody({ category })
+        })
+        .then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    dispatch(fetchCategorizedProductsSuccess(data.data.products));
+                }
+                else
+                {
+                    dispatch(fetchCategorizedProductsFailure(data.message));
+                }
+            })
+    }
 }

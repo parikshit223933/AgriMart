@@ -25,6 +25,7 @@ import SingleProduct from "./SingleProduct";
 import Review from "./Review";
 import ReviewHeader from "./ReviewHeader";
 import ReviewCreator from "./ReviewCreator";
+import SingleCategory from './SingleCategory';
 
 export {
 	Navbar,
@@ -53,5 +54,6 @@ export {
 	SingleProduct,
 	Review,
 	ReviewHeader,
-	ReviewCreator
+    ReviewCreator,
+    SingleCategory
 };

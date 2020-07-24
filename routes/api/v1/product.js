@@ -33,6 +33,7 @@ router.post(
 	passport.authenticate("jwt", { session: false }),
 	productApi.getSingleProduct
 );
+router.post("/categorized-products", productApi.CategorizedProduct);
 
 //since i dont want the session cookies to be generated so i have written session:false
 module.exports = router;

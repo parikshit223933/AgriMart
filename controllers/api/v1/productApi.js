@@ -241,3 +241,27 @@ module.exports.getSingleProduct = async (req, res) => {
 		});
 	}
 };
+
+/* To get products category-wise */
+module.exports.CategorizedProduct=async (req, res)=>
+{//neither do i neeed authorization token for this nor do i need the user. categorized products should be avaibale to all users!
+
+    //req.body={category}
+    try{
+        let products=await Product.find({category:req.body.category});//population is not needed
+        console.log(req.body.category);
+        return res.json(200, {
+            success:true,
+            data:{
+                products
+            }
+        })
+    }
+    catch(error)
+    {
+        return res.json(500, {
+            success:false,
+            message:"Internal Server Error!"
+        })
+    }
+}

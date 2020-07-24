@@ -31,7 +31,10 @@ import {
 	TOGGLE_LIKE_FAILURE,
 	TOGGLE_DISLIKE_START,
 	TOGGLE_DISLIKE_SUCCESS,
-	TOGGLE_DISLIKE_FAILURE
+	TOGGLE_DISLIKE_FAILURE,
+    FETCH_CATEGORIZED_PRODUCTS_START,
+    FETCH_CATEGORIZED_PRODUCTS_SUCCESS,
+    FETCH_CATEGORIZED_PRODUCTS_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -39,7 +42,8 @@ let initialProductState = {
 	inProgress: null,
 	error: null,
 	boughtProducts: [],
-	singleProduct: null
+    singleProduct: null,
+    categorizedProducts:[]
 };
 export default function product(state = initialProductState, action) {
 	switch (action.type) {
@@ -269,7 +273,26 @@ export default function product(state = initialProductState, action) {
 				...state,
 				inProgress: false,
 				error: action.error
-			};
+            };
+        case FETCH_CATEGORIZED_PRODUCTS_START:
+            return{
+                ...state,
+                inProgress:true,
+                error:false
+            }
+        case FETCH_CATEGORIZED_PRODUCTS_SUCCESS:
+            return{
+                ...state,
+                inProgress:false,
+                categorizedProducts:action.products
+            }
+        case FETCH_CATEGORIZED_PRODUCTS_FAILURE:
+            return{
+                ...state,
+                inProgress:false,
+                error:action.error
+            }
+
 		default:
 			return state;
 	}
