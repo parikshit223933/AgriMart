@@ -137,20 +137,36 @@ class SingleCategory extends React.Component {
 							<li className="nav-item" role="presentation">
 								<a className="nav-link disabled">Sort By:</a>
 							</li>
+
 							<li className="nav-item" role="presentation">
 								<a
 									className="nav-link active"
+									id="pills-all-tab"
+									data-toggle="pill"
+									href="#pills-home"
+									role="tab"
+									aria-controls="pills-all"
+									aria-selected="true"
+								>
+									Show All
+								</a>
+							</li>
+
+							<li className="nav-item" role="presentation">
+								<a
+									className="nav-link"
 									id="pills-home-tab"
 									data-toggle="pill"
 									href="#pills-home"
 									role="tab"
 									aria-controls="pills-home"
-									aria-selected="true"
+									aria-selected="false"
 								>
 									Price:{" "}
 									<i className="fas fa-sort-amount-up-alt"></i>
 								</a>
 							</li>
+
 							<li className="nav-item" role="presentation">
 								<a
 									className="nav-link"
@@ -165,6 +181,7 @@ class SingleCategory extends React.Component {
 									<i className="fas fa-sort-amount-up"></i>
 								</a>
 							</li>
+
 							<li className="nav-item" role="presentation">
 								<a
 									className="nav-link"
@@ -182,6 +199,71 @@ class SingleCategory extends React.Component {
 						<div className="tab-content" id="pills-tabContent">
 							<div
 								className="tab-pane fade show active"
+								id="pills-all"
+								role="tabpanel"
+								aria-labelledby="pills-all-tab"
+							>
+								<div className="w-100 d-flex flex-row justify-content-around align-items-center flex-wrap">
+									{categorizedProducts.map((product, index) => {
+										return (
+											<div
+												className="card mb-2 mt-2 ml-1 mr-1"
+												style={{ width: "18rem" }}
+												key={index}
+											>
+												<div
+													style={{
+														width: 286,
+														height: 286,
+														backgroundImage: `url('http://localhost:8000/uploads/products/coverImage-${
+															product.coverImage.split(
+																"-"
+															)[1]
+														}')`,
+														backgroundSize:
+															"contain",
+														backgroundPosition:
+															"center",
+														backgroundRepeat:
+															"no-repeat"
+													}}
+												>
+													{/* <img
+    														src={`http://localhost:8000/${product.coverImage}`}
+    														className="card-img-top"
+    														alt="CoverImg"
+    													/> */}
+												</div>
+												<div className="card-body">
+													<h5 className="card-title text-capitalize mb-0">
+														{product.name}{" "}
+													</h5>
+													<small>
+														({product.category})
+													</small>
+													<p className="card-text mb-1">
+														<b>
+															Rs.
+															{product.price}
+														</b>
+													</p>
+													<p className="card-text">
+														Rating: {product.rating}
+													</p>
+													<a
+														href="#"
+														className="btn btn-warning"
+													>
+														Add to Cart
+													</a>
+												</div>
+											</div>
+										);
+									})}
+								</div>
+							</div>
+							<div
+								className="tab-pane fade"
 								id="pills-home"
 								role="tabpanel"
 								aria-labelledby="pills-home-tab"
@@ -190,7 +272,7 @@ class SingleCategory extends React.Component {
 									{PriceAscending.map((product, index) => {
 										return (
 											<div
-												className="card mb-2 mt-2"
+												className="card mb-2 mt-2 ml-1 mr-1"
 												style={{ width: "18rem" }}
 												key={index}
 											>
@@ -255,7 +337,7 @@ class SingleCategory extends React.Component {
 									{PriceDescending.map((product, index) => {
 										return (
 											<div
-												className="card mb-2 mt-2"
+												className="card mb-2 mt-2 ml-1 mr-1"
 												style={{ width: "18rem" }}
 												key={index}
 											>
@@ -320,7 +402,7 @@ class SingleCategory extends React.Component {
 									{Newest.map((product, index) => {
 										return (
 											<div
-												className="card mb-2 mt-2"
+												className="card mb-2 mt-2 ml-1 mr-1"
 												style={{ width: "18rem" }}
 												key={index}
 											>
