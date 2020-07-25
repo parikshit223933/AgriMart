@@ -4,7 +4,7 @@ import { fetchCategorizedProducts } from "../actions/product";
 import "../singleCategory.css";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
-import {SingleProductInCategory} from './'
+import { SingleProductInCategory } from "./";
 class SingleCategory extends React.Component {
 	constructor(props) {
 		super(props);
@@ -444,8 +444,10 @@ class SingleCategory extends React.Component {
 							>
 								<div className="w-100 d-flex flex-row justify-content-around align-items-center flex-wrap">
 									{/* if the price range is undefined (initially) then all the products will be loaded irrespective of the filters */}
-									{!this.state.priceRange
-										? categorizedProducts.map(
+									{!this.state.priceRange &&
+									!minRating /* i.e. minRating is 0 */
+										? /* If no filter is given */
+										  categorizedProducts.map(
 												(product, index) => {
 													return (
 														<SingleProductInCategory
@@ -455,9 +457,55 @@ class SingleCategory extends React.Component {
 													);
 												}
 										  )
+										: this.state.priceRange && !minRating
+										? categorizedProducts /* price range is given in the filter but the minimum rating is not given */
+												.filter((product) => {
+													if (
+														product.price >=
+															this.state
+																.priceRange
+																.min &&
+														product.price <=
+															this.state
+																.priceRange.max
+													) {
+														return true;
+													}
+													return false;
+												})
+												.map((product, index) => {
+													return (
+														<SingleProductInCategory
+															product={product}
+															key={index}
+														/>
+													);
+												})
+										: minRating && !this.state.priceRange
+										? categorizedProducts
+												.filter((product) => {
+													/* minimum rating is given but price range is not given */
+													if (
+														product.rating >=
+														minRating
+													) {
+														return true;
+													}
+													return false;
+												})
+												.map((product, index) => {
+													return (
+														<SingleProductInCategory
+															product={product}
+															key={index}
+														/>
+													);
+												})
 										: categorizedProducts
 												.filter((product) => {
 													if (
+														product.rating >=
+															minRating &&
 														product.price >=
 															this.state
 																.priceRange
