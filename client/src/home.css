@@ -15,7 +15,7 @@
 	background-image: linear-gradient(
 		0deg,
 		rgb(0 124 15 / 0%) 0%,
-		rgb(255 251 0 / 50%) 100%
+		#ff000080 100%
 	);
 	height: 100%;
 	width: 100%;
@@ -55,3 +55,22 @@
 .jumbotron {
 	background-color: rgba(255, 255, 255, 0.8);
 }
+/* REACT SCROLL ITEMS */
+.menu-item {
+    padding: 0 40px;
+    margin: 5px 10px;
+    user-select: none;
+    cursor: pointer;
+    border: none;
+  }
+  .menu-item-wrapper.active {
+    border: 1px blue solid;
+  }
+  .menu-item.active {
+    border: 1px green solid;
+  }
+   
+  .scroll-menu-arrow {
+    padding: 20px;
+    cursor: pointer;
+  }

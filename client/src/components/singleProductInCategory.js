@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 class SingleProductInCategory extends React.Component
 {
@@ -13,7 +15,8 @@ class SingleProductInCategory extends React.Component
                 }}
                 key={index}
             >
-                <div
+                <Link
+                    to={`/view-product/${product._id}/${this.props.auth.user._id}`}
                     style={{
                         width: 286,
                         height: 286,
@@ -35,13 +38,15 @@ class SingleProductInCategory extends React.Component
                 className="card-img-top"
                 alt="CoverImg"
             /> */}
-                </div>
+                </Link>
                 <div className="card-body">
-                    <h5 className="card-title text-capitalize mb-0">
-                        {
-                            product.name
-                        }{" "}
-                    </h5>
+                    <Link to={`/view-product/${product._id}/${this.props.auth.user._id}`}>
+                        <h5 className="card-title text-capitalize mb-0">
+                            {
+                                product.name
+                            }{" "}
+                        </h5>
+                    </Link>
                     <small>
                         (
                         {
@@ -74,4 +79,8 @@ class SingleProductInCategory extends React.Component
         );
     }
 }
-export default SingleProductInCategory;
+function mapStateToProps({auth})
+{
+    return {auth}
+}
+export default connect(mapStateToProps)(SingleProductInCategory);
