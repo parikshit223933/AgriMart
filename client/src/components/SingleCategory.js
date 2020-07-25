@@ -359,7 +359,7 @@ class SingleCategory extends React.Component {
 						</div>
 					</div>
 
-					{/* //////////////////////////////////////////////////////////////////////////////////////////// */}
+					{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 					<div className="col-md-9 pt-3">
 						<h1>
 							{this.categoryMapper(
@@ -443,6 +443,7 @@ class SingleCategory extends React.Component {
 								aria-labelledby="pills-all-tab"
 							>
 								<div className="w-100 d-flex flex-row justify-content-around align-items-center flex-wrap">
+                                    {!categorizedProducts.length&&<h4>No Products To Show!</h4>}
 									{/* if the price range is undefined (initially) then all the products will be loaded irrespective of the filters */}
 									{!this.state.priceRange &&
 									!minRating /* i.e. minRating is 0 */
@@ -535,6 +536,7 @@ class SingleCategory extends React.Component {
 								aria-labelledby="pills-home-tab"
 							>
 								<div className="w-100 d-flex flex-row justify-content-around align-items-center flex-wrap">
+                                    {!PriceAscending.length&&<h4>No Products To Show!</h4>}
 									{PriceAscending.map((product, index) => {
 										return (
 											<SingleProductInCategory
@@ -552,6 +554,7 @@ class SingleCategory extends React.Component {
 								aria-labelledby="pills-profile-tab"
 							>
 								<div className="w-100 d-flex flex-row justify-content-around align-items-center flex-wrap">
+                                    {!PriceDescending.length&&<h4>No Products To Show!</h4>}
 									{PriceDescending.map((product, index) => {
 										return (
 											<SingleProductInCategory
@@ -569,6 +572,7 @@ class SingleCategory extends React.Component {
 								aria-labelledby="pills-contact-tab"
 							>
 								<div className="w-100 d-flex flex-row justify-content-around align-items-center flex-wrap">
+                                    {!Newest.length&&<h4>No Products To Show!</h4>}
 									{Newest.map((product, index) => {
 										return (
 											<SingleProductInCategory

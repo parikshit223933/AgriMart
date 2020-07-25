@@ -1,6 +1,7 @@
 const Product = require("../../../models/productModel");
 const User = require("../../../models/userModel");
 const Review = require("../../../models/reviewModel");
+const roundTo =require("round-to");
 
 module.exports.createReview = async (req, res) => {
 	try {
@@ -27,6 +28,7 @@ module.exports.createReview = async (req, res) => {
 			default:
 				break;
 		}
+		product.rating = parseInt(req.body.rating);
 		await product.save();
 		let newProduct = await Product.findById(req.body.product)
 			.populate({
@@ -92,6 +94,15 @@ module.exports.deleteReview = async (req, res) => {
 				product.five -= 1;
 				break;
 		}
+		product.rating = roundTo(
+			(product.one * 1 +
+				product.two * 2 +
+				product.three * 3 +
+				product.four * 4 +
+				product.five * 5) /
+				(product.reviews.length-1),
+			2
+        );
 		await review.remove();
 		await product.save();
 
@@ -216,7 +227,16 @@ module.exports.updateReview = async (req, res) => {
 					product.five += 1;
 					break;
 			}
-		}
+        }
+        product.rating = roundTo(
+			(product.one * 1 +
+				product.two * 2 +
+				product.three * 3 +
+				product.four * 4 +
+				product.five * 5) /
+				(product.reviews.length-1),
+			2
+        );
 		await product.save();
 		console.log(product);
 		return res.json(200, {
@@ -235,7 +255,7 @@ module.exports.updateReview = async (req, res) => {
 
 /* handle toggling likes on reviews */
 module.exports.likeReview = async (req, res) => {
-    //req.body={reviewId, userId}
+	//req.body={reviewId, userId}
 	try {
 		let review = await Review.findById(req.body.reviewId);
 		if (review.likes.includes(req.body.userId)) {
@@ -243,19 +263,20 @@ module.exports.likeReview = async (req, res) => {
 				return like != req.body.userId;
 			});
 			await review.save();
-            let product = await Product.findById(review.product).populate({
-				path: "reviews",
-				populate: {
-					path: "likes"
-				},
-				populate: {
-					path: "dislikes"
-				},
-				populate: {
-					path: "author"
-				}
-			})
-			.populate("seller");;
+			let product = await Product.findById(review.product)
+				.populate({
+					path: "reviews",
+					populate: {
+						path: "likes"
+					},
+					populate: {
+						path: "dislikes"
+					},
+					populate: {
+						path: "author"
+					}
+				})
+				.populate("seller");
 			return res.json(200, {
 				success: true,
 				data: {
@@ -264,28 +285,28 @@ module.exports.likeReview = async (req, res) => {
 				}
 			});
 		} else {
-            //before pushing the user to the likes array, I need to check if the user has disliked the post previously or not
-            if(review.dislikes.includes(req.body.userId))
-            {
-                review.dislikes = await review.dislikes.filter((dislike) => {
-                    return dislike != req.body.userId;
-                });
-            }
+			//before pushing the user to the likes array, I need to check if the user has disliked the post previously or not
+			if (review.dislikes.includes(req.body.userId)) {
+				review.dislikes = await review.dislikes.filter((dislike) => {
+					return dislike != req.body.userId;
+				});
+			}
 			await review.likes.push(req.body.userId);
 			await review.save();
-            let product = await Product.findById(review.product).populate({
-				path: "reviews",
-				populate: {
-					path: "likes"
-				},
-				populate: {
-					path: "dislikes"
-				},
-				populate: {
-					path: "author"
-				}
-			})
-			.populate("seller");;
+			let product = await Product.findById(review.product)
+				.populate({
+					path: "reviews",
+					populate: {
+						path: "likes"
+					},
+					populate: {
+						path: "dislikes"
+					},
+					populate: {
+						path: "author"
+					}
+				})
+				.populate("seller");
 			return res.json(200, {
 				success: true,
 				data: {
@@ -295,7 +316,7 @@ module.exports.likeReview = async (req, res) => {
 			});
 		}
 	} catch (error) {
-        console.log(error);
+		console.log(error);
 		return res.json(500, {
 			success: false,
 			message: "Internal Server Error!"
@@ -311,59 +332,60 @@ module.exports.dislikeReview = async (req, res) => {
 				return dislike != req.body.userId;
 			});
 			await review.save();
-			let product = await Product.findById(review.product).populate({
-				path: "reviews",
-				populate: {
-					path: "likes"
-				},
-				populate: {
-					path: "dislikes"
-				},
-				populate: {
-					path: "author"
-				}
-			})
-			.populate("seller");;
+			let product = await Product.findById(review.product)
+				.populate({
+					path: "reviews",
+					populate: {
+						path: "likes"
+					},
+					populate: {
+						path: "dislikes"
+					},
+					populate: {
+						path: "author"
+					}
+				})
+				.populate("seller");
 			return res.json(200, {
 				success: true,
 				data: {
-                    product,
-                    status:false
+					product,
+					status: false
 				}
 			});
 		} else {
-            //before dislikig a review i need to check if the user has liked it previously or not.
-            if(review.likes.includes(req.body.userId))
-            {
-                review.likes = await review.likes.filter((like) => {
-                    return like != req.body.userId;
-                })
-            }
+			//before dislikig a review i need to check if the user has liked it previously or not.
+			if (review.likes.includes(req.body.userId)) {
+				review.likes = await review.likes.filter((like) => {
+					return like != req.body.userId;
+				});
+			}
 			await review.dislikes.push(req.body.userId);
 			await review.save();
-			let product = await Product.findById(review.product).populate({
-				path: "reviews",
-				populate: {
-					path: "likes"
-				},
-				populate: {
-					path: "dislikes"
-				},
-				populate: {
-					path: "author"
-				}
-			})
-			.populate("seller");;
+			let product = await Product.findById(review.product)
+				.populate({
+					path: "reviews",
+					populate: {
+						path: "likes"
+					},
+					populate: {
+						path: "dislikes"
+					},
+					populate: {
+						path: "author"
+					}
+				})
+				.populate("seller");
 			return res.json(200, {
 				success: true,
 				data: {
-                    product,
-                    status:true
+					product,
+					status: true
 				}
 			});
 		}
 	} catch (error) {
-        console.log(error);
+		console.log(error);
 		return res.json(500, {
 			success: false,
 			message: "Internal Server Error!"
