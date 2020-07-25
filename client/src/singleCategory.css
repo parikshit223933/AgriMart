@@ -1,8 +1,6 @@
 .categorized-products
 {
     padding-left: 6rem;
-    width:100vw;
-    height:100vh;
 }
 .prod-card
 {
@@ -12,4 +10,8 @@
 .prod-card:hover
 {
     box-shadow:0px 0px 7px 2px rgb(187, 187, 187);
+}
+.flexible-products-container
+{
+    box-sizing: border-box;
 }

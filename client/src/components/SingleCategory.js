@@ -149,8 +149,8 @@ class SingleCategory extends React.Component {
 		let PriceAscending = this.sortPriceAscending(categorizedProducts);
 		let PriceDescending = this.sortPriceDescending(categorizedProducts);
 		let Newest = this.sortNewest(categorizedProducts);
-        let minPrice=this.getMinPrice(categorizedProducts);
-        let maxPrice=this.getMaxPrice(categorizedProducts);
+		let minPrice = this.getMinPrice(categorizedProducts);
+		let maxPrice = this.getMaxPrice(categorizedProducts);
 
 		return (
 			<div className="container-fluid categorized-products">
@@ -186,26 +186,22 @@ class SingleCategory extends React.Component {
 											minValue={minPrice}
 											value={
 												this.state.priceRange || {
-													min:
-                                                    minPrice ,
-													max:
-														maxPrice 
+													min: minPrice,
+													max: maxPrice
 												}
 											}
-                                            onChange={(value) =>
-                                                {
-                                                    let newRange={...value};
-                                                    if(newRange.min<minPrice)
-                                                    {
-                                                        newRange.min=minPrice
-                                                    }
-                                                    if(newRange.max>maxPrice)
-                                                    {
-                                                        newRange.max=maxPrice
-                                                    }
-                                                    this.setState({ priceRange:newRange })
-                                                }
-											}
+											onChange={(value) => {
+												let newRange = { ...value };
+												if (newRange.min < minPrice) {
+													newRange.min = minPrice;
+												}
+												if (newRange.max > maxPrice) {
+													newRange.max = maxPrice;
+												}
+												this.setState({
+													priceRange: newRange
+												});
+											}}
 										/>
 									</div>
 								</div>
@@ -231,7 +227,9 @@ class SingleCategory extends React.Component {
 									aria-labelledby="headingTwo"
 									data-parent="#accordionExample"
 								>
-									<div className="card-body">...</div>
+									<div className="card-body">
+                                        .......................................
+                                    </div>
 								</div>
 							</div>
 						</div>
@@ -321,130 +319,163 @@ class SingleCategory extends React.Component {
 								aria-labelledby="pills-all-tab"
 							>
 								<div className="w-100 d-flex flex-row justify-content-around align-items-center flex-wrap">
-                                    {/* if the price range is undefined (initially) then all the products will be loaded irrespective of the filters */}
-									{!this.state.priceRange?categorizedProducts.map(
-										(product, index) => {
-											return (
-												<div
-													className="card prod-card mb-2 mt-2 ml-1 mr-1"
-													style={{ width: "18rem" }}
-													key={index}
-												>
-													<div
-														style={{
-															width: 286,
-															height: 286,
-															backgroundImage: `url('http://localhost:8000/uploads/products/coverImage-${
-																product.coverImage.split(
-																	"-"
-																)[1]
-															}')`,
-															backgroundSize:
-																"contain",
-															backgroundPosition:
-																"center",
-															backgroundRepeat:
-																"no-repeat"
-														}}
-													>
-														{/* <img
+									{/* if the price range is undefined (initially) then all the products will be loaded irrespective of the filters */}
+									{!this.state.priceRange
+										? categorizedProducts.map(
+												(product, index) => {
+													return (
+														<div
+															className="card prod-card mb-2 mt-2 ml-1 mr-1"
+															style={{
+																width: "18rem"
+															}}
+															key={index}
+														>
+															<div
+																style={{
+																	width: 286,
+																	height: 286,
+																	backgroundImage: `url('http://localhost:8000/uploads/products/coverImage-${
+																		product.coverImage.split(
+																			"-"
+																		)[1]
+																	}')`,
+																	backgroundSize:
+																		"contain",
+																	backgroundPosition:
+																		"center",
+																	backgroundRepeat:
+																		"no-repeat"
+																}}
+															>
+																{/* <img
     														src={`http://localhost:8000/${product.coverImage}`}
     														className="card-img-top"
     														alt="CoverImg"
     													/> */}
-													</div>
-													<div className="card-body">
-														<h5 className="card-title text-capitalize mb-0">
-															{product.name}{" "}
-														</h5>
-														<small>
-															({product.category})
-														</small>
-														<p className="card-text mb-1">
-															<b>
-																Rs.
-																{product.price}
-															</b>
-														</p>
-														<p className="card-text">
-															Rating:{" "}
-															{product.rating}
-														</p>
-														<a
-															href="/"
-															className="btn btn-warning"
+															</div>
+															<div className="card-body">
+																<h5 className="card-title text-capitalize mb-0">
+																	{
+																		product.name
+																	}{" "}
+																</h5>
+																<small>
+																	(
+																	{
+																		product.category
+																	}
+																	)
+																</small>
+																<p className="card-text mb-1">
+																	<b>
+																		Rs.
+																		{
+																			product.price
+																		}
+																	</b>
+																</p>
+																<p className="card-text">
+																	Rating:{" "}
+																	{
+																		product.rating
+																	}
+																</p>
+																<a
+																	href="/"
+																	className="btn btn-warning"
+																>
+																	Add to Cart
+																</a>
+															</div>
+														</div>
+													);
+												}
+										  )
+										: categorizedProducts
+												.filter((product) => {
+													if (
+														product.price >=
+															this.state
+																.priceRange
+																.min &&
+														product.price <=
+															this.state
+																.priceRange.max
+													) {
+														return true;
+													}
+													return false;
+												})
+												.map((product, index) => {
+													return (
+														<div
+															className="card prod-card mb-2 mt-2 ml-1 mr-1"
+															style={{
+																width: "18rem"
+															}}
+															key={index}
 														>
-															Add to Cart
-														</a>
-													</div>
-												</div>
-											);
-										}
-                                    ):categorizedProducts.filter(product=>
-                                    {
-                                        if(product.price>=this.state.priceRange.min&&product.price<=this.state.priceRange.max)
-                                        {
-                                            return true;
-                                        }
-                                        return false;
-                                    }).map((product, index)=>
-                                    {
-                                        return (
-                                            <div
-                                                className="card prod-card mb-2 mt-2 ml-1 mr-1"
-                                                style={{ width: "18rem" }}
-                                                key={index}
-                                            >
-                                                <div
-                                                    style={{
-                                                        width: 286,
-                                                        height: 286,
-                                                        backgroundImage: `url('http://localhost:8000/uploads/products/coverImage-${
-                                                            product.coverImage.split(
-                                                                "-"
-                                                            )[1]
-                                                        }')`,
-                                                        backgroundSize:
-                                                            "contain",
-                                                        backgroundPosition:
-                                                            "center",
-                                                        backgroundRepeat:
-                                                            "no-repeat"
-                                                    }}
-                                                >
-                                                    {/* <img
+															<div
+																style={{
+																	width: 286,
+																	height: 286,
+																	backgroundImage: `url('http://localhost:8000/uploads/products/coverImage-${
+																		product.coverImage.split(
+																			"-"
+																		)[1]
+																	}')`,
+																	backgroundSize:
+																		"contain",
+																	backgroundPosition:
+																		"center",
+																	backgroundRepeat:
+																		"no-repeat"
+																}}
+															>
+																{/* <img
                                                         src={`http://localhost:8000/${product.coverImage}`}
                                                         className="card-img-top"
                                                         alt="CoverImg"
                                                     /> */}
-                                                </div>
-                                                <div className="card-body">
-                                                    <h5 className="card-title text-capitalize mb-0">
-                                                        {product.name}{" "}
-                                                    </h5>
-                                                    <small>
-                                                        ({product.category})
-                                                    </small>
-                                                    <p className="card-text mb-1">
-                                                        <b>
-                                                            Rs.
-                                                            {product.price}
-                                                        </b>
-                                                    </p>
-                                                    <p className="card-text">
-                                                        Rating:{" "}
-                                                        {product.rating}
-                                                    </p>
-                                                    <a
-                                                        href="/"
-                                                        className="btn btn-warning"
-                                                    >
-                                                        Add to Cart
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
+															</div>
+															<div className="card-body">
+																<h5 className="card-title text-capitalize mb-0">
+																	{
+																		product.name
+																	}{" "}
+																</h5>
+																<small>
+																	(
+																	{
+																		product.category
+																	}
+																	)
+																</small>
+																<p className="card-text mb-1">
+																	<b>
+																		Rs.
+																		{
+																			product.price
+																		}
+																	</b>
+																</p>
+																<p className="card-text">
+																	Rating:{" "}
+																	{
+																		product.rating
+																	}
+																</p>
+																<a
+																	href="/"
+																	className="btn btn-warning"
+																>
+																	Add to Cart
+																</a>
+															</div>
+														</div>
+													);
+												})}
 								</div>
 							</div>
 							<div
