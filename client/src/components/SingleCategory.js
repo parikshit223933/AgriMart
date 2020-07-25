@@ -4,16 +4,40 @@ import { fetchCategorizedProducts } from "../actions/product";
 import "../singleCategory.css";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
-
+import {SingleProductInCategory} from './'
 class SingleCategory extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {};
+		this.state = {
+			ratingCheckboxes: {
+				one: false,
+				two: false,
+				three: false,
+				four: false
+			}
+		};
 	}
 	componentDidMount() {
 		this.FetchProducts();
 	}
+	customerRatingCheckboxInputChangeHandler = (field) => {
+		if (this.state.ratingCheckboxes[field]) {
+			this.setState({
+				ratingCheckboxes: {
+					...this.state.ratingCheckboxes,
+					[field]: false
+				}
+			});
+		} else {
+			this.setState({
+				ratingCheckboxes: {
+					...this.state.ratingCheckboxes,
+					[field]: true
+				}
+			});
+		}
+	};
 	getMinPrice = (products) => {
 		let minPrice = Number.MAX_SAFE_INTEGER;
 		for (let product of products) {
@@ -130,6 +154,21 @@ class SingleCategory extends React.Component {
 			return 0;
 		});
 	};
+	getMinRating = () => {
+		if (this.state.ratingCheckboxes.one) {
+			return 1;
+		}
+		if (this.state.ratingCheckboxes.two) {
+			return 2;
+		}
+		if (this.state.ratingCheckboxes.three) {
+			return 3;
+		}
+		if (this.state.ratingCheckboxes.four) {
+			return 4;
+		}
+		return 0;
+	};
 	render() {
 		const { categorizedProducts, inProgress } = this.props.product;
 		if (inProgress) {
@@ -151,6 +190,7 @@ class SingleCategory extends React.Component {
 		let Newest = this.sortNewest(categorizedProducts);
 		let minPrice = this.getMinPrice(categorizedProducts);
 		let maxPrice = this.getMaxPrice(categorizedProducts);
+		let minRating = this.getMinRating();
 
 		return (
 			<div className="container-fluid categorized-products">
@@ -228,61 +268,89 @@ class SingleCategory extends React.Component {
 									data-parent="#accordionExample"
 								>
 									<div className="card-body">
-                                        {/* Check Boxes for customer rating ///////////////////////////////////////////////////// */}
+										{/* Check Boxes for customer rating ///////////////////////////////////////////////////// */}
 										<div className="form-check">
 											<input
 												className="form-check-input"
 												type="checkbox"
 												value=""
 												id="fourStarAndAbove"
+												onChange={() => {
+													this.customerRatingCheckboxInputChangeHandler(
+														"four"
+													);
+												}}
 											/>
 											<label
 												className="form-check-label"
 												htmlFor="fourStarAndAbove"
 											>
-												4 <i className="fas fa-star"></i> and Above
+												4{" "}
+												<i className="fas fa-star"></i>{" "}
+												and Above
 											</label>
 										</div>
-                                        <div className="form-check">
+										<div className="form-check">
 											<input
 												className="form-check-input"
 												type="checkbox"
 												value=""
 												id="threeStarAndAbove"
+												onChange={() => {
+													this.customerRatingCheckboxInputChangeHandler(
+														"three"
+													);
+												}}
 											/>
 											<label
 												className="form-check-label"
 												htmlFor="threeStarAndAbove"
 											>
-												3 <i className="fas fa-star"></i> and Above
+												3{" "}
+												<i className="fas fa-star"></i>{" "}
+												and Above
 											</label>
 										</div>
-                                        <div className="form-check">
+										<div className="form-check">
 											<input
 												className="form-check-input"
 												type="checkbox"
 												value=""
 												id="twoStarAndAbove"
+												onChange={() => {
+													this.customerRatingCheckboxInputChangeHandler(
+														"two"
+													);
+												}}
 											/>
 											<label
 												className="form-check-label"
 												htmlFor="twoStarAndAbove"
 											>
-												2 <i className="fas fa-star"></i> and Above
+												2{" "}
+												<i className="fas fa-star"></i>{" "}
+												and Above
 											</label>
 										</div>
-                                        <div className="form-check">
+										<div className="form-check">
 											<input
 												className="form-check-input"
 												type="checkbox"
 												value=""
 												id="oneStarAndAbove"
+												onChange={() => {
+													this.customerRatingCheckboxInputChangeHandler(
+														"one"
+													);
+												}}
 											/>
 											<label
 												className="form-check-label"
 												htmlFor="oneStarAndAbove"
 											>
-												1 <i className="fas fa-star"></i> and Above
+												1{" "}
+												<i className="fas fa-star"></i>{" "}
+												and Above
 											</label>
 										</div>
 									</div>
@@ -314,7 +382,7 @@ class SingleCategory extends React.Component {
 									className="nav-link active"
 									id="pills-all-tab"
 									data-toggle="pill"
-									href="#pills-home"
+									href="#pills-all"
 									role="tab"
 									aria-controls="pills-all"
 									aria-selected="true"
@@ -380,71 +448,10 @@ class SingleCategory extends React.Component {
 										? categorizedProducts.map(
 												(product, index) => {
 													return (
-														<div
-															className="card prod-card mb-2 mt-2 ml-1 mr-1"
-															style={{
-																width: "18rem"
-															}}
+														<SingleProductInCategory
+															product={product}
 															key={index}
-														>
-															<div
-																style={{
-																	width: 286,
-																	height: 286,
-																	backgroundImage: `url('http://localhost:8000/uploads/products/coverImage-${
-																		product.coverImage.split(
-																			"-"
-																		)[1]
-																	}')`,
-																	backgroundSize:
-																		"contain",
-																	backgroundPosition:
-																		"center",
-																	backgroundRepeat:
-																		"no-repeat"
-																}}
-															>
-																{/* <img
-    														src={`http://localhost:8000/${product.coverImage}`}
-    														className="card-img-top"
-    														alt="CoverImg"
-    													/> */}
-															</div>
-															<div className="card-body">
-																<h5 className="card-title text-capitalize mb-0">
-																	{
-																		product.name
-																	}{" "}
-																</h5>
-																<small>
-																	(
-																	{
-																		product.category
-																	}
-																	)
-																</small>
-																<p className="card-text mb-1">
-																	<b>
-																		Rs.
-																		{
-																			product.price
-																		}
-																	</b>
-																</p>
-																<p className="card-text">
-																	Rating:{" "}
-																	{
-																		product.rating
-																	}
-																</p>
-																<a
-																	href="/"
-																	className="btn btn-warning"
-																>
-																	Add to Cart
-																</a>
-															</div>
-														</div>
+														/>
 													);
 												}
 										  )
@@ -465,71 +472,10 @@ class SingleCategory extends React.Component {
 												})
 												.map((product, index) => {
 													return (
-														<div
-															className="card prod-card mb-2 mt-2 ml-1 mr-1"
-															style={{
-																width: "18rem"
-															}}
+														<SingleProductInCategory
+															product={product}
 															key={index}
-														>
-															<div
-																style={{
-																	width: 286,
-																	height: 286,
-																	backgroundImage: `url('http://localhost:8000/uploads/products/coverImage-${
-																		product.coverImage.split(
-																			"-"
-																		)[1]
-																	}')`,
-																	backgroundSize:
-																		"contain",
-																	backgroundPosition:
-																		"center",
-																	backgroundRepeat:
-																		"no-repeat"
-																}}
-															>
-																{/* <img
-                                                        src={`http://localhost:8000/${product.coverImage}`}
-                                                        className="card-img-top"
-                                                        alt="CoverImg"
-                                                    /> */}
-															</div>
-															<div className="card-body">
-																<h5 className="card-title text-capitalize mb-0">
-																	{
-																		product.name
-																	}{" "}
-																</h5>
-																<small>
-																	(
-																	{
-																		product.category
-																	}
-																	)
-																</small>
-																<p className="card-text mb-1">
-																	<b>
-																		Rs.
-																		{
-																			product.price
-																		}
-																	</b>
-																</p>
-																<p className="card-text">
-																	Rating:{" "}
-																	{
-																		product.rating
-																	}
-																</p>
-																<a
-																	href="/"
-																	className="btn btn-warning"
-																>
-																	Add to Cart
-																</a>
-															</div>
-														</div>
+														/>
 													);
 												})}
 								</div>
@@ -543,58 +489,10 @@ class SingleCategory extends React.Component {
 								<div className="w-100 d-flex flex-row justify-content-around align-items-center flex-wrap">
 									{PriceAscending.map((product, index) => {
 										return (
-											<div
-												className="card prod-card mb-2 mt-2 ml-1 mr-1"
-												style={{ width: "18rem" }}
+											<SingleProductInCategory
+												product={product}
 												key={index}
-											>
-												<div
-													style={{
-														width: 286,
-														height: 286,
-														backgroundImage: `url('http://localhost:8000/uploads/products/coverImage-${
-															product.coverImage.split(
-																"-"
-															)[1]
-														}')`,
-														backgroundSize:
-															"contain",
-														backgroundPosition:
-															"center",
-														backgroundRepeat:
-															"no-repeat"
-													}}
-												>
-													{/* <img
-    														src={`http://localhost:8000/${product.coverImage}`}
-    														className="card-img-top"
-    														alt="CoverImg"
-    													/> */}
-												</div>
-												<div className="card-body">
-													<h5 className="card-title text-capitalize mb-0">
-														{product.name}{" "}
-													</h5>
-													<small>
-														({product.category})
-													</small>
-													<p className="card-text mb-1">
-														<b>
-															Rs.
-															{product.price}
-														</b>
-													</p>
-													<p className="card-text">
-														Rating: {product.rating}
-													</p>
-													<a
-														href="/"
-														className="btn btn-warning"
-													>
-														Add to Cart
-													</a>
-												</div>
-											</div>
+											/>
 										);
 									})}
 								</div>
@@ -608,58 +506,10 @@ class SingleCategory extends React.Component {
 								<div className="w-100 d-flex flex-row justify-content-around align-items-center flex-wrap">
 									{PriceDescending.map((product, index) => {
 										return (
-											<div
-												className="card prod-card mb-2 mt-2 ml-1 mr-1"
-												style={{ width: "18rem" }}
+											<SingleProductInCategory
+												product={product}
 												key={index}
-											>
-												<div
-													style={{
-														width: 286,
-														height: 286,
-														backgroundImage: `url('http://localhost:8000/uploads/products/coverImage-${
-															product.coverImage.split(
-																"-"
-															)[1]
-														}')`,
-														backgroundSize:
-															"contain",
-														backgroundPosition:
-															"center",
-														backgroundRepeat:
-															"no-repeat"
-													}}
-												>
-													{/* <img
-    														src={`http://localhost:8000/${product.coverImage}`}
-    														className="card-img-top"
-    														alt="CoverImg"
-    													/> */}
-												</div>
-												<div className="card-body">
-													<h5 className="card-title text-capitalize mb-0">
-														{product.name}{" "}
-													</h5>
-													<small>
-														({product.category})
-													</small>
-													<p className="card-text mb-1">
-														<b>
-															Rs.
-															{product.price}
-														</b>
-													</p>
-													<p className="card-text">
-														Rating: {product.rating}
-													</p>
-													<a
-														href="/"
-														className="btn btn-warning"
-													>
-														Add to Cart
-													</a>
-												</div>
-											</div>
+											/>
 										);
 									})}
 								</div>
@@ -673,58 +523,10 @@ class SingleCategory extends React.Component {
 								<div className="w-100 d-flex flex-row justify-content-around align-items-center flex-wrap">
 									{Newest.map((product, index) => {
 										return (
-											<div
-												className="card prod-card mb-2 mt-2 ml-1 mr-1"
-												style={{ width: "18rem" }}
+											<SingleProductInCategory
+												product={product}
 												key={index}
-											>
-												<div
-													style={{
-														width: 286,
-														height: 286,
-														backgroundImage: `url('http://localhost:8000/uploads/products/coverImage-${
-															product.coverImage.split(
-																"-"
-															)[1]
-														}')`,
-														backgroundSize:
-															"contain",
-														backgroundPosition:
-															"center",
-														backgroundRepeat:
-															"no-repeat"
-													}}
-												>
-													{/* <img
-    														src={`http://localhost:8000/${product.coverImage}`}
-    														className="card-img-top"
-    														alt="CoverImg"
-    													/> */}
-												</div>
-												<div className="card-body">
-													<h5 className="card-title text-capitalize mb-0">
-														{product.name}{" "}
-													</h5>
-													<small>
-														({product.category})
-													</small>
-													<p className="card-text mb-1">
-														<b>
-															Rs.
-															{product.price}
-														</b>
-													</p>
-													<p className="card-text">
-														Rating: {product.rating}
-													</p>
-													<a
-														href="/"
-														className="btn btn-warning"
-													>
-														Add to Cart
-													</a>
-												</div>
-											</div>
+											/>
 										);
 									})}
 								</div>
