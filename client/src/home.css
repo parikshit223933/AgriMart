@@ -21,8 +21,6 @@
 	width: 100%;
 }
 .home-component {
-	width: 100vw;
-	height: 100vh;
 	padding-left: 5rem;
 }
 .logo {
@@ -57,20 +55,25 @@
 }
 /* REACT SCROLL ITEMS */
 .menu-item {
-    padding: 0 40px;
-    margin: 5px 10px;
-    user-select: none;
-    cursor: pointer;
-    border: none;
-  }
-  .menu-item-wrapper.active {
-    border: 1px blue solid;
-  }
-  .menu-item.active {
-    border: 1px green solid;
-  }
-   
-  .scroll-menu-arrow {
-    padding: 20px;
-    cursor: pointer;
-  }
+	margin: 5px 10px;
+	user-select: none;
+	border: none;
+}
+
+.scroll-menu-arrow {
+	padding: 10px;
+    font-size:60px;
+}
+.card
+{
+    color:black;
+}
+.card:hover
+{
+    text-decoration: none;
+}
+.hrzntl-scrll
+{
+    background-image: linear-gradient(#e3809c, transparent);
+    box-shadow:0px -7px 100px 1px black;
+}
