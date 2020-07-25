@@ -228,8 +228,64 @@ class SingleCategory extends React.Component {
 									data-parent="#accordionExample"
 								>
 									<div className="card-body">
-                                        .......................................
-                                    </div>
+                                        {/* Check Boxes for customer rating ///////////////////////////////////////////////////// */}
+										<div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value=""
+												id="fourStarAndAbove"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="fourStarAndAbove"
+											>
+												4 <i className="fas fa-star"></i> and Above
+											</label>
+										</div>
+                                        <div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value=""
+												id="threeStarAndAbove"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="threeStarAndAbove"
+											>
+												3 <i className="fas fa-star"></i> and Above
+											</label>
+										</div>
+                                        <div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value=""
+												id="twoStarAndAbove"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="twoStarAndAbove"
+											>
+												2 <i className="fas fa-star"></i> and Above
+											</label>
+										</div>
+                                        <div className="form-check">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												value=""
+												id="oneStarAndAbove"
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="oneStarAndAbove"
+											>
+												1 <i className="fas fa-star"></i> and Above
+											</label>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
