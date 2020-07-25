@@ -393,7 +393,7 @@ class Home extends React.Component {
 						</div>
 					</div>
 				</div>
-				<div className="hrzntl-scrll mb-5 pt-3 pb-5">
+				<div className="hrzntl-scrll mt-3 mb-5 pt-3 pb-5">
                     <p className="display-4 pl-3">Categories</p>
 					<ScrollMenu
 						data={menu}
