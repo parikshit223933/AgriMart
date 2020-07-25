@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCategorizedProducts } from "../actions/product";
-import "../singleCategory.css";
+import "../category.css";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import { SingleProductInCategory } from "./";

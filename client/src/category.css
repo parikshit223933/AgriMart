@@ -5,7 +5,7 @@
 .prod-card
 {
     cursor:pointer;
-    transition: box-shadow ease-in-out 0.1s;
+    transition: box-shadow ease-in-out 0.15s;
 }
 .prod-card:hover
 {
@@ -14,4 +14,14 @@
 .flexible-products-container
 {
     box-sizing: border-box;
+}
+
+/* CATEGORY COMPONENT //////////////////////////////// */
+.category-component
+{
+    padding-left:5rem;
+}
+.all-categories-heading
+{
+    margin-bottom:20px;
 }
