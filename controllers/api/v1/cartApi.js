@@ -26,18 +26,63 @@ module.exports.addProductToCart = async (req,res) => {
     try {
         //find user
         const user = await User.findById(req.user._id);
+        //find product
+        const product = await Product.findById(req.body.productId);
         //check if product exist in cart
         let flag = 0;
         for(let i = 0; i < user.cart.length; i++)
         {
-            if(user.cart[i]._id === req.body.productId) {
+            if(user.cart[i].productId === req.body.productId) {
+                //check that much quantity availaible or not
+                if(user.cart[i].quantity + 1 > product.remainingQuantity) {
+                    return res.json(501, {
+                        success: false,
+                        message: "No more stock left"
+                    })
+                }
                 user.cart[i].quantity += 1;
                 flag = 1;
                 break;
             }
         }
         if(flag == 0) {
-            user.cart.push({ "product": req.body.productId, "quantity": 1});
+            user.cart.push({ "productId": req.body.productId, "quantity": 1});
+        }
+        user.save();
+        console.log(user);
+    } catch (error) {
+        return res.json(500, {
+			success: false,
+			message: "Internal Server Error!"
+		});
+    }
+}
+
+//remove product from cart
+module.exports.removeProductFromCart = async (req, res) => {
+    try {
+        //find user
+        const user = await User.findById(req.user._id);
+        //check if product exist in cart
+        let flag = 0;
+        for(let i = 0; i < user.cart.length; i++)
+        {
+            if(user.cart[i].productId === req.body.productId) {
+                //check that much quantity availaible or not
+                user.cart[i].quantity -= 1;
+                if(user.cart[i].quantity === 0) {
+                    //remove from cart as proiduct quant is 0
+                    user.cart.splice(i, 1);
+                }
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 0) {
+            return res.json(501, {
+                success: false,
+                message: "You had not put this item in stock"
+            })
         }
         user.save();
         console.log(user);
