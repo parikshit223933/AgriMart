@@ -27,6 +27,7 @@ import ReviewHeader from "./ReviewHeader";
 import ReviewCreator from "./ReviewCreator";
 import SingleCategory from './SingleCategory';
 import SingleProductInCategory from './singleProductInCategory';
+import HomeSingleCategory from './HomeSingleCategory';
 
 export {
 	Navbar,
@@ -57,5 +58,6 @@ export {
 	ReviewHeader,
     ReviewCreator,
     SingleCategory,
-    SingleProductInCategory
+    SingleProductInCategory,
+    HomeSingleCategory
 };

@@ -265,3 +265,41 @@ module.exports.CategorizedProduct=async (req, res)=>
         })
     }
 }
+
+/* To get some random 10 items from each category for home page rendering */
+module.exports.getRandomProds=async (req, res)=>
+{
+    try{
+        let obj=new Object();
+        let products=await Product.find({});
+        for(let product of products)
+        {
+            if(!obj[product.category])
+            {
+                obj[product.category]=[];
+                obj[product.category].push(product);
+            }
+            else
+            {
+                if(obj[product.category].length==10)
+                {
+                    continue;
+                }
+                obj[product.category].push(product);
+            }
+        }
+        return res.json(200,{
+            success:true,
+            data:{
+                products:obj
+            }
+        });
+    }
+    catch(error)
+    {
+        return res.json(500, {
+            success:false,
+            message:"Internal Server Error!"
+        })
+    }
+}

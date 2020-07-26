@@ -2,12 +2,16 @@ import React from "react";
 import "../home.css";
 import { Link } from "react-router-dom";
 import ScrollMenu from "react-horizontal-scrolling-menu";
+import { HomeSingleCategory } from "./";
+import { getHomeProducts } from "../actions/product";
+import { connect } from "react-redux";
 
 // list of items
 const list = [
 	{
 		name: (
-			<Link to="/categories/CerealsAndPulses"
+			<Link
+				to="/categories/CerealsAndPulses"
 				className="card"
 				style={{ maxWidth: "400px", maxHeight: "200px" }}
 			>
@@ -40,7 +44,8 @@ const list = [
 	},
 	{
 		name: (
-			<Link to="/categories/Seeds"
+			<Link
+				to="/categories/Seeds"
 				className="card"
 				style={{ maxWidth: "400px", maxHeight: "200px" }}
 			>
@@ -73,7 +78,8 @@ const list = [
 	},
 	{
 		name: (
-			<Link to="/categories/Spices"
+			<Link
+				to="/categories/Spices"
 				className="card"
 				style={{ maxWidth: "400px", maxHeight: "200px" }}
 			>
@@ -107,7 +113,8 @@ const list = [
 	},
 	{
 		name: (
-			<Link to="/categories/Fruits"
+			<Link
+				to="/categories/Fruits"
 				className="card"
 				style={{ maxWidth: "400px", maxHeight: "200px" }}
 			>
@@ -140,7 +147,8 @@ const list = [
 	},
 	{
 		name: (
-			<Link to="/categories/Vegetables" 
+			<Link
+				to="/categories/Vegetables"
 				className="card"
 				style={{ maxWidth: "400px", maxHeight: "200px" }}
 			>
@@ -173,7 +181,8 @@ const list = [
 	},
 	{
 		name: (
-			<Link to="/categories/DryFruits"
+			<Link
+				to="/categories/DryFruits"
 				className="card"
 				style={{ maxWidth: "400px", maxHeight: "200px" }}
 			>
@@ -206,7 +215,8 @@ const list = [
 	},
 	{
 		name: (
-			<Link to="/categories/EdibleOils"
+			<Link
+				to="/categories/EdibleOils"
 				className="card"
 				style={{ maxWidth: "400px", maxHeight: "200px" }}
 			>
@@ -239,7 +249,8 @@ const list = [
 	},
 	{
 		name: (
-			<Link to="/categories/DairyProducts"
+			<Link
+				to="/categories/DairyProducts"
 				className="card"
 				style={{ maxWidth: "400px", maxHeight: "200px" }}
 			>
@@ -272,7 +283,8 @@ const list = [
 	},
 	{
 		name: (
-			<Link to="/categories/Others"
+			<Link
+				to="/categories/Others"
 				className="card"
 				style={{ maxWidth: "400px", maxHeight: "200px" }}
 			>
@@ -335,6 +347,9 @@ class Home extends React.Component {
 		// call it again if items count changes
 		this.menuItems = Menu(list);
 	}
+	componentDidMount() {
+		this.props.dispatch(getHomeProducts());
+	}
 	render() {
 		const menu = this.menuItems;
 		return (
@@ -393,8 +408,8 @@ class Home extends React.Component {
 						</div>
 					</div>
 				</div>
-				<div className="hrzntl-scrll mt-3 mb-5 pt-3 pb-5">
-                    <p className="display-4 pl-3">Categories</p>
+				<div className="hrzntl-scrll mt-3 mb-1 pt-3 pb-5">
+					<p className="display-4 pl-3">Categories</p>
 					<ScrollMenu
 						data={menu}
 						arrowLeft={ArrowLeft}
@@ -406,9 +421,141 @@ class Home extends React.Component {
 						scrollBy={1}
 					/>
 				</div>
+				<div className="container-fluid">
+					<p className="display-4">Our Products</p>
+					<div className="w-100">
+						<h4>Cereals and Pulses</h4>
+						{!this.props.product.homeProducts ? (
+							"Loading..."
+						) : (
+							<HomeSingleCategory
+								products={
+									this.props.product.homeProducts[
+										"Cereals and Pulses"
+									]
+								}
+							/>
+						)}
+					</div>
+					<div className="w-100">
+						<h4>Seeds</h4>
+                        {!this.props.product.homeProducts ? (
+							"Loading..."
+						) : (
+							<HomeSingleCategory
+								products={
+									this.props.product.homeProducts[
+										"Seeds"
+									]
+								}
+							/>
+						)}
+					</div>
+					<div className="w-100">
+						<h4>Spices</h4>
+                        {!this.props.product.homeProducts ? (
+							"Loading..."
+						) : (
+							<HomeSingleCategory
+								products={
+									this.props.product.homeProducts[
+										"Spices"
+									]
+								}
+							/>
+						)}
+					</div>
+					<div className="w-100">
+						<h4>Fruits</h4>
+                        {!this.props.product.homeProducts ? (
+							"Loading..."
+						) : (
+							<HomeSingleCategory
+								products={
+									this.props.product.homeProducts[
+										"Fruits"
+									]
+								}
+							/>
+						)}
+					</div>
+					<div className="w-100">
+						<h4>Vegetables</h4>
+                        {!this.props.product.homeProducts ? (
+							"Loading..."
+						) : (
+							<HomeSingleCategory
+								products={
+									this.props.product.homeProducts[
+										"Vegetables"
+									]
+								}
+							/>
+						)}
+					</div>
+					<div className="w-100">
+						<h4>Dry Fruits</h4>
+                        {!this.props.product.homeProducts ? (
+							"Loading..."
+						) : (
+							<HomeSingleCategory
+								products={
+									this.props.product.homeProducts[
+										"Dry Fruits"
+									]
+								}
+							/>
+						)}
+					</div>
+					<div className="w-100">
+						<h4>Edible Oils</h4>
+                        {!this.props.product.homeProducts ? (
+							"Loading..."
+						) : (
+							<HomeSingleCategory
+								products={
+									this.props.product.homeProducts[
+										"Edible Oils"
+									]
+								}
+							/>
+						)}
+					</div>
+					<div className="w-100">
+						<h4>Dairy Products</h4>
+                        {!this.props.product.homeProducts ? (
+							"Loading..."
+						) : (
+							<HomeSingleCategory
+								products={
+									this.props.product.homeProducts[
+										"Dairy Products"
+									]
+								}
+							/>
+						)}
+					</div>
+					<div className="w-100">
+						<h4>others</h4>
+                        {!this.props.product.homeProducts ? (
+							"Loading..."
+						) : (
+							<HomeSingleCategory
+								products={
+									this.props.product.homeProducts[
+										"Others"
+									]
+								}
+							/>
+						)}
+					</div>
+				</div>
 			</div>
 		);
 	}
 }
+function mapStateToProps({ product }) {
+	return { product };
+}
 
-export default Home;
+export default connect(mapStateToProps)(Home);
