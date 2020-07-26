@@ -13,7 +13,7 @@ passport.use(
 		User.findById(jwtPayload._id, function (error, user) {
 			if (error) {
 				console.log(
-					"Error in finding user from JWT's ppayload user id!"
+					"Error in finding user from JWT's payload user id!"
 				);
 				return;
 			}
