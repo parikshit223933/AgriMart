@@ -8,5 +8,10 @@ router.get(
 	/* passport.authenticate("jwt", { session: false }), */
 	cartApi.showCartProducts
 );
+router.post(
+	"/addProductToCart",
+	/* passport.authenticate("jwt", { session: false }), */
+	cartApi.addProductToCart
+);
 
 module.exports = router;
