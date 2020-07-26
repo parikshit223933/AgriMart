@@ -93,3 +93,34 @@ module.exports.removeProductFromCart = async (req, res) => {
 		});
     }
 }
+
+module.exports.deleteProductFromCart = async (req, res) => {
+    try {
+        //find user
+        const user = await User.findById(req.user._id);
+        //check if product exist in cart
+        let flag = 0;
+        for(let i = 0; i < user.cart.length; i++)
+        {
+            if(user.cart[i].productId === req.body.productId) {
+                //remove from cart as proiduct quant is 0
+                user.cart.splice(i, 1);
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 0) {
+            return res.json(501, {
+                success: false,
+                message: "You had not put this item in stock"
+            })
+        }
+        user.save();
+        console.log(user);
+    } catch (error) {
+        return res.json(500, {
+			success: false,
+			message: "Internal Server Error!"
+		});
+    }
+}

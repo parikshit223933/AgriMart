@@ -16,7 +16,12 @@ router.post(
 router.post(
     "/removeProductFromCart",
     passport.authenticate("jwt", { session: false }),
-	cartApi.addProductToCart
+	cartApi.removeProductFromCart
+)
+router.post(
+    "/deleteProductFromCart",
+    passport.authenticate("jwt", { session: false }),
+	cartApi.deleteProductFromCart
 )
 
 module.exports = router;
