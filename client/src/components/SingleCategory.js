@@ -104,7 +104,7 @@ class SingleCategory extends React.Component {
 				category = "Dairy Products";
 				break;
 			case "Others":
-				category = "Others";
+				category = "Other";
 				break;
 			default:
 				category = "";

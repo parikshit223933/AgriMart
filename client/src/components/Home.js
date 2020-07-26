@@ -421,10 +421,11 @@ class Home extends React.Component {
 						scrollBy={1}
 					/>
 				</div>
-				<div className="container-fluid">
-					<p className="display-4">Our Products</p>
-					<div className="w-100">
-						<h4>Cereals and Pulses</h4>
+                <hr/>
+				<div className="container-fluid pl-0 pr-0 mb-5">
+					<p className="display-4 pl-3">Our Products</p>
+					<div className="w-100 categ">
+						<h4 className="pl-3">Cereals and Pulses</h4>
 						{!this.props.product.homeProducts ? (
 							"Loading..."
 						) : (
@@ -437,8 +438,8 @@ class Home extends React.Component {
 							/>
 						)}
 					</div>
-					<div className="w-100">
-						<h4>Seeds</h4>
+					<div className="w-100 categ">
+						<h4 className="pl-3">Seeds</h4>
                         {!this.props.product.homeProducts ? (
 							"Loading..."
 						) : (
@@ -451,8 +452,8 @@ class Home extends React.Component {
 							/>
 						)}
 					</div>
-					<div className="w-100">
-						<h4>Spices</h4>
+					<div className="w-100 categ">
+						<h4 className="pl-3">Spices</h4>
                         {!this.props.product.homeProducts ? (
 							"Loading..."
 						) : (
@@ -465,8 +466,8 @@ class Home extends React.Component {
 							/>
 						)}
 					</div>
-					<div className="w-100">
-						<h4>Fruits</h4>
+					<div className="w-100 categ">
+						<h4 className="pl-3">Fruits</h4>
                         {!this.props.product.homeProducts ? (
 							"Loading..."
 						) : (
@@ -479,8 +480,8 @@ class Home extends React.Component {
 							/>
 						)}
 					</div>
-					<div className="w-100">
-						<h4>Vegetables</h4>
+					<div className="w-100 categ">
+						<h4 className="pl-3">Vegetables</h4>
                         {!this.props.product.homeProducts ? (
 							"Loading..."
 						) : (
@@ -493,8 +494,8 @@ class Home extends React.Component {
 							/>
 						)}
 					</div>
-					<div className="w-100">
-						<h4>Dry Fruits</h4>
+					<div className="w-100 categ">
+						<h4 className="pl-3">Dry Fruits</h4>
                         {!this.props.product.homeProducts ? (
 							"Loading..."
 						) : (
@@ -507,8 +508,8 @@ class Home extends React.Component {
 							/>
 						)}
 					</div>
-					<div className="w-100">
-						<h4>Edible Oils</h4>
+					<div className="w-100 categ">
+						<h4 className="pl-3">Edible Oils</h4>
                         {!this.props.product.homeProducts ? (
 							"Loading..."
 						) : (
@@ -521,8 +522,8 @@ class Home extends React.Component {
 							/>
 						)}
 					</div>
-					<div className="w-100">
-						<h4>Dairy Products</h4>
+					<div className="w-100 categ">
+						<h4 className="pl-3">Dairy Products</h4>
                         {!this.props.product.homeProducts ? (
 							"Loading..."
 						) : (
@@ -535,15 +536,15 @@ class Home extends React.Component {
 							/>
 						)}
 					</div>
-					<div className="w-100">
-						<h4>others</h4>
+					<div className="w-100 categ">
+						<h4 className="pl-3">Others</h4>
                         {!this.props.product.homeProducts ? (
 							"Loading..."
 						) : (
 							<HomeSingleCategory
 								products={
 									this.props.product.homeProducts[
-										"Others"
+										"Other"
 									]
 								}
 							/>

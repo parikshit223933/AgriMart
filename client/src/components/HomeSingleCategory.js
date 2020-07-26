@@ -1,5 +1,7 @@
 import React from "react";
 import ScrollMenu from "react-horizontal-scrolling-menu";
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 const MenuItem = ({ text }) => {
 	return <div className={`menu-item`}>{text}</div>;
@@ -37,7 +39,7 @@ class HomeSingleCategory extends React.Component {
 		for (let product of this.props.products) {
 			this.list.push({
 				name: (
-					<div  className="card prod-card" style={{width: '10rem', backgroundColor:'transparent'}}>
+					<Link to={`/view-product/${product._id}/${this.props.auth.user._id}`} className="card prod-card" style={{width: '10rem', backgroundColor:'transparent'}}>
                         <div
 							style={{
 								height: 200,
@@ -58,7 +60,7 @@ class HomeSingleCategory extends React.Component {
 								<b>Rs. {product.price}</b>
 							</p>
 						</div>
-					</div>
+					</Link>
 				)
 			});
 		}
@@ -78,4 +80,8 @@ class HomeSingleCategory extends React.Component {
 		);
 	}
 }
-export default HomeSingleCategory;
+function mapStateToProps({auth})
+{
+    return{auth};
+}
+export default connect(mapStateToProps)(HomeSingleCategory);

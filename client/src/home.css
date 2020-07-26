@@ -72,3 +72,11 @@
 {
     text-decoration: none;
 }
+.categ
+{
+    padding:20px 0px;
+}
+.categ:nth-child(2n)
+{
+    background-color:white;
+}
