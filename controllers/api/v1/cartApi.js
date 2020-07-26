@@ -2,10 +2,10 @@ const User = require("../../../models/userModel");
 const Product = require("../../../models/productModel");
 
 //to shaw products in cart 
-module.exports.showCartProducts = async (req, res) => {
+module.exports.showCartProducts = async (req, res) => { //{userID}
 	try {
         //find User
-        const user = await User.findById(req.user._id).populate('cart').exec();
+        const user = await User.findById(req.body.userId).populate('cart').exec();
         console.log(user);
 		return res.json(200, {
 			success: true,
@@ -22,10 +22,10 @@ module.exports.showCartProducts = async (req, res) => {
 };
 
 //add product in cart
-module.exports.addProductToCart = async (req,res) => {
+module.exports.addProductToCart = async (req,res) => { //{userID, productID}
     try {
         //find user
-        const user = await User.findById(req.user._id);
+        const user = await User.findById(req.body.userId);
         //find product
         const product = await Product.findById(req.body.productId);
         //check if product exist in cart
@@ -59,10 +59,10 @@ module.exports.addProductToCart = async (req,res) => {
 }
 
 //remove product from cart
-module.exports.removeProductFromCart = async (req, res) => {
+module.exports.removeProductFromCart = async (req, res) => { //{userID, productID}
     try {
         //find user
-        const user = await User.findById(req.user._id);
+        const user = await User.findById(req.body.userId);
         //check if product exist in cart
         let flag = 0;
         for(let i = 0; i < user.cart.length; i++)
@@ -79,6 +79,7 @@ module.exports.removeProductFromCart = async (req, res) => {
             }
         }
         if(flag == 0) {
+            //so no product in cart with that product id
             return res.json(501, {
                 success: false,
                 message: "You had not put this item in stock"
@@ -94,10 +95,10 @@ module.exports.removeProductFromCart = async (req, res) => {
     }
 }
 
-module.exports.deleteProductFromCart = async (req, res) => {
+module.exports.deleteProductFromCart = async (req, res) => { //{userID, productID}
     try {
         //find user
-        const user = await User.findById(req.user._id);
+        const user = await User.findById(req.body.userId);
         //check if product exist in cart
         let flag = 0;
         for(let i = 0; i < user.cart.length; i++)
@@ -110,6 +111,7 @@ module.exports.deleteProductFromCart = async (req, res) => {
             }
         }
         if(flag == 0) {
+            //product not found in cart
             return res.json(501, {
                 success: false,
                 message: "You had not put this item in stock"

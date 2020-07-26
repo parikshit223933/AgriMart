@@ -2,13 +2,17 @@ const User = require("../../../models/userModel");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 const fs = require("fs");
+const bcrypt = require("bcrypt");
+const saltRound = 10;
 
 /* action for signing in */
 module.exports.create_session = async (req, res) => {
 	try {
         console.log(req.body);
         let user = await User.findOne({ email: req.body.email });
-		if (!user || user.password != req.body.password) {
+        //match input password with hash of correct password in db
+        const match = await bcrypt.compare(req.body.password, user.password);
+		if (!user || !match) {
 			//error code 422 denotes invalid input by the user! this if statement will be a result of invalid input!
 			return res.json(422, {
 				success: false,
@@ -40,7 +44,6 @@ module.exports.create_session = async (req, res) => {
 
 /* action for signing up */
 module.exports.createUser = (req, res) => {
-    console.log(req.body);
 	if (req.body.password != req.body.confirm_password) {
 		//if the passwords entered in the "password" and confirm password" field are not same, then the user will be redirected back to the page he came from.
 		return res.json(401, {
@@ -49,7 +52,7 @@ module.exports.createUser = (req, res) => {
 				"The password in the password field does not match with the password in the confirm password field!"
 		});
 	}
-	User.findOne({ email: req.body.email }, (error, user) => {
+	User.findOne({ email: req.body.email }, async (error, user) => {
 		if (error) {
 			console.log(
 				"There was an error in finding the user from the database. (signing up)",
@@ -63,26 +66,37 @@ module.exports.createUser = (req, res) => {
 		}
 		if (!user) {
 			//if the user does not exists in the database, then we'll need to create the user
-			User.create(
-				{
-					name: req.body.name,
-					email: req.body.email,
-					password: req.body.password
-				},
-				(error, user) => {
-					if (error) {
-						return res.json(400, {
-							success: false,
-							message:
-								"There was an error in creating a new user in the database!"
-						});
-					}
-					return res.json(200, {
-						success: true,
-						message: "User Signed up successfully"
-					});
-				}
-			);
+            //create hash of password
+            try {
+                const salt = await bcrypt.genSalt(saltRound);
+                const hash = await bcrypt.hash(req.body.password, salt);
+
+                User.create(
+                    {
+                        name: req.body.name,
+                        email: req.body.email,
+                        password: hash
+                    },
+                    (error, user) => {
+                        if (error) {
+                            return res.json(400, {
+                                success: false,
+                                message: "There was an error in creating a new user in the database!"
+                            });
+                        }
+                        return res.json(200, {
+                            success: true,
+                            message: "User Signed up successfully"
+                        });
+                    }
+                );
+            } catch (error) {
+                return res.json(500, {
+					success: false,
+					message: "Internal Server Error!"
+				});
+            }
+            
 		} //the user who is trying to sign up, is already present in the database (his email)
 		else {
 			return res.json(400, {
