@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "f-install": "npm install --prefix client",
+    "frontEnd": "npm start --prefix client",
+    "app": "concurrently \"npm run start\" \"npm run frontEnd\""
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,7 @@
   "dependencies": {
     "@types/jquery": "^3.3.38",
     "@types/mongoose": "^5.7.31",
+    "concurrently": "^5.2.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.5",
