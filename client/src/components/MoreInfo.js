@@ -3,7 +3,6 @@ import "../info.css";
 import tushar from "../images/tushar.jpg";
 import cpd from "../images/chandra.jpg";
 import parikshit from "../images/parikshit.jpg";
-import { ContactUs } from "./";
 
 class MoreInfo extends React.Component {
 	render() {
