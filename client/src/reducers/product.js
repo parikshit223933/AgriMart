@@ -37,7 +37,10 @@ import {
 	FETCH_CATEGORIZED_PRODUCTS_FAILURE,
 	GET_HOME_PRODUCTS_START,
 	GET_HOME_PRODUCTS_SUCCESS,
-	GET_HOME_PRODUCTS_FAILURE
+	GET_HOME_PRODUCTS_FAILURE,
+    ADD_TO_CART_START,
+    ADD_TO_CART_SUCCESS,
+    ADD_TO_CART_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -47,7 +50,8 @@ let initialProductState = {
 	boughtProducts: [],
 	singleProduct: null,
 	categorizedProducts: [],
-	homeProducts: {}
+    homeProducts: {},
+    cart:[]
 };
 export default function product(state = initialProductState, action) {
 	switch (action.type) {
@@ -314,7 +318,27 @@ export default function product(state = initialProductState, action) {
 				...state,
 				inProgress: false,
 				error: action.error
-			};
+            };
+        case ADD_TO_CART_START:
+            return{
+                ...state,
+                inProgress:true,
+                error:false,
+            }
+        case ADD_TO_CART_SUCCESS:
+            return{
+                ...state,
+                inProgress:false,
+                cart:action.cart,
+                error:false
+            }
+        case ADD_TO_CART_FAILURE:
+            return{
+                ...state,
+                inProgress:false,
+                error:action.error
+            }
+
 		default:
 			return state;
 	}

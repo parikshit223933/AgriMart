@@ -4,12 +4,12 @@ const passport = require("passport");
 const cartApi = require("../../../controllers/api/v1/cartApi");
 
 router.get(
-	"/",
+	"/get-all-products",
 	passport.authenticate("jwt", { session: false }),
 	cartApi.showCartProducts
 );
 router.post(
-	"/addProductToCart",
+	"/add-product-to-cart",
 	passport.authenticate("jwt", { session: false }),
 	cartApi.addProductToCart
 );

@@ -19,5 +19,9 @@ export const API_URLS = {
     toggleDislike: () => `${API_ROOT}/review/toggle-dislike-review`,
     categorizedProducts:()=>`${API_ROOT}/product/categorized-products`,
     getHomeProducts:()=>`${API_ROOT}/product/get-random-products`,
+<<<<<<< HEAD
     checkoutProduct: ()=>`${API_ROOT}/checkout/createPayment`,
+=======
+    addProductToCart:()=>`${API_ROOT}/cart/add-product-to-cart`,
+>>>>>>> fd9db1b04549a5a768ba08a9041cd249e21abf64
 };

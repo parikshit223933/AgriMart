@@ -3,7 +3,6 @@ import "../info.css";
 import tushar from "../images/tushar.jpg";
 import cpd from "../images/chandra.jpg";
 import parikshit from "../images/parikshit.jpg";
-import { ContactUs } from "./";
 
 class MoreInfo extends React.Component {
 	render() {
@@ -180,7 +179,7 @@ class MoreInfo extends React.Component {
 								<form>
 									<div className="form-group">
 										<label htmlFor="emailinput">
-											Email address
+											<b>Email address</b>
 										</label>
 										<input
 											type="email"
@@ -198,7 +197,7 @@ class MoreInfo extends React.Component {
 									</div>
 									<div className="form-group">
 										<label htmlFor="subjectinput">
-											Subject
+											<b>Subject</b>
 										</label>
 										<input
 											type="text"
@@ -209,7 +208,7 @@ class MoreInfo extends React.Component {
 									</div>
 									<div className="form-group">
 										<label htmlFor="messageArea">
-											Message
+											<b>Message</b>
 										</label>
 										<textarea
 											className="form-control"
