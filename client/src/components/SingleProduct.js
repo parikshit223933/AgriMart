@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import "../singleProduct.css";
 import { getSingleProduct } from "../actions/product";
 import { API_URLS } from "../helpers/urls";
@@ -24,7 +25,7 @@ class SingleProduct extends React.Component {
 	render() {
         const { singleProduct: product } = this.props.product;
 
-		if (!product) {
+        if (!product) {
 			return (
 				<div
 					style={{ height: "100vh", width: "100vh" }}
@@ -66,13 +67,20 @@ class SingleProduct extends React.Component {
 										</button>
 									</div>
 									<div className="buy-now-button m-1">
-										<button
-											type="button"
-											className="btn btn-success btn-lg"
-										>
-											<i className="fas fa-rupee-sign"></i>{" "}
-											Buy Now
-										</button>
+                                        <Link to={{
+                                            pathname: '/checkout',
+                                            state: {
+                                                items: [{ price: product.price, quantity: 1 }]
+                                            }
+                                        }}>
+                                            <button
+                                                type="button"
+                                                className="btn btn-success btn-lg"
+                                            >
+                                                <i className="fas fa-rupee-sign"></i>{" "}
+                                                Buy Now
+                                            </button>
+                                        </Link>
 									</div>
 								</div>
 							</div>

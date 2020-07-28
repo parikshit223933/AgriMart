@@ -14,7 +14,7 @@ const passportJwt           =require('./config/passport-jwt-strategy');
 const flash                 = require('connect-flash');
 const mongoStore            = require('connect-mongo')(session);/* connect mongo is used to store the session information in the database so that the session information dosen't get lost if the server is restarted. */
 const sassMiddleware        = require('node-sass-middleware');
-const cors=require('cors');
+const cors                  = require('cors');
 
 /* conversion of sass to css */
 app.use(sassMiddleware(

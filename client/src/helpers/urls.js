@@ -18,5 +18,6 @@ export const API_URLS = {
 	toggleLike: () => `${API_ROOT}/review/toggle-like-review`,
     toggleDislike: () => `${API_ROOT}/review/toggle-dislike-review`,
     categorizedProducts:()=>`${API_ROOT}/product/categorized-products`,
-    getHomeProducts:()=>`${API_ROOT}/product/get-random-products`
+    getHomeProducts:()=>`${API_ROOT}/product/get-random-products`,
+    checkoutProduct: ()=>`${API_ROOT}/checkout/createPayment`,
 };

@@ -18,9 +18,18 @@ import {
     SingleProduct,
     SingleCategory
 } from "./";
+import CheckOutForm from "./PaymentComponents/CheckOutForm";
+
 import { getAuthTokenFromStorage } from "../helpers/utils";
 import { connect } from "react-redux";
 import { authenticateUser } from "../actions/auth";
+
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+// call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const STRIPE_PUBLISH_KEY = "pk_test_51H9F89HyvUiMKHjejfcy7c0VYxb3a7AvYvCwQ9H7zx00NJpIThu90qwueiPRXsH9j0bfe7sGHWKTe1JWDDAU0ked00l1v3ppVd";
+const stripePromise = loadStripe(STRIPE_PUBLISH_KEY); //configure the Stripe library
 
 class App extends React.Component {
 	componentDidMount() {
@@ -54,6 +63,11 @@ class App extends React.Component {
 							component={SingleProduct}
 						/>
                         <Route path="/categories/:category" component={SingleCategory}/>
+                        <Route path="/checkout">
+                            <Elements stripe={stripePromise}>
+                                <CheckOutForm />
+                            </Elements>
+                        </Route>
 						<Route component={Page404} />
 					</Switch>
 				</div>
