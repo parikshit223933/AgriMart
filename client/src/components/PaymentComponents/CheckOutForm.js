@@ -27,9 +27,7 @@ export default function CheckOutForm(props) {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        console.log(items);
         const url = API_URLS.checkoutProduct();
-        console.log(url);
         window
             .fetch("http://localhost:8000/api/v1/checkout/createPayment", {
                 method: "POST",
