@@ -20,7 +20,7 @@ export default function CheckOutForm(props) {
     const [processing, setProcessing] = useState('');
     const [disabled, setDisabled] = useState(true);
     const [clientSecret, setClientSecret] = useState('');
-    const [items, setItems] = useState(location.state);
+    const [items] = useState(location.state);
 
     const stripe = useStripe();
     const elements = useElements();
@@ -46,7 +46,7 @@ export default function CheckOutForm(props) {
                 console.log(data);
                 setClientSecret(data.clientSecret);
             });
-    }, []);
+    }, [items]);
 
     const cardStyle = {
         style: {
