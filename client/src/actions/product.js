@@ -39,7 +39,10 @@ import {
 	FETCH_CATEGORIZED_PRODUCTS_FAILURE,
 	GET_HOME_PRODUCTS_START,
 	GET_HOME_PRODUCTS_SUCCESS,
-	GET_HOME_PRODUCTS_FAILURE
+	GET_HOME_PRODUCTS_FAILURE,
+    ADD_TO_CART_START,
+    ADD_TO_CART_SUCCESS,
+    ADD_TO_CART_FAILURE
 } from "./actionTypes";
 
 export function createProductStart() {
@@ -599,4 +602,51 @@ export function getHomeProducts() {
 				}
 			});
 	};
+}
+export function addToCartStart()
+{
+    return{
+        type:ADD_TO_CART_START,
+    }
+}
+export function addToCartSuccess(cart)
+{
+    return{
+        type:ADD_TO_CART_SUCCESS,
+        cart
+    }
+}
+export function addToCartFailure(error)
+{
+    return{
+        type:ADD_TO_CART_FAILURE,
+        error
+    }
+}
+export function addToCart(userId, productId)
+{
+    return dispatch=>
+    {
+        dispatch(addToCartStart());
+        let url=API_URLS.addProductToCart();
+        fetch(url, {
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${getAuthTokenFromStorage()}`,
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
+			body: getFormBody({ userId, productId })
+        }).then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    dispatch(addToCartSuccess(data.data.cart));
+                }
+                else
+                {
+                    dispatch(addToCartFailure(data.message))
+                }
+            })
+    }
 }

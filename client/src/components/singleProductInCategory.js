@@ -1,9 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import { addToCart } from '../actions/product';
 
 class SingleProductInCategory extends React.Component
 {
+    handleAddToCart=(productId)=>
+    {
+        this.props.dispatch(addToCart(this.props.auth.user._id, productId));
+    }
     render()
     {
         const {product, index}=this.props;
@@ -68,12 +73,12 @@ class SingleProductInCategory extends React.Component
                             product.rating
                         }
                     </p>
-                    <a
-                        href="/"
+                    <button
+                        onClick={()=>{this.handleAddToCart(product._id)}}
                         className="btn btn-warning"
                     >
                         Add to Cart
-                    </a>
+                    </button>
                 </div>
             </div>
         );
