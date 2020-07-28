@@ -32,7 +32,7 @@ export default function CheckOutForm(props) {
             .fetch("http://localhost:8000/api/v1/checkout/createPayment", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json;charset=utf-8"
+                    "Content-Type": "application/x-www-form-urlencoded"
                 },
                 body: getFormBody({ items }) //where, items: [{price: 100, quantity: 7}]
             })

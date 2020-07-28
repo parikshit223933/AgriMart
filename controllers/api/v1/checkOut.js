@@ -5,11 +5,10 @@ const User = require("../../../models/userModel");
 const Product = require("../../../models/productModel");
 
 module.exports.createPayment = async (req, res) => { //{Items for checkout}
-    console.log(req.body);
+    console.log('********************************', req.body);
     const items = req.body.items;
-    console.log(items);
     //calculate amount
-    let amount = 100000, cart;
+    let amount = 100000;
     for(item in items) {
         const quantity = item.quantity;
         const cost = item.price; //**check var name**
@@ -21,7 +20,6 @@ module.exports.createPayment = async (req, res) => { //{Items for checkout}
             message: "amount can't be 0"
         })
     }
-    console.log(amount);
     try {
         const paymentIntent = await stripe.paymentIntents.create({
             amount: amount,
