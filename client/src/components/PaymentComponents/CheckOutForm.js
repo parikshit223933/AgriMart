@@ -20,7 +20,7 @@ export default function CheckOutForm(props) {
     const [processing, setProcessing] = useState('');
     const [disabled, setDisabled] = useState(true);
     const [clientSecret, setClientSecret] = useState('');
-    const [items] = useState(location.state);
+    const [amount, setAmount] = useState(0);
 
     const stripe = useStripe();
     const elements = useElements();
@@ -32,9 +32,9 @@ export default function CheckOutForm(props) {
             .fetch("http://localhost:8000/api/v1/checkout/createPayment", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
+                    "Content-Type": 'application/json'
                 },
-                body: getFormBody({ items }) //where, items: [{price: 100, quantity: 7}]
+                body: JSON.stringify( location.state ) //where, items: [{price: 100, quantity: 7}]
             })
             .then(res => {
                 console.log(res);
@@ -43,8 +43,9 @@ export default function CheckOutForm(props) {
             .then(data => {
                 console.log(data);
                 setClientSecret(data.clientSecret);
+                setAmount(data.amount);
             });
-    }, [items]);
+    }, []);
 
     const cardStyle = {
         style: {
@@ -97,7 +98,7 @@ export default function CheckOutForm(props) {
 
     return (
         <div className="container">
-            <h1 className="center">Card details</h1>
+            <h1 className="center">Enter Card details for INR { amount }</h1>
             <form id="payment-form" onSubmit={handleSubmit}>
                 <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
                 <button

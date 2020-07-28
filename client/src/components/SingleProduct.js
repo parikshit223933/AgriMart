@@ -70,7 +70,7 @@ class SingleProduct extends React.Component {
                                         <Link to={{
                                             pathname: '/checkout',
                                             state: {
-                                                items: [{ price: product.price, quantity: 1 }]
+                                                items: [{ "price": product.price, "quantity": 1 }]
                                             }
                                         }}>
                                             <button

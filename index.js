@@ -54,6 +54,7 @@ app.use(session(
     }
 ));
 
+app.use(express.json()); //parse body
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.use(cookieParser());

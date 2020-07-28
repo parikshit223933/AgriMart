@@ -5,13 +5,14 @@ const User = require("../../../models/userModel");
 const Product = require("../../../models/productModel");
 
 module.exports.createPayment = async (req, res) => { //{Items for checkout}
-    console.log('********************************', req.body);
     const items = req.body.items;
+
     //calculate amount
-    let amount = 100000;
-    for(item in items) {
-        const quantity = item.quantity;
-        const cost = item.price; //**check var name**
+    let amount = 0;
+    for(let i = 0; i < items.length; i++) {
+        console.log(items[i]);
+        const quantity = items[i].quantity;
+        const cost = items[i].price; 
         amount += quantity * cost;
     }
     if(amount === 0) {
@@ -29,7 +30,8 @@ module.exports.createPayment = async (req, res) => { //{Items for checkout}
         });
         return res.json(200, {
             success: true,
-            clientSecret: paymentIntent.client_secret
+            clientSecret: paymentIntent.client_secret,
+            amount
         })
     } catch (error) {
         console.log(error);
