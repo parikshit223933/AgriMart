@@ -46,7 +46,10 @@ import {
 	GET_CART_ITEMS_FAILURE,
 	DECREASE_PRODUCT_QUANTITY_START,
 	DECREASE_PRODUCT_QUANTITY_SUCCESS,
-	DECREASE_PRODUCT_QUANTITY_FAILURE
+	DECREASE_PRODUCT_QUANTITY_FAILURE,
+    DELETE_PRODUCT_FROM_CART_START,
+    DELETE_PRODUCT_FROM_CART_SUCCESS,
+    DELETE_PRODUCT_FROM_CART_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -399,6 +402,33 @@ export default function product(state = initialProductState, action) {
 			}
 		case DECREASE_PRODUCT_QUANTITY_FAILURE:
 			return {
+				...state,
+				inProgress: false,
+				error: action.error
+			};
+        case DELETE_PRODUCT_FROM_CART_START:
+            return {
+				...state,
+				inProgress: true,
+				error: false
+			};
+        case DELETE_PRODUCT_FROM_CART_SUCCESS:
+            let newCartItems=state.cart.filter(item=>
+                {
+                    if(item.product._id===action.productId)
+                    {
+                        return false;
+                    }
+                    return true;
+                })
+                return {
+					...state,
+					inProgress: false,
+					cart: newCartItems,
+					error: false
+				};
+        case DELETE_PRODUCT_FROM_CART_FAILURE:
+            return {
 				...state,
 				inProgress: false,
 				error: action.error

@@ -19,7 +19,7 @@ router.post(
 	cartApi.decreaseProductQuantity
 )
 router.post(
-    "/deleteProductFromCart",
+    "/delete-product-from-cart",
     passport.authenticate("jwt", { session: false }),
 	cartApi.deleteProductFromCart
 )

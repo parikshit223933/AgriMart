@@ -48,7 +48,10 @@ import {
     GET_CART_ITEMS_FAILURE,
     DECREASE_PRODUCT_QUANTITY_START,
     DECREASE_PRODUCT_QUANTITY_SUCCESS,
-    DECREASE_PRODUCT_QUANTITY_FAILURE
+    DECREASE_PRODUCT_QUANTITY_FAILURE,
+    DELETE_PRODUCT_FROM_CART_START,
+    DELETE_PRODUCT_FROM_CART_SUCCESS,
+    DELETE_PRODUCT_FROM_CART_FAILURE
 } from "./actionTypes";
 
 export function createProductStart() {
@@ -751,6 +754,55 @@ export function decreaseProductQuantity(userId, productId)
                 else
                 {
                     dispatch(decreaseProductQuantityFailure(data.message));
+                }
+            })
+    }
+}
+
+/* DELETING A PRODUCT FROM CART */
+export function deleteProductFromCartStart()
+{
+    return{
+        type:DELETE_PRODUCT_FROM_CART_START
+    }
+}
+export function deleteProductFromCartSuccess(productId)
+{
+    return{
+        type:DELETE_PRODUCT_FROM_CART_SUCCESS,
+        productId
+    }
+}
+export function deleteProductFromCartFailure(error)
+{
+    return{
+        type:DELETE_PRODUCT_FROM_CART_FAILURE,
+        error
+    }
+}
+export function deleteProductFromCart(productId, userId)
+{
+    return dispatch=>
+    {
+        dispatch(deleteProductFromCartStart());
+        let url=API_URLS.deleteCartProduct();
+        fetch(url, {
+            method:'POST',
+			headers: {
+				Authorization: `Bearer ${getAuthTokenFromStorage()}`,
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
+			body: getFormBody({ userId, productId })
+        })
+        .then(response=>response.json()).then(data=>
+            {
+                if(data.success)
+                {
+                    dispatch(deleteProductFromCartSuccess(productId));
+                }
+                else
+                {
+                    dispatch(deleteProductFromCartFailure(data.message));
                 }
             })
     }

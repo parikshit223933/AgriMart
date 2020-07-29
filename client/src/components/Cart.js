@@ -1,7 +1,7 @@
 import React from "react";
 import "../cart.css";
 import { connect } from "react-redux";
-import { getCartItems, decreaseProductQuantity, addToCart } from "../actions/product";
+import { getCartItems, decreaseProductQuantity, addToCart, deleteProductFromCart } from "../actions/product";
 import { getAuthTokenFromStorage } from "../helpers/utils";
 import jwtDecode from "jwt-decode";
 
@@ -34,6 +34,10 @@ class Cart extends React.Component {
     handleIncreaseQuantity=(productId)=>
     {
         this.props.dispatch(addToCart(this.props.auth.user._id, productId))
+    }
+    handleDeleteCartProduct=(productId)=>
+    {
+        this.props.dispatch(deleteProductFromCart(productId, this.props.auth.user._id))
     }
 	render() {
 		if (this.props.product.inProgress) {
@@ -133,7 +137,8 @@ class Cart extends React.Component {
 												<div>
 													<button
 														type="button"
-														className="btn btn-danger remove-item-from-cart"
+                                                        className="btn btn-danger remove-item-from-cart"
+                                                        onClick={()=>{this.handleDeleteCartProduct(item.product._id)}}
 													>
 														REMOVE
 													</button>
