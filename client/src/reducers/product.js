@@ -38,15 +38,15 @@ import {
 	GET_HOME_PRODUCTS_START,
 	GET_HOME_PRODUCTS_SUCCESS,
 	GET_HOME_PRODUCTS_FAILURE,
-    ADD_TO_CART_START,
-    ADD_TO_CART_SUCCESS,
-    ADD_TO_CART_FAILURE,
-    GET_CART_ITEMS_START,
-    GET_CART_ITEMS_SUCCESS,
-    GET_CART_ITEMS_FAILURE,
-    DECREASE_PRODUCT_QUANTITY_START,
-    DECREASE_PRODUCT_QUANTITY_SUCCESS,
-    DECREASE_PRODUCT_QUANTITY_FAILURE
+	ADD_TO_CART_START,
+	ADD_TO_CART_SUCCESS,
+	ADD_TO_CART_FAILURE,
+	GET_CART_ITEMS_START,
+	GET_CART_ITEMS_SUCCESS,
+	GET_CART_ITEMS_FAILURE,
+	DECREASE_PRODUCT_QUANTITY_START,
+	DECREASE_PRODUCT_QUANTITY_SUCCESS,
+	DECREASE_PRODUCT_QUANTITY_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -56,8 +56,8 @@ let initialProductState = {
 	boughtProducts: [],
 	singleProduct: null,
 	categorizedProducts: [],
-    homeProducts: {},
-    cart:[]
+	homeProducts: {},
+	cart: []
 };
 export default function product(state = initialProductState, action) {
 	switch (action.type) {
@@ -324,93 +324,85 @@ export default function product(state = initialProductState, action) {
 				...state,
 				inProgress: false,
 				error: action.error
-            };
-        case ADD_TO_CART_START:
-            return{
-                ...state,
-                inProgress:true,
-                error:false,
-            }
-        case ADD_TO_CART_SUCCESS:
-            return{
-                ...state,
-                inProgress:false,
-                cart:action.cart,
-                error:false
-            }
-        case ADD_TO_CART_FAILURE:
-            return{
-                ...state,
-                inProgress:false,
-                error:action.error
-            }
-        case GET_CART_ITEMS_START:
-            return{
-                ...state,
-                inProgress:true,
-                error:false
-            }
-        case GET_CART_ITEMS_SUCCESS:
-            return{
-                ...state,
-                inProgress:false,
-                cart:action.cart,
-                error:false
-            }
-        case GET_CART_ITEMS_FAILURE:
-            return{
-                ...state,
-                inProgress:false,
-                error:action.error
-            }
-        case DECREASE_PRODUCT_QUANTITY_START:
-            return{
-                ...state,
-                inProgress:true,
-                error:false
-            }
-        case DECREASE_PRODUCT_QUANTITY_SUCCESS:
-            if(action.deleted)
-            {
-                let filteredCart=state.cart.filter((item)=>
-                {
-                    if(action.productId===item.product._id)
-                    {
-                        return false;
-                    }
-                    return true;
-                });
-                return{
-                    ...state,
-                    inProgress:false,
-                    cart:filteredCart,
-                    error:false
-                }
-            }
-            else
-            {
-                let mappedCart=state.cart.map(item=>
-                    {
-                        if(item.product._id===action.productId)
-                        {
-                            item.quantity--;
-                            item.product.remainingQuantity++;
-                        }
-                        return item;
-                    });
-                    return{
-                        ...state,
-                        inProgress:false,
-                        cart:mappedCart,
-                        error:false
-                    }
-            }
-        case DECREASE_PRODUCT_QUANTITY_FAILURE:
-            return{
-                ...state,
-                inProgress:false,
-                error:action.error
-            }
+			};
+		case ADD_TO_CART_START:
+			return {
+				...state,
+				inProgress: true,
+				error: false
+			};
+		case ADD_TO_CART_SUCCESS:
+			return {
+				...state,
+				inProgress: false,
+				cart: action.cart,
+				error: false
+			};
+		case ADD_TO_CART_FAILURE:
+			return {
+				...state,
+				inProgress: false,
+				error: action.error
+			};
+		case GET_CART_ITEMS_START:
+			return {
+				...state,
+				inProgress: true,
+				error: false
+			};
+		case GET_CART_ITEMS_SUCCESS:
+			return {
+				...state,
+				inProgress: false,
+				cart: action.cart,
+				error: false
+			};
+		case GET_CART_ITEMS_FAILURE:
+			return {
+				...state,
+				inProgress: false,
+				error: action.error
+			};
+		case DECREASE_PRODUCT_QUANTITY_START:
+			return {
+				...state,
+				inProgress: true,
+				error: false
+			};
+		case DECREASE_PRODUCT_QUANTITY_SUCCESS:
+			if (action.deleted) {
+				let filteredCart = state.cart.filter((item) => {
+					if (action.productId === item.product._id) {
+						return false;
+					}
+					return true;
+				});
+				return {
+					...state,
+					inProgress: false,
+					cart: filteredCart,
+					error: false
+				};
+			} else {
+				let mappedCart = state.cart.map((item) => {
+					if (item.product._id === action.productId) {
+						item.quantity--;
+					}
+					return item;
+				});
+				return {
+					...state,
+					inProgress: false,
+					cart: mappedCart,
+					error: false
+				};
+			}
+		case DECREASE_PRODUCT_QUANTITY_FAILURE:
+			return {
+				...state,
+				inProgress: false,
+				error: action.error
+			};
 
 		default:
 			return state;

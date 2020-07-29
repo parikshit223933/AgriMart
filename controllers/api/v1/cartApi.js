@@ -31,13 +31,12 @@ module.exports.addProductToCart = async (req, res) => {
 	//{userID, productID}
 	try {
 		let user = await User.findById(req.body.userId);
-		let product = await Product.findById(req.body.productId);
+        let product = await Product.findById(req.body.productId);
+        /* considering that the product is already available in the cart */
 		for (let i = 0; i < user.cart.length; i++) {
 			if ((await user.cart[i].product.toString()) == product._id) {
-				if (product.remainingQuantity > 0) {
-					product.remainingQuantity -= 1;
+				if (product.remainingQuantity >= user.cart[i].quantity+1) {
 					user.cart[i].quantity += 1;
-					await product.save();
                     await user.save();
                     const populatedUser = await User.findById(req.body.userId).populate({
                         path: "cart",
@@ -58,12 +57,11 @@ module.exports.addProductToCart = async (req, res) => {
 					});
 				}
 			}
-		}
+        }
+        /* if the product was not available in the cart, the control will reach here! */
 		if (product.remainingQuantity > 0) {
-			product.remainingQuantity -= 1;
 			await user.cart.push({ product: (await product)._id, quantity: 1 });
 			await user.save();
-			await product.save();
             const populatedUser = await User.findById(req.body.userId).populate({
                 path: "cart",
                 populate: {
@@ -76,7 +74,7 @@ module.exports.addProductToCart = async (req, res) => {
 					cart: await populatedUser.cart
 				}
 			});
-		} else {
+		} else {/* if product is not left in the stock */
 			return res.json(403, {
 				success: false,
 				message: "Out Of Stock!"
@@ -95,14 +93,13 @@ module.exports.decreaseProductQuantity = async (req, res) => {
 	//{userID, productID}
 	try {
 		let user = await User.findById(req.body.userId)
-		let product = await Product.findById(req.body.productId);
+        let product = await Product.findById(req.body.productId);
+        /* supposing that the product is available in the cart */
 		for (let i = 0; i < user.cart.length; i++) {
 			if (product._id.toString() == user.cart[i].product.toString()) {
 				if (user.cart[i].quantity > 1) {
 					user.cart[i].quantity -= 1;
-                    product.remainingQuantity += 1;
 					await user.save();
-                    await product.save();
 					return res.json(200, {
 						success: true,
 						data: {
@@ -114,9 +111,7 @@ module.exports.decreaseProductQuantity = async (req, res) => {
                 else
                 {
                     await user.cart.splice(i, 1);
-                    product.remainingQuantity+=1;
                     await user.save();
-                    await product.save();
                     return res.json(200, {
                         success:true,
                         data:{
@@ -127,6 +122,7 @@ module.exports.decreaseProductQuantity = async (req, res) => {
                 }
 			}
         }
+        /* if the product was not there in the cart, the control will reach here! */
         return res.json(404, {
             success:false,
             message:'Product was not found in the cart!'
