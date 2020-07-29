@@ -5,15 +5,19 @@ const Product = require("../../../models/productModel");
 module.exports.showCartProducts = async (req, res) => {
 	//{userID}
 	try {
+        console.log(req.body)
 		//find User
 		const user = await User.findById(req.body.userId)
-			.populate("cart")
-			.exec();
-		console.log(user);
+			.populate({
+                path:'cart',
+                populate:{
+                    path:'product'
+                }
+            });
 		return res.json(200, {
 			success: true,
 			data: {
-				products: user.cart
+				cart: await user.cart
 			}
 		});
 	} catch (error) {
@@ -31,7 +35,7 @@ module.exports.addProductToCart = async (req, res) => {
 		let user = await User.findById(req.body.userId);
 		let product = await Product.findById(req.body.productId);
 		for (let i = 0; i < user.cart.length; i++) {
-			if (await user.cart[i].product.toString() == product._id) {
+			if ((await user.cart[i].product.toString()) == product._id) {
 				if (product.remainingQuantity > 0) {
 					product.remainingQuantity -= 1;
 					user.cart[i].quantity += 1;

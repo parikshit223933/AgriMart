@@ -40,7 +40,10 @@ import {
 	GET_HOME_PRODUCTS_FAILURE,
     ADD_TO_CART_START,
     ADD_TO_CART_SUCCESS,
-    ADD_TO_CART_FAILURE
+    ADD_TO_CART_FAILURE,
+    GET_CART_ITEMS_START,
+    GET_CART_ITEMS_SUCCESS,
+    GET_CART_ITEMS_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -338,7 +341,25 @@ export default function product(state = initialProductState, action) {
                 inProgress:false,
                 error:action.error
             }
-
+        case GET_CART_ITEMS_START:
+            return{
+                ...state,
+                inProgress:true,
+                error:false
+            }
+        case GET_CART_ITEMS_SUCCESS:
+            return{
+                ...state,
+                inProgress:false,
+                cart:action.cart,
+                error:false
+            }
+        case GET_CART_ITEMS_FAILURE:
+            return{
+                ...state,
+                inProgress:false,
+                error:action.error
+            }
 		default:
 			return state;
 	}

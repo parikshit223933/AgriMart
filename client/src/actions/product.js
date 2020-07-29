@@ -42,7 +42,10 @@ import {
 	GET_HOME_PRODUCTS_FAILURE,
     ADD_TO_CART_START,
     ADD_TO_CART_SUCCESS,
-    ADD_TO_CART_FAILURE
+    ADD_TO_CART_FAILURE,
+    GET_CART_ITEMS_START,
+    GET_CART_ITEMS_SUCCESS,
+    GET_CART_ITEMS_FAILURE
 } from "./actionTypes";
 
 export function createProductStart() {
@@ -646,6 +649,56 @@ export function addToCart(userId, productId)
                 else
                 {
                     dispatch(addToCartFailure(data.message))
+                }
+            })
+    }
+}
+
+/* GET ALL THE CART ITEMS */
+export function getCartItemsStart()
+{
+    return{
+        type:GET_CART_ITEMS_START,
+    }
+}
+export function getCartItemsSuccess(cart)
+{
+    return{
+        type:GET_CART_ITEMS_SUCCESS,
+        cart
+    }
+}
+export function getCartItemsFailure(error)
+{
+    return{
+        type:GET_CART_ITEMS_FAILURE,
+        error
+    }
+}
+export function getCartItems(userId)
+{
+    return dispatch=>
+    {
+        dispatch(getCartItemsStart());
+        let url=API_URLS.getCart();
+        fetch(url, {
+            method:'POST',
+			headers: {
+				Authorization: `Bearer ${getAuthTokenFromStorage()}`,
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
+			body: getFormBody({ userId })
+        })
+        .then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    dispatch(getCartItemsSuccess(data.data.cart));
+                }
+                else
+                {
+                    dispatch(getCartItemsFailure(data.message));
                 }
             })
     }

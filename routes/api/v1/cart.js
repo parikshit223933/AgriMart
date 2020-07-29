@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const cartApi = require("../../../controllers/api/v1/cartApi");
 
-router.get(
+router.post(
 	"/get-all-products",
 	passport.authenticate("jwt", { session: false }),
 	cartApi.showCartProducts

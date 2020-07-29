@@ -7,9 +7,6 @@ import {
 } from "@stripe/react-stripe-js";
 import './checkOutForm.css';
 
-import { API_URLS } from "../../helpers/urls";
-import { getFormBody } from "../../helpers/utils";
-
 export default function CheckOutForm(props) { 
     /* we will render this component on buy now on a product page or cart checkout 
     in props we have to send items it could be all cart item or a specific item 
@@ -27,7 +24,6 @@ export default function CheckOutForm(props) {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        const url = API_URLS.checkoutProduct();
         window
             .fetch("http://localhost:8000/api/v1/checkout/createPayment", {
                 method: "POST",
@@ -45,7 +41,7 @@ export default function CheckOutForm(props) {
                 setClientSecret(data.clientSecret);
                 setAmount(data.amount);
             });
-    }, []);
+    }, [location.state]);
 
     const cardStyle = {
         style: {

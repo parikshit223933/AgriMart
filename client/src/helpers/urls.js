@@ -21,4 +21,5 @@ export const API_URLS = {
     getHomeProducts:()=>`${API_ROOT}/product/get-random-products`,
     checkoutProduct: ()=>`${API_ROOT}/checkout/createPayment`,
     addProductToCart:()=>`${API_ROOT}/cart/add-product-to-cart`,
+    getCart:()=>`${API_ROOT}/cart/get-all-products`,
 };
