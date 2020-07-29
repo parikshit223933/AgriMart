@@ -1,7 +1,7 @@
 import React from "react";
 import "../cart.css";
 import { connect } from "react-redux";
-import { getCartItems, decreaseProductQuantity } from "../actions/product";
+import { getCartItems, decreaseProductQuantity, addToCart } from "../actions/product";
 import { getAuthTokenFromStorage } from "../helpers/utils";
 import jwtDecode from "jwt-decode";
 
@@ -30,6 +30,10 @@ class Cart extends React.Component {
     handleReduceQuantity=(productId)=>
     {
         this.props.dispatch(decreaseProductQuantity(this.props.auth.user._id, productId));
+    }
+    handleIncreaseQuantity=(productId)=>
+    {
+        this.props.dispatch(addToCart(this.props.auth.user._id, productId))
     }
 	render() {
 		if (this.props.product.inProgress) {
@@ -108,6 +112,7 @@ class Cart extends React.Component {
 													<button
 														type="button"
                                                         className="btn increase btn-primary"
+                                                        onClick={()=>{this.handleIncreaseQuantity(item.product._id)}}
 													>
 														+
 													</button>
