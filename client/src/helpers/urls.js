@@ -22,4 +22,5 @@ export const API_URLS = {
     checkoutProduct: ()=>`${API_ROOT}/checkout/createPayment`,
     addProductToCart:()=>`${API_ROOT}/cart/add-product-to-cart`,
     getCart:()=>`${API_ROOT}/cart/get-all-products`,
+    decreaseProductQuantity:()=>`${API_ROOT}/cart/decrease-product-quantity`
 };

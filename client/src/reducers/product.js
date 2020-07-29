@@ -43,7 +43,10 @@ import {
     ADD_TO_CART_FAILURE,
     GET_CART_ITEMS_START,
     GET_CART_ITEMS_SUCCESS,
-    GET_CART_ITEMS_FAILURE
+    GET_CART_ITEMS_FAILURE,
+    DECREASE_PRODUCT_QUANTITY_START,
+    DECREASE_PRODUCT_QUANTITY_SUCCESS,
+    DECREASE_PRODUCT_QUANTITY_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -360,6 +363,55 @@ export default function product(state = initialProductState, action) {
                 inProgress:false,
                 error:action.error
             }
+        case DECREASE_PRODUCT_QUANTITY_START:
+            return{
+                ...state,
+                inProgress:true,
+                error:false
+            }
+        case DECREASE_PRODUCT_QUANTITY_SUCCESS:
+            if(action.deleted)
+            {
+                let filteredCart=state.cart.filter((item)=>
+                {
+                    if(action.productId===item.product._id)
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+                return{
+                    ...state,
+                    inProgress:false,
+                    cart:filteredCart,
+                    error:false
+                }
+            }
+            else
+            {
+                let mappedCart=state.cart.map(item=>
+                    {
+                        if(item.product._id===action.productId)
+                        {
+                            item.quantity--;
+                            item.product.remainingQuantity++;
+                        }
+                        return item;
+                    });
+                    return{
+                        ...state,
+                        inProgress:false,
+                        cart:mappedCart,
+                        error:false
+                    }
+            }
+        case DECREASE_PRODUCT_QUANTITY_FAILURE:
+            return{
+                ...state,
+                inProgress:false,
+                error:action.error
+            }
+
 		default:
 			return state;
 	}

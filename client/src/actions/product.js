@@ -45,7 +45,10 @@ import {
     ADD_TO_CART_FAILURE,
     GET_CART_ITEMS_START,
     GET_CART_ITEMS_SUCCESS,
-    GET_CART_ITEMS_FAILURE
+    GET_CART_ITEMS_FAILURE,
+    DECREASE_PRODUCT_QUANTITY_START,
+    DECREASE_PRODUCT_QUANTITY_SUCCESS,
+    DECREASE_PRODUCT_QUANTITY_FAILURE
 } from "./actionTypes";
 
 export function createProductStart() {
@@ -699,6 +702,55 @@ export function getCartItems(userId)
                 else
                 {
                     dispatch(getCartItemsFailure(data.message));
+                }
+            })
+    }
+}
+export function decreaseProductQuantityStart()
+{
+    return{
+        type:DECREASE_PRODUCT_QUANTITY_START,
+    }
+}
+export function decreaseProductQuantitySuccess(deleted, productId)
+{
+    return{
+        type:DECREASE_PRODUCT_QUANTITY_SUCCESS,
+        deleted,
+        productId
+    }
+}
+export function decreaseProductQuantityFailure(error)
+{
+    return{
+        type:DECREASE_PRODUCT_QUANTITY_FAILURE,
+        error
+    }
+}
+export function decreaseProductQuantity(userId, productId)
+{
+    return dispatch=>
+    {
+        dispatch(decreaseProductQuantityStart());
+        let url=API_URLS.decreaseProductQuantity();
+        fetch(url, {
+            method:'POST',
+			headers: {
+				Authorization: `Bearer ${getAuthTokenFromStorage()}`,
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
+			body: getFormBody({ userId, productId })
+        })
+        .then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    dispatch(decreaseProductQuantitySuccess(data.data.deleted, productId));
+                }
+                else
+                {
+                    dispatch(decreaseProductQuantityFailure(data.message));
                 }
             })
     }

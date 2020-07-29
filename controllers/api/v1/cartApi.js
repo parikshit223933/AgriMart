@@ -5,15 +5,13 @@ const Product = require("../../../models/productModel");
 module.exports.showCartProducts = async (req, res) => {
 	//{userID}
 	try {
-        console.log(req.body)
 		//find User
-		const user = await User.findById(req.body.userId)
-			.populate({
-                path:'cart',
-                populate:{
-                    path:'product'
-                }
-            });
+		const user = await User.findById(req.body.userId).populate({
+			path: "cart",
+			populate: {
+				path: "product"
+			}
+		});
 		return res.json(200, {
 			success: true,
 			data: {
@@ -28,7 +26,7 @@ module.exports.showCartProducts = async (req, res) => {
 	}
 };
 
-//add product in cart
+//add product in cart or increase product quantity
 module.exports.addProductToCart = async (req, res) => {
 	//{userID, productID}
 	try {
@@ -40,11 +38,17 @@ module.exports.addProductToCart = async (req, res) => {
 					product.remainingQuantity -= 1;
 					user.cart[i].quantity += 1;
 					await product.save();
-					await user.save();
+                    await user.save();
+                    const populatedUser = await User.findById(req.body.userId).populate({
+                        path: "cart",
+                        populate: {
+                            path: "product"
+                        }
+                    });
 					return res.json(200, {
 						success: true,
 						data: {
-							cart: user.cart[i]
+							cart: await populatedUser.cart
 						}
 					});
 				} else {
@@ -60,11 +64,16 @@ module.exports.addProductToCart = async (req, res) => {
 			await user.cart.push({ product: (await product)._id, quantity: 1 });
 			await user.save();
 			await product.save();
-
+            const populatedUser = await User.findById(req.body.userId).populate({
+                path: "cart",
+                populate: {
+                    path: "product"
+                }
+            });
 			return res.json(200, {
 				success: true,
 				data: {
-					cart: user.cart
+					cart: await populatedUser.cart
 				}
 			});
 		} else {
@@ -81,36 +90,50 @@ module.exports.addProductToCart = async (req, res) => {
 	}
 };
 
-//remove product from cart
-module.exports.removeProductFromCart = async (req, res) => {
+//REMOVE PRODUCT FROM THE CART OR DECREASE PRODUCT QUANTITY.
+module.exports.decreaseProductQuantity = async (req, res) => {
 	//{userID, productID}
 	try {
-		//find user
-		const user = await User.findById(req.body.userId);
-		//check if product exist in cart
-		let flag = 0;
+		let user = await User.findById(req.body.userId)
+		let product = await Product.findById(req.body.productId);
 		for (let i = 0; i < user.cart.length; i++) {
-			if (user.cart[i].product === req.body.productId) {
-				//check that much quantity availaible or not
-				user.cart[i].quantity -= 1;
-				if (user.cart[i].quantity === 0) {
-					//remove from cart as proiduct quant is 0
-					user.cart.splice(i, 1);
-				}
-				flag = 1;
-				break;
+			if (product._id.toString() == user.cart[i].product.toString()) {
+				if (user.cart[i].quantity > 1) {
+					user.cart[i].quantity -= 1;
+                    product.remainingQuantity += 1;
+					await user.save();
+                    await product.save();
+					return res.json(200, {
+						success: true,
+						data: {
+                            message:'Quantity decreased successfully',
+                            deleted:false
+						}
+					});
+                }
+                else
+                {
+                    await user.cart.splice(i, 1);
+                    product.remainingQuantity+=1;
+                    await user.save();
+                    await product.save();
+                    return res.json(200, {
+                        success:true,
+                        data:{
+                            message:'Product Completely removed from cart!',
+                            deleted:true
+                        }
+                    })
+                }
 			}
-		}
-		if (flag == 0) {
-			//so no product in cart with that product id
-			return res.json(501, {
-				success: false,
-				message: "You had not put this item in stock"
-			});
-		}
-		user.save();
-		console.log(user);
+        }
+        return res.json(404, {
+            success:false,
+            message:'Product was not found in the cart!'
+        })
+        
 	} catch (error) {
+        console.log(error);
 		return res.json(500, {
 			success: false,
 			message: "Internal Server Error!"
