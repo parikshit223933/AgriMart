@@ -69,7 +69,7 @@ class Cart extends React.Component {
 							<div className="d-flex justify-content-between flex-row align-items-center">
 								<h6 className="m-0">Delivery Fee:</h6>{" "}
 								<b>
-									<i className="fas fa-rupee-sign"></i> 40
+									<i className="fas fa-rupee-sign"></i> {cart.length?40:0}
 								</b>
 							</div>
 							<hr />
@@ -77,7 +77,8 @@ class Cart extends React.Component {
 								<h6 className="m-0">Total Amount</h6>{" "}
 								<b>
 									<i className="fas fa-rupee-sign"></i>{" "}
-									{this.getTotalCartPrice(cart) + 40}
+                                    {cart.length?this.getTotalCartPrice(cart) + 40:0}
+									
 								</b>
 							</div>
 						</div>
@@ -89,6 +90,7 @@ class Cart extends React.Component {
 							</header>
 							<hr />
 							<main className="d-flex flex-column justify-content-center align-items-center w-100">
+                                {!cart.length&&<h5>Your Cart is Empty!</h5>}
 								{cart.map((item) => {
 									return (
 										<div className="d-flex w-100 mt-1 mb-1 flex-row justify-content-start align-items-start p-3 single-cart-item" key={item._id}>
@@ -152,7 +154,8 @@ class Cart extends React.Component {
 							<footer className="pl-4 d-flex flex-row justify-content-end align-items-center pr-4">
 								<button
 									type="button"
-									className="btn place-order btn-danger"
+                                    className="btn place-order btn-danger"
+                                    disabled={!cart.length}
 								>
 									Place Order
 								</button>

@@ -13,7 +13,6 @@ class Profile extends React.Component {
 	componentDidMount() {
 		this.handleAPICallsForProducts();
 		this.profilePhotoHeightHandler();
-		this.handleAnimation();
 	}
 	handleAPICallsForProducts = () => {
 		const token = getAuthTokenFromStorage();
@@ -27,21 +26,13 @@ class Profile extends React.Component {
 		let img = $("user-profile-image>img");
 		img.height(img.width());
 	};
-	handleAnimation = () => {
-		$(".custom_animator").addClass("animate__animated animate__flipInY");
-		setTimeout(function () {
-			$(".custom_animator").removeClass(
-				"animate__animated animate__flipInY"
-			);
-		}, 1000);
-	};
 	render() {
 		if (!localStorage.getItem("token")) {
 			return <Redirect to="/sign-in" />;
 		}
 		return (
 			<div className="profile-component bg-warning">
-				<div className="container bg-light pb-5 custom_animator">
+				<div className="container bg-light pb-5">
 					<div className="row pl-2 pr-2">
 						<ProfileBrief />
 						<ProfileSummary />

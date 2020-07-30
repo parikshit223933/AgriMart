@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "../singleProduct.css";
-import { getSingleProduct } from "../actions/product";
+import { getSingleProduct, addToCart } from "../actions/product";
 import { API_URLS } from "../helpers/urls";
 import dateFormat from "dateformat";
 import { Review, ReviewHeader, ReviewCreator } from "./";
 import { createReview } from "../actions/product";
-import moment from 'moment';
+import moment from "moment";
 
 class SingleProduct extends React.Component {
 	componentDidMount() {
@@ -21,11 +21,15 @@ class SingleProduct extends React.Component {
 		//finally in the state i will have author, product, reviewText, reviewTitle, rating
 		this.props.dispatch(createReview(reviewDetails));
 	};
-    
-	render() {
-        const { singleProduct: product } = this.props.product;
 
-        if (!product) {
+    handleAddToCart=(productId)=>
+    {
+        this.props.dispatch(addToCart(this.props.auth.user._id, productId));
+    }
+	render() {
+		const { singleProduct: product } = this.props.product;
+
+		if (!product) {
 			return (
 				<div
 					style={{ height: "100vh", width: "100vh" }}
@@ -41,7 +45,7 @@ class SingleProduct extends React.Component {
 				</div>
 			);
 		}
-        return (
+		return (
 			<div className="single-product-component">
 				<div className="container-fluid bg-white">
 					<div className="row">
@@ -60,27 +64,33 @@ class SingleProduct extends React.Component {
 									<div className="add-to-cart-button m-1">
 										<button
 											type="button"
-											className="btn btn-warning btn-lg text-white"
+                                            className="btn btn-warning btn-lg text-white"
+                                            onClick={()=>{this.handleAddToCart(product._id)}}
 										>
 											<i className="fas fa-cart-arrow-down"></i>{" "}
 											Add to Cart
 										</button>
 									</div>
 									<div className="buy-now-button m-1">
-                                        <Link to={{
-                                            pathname: '/checkout',
-                                            state: {
-                                                items: [{ "price": product.price, "quantity": 1 }]
-                                            }
-                                        }}>
-                                            <button
-                                                type="button"
-                                                className="btn btn-success btn-lg"
-                                            >
-                                                <i className="fas fa-rupee-sign"></i>{" "}
-                                                Buy Now
-                                            </button>
-                                        </Link>
+										<Link
+											to={{
+												pathname: "/checkout",
+												state: {
+													items: [
+														{
+															price:
+																product.price,
+															quantity: 1
+														}
+													]
+												}
+											}}
+											type="button"
+											className="btn btn-success btn-lg"
+										>
+											<i className="fas fa-rupee-sign"></i>{" "}
+											Buy Now
+										</Link>
 									</div>
 								</div>
 							</div>
@@ -139,7 +149,7 @@ class SingleProduct extends React.Component {
 								<h5>Seller:</h5>
 
 								<div
-									className="card mb-3"
+									className="card mb-3 text-capitalize"
 									style={{ maxWidth: "540px" }}
 								>
 									<div className="row no-gutters">
@@ -173,7 +183,13 @@ class SingleProduct extends React.Component {
 												</div>
 												<div>
 													<p className="m-0">
-														Joined Agrimart {moment(new Date(product.seller.createdAt), "YYYYMMDD").fromNow()}
+														Joined Agrimart{" "}
+														{moment(
+															new Date(
+																product.seller.createdAt
+															),
+															"YYYYMMDD"
+														).fromNow()}
 													</p>
 												</div>
 											</div>
@@ -184,7 +200,9 @@ class SingleProduct extends React.Component {
 							<div className="ratings-and-reviews">
 								<h5>Ratings & Reviews</h5>
 								<div className="review-main">
-									<ReviewHeader revLength={product.reviews.length}/>
+									<ReviewHeader
+										revLength={product.reviews.length}
+									/>
 									<ReviewCreator
 										{...this.props}
 										handleSubmitInReviewCreator={
@@ -192,7 +210,12 @@ class SingleProduct extends React.Component {
 										}
 									/>
 									<h5 className="m-3">All Product Reviews</h5>
-                                    {product.reviews.length===0&&<p className="font-weight-bold ml-3 mr-3">No Reviews Yet! Be the first one to write a reviews about this product!</p>}
+									{product.reviews.length === 0 && (
+										<p className="font-weight-bold ml-3 mr-3 pb-4">
+											No Reviews Yet! Be the first one to
+											write a reviews about this product!
+										</p>
+									)}
 
 									{product.reviews.map((review, index) => {
 										return (
