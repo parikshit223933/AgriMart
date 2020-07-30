@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getCartItems, decreaseProductQuantity, addToCart, deleteProductFromCart } from "../actions/product";
 import { getAuthTokenFromStorage } from "../helpers/utils";
 import jwtDecode from "jwt-decode";
+import {Link} from 'react-router-dom';
 
 class Cart extends React.Component {
 	componentDidMount() {
@@ -93,14 +94,14 @@ class Cart extends React.Component {
                                 {!cart.length&&<h5>Your Cart is Empty!</h5>}
 								{cart.map((item) => {
 									return (
-										<div className="d-flex w-100 mt-1 mb-1 flex-row justify-content-start align-items-start p-3 single-cart-item" key={item._id}>
+										<div className="d-flex w-100 flex-row justify-content-start align-items-start p-3 single-cart-item" key={item._id}>
 											<div className="w-25 d-flex flex-column justify-content-center align-items-center cart-prod-img">
 												<div
 													style={{
 														width: 100,
 														height: 100,
 														backgroundImage:
-															'url("https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")',
+															`url("http://localhost:8000/uploads/products/coverImage-${item.product.coverImage.split('-').pop()}")`,
 														backgroundSize: "cover",
 														backgroundPosition:
 															"center"
@@ -152,13 +153,24 @@ class Cart extends React.Component {
 							</main>
 							<hr />
 							<footer className="pl-4 d-flex flex-row justify-content-end align-items-center pr-4">
-								<button
+								<Link
+                                    to={{
+                                        pathname: "/checkout",
+                                        state: {
+                                            items: [//in case of cart, i am squashing all the items into 1 and calculating their total price and sending it to the checkout component
+                                                {//I had to do it that way because in the single product component it has been done the same way, and since the quantity of all items is different according to the implementation of the checkout component these parameters either need to be configured from the check out component first then from single product component then from here, or just leave it that way only.
+                                                    price:cart.length?this.getTotalCartPrice(cart) + 40:0,
+                                                    quantity: 1
+                                                }
+                                            ]
+                                        }
+                                    }}
 									type="button"
                                     className="btn place-order btn-danger"
                                     disabled={!cart.length}
 								>
 									Place Order
-								</button>
+								</Link>
 							</footer>
 						</div>
 					</div>
