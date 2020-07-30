@@ -32,7 +32,7 @@ class Profile extends React.Component {
 		}
 		return (
 			<div className="profile-component w-100 bg-warning">
-				<div className="container bg-light pb-5">
+				<div className="container profile-component-container bg-light pb-5">
 					<div className="row pl-2 pr-2">
 						<ProfileBrief />
 						<ProfileSummary />

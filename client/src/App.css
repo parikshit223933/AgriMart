@@ -323,4 +323,11 @@
         padding-left:5%;
         color:rgb(231, 231, 231);
     }
+    .sell-component {
+        padding-left: 0rem;
+    }
+    .small-screen-query
+    {
+        margin-top:60px !important;
+    }
 }

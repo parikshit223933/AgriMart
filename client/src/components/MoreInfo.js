@@ -10,7 +10,7 @@ class MoreInfo extends React.Component {
 			<div className="more-info-component">
 				<div className="container-fluid p-0">
 					<header className="info-header text-center">
-						<span className="display-1">
+						<span className="display-1 small-screen-display">
 							Agrimart<sup>Info</sup>
 						</span>
 					</header>
@@ -20,47 +20,7 @@ class MoreInfo extends React.Component {
 							className="row w-100"
 							style={{ paddingLeft: "2rem" }}
 						>
-							<div className="col-lg-4 d-flex flex-row justify-content-center align-items-center">
-								<div
-									className="card mt-4 mb-4"
-									style={{
-										width: "100%",
-										border: "none",
-										borderRadius: "50% 50% 0 0"
-									}}
-								>
-									<div
-										className="mx-auto"
-										style={{
-											width: 286,
-											height: 286,
-											backgroundImage: `url(${tushar})`,
-											backgroundSize: "cover",
-											backgroundPosition: "center",
-											backgroundRepeat: "no-repeat",
-											borderRadius: "50%"
-										}}
-									></div>
-
-									<div className="card-body">
-										<p className="card-text">
-											<b>Tushar Sharma</b> is a creative
-											and focused Web Developer dedicated
-											to developing and optimizing
-											interactive, user-friendly and
-											Feature-rich Websites. He has
-											created several Full Stack Projects
-											with React JS and Contributed to
-											Agrimart Significantly using his
-											Backend Web Development Skills under
-											the hood! Moreover Tushar is very
-											particular about every minor defect
-											whether it is a visual discrepancy
-											or server bug.
-										</p>
-									</div>
-								</div>
-							</div>
+							
 							<div className="col-lg-4 d-flex flex-row justify-content-center align-items-center">
 								<div
 									className="card mt-4 mb-4"
@@ -98,6 +58,47 @@ class MoreInfo extends React.Component {
 											exposed to the user. He has
 											Contributed to the Front and
 											Back-end of Agrimart Significantly.
+										</p>
+									</div>
+								</div>
+							</div>
+                            <div className="col-lg-4 d-flex flex-row justify-content-center align-items-center">
+								<div
+									className="card mt-4 mb-4"
+									style={{
+										width: "100%",
+										border: "none",
+										borderRadius: "50% 50% 0 0"
+									}}
+								>
+									<div
+										className="mx-auto"
+										style={{
+											width: 286,
+											height: 286,
+											backgroundImage: `url(${tushar})`,
+											backgroundSize: "cover",
+											backgroundPosition: "center",
+											backgroundRepeat: "no-repeat",
+											borderRadius: "50%"
+										}}
+									></div>
+
+									<div className="card-body">
+										<p className="card-text">
+											<b>Tushar Sharma</b> is a creative
+											and focused Web Developer dedicated
+											to developing and optimizing
+											interactive, user-friendly and
+											Feature-rich Websites. He has
+											created several Full Stack Projects
+											with React JS and Contributed to
+											Agrimart Significantly using his
+											Backend Web Development Skills under
+											the hood! Moreover Tushar is very
+											particular about every minor defect
+											whether it is a visual discrepancy
+											or server bug.
 										</p>
 									</div>
 								</div>

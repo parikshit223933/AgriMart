@@ -1,189 +1,171 @@
 /* PROFILE COMPONENT ///////////////////////////////////////////////////////////////////// */
 
-.profile-component
-{
-    width:100vw;
-    min-height:100vh;
-    padding-left:5rem;
+.profile-component {
+	width: 100vw;
+	min-height: 100vh;
+	padding-left: 5rem;
 }
-.user-profile-image
-{
-    border-radius: 5px;
-    width:100%;
+.user-profile-image {
+	border-radius: 5px;
+	width: 100%;
 }
-.user-profile-image>img
-{   
-    border-radius: inherit;
-    height:100%;
-    width:100%;
+.user-profile-image > img {
+	border-radius: inherit;
+	height: 100%;
+	width: 100%;
 }
-.name-section
-{
-    position:relative;
+.name-section {
+	position: relative;
 }
-.left-section
-{
-    position:relative;
+.left-section {
+	position: relative;
 }
-.hl {/* denotes horizontal line */
-    position: absolute;
-    background-color: #ffc107;
-    height: 3px;
+.hl {
+	/* denotes horizontal line */
+	position: absolute;
+	background-color: #ffc107;
+	height: 3px;
 }
-.one/* first horizontal line */
-{
-    width: 50%;
-    left: 0%;
-    top: 25px;
+.one/* first horizontal line */ {
+	width: 50%;
+	left: 0%;
+	top: 25px;
 }
-.two
-{
-    position:relative !important;
-    width:50%;
-    left:0%;
-    top:0rem;
-    background-color:red !important;
+.two {
+	position: relative !important;
+	width: 50%;
+	left: 0%;
+	top: 0rem;
+	background-color: red !important;
 }
-.social-handle-container
-{
-    font-size: 40px;
-    width:100%;
-    display:flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
+.social-handle-container {
+	font-size: 40px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
 }
-.facebook-handle
-{
-    color:#1a78f4;
+.facebook-handle {
+	color: #1a78f4;
 }
-.instagram-handle
-{
-    color:#ae34ad;
+.instagram-handle {
+	color: #ae34ad;
 }
-.twitter-handle
-{
-    color:#43bffb;
+.twitter-handle {
+	color: #43bffb;
 }
-.google-handle
-{
-    color:#dc4e41;
+.google-handle {
+	color: #dc4e41;
 }
-.name-subtitle
-{
-    color:rgb(255, 187, 0);
+.name-subtitle {
+	color: rgb(255, 187, 0);
 }
-.portfolio{
-    color:orangered;
-    border-radius: 50%;
-    overflow:hidden;
+.portfolio {
+	color: orangered;
+	border-radius: 50%;
+	overflow: hidden;
 }
-.profile-top
-{
-    position: relative;
-    width:100%;
+.profile-top {
+	position: relative;
+	width: 100%;
 }
-.bookmark
-{
-    position: absolute;
-    right:5%;
-    top:3%;
+.bookmark {
+	position: absolute;
+	right: 5%;
+	top: 3%;
 }
-@media screen and (max-width:992px)
-{
-    .bookmark
-    {
-        top:40%;
-    }
+@media screen and (max-width: 992px) {
+	.bookmark {
+		top: 40%;
+	}
 }
-@media screen and (max-width:767px)
-{
-    .bookmark
-    {
-        top:31%;
-    }
+@media screen and (max-width: 767px) {
+	.bookmark {
+		top: 31%;
+	}
 }
-@media screen and (max-width:577px)
-{
-    .bookmark
-    {
-        top:40%;
-    }
+@media screen and (max-width: 577px) {
+	.bookmark {
+		top: 40%;
+	}
 }
-.rating
-{
-    font-size: 15px;
+.rating {
+	font-size: 15px;
 }
-.stars
-{
-    font-size:25px;
+.stars {
+	font-size: 25px;
 }
-.stars>svg
-{
-    color:rgb(255, 187, 0);
+.stars > svg {
+	color: rgb(255, 187, 0);
 }
 
 /* MULTI PRODUCT CONTAINER //////////////////////////////////////////////////////// */
-.MPC
-{
-    box-shadow: 0px 0px 2px 1px rgb(221, 221, 221);
+.MPC {
+	box-shadow: 0px 0px 2px 1px rgb(221, 221, 221);
 }
-.single-product
-{
-    width:280px;
-    /* height:100px; */
-    box-shadow: 0px 0px 2px 1px rgb(221, 221, 221);
-    box-sizing: border-box;
+.single-product {
+	width: 280px;
+	/* height:100px; */
+	box-shadow: 0px 0px 2px 1px rgb(221, 221, 221);
+	box-sizing: border-box;
 }
-.image-container-left-section
-{
-    /* height:100px; */
-    width:100px;
-    min-height:92px;
-    box-sizing:border-box;
+.image-container-left-section {
+	/* height:100px; */
+	width: 100px;
+	min-height: 92px;
+	box-sizing: border-box;
 }
-.details-container
-{
-    width:180px;
-    word-wrap: break-word;
+.details-container {
+	width: 180px;
+	word-wrap: break-word;
 }
-.details-container>div:nth-child(1)
-{
-    text-transform: capitalize;
-    
+.details-container > div:nth-child(1) {
+	text-transform: capitalize;
 }
-hr
-{
-    width:100%;
-    margin:0px;
+hr {
+	width: 100%;
+	margin: 0px;
 }
-
 
 /* Editable products ////////////////////////////////////////////////////////////// */
 
-.editable-single-product
-{
-    position:relative;
+.editable-single-product {
+	position: relative;
+}
+.editable-cover {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0%;
+	left: 0%;
+	transition: background-color ease-in-out 0.2s;
+	display: none;
+}
+.editable-single-product:hover > .editable-cover {
+	display: flex;
+}
+.editable-cover:hover {
+	background-color: rgba(0, 0, 0, 0.7);
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
 
-}
-.editable-cover
-{
-    position:absolute;
-    width:100%;
-    height:100%;
-    top:0%;
-    left:0%;
-    transition:background-color ease-in-out 0.2s;
-    display:none;
-}
-.editable-single-product:hover>.editable-cover
-{
-    display:flex;
-}
-.editable-cover:hover
-{
-    background-color:rgba(0, 0, 0, 0.7);
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+/* ********************************************************************************************************************** */
+/*                                                                                                                        */
+/* ----------------------------------------- MEDIA QUERIES -------------------------------------------------------------  */
+/*                                                                                                                        */
+/* ********************************************************************************************************************** */
+
+@media screen and (max-width: 500px) {
+	.profile-component {
+		width: 100vw;
+		min-height: 100vh;
+        padding-left: 0rem;
+    }
+    .profile-component-container
+    {
+        padding-top:30px;
+    }
 }
