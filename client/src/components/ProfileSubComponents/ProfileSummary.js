@@ -17,7 +17,7 @@ class ProfileSummary extends React.Component {
 				{/* CAUTION! DO NOT ANDD ANY ANIMATIONS OTHERWISE THE MODALS WONT WORK */}
 				<div className="profile-top">
 					<div className="title-name mt-3">
-						<h1>{user.name}</h1>
+						<h1 className="text-capitalize">{user.name}</h1>
 						<div className="hl two"></div>
 					</div>
 					<div className="name-subtitle">

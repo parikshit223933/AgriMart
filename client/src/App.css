@@ -31,13 +31,20 @@
 }
 
 /* NAVBAR COMPOENENT////////////////////////////////////////////////////////////////////////////// */
+.menu-button-for-navbar {
+	display: none;
+}
+.back-button-main-nav
+{
+    display:none;
+}
 .custom-navbar {
 	height: 100%;
 	width: 5rem;
 	background-color: #1e1e30;
 	box-sizing: border-box;
 	position: fixed;
-	z-index: 3;
+	z-index: 300;
 	transition: var(--custom-transit);
 }
 
@@ -84,7 +91,7 @@
 	background-color: #1e1e30;
 	box-sizing: border-box;
 	position: fixed;
-	z-index: 2;
+	z-index: 200;
 	padding-left: 5rem;
 	transition: transform ease-in-out 0.2s;
 	/* transform: translate3d(-12rem, 0, 0); */
@@ -166,10 +173,10 @@
 	background-repeat: no-repeat;
 	background-size: cover;
     background-attachment: fixed; */
-    background-color: #ffffff;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23ffcccc' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%23ff9999' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%23ff6666' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%23ff3333' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%23ff0000' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
-background-attachment: fixed;
-background-size: cover;
+	background-color: #ffffff;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23ffcccc' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%23ff9999' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%23ff6666' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%23ff3333' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%23ff0000' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
+	background-attachment: fixed;
+	background-size: cover;
 }
 
 /* SIGN IN COMPONENT ///////////////////////////////////////////////////////////////// */
@@ -213,7 +220,7 @@ background-size: cover;
 	background-color: #1e1e30;
 	box-sizing: border-box;
 	position: fixed;
-	z-index: 1;
+	z-index: 100;
 	padding-left: 17rem;
 	transition: transform ease-in-out 0.2s;
 	/* transform: translate3d(-29rem, 0, 0); */
@@ -265,4 +272,55 @@ background-size: cover;
 	position: absolute;
 	right: 15%;
 	top: 40%;
+}
+
+/* ********************************************************************************************************************** */
+/*                                                                                                                        */
+/* ----------------------------------------- MEDIA QUERIES -------------------------------------------------------------  */
+/*                                                                                                                        */
+/* ********************************************************************************************************************** */
+
+@media screen and (max-width: 500px) {
+	.custom-navbar {
+		display: none;
+	}
+	.exposed-navbar {
+		width: 50%;
+		padding-left: 2%;
+	}
+	.website-name {
+		padding-left: 10px !important;
+	}
+	.categories-nav {
+		width: 100%;
+		padding-left: 50%;
+	}
+	.menu-button-for-navbar {
+		display: block;
+        position: fixed;
+        z-index: 50;
+		top: 1%;
+		left: 4%;
+		font-size: 30px;
+    }
+    .website-name
+    {
+        display:none;
+    }
+    .back-button-main-nav
+    {
+        display:block;
+        font-size:30px;
+        margin:10px 0px 10px 0px;
+        padding-left:5%;
+        color:rgb(231, 231, 231);
+    }
+    .back-button-cat-nav
+    {
+        display:block;
+        font-size:30px;
+        margin:10px 0px 10px 0px;
+        padding-left:5%;
+        color:rgb(231, 231, 231);
+    }
 }
