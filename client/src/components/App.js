@@ -20,6 +20,8 @@ import {
 } from "./";
 import CheckOutForm from "./PaymentComponents/CheckOutForm";
 
+import PrivateRoute from './Routes/PrivateRoute';
+
 import { getAuthTokenFromStorage } from "../helpers/utils";
 import { connect } from "react-redux";
 import { authenticateUser } from "../actions/auth";
@@ -46,28 +48,27 @@ class App extends React.Component {
 					<Navbar />
 					<Switch>
 						<Route path="/" exact component={Home} />
-						<Route path="/profile" exact component={Profile} />
+						<PrivateRoute path="/profile" exact component={Profile} />
 						<Route path="/sign-in" component={SignIn} />
 						<Route path="/sign-up" component={SignUp} />
-						<Route path="/cart" component={Cart} />
+						<PrivateRoute path="/cart" component={Cart} />
 						<Route exact path="/categories" component={Categories} />
-						<Route path="/sell" component={Sell} />
-						<Route path="/sell" component={Sell} />
+						<PrivateRoute path="/sell" component={Sell} />
 						<Route path="/more-info" component={MoreInfo} />
-						<Route
+						<PrivateRoute
 							path="/edit-product/:productId/:userId"
 							component={EditProduct}
 						/>
-						<Route
+						<PrivateRoute
 							path="/view-product/:productId/:userId"
 							component={SingleProduct}
 						/>
                         <Route path="/categories/:category" component={SingleCategory}/>
-                        <Route path="/checkout">
+                        <PrivateRoute path="/checkout">
                             <Elements stripe={stripePromise}>
                                 <CheckOutForm />
                             </Elements>
-                        </Route>
+                        </PrivateRoute>
 						<Route component={Page404} />
 					</Switch>
 				</div>
