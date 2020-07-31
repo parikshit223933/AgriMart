@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { clearAuthState, signUp } from "../actions/auth";
 
 /* 
@@ -51,11 +50,6 @@ class SignUp extends React.Component {
 		this.props.dispatch(signUp(name, email, password, confirm_password));
 	};
 	render() {
-		const { isLoggedIn } = this.props.auth;
-		if (isLoggedIn) {
-			//instead of using private route, I'll just redirect the user to the home page if he is already logged in.
-			return <Redirect to="/" />;
-		}
 		return (
 			<div className="sign-up">
 				<div className="container animate__animated animate__fadeInLeft">

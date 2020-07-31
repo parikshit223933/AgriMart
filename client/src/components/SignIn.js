@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { login, clearAuthState } from "../actions/auth";
 
 class SignIn extends React.Component {
@@ -33,11 +32,7 @@ class SignIn extends React.Component {
 		}
 	};
 	render() {
-		const { inProgress, error, isLoggedIn } = this.props.auth;
-		if (isLoggedIn) {
-			//instead of using private route, I'll redirect the user to the home page if he is already logged in
-			return <Redirect to="/" />;
-		}
+		const { inProgress, error } = this.props.auth;
 		return (
 			<div className="sign-in">
 				<div className="container animate__animated animate__fadeInLeft">

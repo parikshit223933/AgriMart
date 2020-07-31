@@ -1,20 +1,20 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const RestrictedRoute = ({ component: Component, ...rest }) => {
     const isLoggedin = localStorage.getItem('token');
     return (
-        // Show the component only when the user is logged in
-        // Otherwise, redirect the user to /signin page
+        // Show the component only when the user is logged out
+        // Otherwise, redirect the user to home page
         // ...rest destructure the props of route
         <Route {...rest}
             render={props =>
-                isLoggedin ? (
+                !isLoggedin ? (
                     <Component />
                 ) : (
                     <Redirect
                         to={{
-                            pathname: "/sign-in",
+                            pathname: "/",
                             state: {
                               from: props.location
                             }
@@ -26,4 +26,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     );
 }
 
-export default PrivateRoute;
+export default RestrictedRoute;

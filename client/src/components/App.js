@@ -21,6 +21,7 @@ import {
 import CheckOutForm from "./PaymentComponents/CheckOutForm";
 
 import PrivateRoute from './Routes/PrivateRoute';
+import RestrictedRoute from './Routes/RestrictedRoute';
 
 import { getAuthTokenFromStorage } from "../helpers/utils";
 import { connect } from "react-redux";
@@ -49,8 +50,8 @@ class App extends React.Component {
 					<Switch>
 						<Route path="/" exact component={Home} />
 						<PrivateRoute path="/profile" exact component={Profile} />
-						<Route path="/sign-in" component={SignIn} />
-						<Route path="/sign-up" component={SignUp} />
+						<RestrictedRoute path="/sign-in" component={SignIn} />
+						<RestrictedRoute path="/sign-up" component={SignUp} />
 						<PrivateRoute path="/cart" component={Cart} />
 						<Route exact path="/categories" component={Categories} />
 						<PrivateRoute path="/sell" component={Sell} />
