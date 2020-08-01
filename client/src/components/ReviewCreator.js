@@ -1,4 +1,6 @@
 import React from "react";
+import { showNotification } from "../helpers/utils";
+import { clearProductState } from "../actions/product";
 
 class ReviewCreator extends React.Component
 {
@@ -24,7 +26,20 @@ class ReviewCreator extends React.Component
             product: this.props.match.params.productId
         });
     }
-
+    componentDidUpdate(prevProps, prevState)
+    {
+        const {success, error}=this.props.product;
+        if(success)
+        {
+            showNotification(success, 1500, 'success');
+            this.props.dispatch(clearProductState());
+        }   
+        else if(error)
+        {
+            showNotification(error, 1500, 'error');
+            this.props.dispatch(clearProductState());
+        }
+    }
     render()
     {
         return (
@@ -94,5 +109,9 @@ class ReviewCreator extends React.Component
             </form>
         );
     }
+}
+function mapStateToProps({product})
+{
+    return{product};
 }
 export default ReviewCreator;
