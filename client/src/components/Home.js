@@ -5,6 +5,8 @@ import ScrollMenu from "react-horizontal-scrolling-menu";
 import { HomeSingleCategory } from "./";
 import { getHomeProducts } from "../actions/product";
 import { connect } from "react-redux";
+import { showNotification } from "../helpers/utils";
+import { clearAuthState } from "../actions/auth";
 
 // list of items
 const list = [
@@ -355,6 +357,12 @@ class Home extends React.Component
     componentDidMount()
     {
         this.props.dispatch(getHomeProducts());
+        const {success}=this.props.auth;
+        if(success)
+        {
+            showNotification(success, 2000, 'success')
+            this.props.dispatch(clearAuthState());
+        }
     }
     render()
     {
@@ -562,9 +570,9 @@ class Home extends React.Component
         );
     }
 }
-function mapStateToProps({ product })
+function mapStateToProps({ product, auth })
 {
-    return { product };
+    return { product, auth };
 }
 
 export default connect(mapStateToProps)(Home);

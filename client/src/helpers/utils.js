@@ -1,3 +1,5 @@
+import Noty from 'noty';
+
 export function getFormBody(params)
 {
     let formBody = [];
@@ -12,4 +14,14 @@ export function getFormBody(params)
 export function getAuthTokenFromStorage()
 {
     return localStorage.getItem("token");
+}
+export function showNotification(message, timeout, type)
+{
+    new Noty({
+        theme: 'relax',
+        text: message,
+        type: type,
+        timeout: timeout,
+        layout: 'topRight'
+    }).show()
 }

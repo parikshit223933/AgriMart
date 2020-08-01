@@ -51,7 +51,8 @@ import {
     DECREASE_PRODUCT_QUANTITY_FAILURE,
     DELETE_PRODUCT_FROM_CART_START,
     DELETE_PRODUCT_FROM_CART_SUCCESS,
-    DELETE_PRODUCT_FROM_CART_FAILURE
+    DELETE_PRODUCT_FROM_CART_FAILURE,
+    CLEAR_PRODUCT_STATE
 } from "./actionTypes";
 
 export function createProductStart() {
@@ -805,5 +806,12 @@ export function deleteProductFromCart(productId, userId)
                     dispatch(deleteProductFromCartFailure(data.message));
                 }
             })
+    }
+}
+/* FOR CLEARING PRODUCT STATE */
+export function clearProductState()
+{
+    return {
+        type:CLEAR_PRODUCT_STATE
     }
 }

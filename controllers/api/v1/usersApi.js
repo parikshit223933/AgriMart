@@ -8,18 +8,24 @@ const saltRound = 10;
 /* action for signing in */
 module.exports.create_session = async (req, res) => {
 	try {
-        console.log(req.body);
         let user = await User.findOne({ email: req.body.email });
-        //match input password with hash of correct password in db
-        const match = await bcrypt.compare(req.body.password, user.password);
-		if (!user || !match) {
+        if (!user) {
 			//error code 422 denotes invalid input by the user! this if statement will be a result of invalid input!
 			return res.json(422, {
 				success: false,
 				message: "Invalid email or password! Please try again."
 			});
 		}
-		//if the user is found,
+        //match input password with hash of correct password in db IF THE USER IS FOUND IN THE DB
+        const match = await bcrypt.compare(req.body.password, user.password);
+		if (!match) {
+			//error code 422 denotes invalid input by the user! this if statement will be a result of invalid input!
+			return res.json(422, {
+				success: false,
+				message: "Invalid email or password! Please try again."
+			});
+		}
+		//if the user is found and the password also matched,
 		let { password, ...expanded_user } = user._doc;
 		return res.json(200, {
 			message: "Sign in successful!",
@@ -30,10 +36,7 @@ module.exports.create_session = async (req, res) => {
 			}
 		});
 	} catch (error) {
-		console.log(
-			"There was an error in finding the user by email in the database!",
-			error
-		);
+		console.log(error);
 		return res.json(500, {
 			message:
 				"Internal Server Error. Please try after some time. If the issue persists, Please mail us at agrimartOfficial@gmail.com",

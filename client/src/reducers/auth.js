@@ -18,6 +18,7 @@ import
 
 let initialAuthState = {
     user: {},
+    success:null,
     error: "",
     inProgress: false,
     isLoggedIn: false
@@ -30,7 +31,7 @@ export default function auth(state = initialAuthState, action)
             return {
                 ...state,
                 inProgress: true,
-                error: false
+                error: false,
             };
         case LOGIN_SUCCESS:
             return {
@@ -38,7 +39,8 @@ export default function auth(state = initialAuthState, action)
                 user: action.user,
                 inProgress: false,
                 error: false,
-                isLoggedIn: true
+                isLoggedIn: true,
+                success:'Logged In SuccessFully!'
             };
 
         case LOGIN_FAILURE:
@@ -46,7 +48,8 @@ export default function auth(state = initialAuthState, action)
                 ...state,
                 error: action.error,
                 isLoggedIn: false,
-                inProgress: false
+                inProgress: false,
+                success:false
             };
         case AUTHENTICATE_USER:
             return {
@@ -60,12 +63,14 @@ export default function auth(state = initialAuthState, action)
             return {
                 ...state,
                 user: {},
-                isLoggedIn: false
+                isLoggedIn: false,
+                success:'Logged Out Successfully!'
             };
         case CLEAR_AUTH_STATE:
             return {
                 ...state,
-                error: null
+                error: null,
+                success:null
             };
         case SIGN_UP_START:
             return {
@@ -79,7 +84,8 @@ export default function auth(state = initialAuthState, action)
                 ...state,
                 error: action.error,
                 isLoggedIn: false,
-                inProgress: false
+                inProgress: false,
+                success:false
             };
         case UPDATE_USER_START:
             return {
@@ -91,13 +97,15 @@ export default function auth(state = initialAuthState, action)
                 ...state,
                 inProgress: false,
                 error: false,
-                user: action.user
+                user: action.user,
+                success:'User Details Updated SuccessFully!'
             };
         case UPDATE_USER_FAILED:
             return {
                 ...state,
                 inProgress: false,
-                error: action.error
+                error: action.error,
+                success:false
             };
         case UPLOAD_AVATAR_START:
             return {
@@ -109,13 +117,15 @@ export default function auth(state = initialAuthState, action)
                 ...state,
                 inProgress: false,
                 error: false,
-                user: action.user
+                user: action.user,
+                success:'Profile Picture Updated Successfully!'
             };
         case UPLOAD_AVATAR_FAILURE:
             return {
                 ...state,
                 inProgress: false,
-                error: action.error
+                error: action.error,
+                success:false
             };
         default:
             return state;

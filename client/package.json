@@ -13,6 +13,7 @@
     "jquery": "^3.5.1",
     "jwt-decode": "^2.2.0",
     "moment": "^2.27.0",
+    "noty": "^3.2.0-beta",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-horizontal-scrolling-menu": "^0.7.7",

@@ -50,7 +50,8 @@ import
         DECREASE_PRODUCT_QUANTITY_FAILURE,
         DELETE_PRODUCT_FROM_CART_START,
         DELETE_PRODUCT_FROM_CART_SUCCESS,
-        DELETE_PRODUCT_FROM_CART_FAILURE
+        DELETE_PRODUCT_FROM_CART_FAILURE,
+        CLEAR_PRODUCT_STATE
     } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -448,7 +449,11 @@ export default function product(state = initialProductState, action)
                 inProgress: false,
                 error: action.error
             };
-
+        case CLEAR_PRODUCT_STATE:
+            return{
+                ...state,
+                error:null
+            }
         default:
             return state;
     }

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { login, clearAuthState } from "../actions/auth";
+import { showNotification } from "../helpers/utils";
 
 class SignIn extends React.Component
 {
@@ -11,10 +12,6 @@ class SignIn extends React.Component
             email: "",
             password: ""
         };
-    }
-    componentWillUnmount()
-    {
-        this.props.dispatch(clearAuthState()); //setting error=null when navigating away from the sign in page
     }
     handleEmailChange = (event) =>
     {
@@ -38,18 +35,25 @@ class SignIn extends React.Component
             this.props.dispatch(login(email, password));
         }
     };
+    componentDidUpdate(prevProps, prevState)
+    {
+        const { error } = this.props.auth;
+        if(error)
+        {
+            showNotification(error, 2000, 'error')
+            this.props.dispatch(clearAuthState());
+        }
+    }
     render()
     {
-        const { inProgress, error } = this.props.auth;
+        const { inProgress } = this.props.auth;
+
         return (
             <div className="sign-in">
                 <div className="container animate__animated animate__fadeInLeft">
                     <div className="row">
                         <div className="col-xl-8 offset-xl-2 col-md-10 offset-md-2 col-sm-12 bg-light mt-5 p-5 custom-sign-box">
                             <h1 className="text-center">Sign In</h1>
-                            {!error && (
-                                <div className="error-message">{error}</div>
-                            )}
 
                             <form>
                                 <div className="form-group">
