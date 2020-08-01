@@ -2,7 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { createProduct } from "../actions/product";
+import { createProduct, clearProductState } from "../actions/product";
+import { showNotification } from "../helpers/utils";
 
 class Sell extends React.Component
 {
@@ -19,7 +20,20 @@ class Sell extends React.Component
             remainingQuantity: ""
         };
     }
-
+    componentDidUpdate(prevProps, prevState)
+    {
+        const {success, error}=this.props.product;
+        if(success)
+        {
+            showNotification(success, 1500, 'success');
+            this.props.dispatch(clearProductState());
+        }
+        else if(error)
+        {
+            showNotification(error, 1500, 'error');
+            this.props.dispatch(clearProductState());
+        }
+    }
     formInputHandler = (property, event) =>
     {
         if (property === "coverImage")

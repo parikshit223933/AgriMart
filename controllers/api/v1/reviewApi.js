@@ -350,7 +350,7 @@ module.exports.dislikeReview = async (req, res) => {
 				success: true,
 				data: {
 					product,
-					status: false
+					status: false//dislike is removed
 				}
 			});
 		} else {
@@ -380,7 +380,7 @@ module.exports.dislikeReview = async (req, res) => {
 				success: true,
 				data: {
 					product,
-					status: true
+					status: true//dislike is added
 				}
 			});
 		}

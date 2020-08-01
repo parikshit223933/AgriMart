@@ -452,10 +452,11 @@ export function toggleLikeStart() {
 		type: TOGGLE_LIKE_START
 	};
 }
-export function toggleLikeSuccess(product) {
+export function toggleLikeSuccess(product, status) {
 	return {
 		type: TOGGLE_LIKE_SUCCESS,
-		product
+        product,
+        status
 	};
 }
 export function toggleLikeFailure(error) {
@@ -496,10 +497,11 @@ export function toggleDislikeStart() {
 		type: TOGGLE_DISLIKE_START
 	};
 }
-export function toggleDislikeSuccess(product) {
+export function toggleDislikeSuccess(product, status) {
 	return {
 		type: TOGGLE_DISLIKE_SUCCESS,
-		product
+        product,
+        status
 	};
 }
 export function toggleDislikeFailure(error) {

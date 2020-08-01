@@ -1,63 +1,64 @@
 import
-    {
-        CREATE_PRODUCT_START,
-        CREATE_PRODUCT_SUCCESS,
-        CREATE_PRODUCT_FAILURE,
-        RETRIEVE_PRODUCTS_START,
-        RETRIEVE_PRODUCTS_SUCCESS,
-        RETRIEVE_PRODUCTS_FAILURE,
-        FETCH_BOUGHT_PRODUCTS_START,
-        FETCH_BOUGHT_PRODUCTS_SUCCESS,
-        FETCH_BOUGHT_PRODUCTS_FAILURE,
-        EDIT_PRODUCT_START,
-        EDIT_PRODUCT_SUCCESS,
-        EDIT_PRODUCT_FAILURE,
-        DELETE_PRODUCT_START,
-        DELETE_PRODUCT_SUCCESS,
-        DELETE_PRODUCT_FAILURE,
-        GET_SINGLE_PRODUCT_START,
-        GET_SINGLE_PRODUCT_SUCCESS,
-        GET_SINGLE_PRODUCT_FAILURE,
-        CREATE_REVIEW_START,
-        CREATE_REVIEW_SUCCESS,
-        CREATE_REVIEW_FAILURE,
-        DELETE_REVIEW_START,
-        DELETE_REVIEW_SUCCESS,
-        DELETE_REVIEW_FAILURE,
-        UPDATE_REVIEW_SUCCESS,
-        UPDATE_REVIEW_START,
-        UPDATE_REVIEW_FAILURE,
-        TOGGLE_LIKE_START,
-        TOGGLE_LIKE_SUCCESS,
-        TOGGLE_LIKE_FAILURE,
-        TOGGLE_DISLIKE_START,
-        TOGGLE_DISLIKE_SUCCESS,
-        TOGGLE_DISLIKE_FAILURE,
-        FETCH_CATEGORIZED_PRODUCTS_START,
-        FETCH_CATEGORIZED_PRODUCTS_SUCCESS,
-        FETCH_CATEGORIZED_PRODUCTS_FAILURE,
-        GET_HOME_PRODUCTS_START,
-        GET_HOME_PRODUCTS_SUCCESS,
-        GET_HOME_PRODUCTS_FAILURE,
-        ADD_TO_CART_START,
-        ADD_TO_CART_SUCCESS,
-        ADD_TO_CART_FAILURE,
-        GET_CART_ITEMS_START,
-        GET_CART_ITEMS_SUCCESS,
-        GET_CART_ITEMS_FAILURE,
-        DECREASE_PRODUCT_QUANTITY_START,
-        DECREASE_PRODUCT_QUANTITY_SUCCESS,
-        DECREASE_PRODUCT_QUANTITY_FAILURE,
-        DELETE_PRODUCT_FROM_CART_START,
-        DELETE_PRODUCT_FROM_CART_SUCCESS,
-        DELETE_PRODUCT_FROM_CART_FAILURE,
-        CLEAR_PRODUCT_STATE
-    } from "../actions/actionTypes";
+{
+    CREATE_PRODUCT_START,
+    CREATE_PRODUCT_SUCCESS,
+    CREATE_PRODUCT_FAILURE,
+    RETRIEVE_PRODUCTS_START,
+    RETRIEVE_PRODUCTS_SUCCESS,
+    RETRIEVE_PRODUCTS_FAILURE,
+    FETCH_BOUGHT_PRODUCTS_START,
+    FETCH_BOUGHT_PRODUCTS_SUCCESS,
+    FETCH_BOUGHT_PRODUCTS_FAILURE,
+    EDIT_PRODUCT_START,
+    EDIT_PRODUCT_SUCCESS,
+    EDIT_PRODUCT_FAILURE,
+    DELETE_PRODUCT_START,
+    DELETE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_FAILURE,
+    GET_SINGLE_PRODUCT_START,
+    GET_SINGLE_PRODUCT_SUCCESS,
+    GET_SINGLE_PRODUCT_FAILURE,
+    CREATE_REVIEW_START,
+    CREATE_REVIEW_SUCCESS,
+    CREATE_REVIEW_FAILURE,
+    DELETE_REVIEW_START,
+    DELETE_REVIEW_SUCCESS,
+    DELETE_REVIEW_FAILURE,
+    UPDATE_REVIEW_SUCCESS,
+    UPDATE_REVIEW_START,
+    UPDATE_REVIEW_FAILURE,
+    TOGGLE_LIKE_START,
+    TOGGLE_LIKE_SUCCESS,
+    TOGGLE_LIKE_FAILURE,
+    TOGGLE_DISLIKE_START,
+    TOGGLE_DISLIKE_SUCCESS,
+    TOGGLE_DISLIKE_FAILURE,
+    FETCH_CATEGORIZED_PRODUCTS_START,
+    FETCH_CATEGORIZED_PRODUCTS_SUCCESS,
+    FETCH_CATEGORIZED_PRODUCTS_FAILURE,
+    GET_HOME_PRODUCTS_START,
+    GET_HOME_PRODUCTS_SUCCESS,
+    GET_HOME_PRODUCTS_FAILURE,
+    ADD_TO_CART_START,
+    ADD_TO_CART_SUCCESS,
+    ADD_TO_CART_FAILURE,
+    GET_CART_ITEMS_START,
+    GET_CART_ITEMS_SUCCESS,
+    GET_CART_ITEMS_FAILURE,
+    DECREASE_PRODUCT_QUANTITY_START,
+    DECREASE_PRODUCT_QUANTITY_SUCCESS,
+    DECREASE_PRODUCT_QUANTITY_FAILURE,
+    DELETE_PRODUCT_FROM_CART_START,
+    DELETE_PRODUCT_FROM_CART_SUCCESS,
+    DELETE_PRODUCT_FROM_CART_FAILURE,
+    CLEAR_PRODUCT_STATE
+} from "../actions/actionTypes";
 
 let initialProductState = {
     allProducts: [],
     inProgress: null,
     error: null,
+    success: null,
     boughtProducts: [],
     singleProduct: null,
     categorizedProducts: [],
@@ -74,12 +75,13 @@ export default function product(state = initialProductState, action)
                 inProgress: true,
                 error: false
             };
-        case CREATE_PRODUCT_SUCCESS:
+        case CREATE_PRODUCT_SUCCESS://Success Notification Needed
             return {
                 ...state,
                 inProgress: false,
                 error: false,
-                allProducts: [action.product, ...state.allProducts]
+                allProducts: [action.product, ...state.allProducts],
+                success: 'Product Created Successfully!'
             };
         case CREATE_PRODUCT_FAILURE:
             return {
@@ -129,7 +131,7 @@ export default function product(state = initialProductState, action)
                 ...state,
                 inProgress: true
             };
-        case EDIT_PRODUCT_SUCCESS:
+        case EDIT_PRODUCT_SUCCESS://Success Notification Needed
             let newProducts = state.allProducts.filter(function (product)
             {
                 return product._id === action.product._id;
@@ -138,7 +140,8 @@ export default function product(state = initialProductState, action)
                 ...state,
                 inProgress: false,
                 error: false,
-                allProducts: newProducts
+                allProducts: newProducts,
+                success: 'Product Edited Successfully!'
             };
         case EDIT_PRODUCT_FAILURE:
             return {
@@ -152,7 +155,7 @@ export default function product(state = initialProductState, action)
                 inProgress: true,
                 error: false
             };
-        case DELETE_PRODUCT_SUCCESS:
+        case DELETE_PRODUCT_SUCCESS://Success Notification Needed
             let new_Products = state.allProducts.filter(function (product)
             {
                 return product._id !== action.productId;
@@ -161,7 +164,8 @@ export default function product(state = initialProductState, action)
                 ...state,
                 inProgress: false,
                 error: false,
-                allProducts: new_Products
+                allProducts: new_Products,
+                success: 'Product Deleted Successfully!'
             };
         case DELETE_PRODUCT_FAILURE:
             return {
@@ -194,12 +198,13 @@ export default function product(state = initialProductState, action)
                 inProgress: true,
                 error: false
             };
-        case CREATE_REVIEW_SUCCESS:
+        case CREATE_REVIEW_SUCCESS://Success Notification Needed
             return {
                 ...state,
                 inProgress: false,
                 singleProduct: action.product,
-                error: false
+                error: false,
+                success: 'Posted New Review!'
             };
         case CREATE_REVIEW_FAILURE:
             return {
@@ -213,7 +218,7 @@ export default function product(state = initialProductState, action)
                 inProgress: true,
                 error: false
             };
-        case DELETE_REVIEW_SUCCESS:
+        case DELETE_REVIEW_SUCCESS://Success Notification Needed
             let newAllProductsArray = state.allProducts.map((product) =>
             {
                 if (product._id === action.productId)
@@ -227,7 +232,8 @@ export default function product(state = initialProductState, action)
                 inProgress: false,
                 error: false,
                 allProducts: newAllProductsArray,
-                singleProduct: action.product
+                singleProduct: action.product,
+                success: 'Review Deleted Successfully!'
             };
         case DELETE_REVIEW_FAILURE:
             return {
@@ -241,7 +247,7 @@ export default function product(state = initialProductState, action)
                 inProgress: true,
                 error: false
             };
-        case UPDATE_REVIEW_SUCCESS:
+        case UPDATE_REVIEW_SUCCESS://Success Notification Needed
             let newAllProducts = state.allProducts.map((product) =>
             {
                 if (product._id === action.productId)
@@ -255,7 +261,8 @@ export default function product(state = initialProductState, action)
                 inProgress: false,
                 singleProduct: action.product,
                 allProducts: newAllProducts,
-                error: false
+                error: false,
+                success: 'Review updated Successfully!'
             };
         case UPDATE_REVIEW_FAILURE:
             return {
@@ -269,13 +276,25 @@ export default function product(state = initialProductState, action)
                 inProgress: true,
                 error: false
             };
-        case TOGGLE_LIKE_SUCCESS:
-            return {
-                ...state,
-                inProgress: false,
-                error: false,
-                singleProduct: action.product
-            };
+        case TOGGLE_LIKE_SUCCESS://Success Notification Needed
+            if (action.status)
+            {
+                return {
+                    ...state,
+                    inProgress: false,
+                    error: false,
+                    singleProduct: action.product,
+                    success: 'Like Added Successfully!'
+                };
+            }
+            else
+                return {
+                    ...state,
+                    inProgress: false,
+                    error: false,
+                    singleProduct: action.product,
+                    success: 'Like Removed Successfully!'
+                };
         case TOGGLE_LIKE_FAILURE:
             return {
                 ...state,
@@ -288,13 +307,23 @@ export default function product(state = initialProductState, action)
                 inProgress: true,
                 error: false
             };
-        case TOGGLE_DISLIKE_SUCCESS:
-            return {
-                ...state,
-                inProgress: false,
-                error: false,
-                singleProduct: action.product
-            };
+        case TOGGLE_DISLIKE_SUCCESS://Success Notification Needed
+            if (action.status)
+                return {
+                    ...state,
+                    inProgress: false,
+                    error: false,
+                    singleProduct: action.product,
+                    success: 'Dislike Added Successfully!'
+                };
+            else
+                return {
+                    ...state,
+                    inProgress: false,
+                    error: false,
+                    singleProduct: action.product,
+                    success: 'Dislike Removed Successfully!'
+                };
         case TOGGLE_DISLIKE_FAILURE:
             return {
                 ...state,
@@ -344,12 +373,13 @@ export default function product(state = initialProductState, action)
                 inProgress: true,
                 error: false
             };
-        case ADD_TO_CART_SUCCESS:
+        case ADD_TO_CART_SUCCESS://Success Notification Needed
             return {
                 ...state,
                 inProgress: false,
                 cart: action.cart,
-                error: false
+                error: false,
+                success:'Product is added to cart successfully!'
             };
         case ADD_TO_CART_FAILURE:
             return {
@@ -428,7 +458,7 @@ export default function product(state = initialProductState, action)
                 inProgress: true,
                 error: false
             };
-        case DELETE_PRODUCT_FROM_CART_SUCCESS:
+        case DELETE_PRODUCT_FROM_CART_SUCCESS://Success Notification Needed
             let newCartItems = state.cart.filter(item =>
             {
                 if (item.product._id === action.productId)
@@ -441,7 +471,8 @@ export default function product(state = initialProductState, action)
                 ...state,
                 inProgress: false,
                 cart: newCartItems,
-                error: false
+                error: false,
+                success:'Product is deleted from cart successfully!'
             };
         case DELETE_PRODUCT_FROM_CART_FAILURE:
             return {
@@ -450,9 +481,10 @@ export default function product(state = initialProductState, action)
                 error: action.error
             };
         case CLEAR_PRODUCT_STATE:
-            return{
+            return {
                 ...state,
-                error:null
+                error: null,
+                success:null,
             }
         default:
             return state;
