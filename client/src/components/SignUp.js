@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { clearAuthState, signUp } from "../actions/auth";
+import { showNotification } from "../helpers/utils";
 
 /* 
 SIGN UP ACTION WORKING PRINCIPLE:
@@ -57,6 +58,15 @@ class SignUp extends React.Component
         const { name, email, password, confirm_password } = this.state;
         this.props.dispatch(signUp(name, email, password, confirm_password));
     };
+    componentDidUpdate(prevProps, prevState)
+    {
+        const {error}=this.props.auth;
+        if(error)
+        {
+            showNotification(error, 1500, 'error');
+            this.props.dispatch(clearAuthState())
+        }
+    }
     render()
     {
         return (

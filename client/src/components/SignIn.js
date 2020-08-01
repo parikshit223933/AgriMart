@@ -35,6 +35,15 @@ class SignIn extends React.Component
             this.props.dispatch(login(email, password));
         }
     };
+    componentDidMount()
+    {
+        const { success } = this.props.auth;
+        if(success)
+        {
+            showNotification(success, 2000, 'success')
+            this.props.dispatch(clearAuthState());
+        }
+    }
     componentDidUpdate(prevProps, prevState)
     {
         const { error } = this.props.auth;
@@ -43,6 +52,7 @@ class SignIn extends React.Component
             showNotification(error, 2000, 'error')
             this.props.dispatch(clearAuthState());
         }
+        
     }
     render()
     {
