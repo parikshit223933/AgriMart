@@ -5,6 +5,7 @@ import { getCartItems, decreaseProductQuantity, addToCart, deleteProductFromCart
 import { getAuthTokenFromStorage, showNotification } from "../helpers/utils";
 import jwtDecode from "jwt-decode";
 import { Link } from 'react-router-dom';
+import $ from 'jquery';
 
 class Cart extends React.Component
 {
@@ -20,13 +21,13 @@ class Cart extends React.Component
     componentDidUpdate(prevProps, prevState)
     {
         /* FOR NOTIFICATIONS */
-        const {success, error}=this.props.product;
-        if(success)
+        const { success, error } = this.props.product;
+        if (success)
         {
             showNotification(success, 1500, 'success');
             this.props.dispatch(clearProductState());
         }
-        else if(error)
+        else if (error)
         {
             showNotification(error, 1500, 'error');
             this.props.dispatch(clearProductState());
@@ -61,6 +62,13 @@ class Cart extends React.Component
     handleDeleteCartProduct = (productId) =>
     {
         this.props.dispatch(deleteProductFromCart(productId, this.props.auth.user._id))
+
+        /* FOR REMOVING THE SIDE EFFECTS OF THE REMOVE PRODUCT MODAL */
+        $('#deleteProductFromCart').addClass('hide');
+        $('#deleteProductFromCart').removeClass('show');
+        $('.modal-backdrop').hide();
+        document.body.style.paddingRight = '0'
+        document.getElementsByTagName("body")[0].style.overflowY = "auto";
     }
     render()
     {
@@ -166,10 +174,32 @@ class Cart extends React.Component
                                                     <button
                                                         type="button"
                                                         className="btn btn-danger remove-item-from-cart"
-                                                        onClick={() => { this.handleDeleteCartProduct(item.product._id) }}
+                                                        data-target={`#deleteproductfromcart${item.product._id}`}
+                                                        data-toggle="modal"
                                                     >
                                                         REMOVE
 													</button>
+                                                    {/* MODAL START */}
+                                                    <div className="modal fade" id={`deleteproductfromcart${item.product._id}`} tabIndex="-100" role="dialog" aria-labelledby={`deleteproductfromcartLabel${item.product._id}`} aria-hidden="true">
+                                                        <div className="modal-dialog">
+                                                            <div className="modal-content">
+                                                                <div className="modal-header">
+                                                                    <h5 className="modal-title" id={`deleteproductfromcartLabel${item.product._id}`}>Modal title</h5>
+                                                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div className="modal-body">
+                                                                    <b>Are you sure you want to remove this product from your cart?</b>
+                                                                </div>
+                                                                <div className="modal-footer">
+                                                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">No</button>
+                                                                    <button type="button" className="btn btn-danger" onClick={() => { this.handleDeleteCartProduct(item.product._id) }}>Yes</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {/* MODAL END */}
                                                 </div>
                                             </div>
                                         </div>
