@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import {
-  CardElement,
-  useStripe,
-  useElements
-} from "@stripe/react-stripe-js";
-import './checkOutForm.css';
+import
+    {
+        CardElement,
+        useStripe,
+        useElements
+    } from "@stripe/react-stripe-js";
+import '../../checkOutForm.css';
 
-export default function CheckOutForm(props) { 
+export default function CheckOutForm(props)
+{
     /* we will render this component on buy now on a product page or cart checkout 
     in props we have to send items it could be all cart item or a specific item 
     for cart pass user.cart as props while for specific item pass item and quantity = 1*/
@@ -22,7 +24,8 @@ export default function CheckOutForm(props) {
     const stripe = useStripe();
     const elements = useElements();
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         // Create PaymentIntent as soon as the page loads
         window
             .fetch("http://localhost:8000/api/v1/checkout/createPayment", {
@@ -30,13 +33,15 @@ export default function CheckOutForm(props) {
                 headers: {
                     "Content-Type": 'application/json'
                 },
-                body: JSON.stringify( location.state ) //where, items: [{price: 100, quantity: 7}]
+                body: JSON.stringify(location.state) //where, items: [{price: 100, quantity: 7}]
             })
-            .then(res => {
+            .then(res =>
+            {
                 console.log(res);
                 return res.json();
             })
-            .then(data => {
+            .then(data =>
+            {
                 console.log(data);
                 setClientSecret(data.clientSecret);
                 setAmount(data.amount);
@@ -62,14 +67,16 @@ export default function CheckOutForm(props) {
         }
     };
 
-    const handleChange = async (event) => {
+    const handleChange = async (event) =>
+    {
         // Listen for changes in the CardElement
         // and display any errors as the customer types their card details
         setDisabled(event.empty);
         setError(event.error ? event.error.message : "");
     };
 
-    const handleSubmit = async ev => {
+    const handleSubmit = async ev =>
+    {
         ev.preventDefault();
         setProcessing(true);
 
@@ -82,10 +89,12 @@ export default function CheckOutForm(props) {
             }
         });
 
-        if (payload.error) {
+        if (payload.error)
+        {
             setError(`Payment failed ${payload.error.message}`);
             setProcessing(false);
-        } else {
+        } else
+        {
             setError(null);
             setProcessing(false);
             setSucceeded(true);
@@ -94,7 +103,7 @@ export default function CheckOutForm(props) {
 
     return (
         <div className="container">
-            <h1 className="center">Enter Card details for INR { amount }</h1>
+            <h1 className="center">Enter Card details for INR {amount}</h1>
             <form id="payment-form" onSubmit={handleSubmit}>
                 <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
                 <button
@@ -105,8 +114,8 @@ export default function CheckOutForm(props) {
                         {processing ? (
                             <div className="spinner" id="spinner"></div>
                         ) : (
-                            "Pay"
-                        )}
+                                "Pay"
+                            )}
                     </span>
                 </button>
 
@@ -121,15 +130,15 @@ export default function CheckOutForm(props) {
                 <p className={succeeded ? "result-message" : "result-message hidden"}>
                     Payment succeeded, see the result in your
                     <a
-                    href={`https://dashboard.stripe.com/test/payments`}
+                        href={`https://dashboard.stripe.com/test/payments`}
                     >
                         {" "}
                         Stripe dashboard.
-                    </a> 
+                    </a>
                     Refresh the page to pay again.
                 </p>
             </form>
         </div>
-        
+
     );
 }

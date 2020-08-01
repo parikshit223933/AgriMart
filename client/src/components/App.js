@@ -9,24 +9,24 @@ import { authenticateUser } from "../actions/auth";
 import "../App.css";
 
 import
-    {
-        Navbar,
-        SignIn,
-        SignUp,
-        Home,
-        Cart,
-        Page404,
-        Profile,
-        Categories,
-        Sell,
-        MoreInfo,
-        EditProduct,
-        SingleProduct,
-        SingleCategory,
-        CheckOutForm,
-        PrivateRoute,
-        RestrictedRoute
-    } from "./";
+{
+    Navbar,
+    SignIn,
+    SignUp,
+    Home,
+    Cart,
+    Page404,
+    Profile,
+    Categories,
+    Sell,
+    MoreInfo,
+    EditProduct,
+    SingleProduct,
+    SingleCategory,
+    CheckOutForm,
+    PrivateRoute,
+    RestrictedRoute
+} from "./";
 
 // call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.

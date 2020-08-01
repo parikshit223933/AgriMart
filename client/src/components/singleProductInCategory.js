@@ -1,17 +1,17 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { addToCart } from '../actions/product';
 
 class SingleProductInCategory extends React.Component
 {
-    handleAddToCart=(productId)=>
+    handleAddToCart = (productId) =>
     {
         this.props.dispatch(addToCart(this.props.auth.user._id, productId));
     }
     render()
     {
-        const {product, index}=this.props;
+        const { product, index } = this.props;
         return (
             <div
                 className="card prod-card mb-2 mt-2 ml-1 mr-1"
@@ -29,7 +29,7 @@ class SingleProductInCategory extends React.Component
                             product.coverImage.split(
                                 "-"
                             )[1]
-                        }')`,
+                            }')`,
                         backgroundSize:
                             "contain",
                         backgroundPosition:
@@ -74,7 +74,7 @@ class SingleProductInCategory extends React.Component
                         }
                     </p>
                     <button
-                        onClick={()=>{this.handleAddToCart(product._id)}}
+                        onClick={() => { this.handleAddToCart(product._id) }}
                         className="btn btn-warning"
                     >
                         Add to Cart
@@ -84,8 +84,8 @@ class SingleProductInCategory extends React.Component
         );
     }
 }
-function mapStateToProps({auth})
+function mapStateToProps({ auth })
 {
-    return {auth}
+    return { auth }
 }
 export default connect(mapStateToProps)(SingleProductInCategory);

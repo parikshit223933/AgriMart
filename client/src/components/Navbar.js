@@ -17,12 +17,12 @@ class Navbar extends React.Component
         {
             $(".exposed-navbar").addClass("exposed");
         })
-        $('.back-button-main-nav').click(function()
+        $('.back-button-main-nav').click(function ()
         {
             $(".exposed-navbar").removeClass("exposed");
             $(".categories-nav").removeClass("exposed");
         })
-        $('.back-button-cat-nav').click(function()
+        $('.back-button-cat-nav').click(function ()
         {
             $(".categories-nav").removeClass("exposed");
         })

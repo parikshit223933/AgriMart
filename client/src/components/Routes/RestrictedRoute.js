@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const RestrictedRoute = ({ component: Component, ...rest }) => {
+const RestrictedRoute = ({ component: Component, ...rest }) =>
+{
     const isLoggedin = localStorage.getItem('token');
     return (
         // Show the component only when the user is logged out
@@ -12,15 +13,15 @@ const RestrictedRoute = ({ component: Component, ...rest }) => {
                 !isLoggedin ? (
                     <Component />
                 ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/",
-                            state: {
-                              from: props.location
-                            }
-                        }}
-                    />
-                )
+                        <Redirect
+                            to={{
+                                pathname: "/",
+                                state: {
+                                    from: props.location
+                                }
+                            }}
+                        />
+                    )
             }
         />
     );
