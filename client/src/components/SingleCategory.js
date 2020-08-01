@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCategorizedProducts } from "../actions/product";
+import { fetchCategorizedProducts, clearProductState } from "../actions/product";
 import "../category.css";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import { SingleProductInCategory } from "./";
+import { showNotification } from "../helpers/utils";
 class SingleCategory extends React.Component
 {
     constructor(props)
@@ -90,6 +91,21 @@ class SingleCategory extends React.Component
         )
         {
             this.FetchProducts();
+        }
+        
+
+
+        /* FOR NOTIFICATIONS */
+        const {success, error}=this.props.product;
+        if(success)
+        {
+            showNotification(success, 1500, 'success');
+            this.props.dispatch(clearProductState());
+        }
+        else if(error)
+        {
+            showNotification(error, 1500, 'error');
+            this.props.dispatch(clearProductState());
         }
     }
     categoryMapper = (categoryFromUrl) =>

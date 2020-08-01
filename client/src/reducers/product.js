@@ -379,7 +379,7 @@ export default function product(state = initialProductState, action)
                 inProgress: false,
                 cart: action.cart,
                 error: false,
-                success:'Product is added to cart successfully!'
+                success: 'Product is added to cart successfully!'
             };
         case ADD_TO_CART_FAILURE:
             return {
@@ -412,7 +412,7 @@ export default function product(state = initialProductState, action)
                 inProgress: true,
                 error: false
             };
-        case DECREASE_PRODUCT_QUANTITY_SUCCESS:
+        case DECREASE_PRODUCT_QUANTITY_SUCCESS://Success Notification Needed
             if (action.deleted)
             {
                 let filteredCart = state.cart.filter((item) =>
@@ -427,7 +427,8 @@ export default function product(state = initialProductState, action)
                     ...state,
                     inProgress: false,
                     cart: filteredCart,
-                    error: false
+                    error: false,
+                    success: 'Product is removed from the cart!'
                 };
             } else
             {
@@ -443,7 +444,8 @@ export default function product(state = initialProductState, action)
                     ...state,
                     inProgress: false,
                     cart: mappedCart,
-                    error: false
+                    error: false,
+                    success: 'Product Quantity Reduced!'
                 };
             }
         case DECREASE_PRODUCT_QUANTITY_FAILURE:
@@ -472,7 +474,7 @@ export default function product(state = initialProductState, action)
                 inProgress: false,
                 cart: newCartItems,
                 error: false,
-                success:'Product is deleted from cart successfully!'
+                success: 'Product is deleted from cart successfully!'
             };
         case DELETE_PRODUCT_FROM_CART_FAILURE:
             return {
@@ -484,7 +486,7 @@ export default function product(state = initialProductState, action)
             return {
                 ...state,
                 error: null,
-                success:null,
+                success: null,
             }
         default:
             return state;

@@ -11,7 +11,7 @@ module.exports.showCartProducts = async (req, res) => {
 			populate: {
 				path: "product"
 			}
-		});
+        });
 		return res.json(200, {
 			success: true,
 			data: {

@@ -1,8 +1,8 @@
 import React from "react";
 import "../cart.css";
 import { connect } from "react-redux";
-import { getCartItems, decreaseProductQuantity, addToCart, deleteProductFromCart } from "../actions/product";
-import { getAuthTokenFromStorage } from "../helpers/utils";
+import { getCartItems, decreaseProductQuantity, addToCart, deleteProductFromCart, clearProductState } from "../actions/product";
+import { getAuthTokenFromStorage, showNotification } from "../helpers/utils";
 import jwtDecode from "jwt-decode";
 import { Link } from 'react-router-dom';
 
@@ -15,6 +15,21 @@ class Cart extends React.Component
         {
             const user = jwtDecode(token);
             this.props.dispatch(getCartItems(user._id));
+        }
+    }
+    componentDidUpdate(prevProps, prevState)
+    {
+        /* FOR NOTIFICATIONS */
+        const {success, error}=this.props.product;
+        if(success)
+        {
+            showNotification(success, 1500, 'success');
+            this.props.dispatch(clearProductState());
+        }
+        else if(error)
+        {
+            showNotification(error, 1500, 'error');
+            this.props.dispatch(clearProductState());
         }
     }
     getTotalNumberOfItems = (cart) =>
