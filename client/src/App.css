@@ -38,6 +38,10 @@
 {
     display:none;
 }
+.back-button-cat-nav
+{
+    display:none;
+}
 .custom-navbar {
 	height: 100%;
 	width: 5rem;

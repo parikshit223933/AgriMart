@@ -28,36 +28,43 @@ import ReviewCreator from "./ReviewCreator";
 import SingleCategory from './SingleCategory';
 import SingleProductInCategory from './singleProductInCategory';
 import HomeSingleCategory from './HomeSingleCategory';
+import CheckOutForm from "./PaymentComponents/CheckOutForm";
+import PrivateRoute from './Routes/PrivateRoute';
+import RestrictedRoute from './Routes/RestrictedRoute';
 
-export {
-	Navbar,
-	App,
-	SignUp,
-	SignIn,
-	Home,
-	Cart,
-	Page404,
-	Profile,
-	Categories,
-	Sell,
-	MoreInfo,
-	ProfileBrief,
-	ProfileSummary,
-	ProfileSoldItems,
-	ProfileBookmarkedUsers,
-	ProfileUnsoldItems,
-	ProfileProductHistory,
-	ProfileSettings,
-	ChangePassword,
-	ChangeProfilePicture,
-	MultiProductContainer,
-	SingleProductBox,
-	EditProduct,
-	SingleProduct,
-	Review,
-	ReviewHeader,
+export
+{
+    Navbar,
+    App,
+    SignUp,
+    SignIn,
+    Home,
+    Cart,
+    Page404,
+    Profile,
+    Categories,
+    Sell,
+    MoreInfo,
+    ProfileBrief,
+    ProfileSummary,
+    ProfileSoldItems,
+    ProfileBookmarkedUsers,
+    ProfileUnsoldItems,
+    ProfileProductHistory,
+    ProfileSettings,
+    ChangePassword,
+    ChangeProfilePicture,
+    MultiProductContainer,
+    SingleProductBox,
+    EditProduct,
+    SingleProduct,
+    Review,
+    ReviewHeader,
     ReviewCreator,
     SingleCategory,
     SingleProductInCategory,
-    HomeSingleCategory
+    HomeSingleCategory,
+    CheckOutForm,
+    PrivateRoute,
+    RestrictedRoute
 };
