@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getAuthTokenFromStorage } from "../helpers/utils";
+import { getAuthTokenFromStorage, showNotification } from "../helpers/utils";
 import * as jwtDecode from "jwt-decode";
 import * as $ from "jquery";
 import "../Profile.css";
 import { ProfileBrief, ProfileSummary } from "./";
 import { Redirect } from "react-router-dom";
 import { retrieveProducts, fetchBoughtProducts } from "../actions/product";
+import { clearAuthState } from "../actions/auth";
 
 class Profile extends React.Component
 {
@@ -30,6 +31,20 @@ class Profile extends React.Component
         let img = $("user-profile-image>img");
         img.height(img.width());
     };
+    componentDidUpdate(prevProps, prevState)//to show success messages after updating the profile
+    {
+        const {success, error}=this.props.auth;
+        if(success)
+        {
+            showNotification(success, 1500, 'success');
+            this.props.dispatch(clearAuthState());
+        }
+        if(error)
+        {
+            showNotification(error, 1500, 'error');
+            this.props.dispatch(clearAuthState());
+        }
+    }
     render()
     {
         if (!localStorage.getItem("token"))

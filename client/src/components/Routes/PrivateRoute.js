@@ -11,7 +11,7 @@ const PrivateRoute = ({ component: Component, ...rest }) =>
         <Route {...rest}
             render={props =>
                 isLoggedin ? (
-                    <Component />
+                    <Component match={rest.computedMatch}/>
                 ) : (
                         <Redirect
                             to={{

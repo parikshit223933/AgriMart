@@ -13,6 +13,7 @@ class SingleProduct extends React.Component
 {
     componentDidMount()
     {
+        console.log('**********', this.props);
         this.props.dispatch(
             getSingleProduct(this.props.match.params.productId)
         );
