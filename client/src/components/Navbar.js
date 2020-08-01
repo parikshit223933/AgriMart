@@ -75,11 +75,24 @@ class Navbar extends React.Component
     logouthandler = (event) =>
     {
         this.props.dispatch(logout());
+        this.closePrimaryNavbar()
     };
     handleThemeToggler = (event) =>
     {
+        this.closePrimaryNavbar()
         //To be done later
     };
+    closePrimaryNavbar = () =>
+    {
+        $(".exposed-navbar").removeClass("exposed");
+        $(".website-name").removeClass("animate__jello");
+    }
+    closeSecondaryNavbar = () =>
+    {
+        $(".website-name").removeClass("animate__jello");
+        $(".categories-nav").removeClass("exposed");
+        $(".exposed-navbar").removeClass("exposed");
+    }
     render()
     {
         const { isLoggedIn } = this.props.auth;
@@ -141,11 +154,11 @@ class Navbar extends React.Component
                     </div>
                     <hr className="m-0 bg-warning custom-width" />
                     <div className="buttons-container-exposed">
-                        <Link to="/" className="home-exposed">
+                        <Link to="/" className="home-exposed" onClick={this.closePrimaryNavbar}>
                             <div>Home</div>
                         </Link>
                         {isLoggedIn && (
-                            <Link to="/profile" className="profile-exposed">
+                            <Link to="/profile" className="profile-exposed" onClick={this.closePrimaryNavbar}>
                                 <div>Profile</div>
                             </Link>
                         )}
@@ -153,6 +166,7 @@ class Navbar extends React.Component
                             <Link
                                 to="/sign-in"
                                 className="signin-button-exposed"
+                                onClick={this.closePrimaryNavbar}
                             >
                                 <div>Sign In</div>
                             </Link>
@@ -161,6 +175,7 @@ class Navbar extends React.Component
                             <Link
                                 to="/sign-up"
                                 className="signup-button-exposed"
+                                onClick={this.closePrimaryNavbar}
                             >
                                 <div>Sign Up</div>
                             </Link>
@@ -174,7 +189,7 @@ class Navbar extends React.Component
                                 <div>Log Out</div>
                             </Link>
                         )}
-                        <Link to="/cart" className="cart-exposed">
+                        <Link to="/cart" className="cart-exposed" onClick={this.closePrimaryNavbar}>
                             <div>Cart</div>
                         </Link>
                         <Link
@@ -190,15 +205,16 @@ class Navbar extends React.Component
                             to=""
                             className="toggle-theme-exposed"
                             onClick={this.handleThemeToggler}
+
                         >
                             <div>Toggle Theme</div>
                         </Link>
                         {isLoggedIn && (
-                            <Link to="/sell" className="sell-exposed">
+                            <Link to="/sell" className="sell-exposed" onClick={this.closePrimaryNavbar}>
                                 Sell on Agrimart
                             </Link>
                         )}
-                        <Link to="/more-info" className="more-info-exposed">
+                        <Link to="/more-info" className="more-info-exposed" onClick={this.closePrimaryNavbar}>
                             <div>More Info</div>
                         </Link>
                     </div>
@@ -212,31 +228,31 @@ class Navbar extends React.Component
                     </div>
                     <hr className="m-0 bg-danger custom-width" />
                     <div className="categories-nav-inner-container">
-                        <Link to="/categories/CerealsAndPulses">
+                        <Link to="/categories/CerealsAndPulses" onClick={this.closeSecondaryNavbar}>
                             <div>Cereals and Pulses</div>
                         </Link>
-                        <Link to="/categories/Seeds">
+                        <Link to="/categories/Seeds" onClick={this.closeSecondaryNavbar}>
                             <div>Seeds</div>
                         </Link>
-                        <Link to="/categories/Spices">
+                        <Link to="/categories/Spices" onClick={this.closeSecondaryNavbar}>
                             <div>Spices</div>
                         </Link>
-                        <Link to="/categories/Fruits">
+                        <Link to="/categories/Fruits" onClick={this.closeSecondaryNavbar}>
                             <div>Fruits</div>
                         </Link>
-                        <Link to="/categories/Vegetables">
+                        <Link to="/categories/Vegetables" onClick={this.closeSecondaryNavbar}>
                             <div>Vegetables</div>
                         </Link>
-                        <Link to="/categories/DryFruits">
+                        <Link to="/categories/DryFruits" onClick={this.closeSecondaryNavbar}>
                             <div>Dry Fruits</div>
                         </Link>
-                        <Link to="/categories/EdibleOils">
+                        <Link to="/categories/EdibleOils" onClick={this.closeSecondaryNavbar}>
                             <div>Edible Oils</div>
                         </Link>
-                        <Link to="/categories/DairyProducts">
+                        <Link to="/categories/DairyProducts" onClick={this.closeSecondaryNavbar}>
                             <div>Dairy Products</div>
                         </Link>
-                        <Link to="/categories/Others">
+                        <Link to="/categories/Others" onClick={this.closeSecondaryNavbar}>
                             <div>Others</div>
                         </Link>
                     </div>
