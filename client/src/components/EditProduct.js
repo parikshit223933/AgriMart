@@ -1,8 +1,8 @@
 import React from "react";
-import { retrieveProducts, editProduct } from "../actions/product";
+import { retrieveProducts, editProduct, clearProductState } from "../actions/product";
 import * as $ from "jquery";
 import { connect } from "react-redux";
-import { getAuthTokenFromStorage } from "../helpers/utils";
+import { getAuthTokenFromStorage, showNotification } from "../helpers/utils";
 import jwtDecode from "jwt-decode";
 
 class EditProduct extends React.Component
@@ -81,6 +81,20 @@ class EditProduct extends React.Component
                     this.firstRefresh = true;
                 }
             });
+        }
+
+        /* HANDLING NOTIFICATIONS */
+
+        const {error, success}=this.props.product;
+        if(success)
+        {
+            showNotification(success, 1500, 'success');
+            this.props.dispatch(clearProductState());
+        }
+        else if (error)
+        {
+            showNotification(error, 1500, 'error');
+            this.props.dispatch(clearProductState());
         }
     }
     render()

@@ -12,6 +12,13 @@ module.exports.createNewProduct = /* async */ (req, res) =>
         {
             try
             {
+                if(!req.file)
+                {
+                    return res.json(422, {
+                        success:false,
+                        message:'Please provide an image for the product!'
+                    })
+                }
                 let { _id, ...newProduct } = req.body;
                 let product = await Product.create(newProduct);
                 product.coverImage = path.join(

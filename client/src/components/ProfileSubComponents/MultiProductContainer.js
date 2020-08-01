@@ -1,6 +1,29 @@
 import React from "react";
 import { SingleProductBox } from "..";
+import {connect} from 'react-redux';
+import { showNotification } from "../../helpers/utils";
+import { clearProductState } from "../../actions/product";
+
 class MultiProductContainer extends React.Component {
+    componentDidUpdate(prevProps, prevState)
+    {
+        if(prevProps.products.length!=this.props.products.length)
+        {
+            console.log(prevProps.products.length, this.props.products.length)
+            const {deleteSuccess, deleteError}=this.props;
+            console.log(deleteSuccess, deleteError)
+            if(deleteSuccess)
+            {
+                showNotification(deleteSuccess, 1500, 'success');
+                this.props.dispatch(clearProductState());
+            }
+            else if (deleteError)
+            {
+                showNotification(deleteError, 1500, 'error');
+                this.props.dispatch(clearProductState());
+            }
+        }
+    }
 	render() {
 		const { products } = this.props;
 		if (!products) {
@@ -47,4 +70,11 @@ class MultiProductContainer extends React.Component {
 		);
 	}
 }
-export default MultiProductContainer;
+function mapStateToProps({product})
+{
+    return{
+        deleteSuccess:product.success,
+        deleteError:product.error
+    }
+}
+export default connect(mapStateToProps)(MultiProductContainer);
