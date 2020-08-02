@@ -5,8 +5,11 @@ const fs = require("fs");
 const bcrypt = require("bcrypt");
 const saltRound = 10;
 const authMailer= require("../../../mailers/authMailer");
+const signUpMailer=require('../../../mailers/signUpMailer');
 const queue = require('../../../config/kue');
-const loginMailWorker = require('../../../workers/loginMailWorker');// WARNING: DO NOT REMOVE IT THIS IS THE WORKER FOR SENDING LOGIN EMAILS
+const loginMailWorker = require('../../../workers/loginMailWorker');
+const signUpMailWorker=require('../../../workers/signUpMailWorker');
+// ! WARNING: DO NOT REMOVE THE UNUSED REQUIRES.
 
 /* action for signing in */
 module.exports.create_session = async (req, res) =>
@@ -33,14 +36,15 @@ module.exports.create_session = async (req, res) =>
             });
         }
         //if the user is found and the password also matched,
-        // authMailer(user);//sending the login mail to the corresponding user!
+        // authMailer(user);
+        //sending the login mail to the corresponding user!
         try
         {
             let job = queue.create('emails', user._doc).save(function (error)
             {
                 if (error)
                 {
-                    console.log('***************************', error);
+                    console.log( error);
                     return;
                 }
                 console.log(`Job is enqueued with job id ${job.id}`)
@@ -122,6 +126,16 @@ module.exports.createUser = (req, res) =>
                                 message: "There was an error in creating a new user in the database!"
                             });
                         }
+                        //user created successfully, now i can send an email corresponding to sign up
+                        let job=queue.create('signUpMailer', user).save(function(error)
+                        {
+                            if(error)
+                            {
+                                console.log(error);
+                                return;
+                            }
+                            console.log(`Job is enqueued with job id ${job.id}`);
+                        })
                         return res.json(200, {
                             success: true,
                             message: "User Signed up successfully"
