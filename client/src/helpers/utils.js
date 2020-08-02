@@ -43,7 +43,7 @@ export function showNotification(message, timeout, type)
                     width      : 200,
                     height     : n.barDom.getBoundingClientRect().height,
                     radius     : 0,
-                    x          : {[150]: -150},
+                    x          : {150: -150},
                     duration   : 1.2 * 500,
                     isShowStart: true
                 });

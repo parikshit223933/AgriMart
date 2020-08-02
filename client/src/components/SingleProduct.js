@@ -211,6 +211,7 @@ class SingleProduct extends React.Component
                                     />
                                     <ReviewCreator
                                         {...this.props}
+                                        reviews={product.reviews}
                                         handleSubmitInReviewCreator={
                                             this.handleSubmitInReviewCreator
                                         }

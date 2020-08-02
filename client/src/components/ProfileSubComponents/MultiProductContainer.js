@@ -7,7 +7,7 @@ import { clearProductState } from "../../actions/product";
 class MultiProductContainer extends React.Component {
     componentDidUpdate(prevProps, prevState)
     {
-        if(prevProps.products.length!=this.props.products.length)
+        if(prevProps.products.length!==this.props.products.length)
         {
             console.log(prevProps.products.length, this.props.products.length)
             const {deleteSuccess, deleteError}=this.props;

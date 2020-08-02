@@ -1,6 +1,7 @@
 import React from "react";
 import { showNotification } from "../helpers/utils";
 import { clearProductState } from "../actions/product";
+import { connect } from 'react-redux';
 
 class ReviewCreator extends React.Component
 {
@@ -11,7 +12,7 @@ class ReviewCreator extends React.Component
             reviewText: "",
             reviewTitle: "",
             rating: 5
-        };
+        };//see the componentDidMountFunction
     }
     inputHandler = (key, event) =>
     {
@@ -28,20 +29,33 @@ class ReviewCreator extends React.Component
     }
     componentDidUpdate(prevProps, prevState)
     {
-        const {success, error}=this.props.product;
-        if(success)
+        const { success, error } = this.props.product;
+        if (success)
         {
             showNotification(success, 1500, 'success');
             this.props.dispatch(clearProductState());
-        }   
-        else if(error)
+        }
+        else if (error)
         {
             showNotification(error, 1500, 'error');
             this.props.dispatch(clearProductState());
         }
     }
+    checkReviews = (reviews) =>
+    {
+        for (let review of reviews)
+        {
+            if (review.author._id === this.props.auth.user._id)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     render()
     {
+        const creationAllowed = this.checkReviews(this.props.reviews);
+
         return (
             <form className="p-3 apply-shadow">
                 <h5>Write a Review...</h5>
@@ -59,6 +73,7 @@ class ReviewCreator extends React.Component
                             this.inputHandler("reviewTitle", event);
                         }}
                         value={this.state.reviewTitle}
+                        disabled={!creationAllowed}
                     />
                 </div>
                 <div className="form-group">
@@ -73,6 +88,7 @@ class ReviewCreator extends React.Component
                             this.inputHandler("rating", event);
                         }}
                         value={this.state.rating}
+                        disabled={!creationAllowed}
                     >
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -86,6 +102,7 @@ class ReviewCreator extends React.Component
                         <b>Review text</b>
                     </label>
                     <textarea
+                        disabled={!creationAllowed}
                         className="form-control"
                         id="review-text"
                         rows="3"
@@ -102,6 +119,7 @@ class ReviewCreator extends React.Component
                         type="submit"
                         onClick={(event) => { this.props.handleSubmitInReviewCreator(event, this.state) }}
                         className="btn btn-primary"
+                        disabled={!creationAllowed}
                     >
                         Submit
 					</button>
@@ -110,8 +128,8 @@ class ReviewCreator extends React.Component
         );
     }
 }
-function mapStateToProps({product})
+function mapStateToProps({ auth })
 {
-    return{product};
+    return { auth };
 }
-export default ReviewCreator;
+export default connect(mapStateToProps)(ReviewCreator);

@@ -112,7 +112,7 @@ class Review extends React.Component
                     <div className="d-flex flex-row flex-wrap w-50 justify-content-start align-items-center">
                         <div>
                             <p className="m-0">
-                                <b className="disabled">
+                                <b className="text-secondary text-capitalize">
                                     {review.author.name}
                                     {", "}
                                 </b>
