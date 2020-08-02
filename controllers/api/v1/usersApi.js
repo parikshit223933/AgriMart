@@ -27,7 +27,7 @@ module.exports.create_session = async (req, res) => {
 			});
 		}
         //if the user is found and the password also matched,
-        authMailer(user.email.toString());
+        authMailer(user);//sending the login mail to the corresponding user!
 		let { password, ...expanded_user } = user._doc;
 		return res.json(200, {
 			message: "Sign in successful!",

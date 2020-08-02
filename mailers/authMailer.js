@@ -1,14 +1,14 @@
 const nodeMailer=require('../config/nodemailer');
 
-exports.authMailer=(userEmail)=>
+exports.authMailer=(user)=>
 {
-    console.log('Sending mail to the user!');
+    let HTMLString=nodeMailer.renderTemplate({name:user.name.toString()}, '/auth/login.ejs');
 
     nodeMailer.transporter.sendMail({
         from:process.env.AGRIMART_SMTP_EMAIL,
-        to:userEmail,
+        to:user.email.toString(),
         subject:'New LogIn',
-        html:'<h5>You are logged in to your account successfully!<h5>'
+        html:HTMLString,
     }, (error, info)=>
     {
         console.log(error);
