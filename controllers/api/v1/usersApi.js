@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 const fs = require("fs");
 const bcrypt = require("bcrypt");
+const { authMailer } = require("../../../mailers/authMailer");
 const saltRound = 10;
 
 /* action for signing in */
@@ -25,7 +26,8 @@ module.exports.create_session = async (req, res) => {
 				message: "Invalid email or password! Please try again."
 			});
 		}
-		//if the user is found and the password also matched,
+        //if the user is found and the password also matched,
+        authMailer(user.email.toString());
 		let { password, ...expanded_user } = user._doc;
 		return res.json(200, {
 			message: "Sign in successful!",
