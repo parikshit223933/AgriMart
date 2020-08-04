@@ -2,6 +2,9 @@ const Product = require("../../../models/productModel");
 const Review = require('../../../models/reviewModel');
 const path = require("path");
 const fs = require("fs");
+const newProductMailer = require('../../../mailers/newProductMailer');
+const newProductMailerWorker = require('../../../workers/newProductMailWorker');
+const queue = require('../../../config/kue');
 
 module.exports.createNewProduct = /* async */ (req, res) =>
 {
@@ -12,14 +15,14 @@ module.exports.createNewProduct = /* async */ (req, res) =>
         {
             try
             {
-                if(!req.file)
+                if (!req.file)
                 {
                     return res.json(422, {
-                        success:false,
-                        message:'Please provide an image for the product!'
+                        success: false,
+                        message: 'Please provide an image for the product!'
                     })
                 }
-                let { _id, ...newProduct } = req.body;
+                let { _id, userEmail, ...newProduct } = req.body;
                 let product = await Product.create(newProduct);
                 product.coverImage = path.join(
                     Product.imagePath,
@@ -28,6 +31,19 @@ module.exports.createNewProduct = /* async */ (req, res) =>
                 );
                 product.seller = _id;
                 product.save();
+
+                let job = queue
+                .create('new_product_mailer', { product, userEmail })
+                .save(function (error)
+                {
+                    if (error)
+                    {
+                        console.log(error)
+                        return;
+                    }
+                    console.log(`Job is enqueued with job id ${job.id}!`);
+                })
+
                 return res.json(200, {
                     success: true,
                     message: "Product Posted Successfully!",
@@ -40,8 +56,8 @@ module.exports.createNewProduct = /* async */ (req, res) =>
             {
                 console.log(error);
                 return res.json(422, {
-                    success:false,
-                    message:'Error in creating a new product!'
+                    success: false,
+                    message: 'Error in creating a new product!'
                 })
             }
 

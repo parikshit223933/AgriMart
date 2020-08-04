@@ -61,6 +61,7 @@ class Sell extends React.Component
         event.preventDefault();
 
         const data = new FormData();
+        data.append("userEmail", this.props.auth.user.email);
         data.append("_id", this.props.auth.user._id);
         data.append("name", this.state.name);
         data.append("coverImage", this.state.coverImage);
