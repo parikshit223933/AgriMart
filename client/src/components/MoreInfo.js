@@ -3,11 +3,52 @@ import "../info.css";
 import tushar from "../images/tushar.jpg";
 import cpd from "../images/chandra.jpg";
 import parikshit from "../images/parikshit.jpg";
+import {API_URLS} from '../helpers/urls';
+import { showNotification, getFormBody } from "../helpers/utils";
 
 class MoreInfo extends React.Component
 {
+    constructor(props)
+    {
+        super(props);
+        this.state={
+            message:'',
+            email:'',
+            subject:''
+        }
+    }
+    handleInputChange=(event, field)=>
+    {
+        this.setState({
+            [field]:event.target.value
+        })
+    }
+    handleSubmit=(event)=>
+    {
+        event.preventDefault();
+        fetch(API_URLS.sendMessage(), {
+            method: "POST",
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
+			body: getFormBody(this.state)
+        })
+        .then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    showNotification(data.data.message, 1500, 'success');
+                }
+                else
+                {
+                    showNotification(data.message, 1500, 'error');
+                }
+            })
+    }
     render()
     {
+        console.log(this.state);
         return (
             <div className="more-info-component">
                 <div className="container-fluid p-0">
@@ -161,7 +202,7 @@ class MoreInfo extends React.Component
                                 giving you the very best of all services, with a
                                 highly converged focus on hygine, good customer
                                 service and uniqueness under the hood. Agrimart
-                                was founded in 2020 by
+                                was founded in 2020 by {" "} 
 								<b>Parikshit Singh</b>, <b>Tushar Sharma</b> and{" "}
                                 <b>Chandra Prakash Dubey</b>. We hope you enjoy
 								our products and services as much as we enjoy
@@ -189,6 +230,8 @@ class MoreInfo extends React.Component
                                             className="form-control"
                                             id="emailinput"
                                             aria-describedby="emailHelp"
+                                            value={this.state.email}
+                                            onChange={(event)=>this.handleInputChange(event, 'email')}
                                         />
                                         <small
                                             id="emailHelp"
@@ -207,6 +250,8 @@ class MoreInfo extends React.Component
                                             className="form-control"
                                             id="subjectinput"
                                             aria-describedby="emailHelp"
+                                            value={this.state.subject}
+                                            onChange={(event)=>this.handleInputChange(event, 'subject')}
                                         />
                                     </div>
                                     <div className="form-group">
@@ -218,11 +263,14 @@ class MoreInfo extends React.Component
                                             placeholder="Type your message here..."
                                             id="messageArea"
                                             rows="5"
+                                            value={this.state.message}
+                                            onChange={(event)=>this.handleInputChange(event, 'message')}
                                         ></textarea>
                                     </div>
                                     <button
                                         type="submit"
                                         className="btn btn-primary"
+                                        onClick={this.handleSubmit}
                                     >
                                         Submit
 									</button>

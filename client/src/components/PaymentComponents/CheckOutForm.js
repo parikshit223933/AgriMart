@@ -27,7 +27,6 @@ const CheckOutForm = (props) =>
     const userEmail = props.auth.user.email;
     useEffect(() =>
     {
-        console.log('****', userEmail);
         if (userEmail)
             // Create PaymentIntent as soon as the page loads
             window

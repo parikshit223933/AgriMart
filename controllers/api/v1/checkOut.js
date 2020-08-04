@@ -6,6 +6,7 @@ const Product = require("../../../models/productModel");
 const queue=require('../../../config/kue');
 const checkoutMailer=require('../../../mailers/checkoutMailer');
 const checkoutMailerWorker=require('../../../workers/checkoutMailerWorker');
+/* DO NOT REMOVE THE UNUSED IMPORTS */
 
 module.exports.createPayment = async (req, res) => { //{Items for checkout}
     const items = req.body.state.items;
