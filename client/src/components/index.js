@@ -31,6 +31,7 @@ import HomeSingleCategory from './HomeSingleCategory';
 import CheckOutForm from "./PaymentComponents/CheckOutForm";
 import PrivateRoute from './Routes/PrivateRoute';
 import RestrictedRoute from './Routes/RestrictedRoute';
+import ForgotPassword from './ForgotPassword';
 
 export
 {
@@ -66,5 +67,6 @@ export
     HomeSingleCategory,
     CheckOutForm,
     PrivateRoute,
-    RestrictedRoute
+    RestrictedRoute,
+    ForgotPassword
 };
