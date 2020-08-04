@@ -3,14 +3,27 @@ const STRIPE_PUBLISH_KEY = 'pk_test_51H9F89HyvUiMKHjejfcy7c0VYxb3a7AvYvCwQ9H7zx0
 const stripe = require('stripe')(STRIPE_SECRET_KEY);
 const User = require("../../../models/userModel");
 const Product = require("../../../models/productModel");
+const queue=require('../../../config/kue');
+const checkoutMailer=require('../../../mailers/checkoutMailer');
+const checkoutMailerWorker=require('../../../workers/checkoutMailerWorker');
 
 module.exports.createPayment = async (req, res) => { //{Items for checkout}
-    const items = req.body.items;
-
+    const items = req.body.state.items;
+    const userEmail=req.body.userEmail;
+    let user=await User.findOne({email:userEmail});
+    if(!user)
+    {
+        return res.json(403, {
+            success:false,
+            message:'User is not allowed to perform this action!'
+        });
+    }
+    // !WARNING: WE SHOULDNT BE DIRECTLY CONTINUING WITH THE PAYMENT.
+    //FIRSTLY CHECK FOR THE ALL THESE ITEMS, DO THEY EXIST IN THE DB OR NOT, IF NOT THEN CANCEL THE TRANSACTION!
+    
     //calculate amount
     let amount = 0;
     for(let i = 0; i < items.length; i++) {
-        console.log(items[i]);
         const quantity = items[i].quantity;
         const cost = items[i].price; 
         amount += quantity * cost;
@@ -28,6 +41,19 @@ module.exports.createPayment = async (req, res) => { //{Items for checkout}
             // Verify your integration in this guide by including this parameter
             metadata: {integration_check: 'accept_a_payment'},
         });
+
+        let job=queue
+        .create('checkout_mailer_worker', {price:amount, email:userEmail})
+        .save(function(error)
+        {
+            if(error)
+            {
+                console.log(error);
+                return;
+            }
+            console.log(`Job is enqueued with job id ${job.id}`)
+        })
+
         return res.json(200, {
             success: true,
             clientSecret: paymentIntent.client_secret,

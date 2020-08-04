@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { connect } from 'react-redux';
 import
-    {
-        CardElement,
-        useStripe,
-        useElements
-    } from "@stripe/react-stripe-js";
+{
+    CardElement,
+    useStripe,
+    useElements
+} from "@stripe/react-stripe-js";
 import '../../checkOutForm.css';
 
-export default function CheckOutForm(props)
+const CheckOutForm = (props) =>
 {
     /* we will render this component on buy now on a product page or cart checkout 
     in props we have to send items it could be all cart item or a specific item 
@@ -23,30 +24,32 @@ export default function CheckOutForm(props)
 
     const stripe = useStripe();
     const elements = useElements();
-
+    const userEmail = props.auth.user.email;
     useEffect(() =>
     {
-        // Create PaymentIntent as soon as the page loads
-        window
-            .fetch("http://localhost:8000/api/v1/checkout/createPayment", {
-                method: "POST",
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: JSON.stringify(location.state) //where, items: [{price: 100, quantity: 7}]
-            })
-            .then(res =>
-            {
-                console.log(res);
-                return res.json();
-            })
-            .then(data =>
-            {
-                console.log(data);
-                setClientSecret(data.clientSecret);
-                setAmount(data.amount);
-            });
-    }, [location.state]);
+        console.log('****', userEmail);
+        if (userEmail)
+            // Create PaymentIntent as soon as the page loads
+            window
+                .fetch("http://localhost:8000/api/v1/checkout/createPayment", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": 'application/json'
+                    },
+                    body: JSON.stringify({ state: location.state, userEmail }) //where, items: [{price: 100, quantity: 7}]
+                })
+                .then(res =>
+                {
+                    console.log(res);
+                    return res.json();
+                })
+                .then(data =>
+                {
+                    console.log(data);
+                    setClientSecret(data.clientSecret);
+                    setAmount(data.amount);
+                });
+    }, [location.state, userEmail]);
 
     const cardStyle = {
         style: {
@@ -142,3 +145,8 @@ export default function CheckOutForm(props)
 
     );
 }
+function mapStateToProps({ auth })
+{
+    return { auth };
+}
+export default connect(mapStateToProps)(CheckOutForm);
