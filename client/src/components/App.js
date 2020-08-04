@@ -26,7 +26,8 @@ import
     CheckOutForm,
     PrivateRoute,
     RestrictedRoute,
-    ForgotPassword
+    ForgotPassword,
+    ResetPassword
 } from "./";
 
 // call `loadStripe` outside of a component’s render to avoid
@@ -56,7 +57,8 @@ class App extends React.Component
                         <PrivateRoute path="/profile" exact component={Profile} />
                         <RestrictedRoute path="/sign-in" component={SignIn} />
                         <RestrictedRoute path="/sign-up" component={SignUp} />
-                        <RestrictedRoute path="/forgot-password" component={ForgotPassword} />
+                        <RestrictedRoute exact path="/forgot-password" component={ForgotPassword} />
+                        <RestrictedRoute exact path="/forgot-password/reset-password/:token" component={ResetPassword} />
                         <PrivateRoute path="/cart" component={Cart} />
                         <Route exact path="/categories" component={Categories} />
                         <PrivateRoute path="/sell" component={Sell} />

@@ -7,6 +7,7 @@ export const API_URLS = {
     updateUser: () => `${API_ROOT}/users/update-user`,
     uploadAvatar: () => `${API_ROOT}/users/upload-avatar`,
     forgotPassword:()=>`${API_ROOT}/users/forgot-password`,
+    resetPassword:()=>`${API_ROOT}/users/reset-password`,
     profilePictureRoot: () => USER_PROFILE_PICTURE_ROOT,
     getProducts: () => `${API_ROOT}/product/get-products`,
     getBoughtProducts: () => `${API_ROOT}/product/get-bought-items`,
@@ -25,5 +26,5 @@ export const API_URLS = {
     getCart: () => `${API_ROOT}/cart/get-all-products`,
     decreaseProductQuantity: () => `${API_ROOT}/cart/decrease-product-quantity`,
     deleteCartProduct: () => `${API_ROOT}/cart/delete-product-from-cart`,
-    sendMessage:()=>`${API_ROOT}/contact/contact-agrimart`
+    sendMessage:()=>`${API_ROOT}/contact/contact-agrimart`,
 };

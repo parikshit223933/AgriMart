@@ -398,3 +398,60 @@ module.exports.forgotPassword = async (req, res) =>
             });
         });
 }
+module.exports.resetPassword=async (req, res)=>
+{
+    let {confirmPassword, newPassword, token}=req.body;
+    if(!confirmPassword||!newPassword)
+    {
+        return res.json(422, {
+            success:false,
+            message:"Fields can't be empty!"
+        });
+    }
+    if(!token)
+    {
+        res.json(404, {
+            success:false,
+            message:'No token found in request!'
+        })
+    }
+    if(confirmPassword!=newPassword)
+    {
+        return res.json(422, {
+            success:false,
+            message:'Passwords in both the fields should be same!'
+        });
+    }
+    let dbToken=await Token.findOne({accessToken:token});
+    if(!dbToken)
+    {
+        return res.json(404, {
+            success:false,
+            message:"Invalid Link! You can't change password using this link!"
+        })
+    }
+    if(!dbToken.isValid)
+    {
+        return res.json(401, {
+            success:false,
+            message:'Token Expired! You cant reset password using this link!'
+        })
+    }
+    
+    let user=await User.findById(dbToken.user);
+    
+    const salt = await bcrypt.genSalt(saltRound);
+    const hash = await bcrypt.hash(newPassword, salt);
+
+    user.password=hash;
+    user.save();
+    token.isValid=false;
+    dbToken.save();
+
+    return res.json(200, {
+        success:true,
+        data:{
+            message:'Password Changed Successfully! Proceed to login.'
+        }
+    })
+}

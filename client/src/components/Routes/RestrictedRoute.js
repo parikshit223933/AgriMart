@@ -8,22 +8,7 @@ const RestrictedRoute = ({ component: Component, ...rest }) =>
         // Show the component only when the user is logged out
         // Otherwise, redirect the user to home page
         // ...rest destructure the props of route
-        <Route {...rest}
-            render={props =>
-                !isLoggedin ? (
-                    <Component />
-                ) : (
-                        <Redirect
-                            to={{
-                                pathname: "/",
-                                state: {
-                                    from: props.location
-                                }
-                            }}
-                        />
-                    )
-            }
-        />
+        <Route {...rest} render={props => !isLoggedin ? ( <Component {...rest} /> ) : ( <Redirect to={{ pathname: "/", state: { from: props.location } }} /> ) } />
     );
 }
 

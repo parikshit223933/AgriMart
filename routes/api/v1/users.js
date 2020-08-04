@@ -16,5 +16,6 @@ router.post(
 	usersApi.uploadAvatar
 );
 router.post('/forgot-password', usersApi.forgotPassword);
+router.post('/reset-password', usersApi.resetPassword);
 
 module.exports = router;

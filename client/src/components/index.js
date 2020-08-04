@@ -32,6 +32,7 @@ import CheckOutForm from "./PaymentComponents/CheckOutForm";
 import PrivateRoute from './Routes/PrivateRoute';
 import RestrictedRoute from './Routes/RestrictedRoute';
 import ForgotPassword from './ForgotPassword';
+import ResetPassword from './ResetPassword';
 
 export
 {
@@ -68,5 +69,6 @@ export
     CheckOutForm,
     PrivateRoute,
     RestrictedRoute,
-    ForgotPassword
+    ForgotPassword,
+    ResetPassword
 };
