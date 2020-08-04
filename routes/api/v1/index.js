@@ -7,6 +7,7 @@ const review=require('./review');
 const cart = require('./cart');
 const checkOut = require('./checkOut');
 const contact =require('./contact');
+
 router.use('/home', home);
 router.use('/users', users);
 router.use('/product', product);

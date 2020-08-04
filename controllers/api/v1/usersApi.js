@@ -3,13 +3,19 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 const fs = require("fs");
 const bcrypt = require("bcrypt");
+const Token = require('../../../models/tokenModel');
+const cryptoRandomString = require('crypto-random-string');
 const saltRound = 10;
-const authMailer= require("../../../mailers/authMailer");
-const signUpMailer=require('../../../mailers/signUpMailer');
 const queue = require('../../../config/kue');
+const authMailer = require("../../../mailers/authMailer");
+const signUpMailer = require('../../../mailers/signUpMailer');
 const loginMailWorker = require('../../../workers/loginMailWorker');
-const signUpMailWorker=require('../../../workers/signUpMailWorker');
-// ! WARNING: DO NOT REMOVE THE UNUSED REQUIRES.
+const signUpMailWorker = require('../../../workers/signUpMailWorker');
+const tokenMailer = require('../../../mailers/tokenMailer');
+const forgotPasswordWorker = require('../../../workers/forgotPasswordWorker');
+/**
+ * @WARNING : DO NOT REMOVE THE UNUSED REQUIRES.
+ */
 
 /* action for signing in */
 module.exports.create_session = async (req, res) =>
@@ -44,7 +50,7 @@ module.exports.create_session = async (req, res) =>
             {
                 if (error)
                 {
-                    console.log( error);
+                    console.log(error);
                     return;
                 }
                 console.log(`Job is enqueued with job id ${job.id}`)
@@ -127,9 +133,9 @@ module.exports.createUser = (req, res) =>
                             });
                         }
                         //user created successfully, now i can send an email corresponding to sign up
-                        let job=queue.create('signUpMailer', user).save(function(error)
+                        let job = queue.create('signUpMailer', user).save(function (error)
                         {
-                            if(error)
+                            if (error)
                             {
                                 console.log(error);
                                 return;
@@ -343,3 +349,52 @@ module.exports.uploadAvatar = (req, res) =>
         });
     }
 };
+module.exports.forgotPassword = async (req, res) =>
+{
+    //req={email:...}
+    if (!req.body.email)
+    {
+        return res.json(404, {
+            success: false,
+            message: 'Empty email field!'
+        });
+    }
+    let user = await User.findOne({ email: req.body.email });
+    if (!user)
+    {
+        res.json(404, {
+            success: false,
+            message: 'User does not exist!, Please Sign Up!'
+        });
+    }
+
+    let randomAccessToken = cryptoRandomString({ length: 100, type: 'url-safe' });
+    let token = await Token.create({ accessToken: randomAccessToken, user: user._id, isValid: true });
+    token.save();
+
+    let job = queue
+        .create('forgot_password',
+            {
+                email: user.email,
+                url: `http://localhost:3000/forgot-password/reset-password/${randomAccessToken}`,
+                name: user.name
+            })
+        .save(function (error)
+        {
+            if (error)
+            {
+                console.log(error);
+                return res.json(500, {
+                    success: false,
+                    message: 'Internal server Error!'
+                });
+            }
+            console.log(`Job is enqueued with job id ${job.id}`);
+            return res.json(200, {
+                success: true,
+                data: {
+                    message: 'Kindly check your Inbox!'
+                }
+            });
+        });
+}

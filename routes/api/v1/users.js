@@ -15,5 +15,6 @@ router.post(
 	Passport.authenticate("jwt", { session: false }),
 	usersApi.uploadAvatar
 );
+router.post('/forgot-password', usersApi.forgotPassword);
 
 module.exports = router;

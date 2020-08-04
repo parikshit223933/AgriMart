@@ -6,6 +6,7 @@ export const API_URLS = {
     createProduct: () => `${API_ROOT}/product/create`,
     updateUser: () => `${API_ROOT}/users/update-user`,
     uploadAvatar: () => `${API_ROOT}/users/upload-avatar`,
+    forgotPassword:()=>`${API_ROOT}/users/forgot-password`,
     profilePictureRoot: () => USER_PROFILE_PICTURE_ROOT,
     getProducts: () => `${API_ROOT}/product/get-products`,
     getBoughtProducts: () => `${API_ROOT}/product/get-bought-items`,
