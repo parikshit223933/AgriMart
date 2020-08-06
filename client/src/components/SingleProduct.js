@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "../singleProduct.css";
-import { getSingleProduct, addToCart, upvote } from "../actions/product";
+import { getSingleProduct, addToCart, upvote, downVote } from "../actions/product";
 import { API_URLS } from "../helpers/urls";
 import dateFormat from "dateformat";
 import { Review, ReviewHeader, ReviewCreator } from "./";
@@ -28,6 +28,10 @@ class SingleProduct extends React.Component {
     handleUpvote=(userId)=>
     {
         this.props.dispatch(upvote(userId, this.props.auth.user._id));
+    }
+    handleDownVote=(userId)=>
+    {
+        this.props.dispatch(downVote(userId, this.props.auth.user._id));
     }
 	render() {
 		const { singleProduct: product } = this.props.product;
@@ -183,14 +187,22 @@ class SingleProduct extends React.Component {
 													Upvotes
 												</div>
 												<div className="mt-2 mb-2">
-													<button
+                                                    {product.seller.upVotes.includes(this.props.auth.user._id)?<button
+														type="button"
+                                                        className="btn btn-danger btn-sm"
+                                                        onClick={()=>this.handleDownVote(product.seller._id)}
+													>
+														<i className="far fa-angry"></i>{" "}
+														DownVote
+													</button>:<button
 														type="button"
 														className="btn btn-success btn-sm"
 														onClick={()=>this.handleUpvote(product.seller._id)}
 													>
 														<i className="far fa-laugh-beam"></i>{" "}
 														UpVote
-													</button>
+													</button>}
+													
 												</div>
 												<div>
 													<i>

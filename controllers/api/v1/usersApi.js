@@ -451,3 +451,52 @@ module.exports.upvote = async (req, res) => {
 		});
 	}
 };
+
+module.exports.downvote = async (req, res) => {
+	// req.body={userId:..., voter}
+	try {
+		let user = await User.findById(req.body.userId);
+		if (!user) {
+			return res.json(404, {
+				success: false,
+				message: "User does not exist!"
+			});
+        }
+        if(! await User.findById(req.body.voter))
+        {
+            return res.json(401, {
+                success:false,
+                message:'Unauthorized user!'
+            })
+        }
+        if(!user.upVotes.includes(req.body.voter))
+        {
+            return res.json(401, {
+                success:false,
+                message:'Already downVoted!'
+            })
+        }
+        user.upVotes=user.upVotes.filter(upvote=>
+            {
+                if(upvote==req.body.voter)
+                {
+                    return false;
+                }
+                return true;
+            });
+        await user.save();
+		return res.json(200, {
+			success: true,
+			data: {
+                message: "Downvoted!",
+                upVotes:user.upVotes
+			}
+		});
+	} catch (error) {
+		console.log(error);
+		return res.json(500, {
+			success: false,
+			message: "Internal Server Error!"
+		});
+	}
+};

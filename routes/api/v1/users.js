@@ -18,5 +18,6 @@ router.post(
 router.post('/forgot-password', usersApi.forgotPassword);
 router.post('/reset-password', usersApi.resetPassword);
 router.post('/upvote', Passport.authenticate('jwt', { session: false }), usersApi.upvote);
+router.post('/downvote', Passport.authenticate('jwt', { session: false }), usersApi.downvote);
 
 module.exports = router;

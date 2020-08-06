@@ -55,7 +55,10 @@ import {
     CLEAR_PRODUCT_STATE,
     UPVOTE_START,
     UPVOTE_SUCCESS,
-    UPVOTE_FAILURE
+    UPVOTE_FAILURE,
+    DOWNVOTE_START,
+    DOWNVOTE_SUCCESS,
+    DOWNVOTE_FAILURE
 } from "./actionTypes";
 
 export function createProductStart() {
@@ -821,7 +824,7 @@ export function clearProductState()
     }
 }
 
-/* to upvote a user */
+/* UPVOTING THE SELLER OF A PRODUCT */
 export function upvoteStart()
 {
     return{
@@ -867,6 +870,57 @@ export function upvote(userId, voter)
                 else
                 {
                     dispatch(upvoteFailure(data.message));
+                }
+            })
+    }
+}
+
+/* DOWNVOTING THE SELLER OF A PRODUCT */
+export function downvoteStart()
+{
+    return{
+        type:DOWNVOTE_START
+    }
+}
+export function downvoteSuccess(success, upVotes)
+{
+    return{
+        type:DOWNVOTE_SUCCESS,
+        success,
+        upVotes
+    }
+}
+export function downvoteFailure(error)
+{
+    return{
+        type:DOWNVOTE_FAILURE,
+        error
+    }
+}
+export function downVote(userId, voter)
+{
+    return dispatch=>
+    {
+        dispatch(downvoteStart());
+        let url=API_URLS.downvote();
+        fetch(url, {
+            method: "POST",
+			headers: {
+				Authorization: `Bearer ${getAuthTokenFromStorage()}`,
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
+			body: getFormBody({ userId, voter })
+        })
+        .then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    dispatch(downvoteSuccess(data.data.message, data.data.upVotes));
+                }
+                else
+                {
+                    dispatch(downvoteFailure(data.message));
                 }
             })
     }

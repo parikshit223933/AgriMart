@@ -54,7 +54,10 @@ import
     CLEAR_PRODUCT_STATE,
     UPVOTE_START,
     UPVOTE_SUCCESS,
-    UPVOTE_FAILURE
+    UPVOTE_FAILURE,
+    DOWNVOTE_START,
+    DOWNVOTE_SUCCESS,
+    DOWNVOTE_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -517,6 +520,37 @@ export default function product(state = initialProductState, action)
                 success:action.success
             }
         case UPVOTE_FAILURE:
+            return {
+                ...state,
+                error:action.error,
+                inProgress:false
+            }
+        case DOWNVOTE_START:
+            return{
+                ...state,
+                inProgress:true,
+                error:false,
+                success:null
+            }
+        case DOWNVOTE_SUCCESS:
+            let new_single_product=Object.assign({}, state.singleProduct);
+            new_single_product.seller.upVotes=action.upVotes;
+            let new_All_Products=state.allProducts.map(product=>
+                {
+                    if(product._id===new_single_product._id)
+                    {
+                        return new_single_product;
+                    }
+                    return product;
+                });
+            return{
+                ...state,
+                singleProduct:new_single_product,
+                allProducts:new_All_Products,
+                inProgress:false,
+                success:action.success
+            }
+        case DOWNVOTE_FAILURE:
             return {
                 ...state,
                 error:action.error,
