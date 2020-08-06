@@ -30,13 +30,12 @@ class ProfileSummary extends React.Component
                             </h4>
                         )}
                     </div>
-                    <div className="bookmark">
+                    {/* <div className="bookmark">
                         <button type="button" className="btn btn-light">
                             <i className="fas fa-bookmark text-secondary"></i>{" "}
 							Bookmark
 						</button>
-                        {/* bookmarks button should be hidden and disabled if the user is viewing his own profile! */}
-                    </div>
+                    </div> */}
                     <div className="rankings">
                         <p className="text-muted rating mb-0 mt-4">Rating</p>
                         <div className="stars">
@@ -100,7 +99,7 @@ class ProfileSummary extends React.Component
                                 Purchase History
 							</a>
                         </li>
-                        <li className="nav-item" role="presentation">
+                        {/* <li className="nav-item" role="presentation">
                             <a
                                 className="nav-link bg-light"
                                 id="bookmarks-tab"
@@ -112,7 +111,7 @@ class ProfileSummary extends React.Component
                             >
                                 Bookmarks
 							</a>
-                        </li>
+                        </li> */}
                         <li className="nav-item" role="presentation">
                             <a
                                 className="nav-link bg-light"
@@ -152,14 +151,14 @@ class ProfileSummary extends React.Component
                         >
                             <ProfileProductHistory bought={boughtProducts} />
                         </div>
-                        <div
+                        {/* <div
                             className="tab-pane fade"
                             id="bookmarks"
                             role="tabpanel"
                             aria-labelledby="bookmarks-tab"
                         >
                             <ProfileBookmarkedUsers />
-                        </div>
+                        </div> */}
                         <div
                             className="tab-pane fade"
                             id="settings"

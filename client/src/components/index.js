@@ -13,7 +13,6 @@ import ProfileBrief from "./ProfileSubComponents/ProfileBrief";
 import ProfileSummary from "./ProfileSubComponents/ProfileSummary";
 import ProfileSoldItems from "./ProfileSubComponents/ProfileSoldItems";
 import ProfileUnsoldItems from "./ProfileSubComponents/ProfileUnsoldItems";
-import ProfileBookmarkedUsers from "./ProfileSubComponents/ProfileBookmarkedUsers";
 import ProfileProductHistory from "./ProfileSubComponents/ProfileProductHistory";
 import ProfileSettings from "./ProfileSubComponents/ProfileSettings";
 import ChangePassword from "./ProfileSubComponents/ChangePassword";
@@ -50,7 +49,6 @@ export
     ProfileBrief,
     ProfileSummary,
     ProfileSoldItems,
-    ProfileBookmarkedUsers,
     ProfileUnsoldItems,
     ProfileProductHistory,
     ProfileSettings,
