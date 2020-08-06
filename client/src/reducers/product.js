@@ -51,7 +51,10 @@ import
     DELETE_PRODUCT_FROM_CART_START,
     DELETE_PRODUCT_FROM_CART_SUCCESS,
     DELETE_PRODUCT_FROM_CART_FAILURE,
-    CLEAR_PRODUCT_STATE
+    CLEAR_PRODUCT_STATE,
+    UPVOTE_START,
+    UPVOTE_SUCCESS,
+    UPVOTE_FAILURE
 } from "../actions/actionTypes";
 
 let initialProductState = {
@@ -487,6 +490,37 @@ export default function product(state = initialProductState, action)
                 ...state,
                 error: null,
                 success: null,
+            }
+        case UPVOTE_START:
+            return{
+                ...state,
+                inProgress:true,
+                error:false,
+                success:null
+            }
+        case UPVOTE_SUCCESS:
+            let newSingleProduct=Object.assign({}, state.singleProduct);
+            newSingleProduct.seller.upVotes=action.upVotes;
+            let new_AllProducts=state.allProducts.map(product=>
+                {
+                    if(product._id===newSingleProduct._id)
+                    {
+                        return newSingleProduct;
+                    }
+                    return product;
+                });
+            return{
+                ...state,
+                singleProduct:newSingleProduct,
+                allProducts:new_AllProducts,
+                inProgress:false,
+                success:action.success
+            }
+        case UPVOTE_FAILURE:
+            return {
+                ...state,
+                error:action.error,
+                inProgress:false
             }
         default:
             return state;

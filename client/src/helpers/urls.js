@@ -27,4 +27,5 @@ export const API_URLS = {
     decreaseProductQuantity: () => `${API_ROOT}/cart/decrease-product-quantity`,
     deleteCartProduct: () => `${API_ROOT}/cart/delete-product-from-cart`,
     sendMessage:()=>`${API_ROOT}/contact/contact-agrimart`,
+    upvote:()=>`${API_ROOT}/users/upvote`,
 };

@@ -45,10 +45,12 @@ let userSchema = new mongoose.Schema(
 			type: Boolean,
 			default: false
 		},
-		upVotes: {
-			type: Number,
-			default: 0
-		},
+		upVotes: [
+            {
+                type:mongoose.Schema.Types.ObjectId,
+                ref:'User'
+            }
+        ],
 		bookmarks: [
 			{
 				type: mongoose.Schema.Types.ObjectId,

@@ -52,7 +52,10 @@ import {
     DELETE_PRODUCT_FROM_CART_START,
     DELETE_PRODUCT_FROM_CART_SUCCESS,
     DELETE_PRODUCT_FROM_CART_FAILURE,
-    CLEAR_PRODUCT_STATE
+    CLEAR_PRODUCT_STATE,
+    UPVOTE_START,
+    UPVOTE_SUCCESS,
+    UPVOTE_FAILURE
 } from "./actionTypes";
 
 export function createProductStart() {
@@ -815,5 +818,56 @@ export function clearProductState()
 {
     return {
         type:CLEAR_PRODUCT_STATE
+    }
+}
+
+/* to upvote a user */
+export function upvoteStart()
+{
+    return{
+        type:UPVOTE_START,
+    }
+}
+export function upvoteSuccess(success, upVotes)
+{
+    return{
+        type:UPVOTE_SUCCESS,
+        success,
+        upVotes
+    }
+}
+export function upvoteFailure(error)
+{
+    return{
+        type:UPVOTE_FAILURE,
+        error
+    }
+}
+export function upvote(userId, voter)
+{
+    return dispatch=>
+    {
+        dispatch(upvoteStart());
+        let url=API_URLS.upvote();
+        fetch(url, {
+            method: "POST",
+			headers: {
+				Authorization: `Bearer ${getAuthTokenFromStorage()}`,
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
+			body: getFormBody({ userId, voter })
+        })
+        .then(response=>response.json())
+        .then(data=>
+            {
+                if(data.success)
+                {
+                    dispatch(upvoteSuccess(data.data.message, data.data.upVotes));
+                }
+                else
+                {
+                    dispatch(upvoteFailure(data.message));
+                }
+            })
     }
 }

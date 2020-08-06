@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import
     {
         ProfileSoldItems,
-        ProfileBookmarkedUsers,
         ProfileProductHistory,
         ProfileUnsoldItems,
         ProfileSettings
