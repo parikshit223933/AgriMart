@@ -30,6 +30,8 @@ import
     ResetPassword
 } from "./";
 
+import CheckOutForm2 from './PaymentComponents/CheckOutForm2';
+
 // call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const STRIPE_PUBLISH_KEY = "pk_test_51H9F89HyvUiMKHjejfcy7c0VYxb3a7AvYvCwQ9H7zx00NJpIThu90qwueiPRXsH9j0bfe7sGHWKTe1JWDDAU0ked00l1v3ppVd";
@@ -75,6 +77,11 @@ class App extends React.Component
                         <PrivateRoute path="/checkout">
                             <Elements stripe={stripePromise}>
                                 <CheckOutForm />
+                            </Elements>
+                        </PrivateRoute>
+                        <PrivateRoute exact path="/test-component">
+                            <Elements stripe={stripePromise}>
+                                <CheckOutForm2 />
                             </Elements>
                         </PrivateRoute>
                         <Route component={Page404} />

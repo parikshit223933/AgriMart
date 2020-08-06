@@ -1,0 +1,192 @@
+input,
+button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: none;
+	border-style: none;
+}
+
+.checkout-component {
+	padding-top: 5rem;
+	padding-left: 6rem;
+    padding-right: 0px;
+    background-color: #404040;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='100' y1='33' x2='100' y2='-3'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='100' y1='135' x2='100' y2='97'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='%23363636' fill-opacity='0.6'%3E%3Crect x='100' width='100' height='100'/%3E%3Crect y='100' width='100' height='100'/%3E%3C/g%3E%3Cg fill-opacity='0.5'%3E%3Cpolygon fill='url(%23a)' points='100 30 0 0 200 0'/%3E%3Cpolygon fill='url(%23b)' points='100 100 0 130 0 100 200 100 200 130'/%3E%3C/g%3E%3C/svg%3E");
+    height:100vh;
+}
+@keyframes fade {
+	from {
+		opacity: 0;
+		transform: scale3D(0.95, 0.95, 0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale3D(1, 1, 1);
+	}
+}
+
+.Form {
+	animation: fade 200ms ease-out;
+	background-color: rgb(207, 207, 207);
+	box-shadow: 0px 0px 20px 1px rgb(0, 0, 0);
+}
+
+.FormGroup {
+	margin: 0 15px 20px;
+	padding: 0;
+	border-style: none;
+	background-color: #494949;
+	will-change: opacity, transform;
+}
+
+.FormRow {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	margin-left: 15px;
+	border-top: 1px solid white;
+}
+
+.FormRow:first-child {
+	border-top: none;
+}
+
+.FormRowLabel {
+	width: 15%;
+	min-width: 70px;
+	padding: 11px 0;
+	color: #ffffff;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@keyframes void-animation-out {
+	0%,
+	to {
+		opacity: 1;
+	}
+}
+.FormRowInput:-webkit-autofill {
+	-webkit-text-fill-color: #fce883;
+	/* Hack to hide the default webkit autofill */
+	transition: background-color 100000000s;
+	animation: 1ms void-animation-out;
+}
+
+.FormRowInput {
+	font-size: 16px;
+	width: 100%;
+	padding: 11px 15px 11px 0;
+	color: #fff;
+	background-color: transparent;
+	animation: 1ms void-animation-out;
+}
+
+.FormRowInput::placeholder {
+	color: #ebebeb;
+}
+
+.StripeElement--webkit-autofill {
+	background: transparent !important;
+}
+
+.StripeElement {
+	width: 100%;
+	padding: 11px 15px 11px 0;
+}
+
+.SubmitButton {
+	display: block;
+	font-size: 16px;
+	width: calc(100% - 30px);
+	height: 40px;
+	margin: 40px 15px 0;
+	background-color: #494949;
+	border-radius: 4px;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 100ms ease-in-out;
+	will-change: transform, background-color, box-shadow;
+}
+
+.SubmitButton:active {
+	background-color: #d782d9;
+	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+		inset 0 1px 0 #e298d8;
+	transform: scale(0.99);
+}
+
+.SubmitButton.SubmitButton--error {
+	transform: translateY(15px);
+}
+.SubmitButton.SubmitButton--error:active {
+	transform: scale(0.99) translateY(15px);
+}
+
+.SubmitButton:disabled {
+	opacity: 0.5;
+	cursor: default;
+	background-color: #7795f8;
+	box-shadow: none;
+}
+
+.ErrorMessage {
+	color: rgb(0, 0, 0);
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	padding: 0 15px;
+	font-size: 13px;
+	margin-top: 0px;
+	width: 100%;
+	transform: translateY(-15px);
+	opacity: 0;
+	animation: fade 150ms ease-out;
+	animation-delay: 50ms;
+	animation-fill-mode: forwards;
+	will-change: opacity, transform;
+}
+
+.ErrorMessage svg {
+	margin-right: 10px;
+}
+
+.Result {
+	margin-top: 50px;
+	text-align: center;
+	animation: fade 200ms ease-out;
+}
+
+.ResultTitle {
+	color: rgb(0, 136, 52);
+	font-weight: 500;
+	margin-bottom: 8px;
+	font-size: 17px;
+	text-align: center;
+}
+
+.ResultMessage {
+	color: #001c2c;
+	font-size: 14px;
+	font-weight: 400;
+	margin-bottom: 25px;
+	line-height: 1.6em;
+	text-align: center;
+}
+
+.ResetButton {
+	border: 0;
+	cursor: pointer;
+	background: transparent;
+}
+@media screen and (max-width: 500px) {
+	.checkout-component {
+		padding-top: 10rem;
+		padding-left: 1rem;
+		padding-right: 0px;
+	}
+}
