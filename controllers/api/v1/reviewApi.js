@@ -130,7 +130,7 @@ module.exports.deleteReview = async (req, res) =>
                 product.three * 3 +
                 product.four * 4 +
                 product.five * 5) /
-            (product.reviews.length - 1),
+            (product.reviews.length),
             2
         );
         await review.remove();
