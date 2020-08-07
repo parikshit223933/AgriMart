@@ -13,6 +13,7 @@ const loginMailWorker = require("../../../workers/loginMailWorker");
 const signUpMailWorker = require("../../../workers/signUpMailWorker");
 const tokenMailer = require("../../../mailers/tokenMailer");
 const forgotPasswordWorker = require("../../../workers/forgotPasswordWorker");
+const crypto = require("crypto");
 /**
  * @WARNING : DO NOT REMOVE THE UNUSED REQUIRES.
  */
@@ -73,13 +74,17 @@ module.exports.create_session = async (req, res) => {
 
 /* action for signing up */
 module.exports.createUser = (req, res) => {
-    if(!req.body.password||!req.body.confirm_password||!req.body.email||!req.body.name)
-    {
-        return res.json(404, {
-            success:false,
-            message:'Please fill all the required fields!'
-        })
-    }
+	if (
+		!req.body.password ||
+		!req.body.confirm_password ||
+		!req.body.email ||
+		!req.body.name
+	) {
+		return res.json(404, {
+			success: false,
+			message: "Please fill all the required fields!"
+		});
+	}
 	if (req.body.password != req.body.confirm_password) {
 		//if the passwords entered in the "password" and confirm password" field are not same, then the user will be redirected back to the page he came from.
 		return res.json(401, {
@@ -426,28 +431,26 @@ module.exports.upvote = async (req, res) => {
 				success: false,
 				message: "User does not exist!"
 			});
-        }
-        if(! await User.findById(req.body.voter))
-        {
-            return res.json(401, {
-                success:false,
-                message:'Unauthorized user!'
-            })
-        }
-        if(user.upVotes.includes(req.body.voter))
-        {
-            return res.json(401, {
-                success:false,
-                message:'Already UpVoted!'
-            })
-        }
+		}
+		if (!(await User.findById(req.body.voter))) {
+			return res.json(401, {
+				success: false,
+				message: "Unauthorized user!"
+			});
+		}
+		if (user.upVotes.includes(req.body.voter)) {
+			return res.json(401, {
+				success: false,
+				message: "Already UpVoted!"
+			});
+		}
 		user.upVotes.push(req.body.voter);
-        await user.save();
+		await user.save();
 		return res.json(200, {
 			success: true,
 			data: {
-                message: "Upvoted!",
-                upVotes:user.upVotes
+				message: "Upvoted!",
+				upVotes: user.upVotes
 			}
 		});
 	} catch (error) {
@@ -468,37 +471,92 @@ module.exports.downvote = async (req, res) => {
 				success: false,
 				message: "User does not exist!"
 			});
-        }
-        if(! await User.findById(req.body.voter))
-        {
-            return res.json(401, {
-                success:false,
-                message:'Unauthorized user!'
-            })
-        }
-        if(!user.upVotes.includes(req.body.voter))
-        {
-            return res.json(401, {
-                success:false,
-                message:'Already downVoted!'
-            })
-        }
-        user.upVotes=user.upVotes.filter(upvote=>
-            {
-                if(upvote==req.body.voter)
-                {
-                    return false;
-                }
-                return true;
-            });
-        await user.save();
+		}
+		if (!(await User.findById(req.body.voter))) {
+			return res.json(401, {
+				success: false,
+				message: "Unauthorized user!"
+			});
+		}
+		if (!user.upVotes.includes(req.body.voter)) {
+			return res.json(401, {
+				success: false,
+				message: "Already downVoted!"
+			});
+		}
+		user.upVotes = user.upVotes.filter((upvote) => {
+			if (upvote == req.body.voter) {
+				return false;
+			}
+			return true;
+		});
+		await user.save();
 		return res.json(200, {
 			success: true,
 			data: {
-                message: "Downvoted!",
-                upVotes:user.upVotes
+				message: "Downvoted!",
+				upVotes: user.upVotes
 			}
 		});
+	} catch (error) {
+		console.log(error);
+		return res.json(500, {
+			success: false,
+			message: "Internal Server Error!"
+		});
+	}
+};
+
+/* GOOGLE OAUTH LOGIN (COLLECTING DATA FROM REACT GOOGLE LOGIN LIBRARY) */
+module.exports.OAuth2 = async (req, res) => {
+	//password, email, name
+	try {
+		let checkExistingUser = await User.findOne({ email: req.body.email });
+		if (checkExistingUser) {
+			let { password, ...expanded_user } = checkExistingUser._doc;
+			return res.json(200, {
+				message: "Sign in successful!",
+				success: true,
+				data: {
+					token: jwt.sign(expanded_user, "secret"),
+					user: expanded_user
+				}
+			});
+		} else {
+			let unhashedPassword = crypto.randomBytes(100).toString("hex");
+			let salt = await bcrypt.genSalt(saltRound);
+
+			let hashedPassword = await bcrypt.hash(unhashedPassword, salt);
+			let email = req.body.email;
+			let name = req.body.name;
+
+			try {
+				let user = await User.create({
+					password: hashedPassword,
+					email,
+					name
+				});
+
+                await user.save();
+                
+                let { password, ...expanded_user } = await user._doc;
+                console.log(expanded_user);
+				return res.json(200, {
+					message: "Sign in successful!",
+					success: true,
+					data: {
+						token: jwt.sign(expanded_user, "secret"),
+						user: expanded_user
+					}
+				});
+			} catch (error) {
+				console.log(error);
+				return res.json(500, {
+					success: false,
+					message: "Internal Server Error!"
+				});
+			}
+		}
 	} catch (error) {
 		console.log(error);
 		return res.json(500, {

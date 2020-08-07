@@ -14,6 +14,9 @@ import
         UPLOAD_AVATAR_START,
         UPLOAD_AVATAR_SUCCESS,
         UPLOAD_AVATAR_FAILURE,
+        OAUTH_START,
+        OAUTH_FAILURE,
+        OAUTH_SUCCESS,
     } from "./actionTypes";
 import { API_URLS } from "../helpers/urls";
 import { getFormBody, getAuthTokenFromStorage } from "../helpers/utils";
@@ -239,5 +242,53 @@ export function uploadAvatar(data)
                     dispatch(uploadAvatarFailure(res.data.message));
             })
             .catch((error) => console.log(error));
+    };
+}
+
+/* OAUTH */
+export function oauthStart()
+{
+    return{
+        type:OAUTH_START
+    }
+}
+export function oauthSuccess(user)
+{
+    return{
+        type:OAUTH_SUCCESS,
+        user
+    }
+}
+export function oauthFailure(error)
+{
+    return {
+        type:OAUTH_FAILURE,
+        error
+    }
+}
+export function OAuth(name, email)
+{
+    return (dispatch) =>
+    {
+        dispatch(oauthStart());
+        let url = API_URLS.oauth();
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: getFormBody({ name, email})
+        })
+            .then((response) => response.json())
+            .then((data) =>
+            {
+                if (data.success)
+                {
+                    localStorage.setItem("token", data.data.token);
+                    dispatch(oauthSuccess(data.data.user));
+                    return;
+                }
+                dispatch(oauthFailure(data.message));
+            });
     };
 }

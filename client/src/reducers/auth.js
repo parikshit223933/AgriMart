@@ -13,7 +13,10 @@ import
         UPDATE_USER_FAILED,
         UPLOAD_AVATAR_START,
         UPLOAD_AVATAR_SUCCESS,
-        UPLOAD_AVATAR_FAILURE
+        UPLOAD_AVATAR_FAILURE,
+        OAUTH_START,
+        OAUTH_SUCCESS,
+        OAUTH_FAILURE
     } from "../actions/actionTypes";
 
 let initialAuthState = {
@@ -127,6 +130,29 @@ export default function auth(state = initialAuthState, action)
                 error: action.error,
                 success:false
             };
+        case OAUTH_START:
+            return{
+                ...state,
+                inProgress:true,
+                error:null,
+                success:null
+            }
+        case OAUTH_SUCCESS:
+            return{
+                ...state,
+                inProgress:false,
+                user:action.user,
+                success:'Signed In using Google!',
+                isLoggedIn:true
+            }
+        case OAUTH_FAILURE:
+            return{
+                ...state,
+                inProgress:false,
+                isLoggedIn:false,
+                error:action.error
+            }
+
         default:
             return state;
     }
