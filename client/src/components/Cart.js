@@ -74,7 +74,20 @@ class Cart extends React.Component
     {
         if (this.props.product.inProgress)
         {
-            return <h1>Loading please wait...</h1>;
+            return (
+				<div
+					style={{ height: "100vh", width: "100vh" }}
+					className="d-flex flex-column justify-content-center align-items-center ml-auto mr-auto"
+				>
+					<div
+						className="spinner-border text-danger"
+						role="status"
+						style={{ width: "10rem", height: "10rem" }}
+					>
+						<span className="sr-only">Loading...</span>
+					</div>
+				</div>
+			);
         }
         const { cart } = this.props.product;
         console.log(cart);

@@ -6,6 +6,14 @@ class ReviewHeader extends React.Component
 {
     render()
     {
+        if (this.props.product.inProgress)
+        {
+            return (
+				<div className="spinner-border text-warning text-center" role="status">
+  <span className="sr-only">Loading...</span>
+</div>
+			);
+        }
         const { singleProduct: product } = this.props.product;
         const { revLength } = this.props;//length of the reviews array
         return (

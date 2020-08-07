@@ -54,6 +54,14 @@ class ReviewCreator extends React.Component
     }
     render()
     {
+        if (this.props.auth.inProgress)
+        {
+            return (
+				<div className="spinner-border text-warning text-center" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+			);
+        }
         const creationAllowed = this.checkReviews(this.props.reviews);
 
         return (

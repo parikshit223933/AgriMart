@@ -367,6 +367,23 @@ class Home extends React.Component
     render()
     {
         const menu = this.menuItems;
+        if (this.props.product.inProgress||this.props.auth.inProgress)
+        {
+            return (
+				<div
+					style={{ height: "100vh", width: "100vh" }}
+					className="d-flex flex-column justify-content-center align-items-center ml-auto mr-auto"
+				>
+					<div
+						className="spinner-border text-danger"
+						role="status"
+						style={{ width: "10rem", height: "10rem" }}
+					>
+						<span className="sr-only">Loading...</span>
+					</div>
+				</div>
+			);
+        }
         return (
             <div className="home-component">
                 <div className="grad-cover">

@@ -229,16 +229,19 @@ class SingleCategory extends React.Component
         if (inProgress)
         {
             return (
-                <div className="text-center pt-5">
-                    <div
-                        className="spinner-border text-warning"
-                        role="status"
-                        style={{ width: "5rem", height: "5rem" }}
-                    >
-                        <span className="sr-only">Loading...</span>
-                    </div>
-                </div>
-            );
+				<div
+					style={{ height: "100vh", width: "100vh" }}
+					className="d-flex flex-column justify-content-center align-items-center ml-auto mr-auto"
+				>
+					<div
+						className="spinner-border text-danger"
+						role="status"
+						style={{ width: "10rem", height: "10rem" }}
+					>
+						<span className="sr-only">Loading...</span>
+					</div>
+				</div>
+			);
         }
 
         let PriceAscending = this.sortPriceAscending(categorizedProducts);

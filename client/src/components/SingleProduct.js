@@ -169,7 +169,7 @@ class SingleProduct extends React.Component {
 												<div>
 													<h6 className="m-0">
 														{product.seller.name}{" "}
-														{!product.seller
+														{product.seller
 															.trusted ? (
 															<span
 																style={{

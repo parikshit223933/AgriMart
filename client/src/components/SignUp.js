@@ -69,6 +69,23 @@ class SignUp extends React.Component
     }
     render()
     {
+        if (this.props.auth.inProgress)
+        {
+            return (
+				<div
+					style={{ height: "100vh", width: "100vh" }}
+					className="d-flex flex-column justify-content-center align-items-center ml-auto mr-auto"
+				>
+					<div
+						className="spinner-border text-danger"
+						role="status"
+						style={{ width: "10rem", height: "10rem" }}
+					>
+						<span className="sr-only">Loading...</span>
+					</div>
+				</div>
+			);
+        }
         return (
             <div className="sign-up">
                 <div className="container animate__animated animate__fadeInLeft">

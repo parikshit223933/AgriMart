@@ -188,7 +188,10 @@ class CheckoutForm extends React.Component {
 								<ResetButton onClick={this.reset} />
 							</div>
 						) : (
-							<form className="Form pt-4 pb-4" onSubmit={this.handleSubmit}>
+							<form
+								className="Form pt-4 pb-4"
+								onSubmit={this.handleSubmit}
+							>
 								<fieldset className="FormGroup">
 									<Field
 										label="Name"
@@ -291,5 +294,4 @@ const App = () => {
 		</div>
 	);
 };
-
 export default App;

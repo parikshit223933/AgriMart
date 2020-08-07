@@ -8,7 +8,8 @@ class SingleProductInCategory extends React.Component {
 		this.props.dispatch(addToCart(this.props.auth.user._id, productId));
 	};
 	render() {
-		const { product, index } = this.props;
+        const { product, index } = this.props;
+        
 		return (
 			<div
 				className="card prod-card mb-2 mt-2 ml-1 mr-1"
