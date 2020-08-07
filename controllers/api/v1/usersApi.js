@@ -73,6 +73,13 @@ module.exports.create_session = async (req, res) => {
 
 /* action for signing up */
 module.exports.createUser = (req, res) => {
+    if(!req.body.password||!req.body.confirm_password||!req.body.email||!req.body.name)
+    {
+        return res.json(404, {
+            success:false,
+            message:'Please fill all the required fields!'
+        })
+    }
 	if (req.body.password != req.body.confirm_password) {
 		//if the passwords entered in the "password" and confirm password" field are not same, then the user will be redirected back to the page he came from.
 		return res.json(401, {

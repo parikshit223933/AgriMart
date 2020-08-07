@@ -92,7 +92,8 @@ class SignUp extends React.Component
                     <div className="row">
                         <div className="col-xl-8 offset-xl-2 col-md-10 offset-md-2 col-sm-12 bg-light mt-5 p-5 custom-sign-box">
                             <h1 className="text-center">Sign Up</h1>
-                            <form>
+                            
+                            <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="name">Name</label>
                                     <input
@@ -103,6 +104,7 @@ class SignUp extends React.Component
                                         placeholder="Enter your name here!"
                                         onChange={this.handleNameChange}
                                         value={this.state.name}
+                                        required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -115,6 +117,7 @@ class SignUp extends React.Component
                                         placeholder="abc@example.com"
                                         onChange={this.handleEmailChange}
                                         value={this.state.email}
+                                        required
                                     />
                                     <small
                                         id="email"
@@ -133,6 +136,7 @@ class SignUp extends React.Component
                                         placeholder="Enter a new password!"
                                         onChange={this.handlePasswordChange}
                                         value={this.state.password}
+                                        required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -148,11 +152,11 @@ class SignUp extends React.Component
                                             this.handleConfirmPasswordChange
                                         }
                                         value={this.state.confirm_password}
+                                        required
                                     />
                                 </div>
                                 <button
                                     type="submit"
-                                    onClick={this.handleSubmit}
                                     className="btn btn-primary"
                                 >
                                     Submit

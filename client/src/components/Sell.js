@@ -13,7 +13,7 @@ class Sell extends React.Component {
 			coverImage: "",
 			price: "",
 			description: "",
-			category: "",
+			category: "Category",
 			minimumOrderQuantity: "",
 			remainingQuantity: ""
 		};
@@ -40,6 +40,7 @@ class Sell extends React.Component {
 		}
 	};
 	handleSubmit = (event) => {
+        event.preventDefault();
 		if (this.state.category === "Category") {
 			window.alert(
 				"Please Select a Category. In case your Entity is not mentioned in the list, please select 'Other' option!"
@@ -64,7 +65,7 @@ class Sell extends React.Component {
 	};
 
 	render() {
-		const { isLoggedIn } = this.props.auth;
+        const { isLoggedIn } = this.props.auth;
 		if (!isLoggedIn) {
 			return <Redirect to="/sign-in" />;
 		}
@@ -96,7 +97,7 @@ class Sell extends React.Component {
 							<h1 className="text-center pb-4">
 								Start Selling...
 							</h1>
-							<form>
+							<form onSubmit={this.handleSubmit}>
 								<div className="form-group">
 									<label htmlFor="name">Entity Name</label>
 									<input
@@ -194,8 +195,7 @@ class Sell extends React.Component {
 									<label htmlFor="description">
 										Description
 									</label>
-									<input
-										type="text"
+									<textarea
 										className="form-control"
 										id="description"
 										aria-describedby="description"
@@ -213,7 +213,8 @@ class Sell extends React.Component {
 								<div className="form-group">
 									<select
 										className="custom-select"
-										defaultValue="1"
+                                        defaultValue="1"
+                                        required
 										onChange={(event) => {
 											this.formInputHandler(
 												"category",
@@ -354,7 +355,6 @@ class Sell extends React.Component {
 								<button
 									type="submit"
 									className="btn btn-success"
-									onClick={this.handleSubmit}
 								>
 									Submit
 								</button>
