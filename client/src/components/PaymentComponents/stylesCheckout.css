@@ -1,11 +1,17 @@
-input,
+/* input,
 button {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 	outline: none;
 	border-style: none;
-}
+} */
+/* 
+*
+* @warning: other things will break visually after revoving the above comment.
+in single category component the checkboxes will get hidden
+*
+ */
 
 .checkout-component {
 	padding-top: 5rem;
