@@ -77,11 +77,6 @@ class Navbar extends React.Component
         this.props.dispatch(logout());
         this.closePrimaryNavbar()
     };
-    handleThemeToggler = (event) =>
-    {
-        this.closePrimaryNavbar()
-        //To be done later
-    };
     closePrimaryNavbar = () =>
     {
         $(".exposed-navbar").removeClass("exposed");
@@ -131,9 +126,6 @@ class Navbar extends React.Component
                         </div>
                         <div className="categories">
                             <i className="fas fa-sitemap"></i>
-                        </div>
-                        <div className="toggle-theme">
-                            <i className="fas fa-exchange-alt"></i>
                         </div>
                         {isLoggedIn && (
                             <div className="sell">
@@ -200,14 +192,6 @@ class Navbar extends React.Component
                                 Categories{" "}
                                 <i className="fas fa-chevron-right float-right"></i>
                             </div>
-                        </Link>
-                        <Link
-                            to=""
-                            className="toggle-theme-exposed"
-                            onClick={this.handleThemeToggler}
-
-                        >
-                            <div>Toggle Theme</div>
                         </Link>
                         {isLoggedIn && (
                             <Link to="/sell" className="sell-exposed" onClick={this.closePrimaryNavbar}>
