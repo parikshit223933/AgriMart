@@ -1,8 +1,8 @@
 import React from "react";
-import { retrieveProducts, editProduct, clearProductState } from "../actions/product";
+import { retrieveProducts, editProduct, clearProductState } from "../../actions/product";
 import * as $ from "jquery";
 import { connect } from "react-redux";
-import { getAuthTokenFromStorage, showNotification } from "../helpers/utils";
+import { getAuthTokenFromStorage, showNotification } from "../../helpers/utils";
 import jwtDecode from "jwt-decode";
 
 class EditProduct extends React.Component

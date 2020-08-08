@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import * as jwtDecode from "jwt-decode";
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { getAuthTokenFromStorage } from "../helpers/utils";
+import { getAuthTokenFromStorage } from "../../helpers/utils";
 import { connect } from "react-redux";
-import { authenticateUser } from "../actions/auth";
-import "../App.css";
+import { authenticateUser } from "../../actions/auth";
+import "../../App.css";
 
 import
 {
@@ -28,9 +28,9 @@ import
     RestrictedRoute,
     ForgotPassword,
     ResetPassword
-} from "./";
+} from "..";
 
-import CheckOutForm2 from './PaymentComponents/CheckOutForm2';
+import CheckOutForm2 from '../PaymentComponents/CheckOutForm2';
 
 // call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.

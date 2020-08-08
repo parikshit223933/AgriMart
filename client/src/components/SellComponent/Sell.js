@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { createProduct, clearProductState } from "../actions/product";
-import { showNotification } from "../helpers/utils";
+import { createProduct, clearProductState } from "../../actions/product";
+import { showNotification } from "../../helpers/utils";
 
 class Sell extends React.Component {
 	constructor(props) {

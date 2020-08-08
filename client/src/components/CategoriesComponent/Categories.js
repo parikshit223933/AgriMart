@@ -1,5 +1,5 @@
 import React from "react";
-import "../category.css";
+import "../../category.css";
 import { Link } from 'react-router-dom';
 
 class Categories extends React.Component

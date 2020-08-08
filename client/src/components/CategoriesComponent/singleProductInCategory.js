@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { addToCart } from "../actions/product";
+import { addToCart } from "../../actions/product";
 
 class SingleProductInCategory extends React.Component {
 	handleAddToCart = (productId) => {

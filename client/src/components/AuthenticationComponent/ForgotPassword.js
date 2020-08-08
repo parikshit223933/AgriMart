@@ -1,6 +1,6 @@
 import React from 'react';
-import { API_URLS } from '../helpers/urls';
-import { showNotification, getFormBody } from '../helpers/utils';
+import { API_URLS } from '../../helpers/urls';
+import { showNotification, getFormBody } from '../../helpers/utils';
 
 class ForgotPassword extends React.Component
 {

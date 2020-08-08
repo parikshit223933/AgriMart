@@ -1,8 +1,8 @@
 import React from "react";
-import "../cart.css";
+import "../../cart.css";
 import { connect } from "react-redux";
-import { getCartItems, decreaseProductQuantity, addToCart, deleteProductFromCart, clearProductState } from "../actions/product";
-import { getAuthTokenFromStorage, showNotification } from "../helpers/utils";
+import { getCartItems, decreaseProductQuantity, addToCart, deleteProductFromCart, clearProductState } from "../../actions/product";
+import { getAuthTokenFromStorage, showNotification } from "../../helpers/utils";
 import jwtDecode from "jwt-decode";
 import { Link } from 'react-router-dom';
 import $ from 'jquery';

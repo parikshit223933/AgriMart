@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import "../singleProduct.css";
-import { getSingleProduct, addToCart, upvote, downVote } from "../actions/product";
-import { API_URLS } from "../helpers/urls";
+import "../../singleProduct.css";
+import { getSingleProduct, addToCart, upvote, downVote } from "../../actions/product";
+import { API_URLS } from "../../helpers/urls";
 import dateFormat from "dateformat";
-import { Review, ReviewHeader, ReviewCreator } from "./";
-import { createReview } from "../actions/product";
+import { Review, ReviewHeader, ReviewCreator } from "../";
+import { createReview } from "../../actions/product";
 import moment from "moment";
 
 class SingleProduct extends React.Component {

@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getAuthTokenFromStorage, showNotification } from "../helpers/utils";
+import { getAuthTokenFromStorage, showNotification } from "../../helpers/utils";
 import * as jwtDecode from "jwt-decode";
 import * as $ from "jquery";
-import "../Profile.css";
-import { ProfileBrief, ProfileSummary } from "./";
+import "../../Profile.css";
+import { ProfileBrief, ProfileSummary } from "../";
 import { Redirect } from "react-router-dom";
-import { retrieveProducts, fetchBoughtProducts } from "../actions/product";
-import { clearAuthState } from "../actions/auth";
+import { retrieveProducts, fetchBoughtProducts } from "../../actions/product";
+import { clearAuthState } from "../../actions/auth";
 
 class Profile extends React.Component
 {

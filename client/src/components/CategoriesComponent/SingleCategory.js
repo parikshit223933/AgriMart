@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import {
 	fetchCategorizedProducts,
 	clearProductState
-} from "../actions/product";
-import "../category.css";
+} from "../../actions/product";
+import "../../category.css";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
-import { SingleProductInCategory } from "./";
-import { showNotification } from "../helpers/utils";
+import { SingleProductInCategory } from "../";
+import { showNotification } from "../../helpers/utils";
 class SingleCategory extends React.Component {
 	constructor(props) {
 		super(props);

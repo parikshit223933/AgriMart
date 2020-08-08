@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { clearAuthState, signUp, OAuth } from "../actions/auth";
-import { showNotification } from "../helpers/utils";
+import { clearAuthState, signUp, OAuth } from "../../actions/auth";
+import { showNotification } from "../../helpers/utils";
 import GoogleLogin from "react-google-login";
 
 /* 
