@@ -1,10 +1,10 @@
 import React from "react";
-import "../info.css";
-import tushar from "../images/tushar.jpg";
-import cpd from "../images/chandra.jpg";
-import parikshit from "../images/parikshit.jpg";
-import {API_URLS} from '../helpers/urls';
-import { showNotification, getFormBody } from "../helpers/utils";
+import "../../info.css";
+import tushar from "../../images/tushar.jpg";
+import cpd from "../../images/chandra.jpg";
+import parikshit from "../../images/parikshit.jpg";
+import {API_URLS} from '../../helpers/urls';
+import { showNotification, getFormBody } from "../../helpers/utils";
 
 class MoreInfo extends React.Component
 {

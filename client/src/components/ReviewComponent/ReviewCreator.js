@@ -1,6 +1,6 @@
 import React from "react";
-import { showNotification } from "../helpers/utils";
-import { clearProductState } from "../actions/product";
+import { showNotification } from "../../helpers/utils";
+import { clearProductState } from "../../actions/product";
 import { connect } from 'react-redux';
 
 class ReviewCreator extends React.Component

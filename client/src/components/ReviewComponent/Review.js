@@ -5,7 +5,7 @@ import {
 	updateReview,
 	toggleLike,
 	toggleDislike
-} from "../actions/product";
+} from "../../actions/product";
 import moment from "moment";
 
 /* this component contains all the reviews */

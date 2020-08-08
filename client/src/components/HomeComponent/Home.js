@@ -1,12 +1,12 @@
 import React from "react";
-import "../home.css";
+import "../../home.css";
 import { Link } from "react-router-dom";
 import ScrollMenu from "react-horizontal-scrolling-menu";
-import { HomeSingleCategory } from "./";
-import { getHomeProducts } from "../actions/product";
+import { HomeSingleCategory } from "../";
+import { getHomeProducts } from "../../actions/product";
 import { connect } from "react-redux";
-import { showNotification } from "../helpers/utils";
-import { clearAuthState } from "../actions/auth";
+import { showNotification } from "../../helpers/utils";
+import { clearAuthState } from "../../actions/auth";
 
 // list of items
 const list = [

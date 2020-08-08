@@ -1,6 +1,6 @@
 import React from 'react';
-import { API_URLS } from '../helpers/urls';
-import { getFormBody, showNotification } from '../helpers/utils';
+import { API_URLS } from '../../helpers/urls';
+import { getFormBody, showNotification } from '../../helpers/utils';
 
 class ResetPassword extends React.Component
 {
