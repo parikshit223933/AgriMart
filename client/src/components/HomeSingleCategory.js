@@ -54,7 +54,7 @@ class HomeSingleCategory extends React.Component
         }
         if (!this.props.products)
         {
-            return <h6>Nothing To Show Here!</h6>;
+            return <p className="pl-3">Nothing To Show Here!</p>;
         }
 
         /* Fill up the list here! */

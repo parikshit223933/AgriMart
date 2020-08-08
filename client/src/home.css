@@ -62,7 +62,7 @@
 
 .scroll-menu-arrow {
 	padding: 10px;
-    font-size:60px;
+    font-size:30px;
 }
 .card
 {
@@ -91,5 +91,9 @@
 {
     .home-component {
         padding-left: 0rem;
+    }
+    .display-4
+    {
+        font-size:40px;
     }
 }

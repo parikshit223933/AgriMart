@@ -123,7 +123,10 @@ class SignIn extends React.Component {
 									></div>
 								)}
 							</form>
-							<div className="mt-4">
+                            <div className="mt-2" style={{fontWeight:'bolder'}}>
+                                OR
+                            </div>
+							<div className="mt-2">
 							    <GoogleLogin
     								clientId="1014305949901-lrutgs7it8n0mr8hqh3456cqsv14lusl.apps.googleusercontent.com"
     								onSuccess={this.handleGoogleOnSuccess}

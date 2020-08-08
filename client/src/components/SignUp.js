@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { clearAuthState, signUp } from "../actions/auth";
+import { clearAuthState, signUp, OAuth } from "../actions/auth";
 import { showNotification } from "../helpers/utils";
+import GoogleLogin from "react-google-login";
 
 /* 
 SIGN UP ACTION WORKING PRINCIPLE:
@@ -66,6 +67,16 @@ class SignUp extends React.Component
             showNotification(error, 1500, 'error');
             this.props.dispatch(clearAuthState())
         }
+    }
+    handleGoogleOnFailure=(error, details)=>
+    {
+        console.log(error, details);
+        return;
+    }
+    handleGoogleOnSuccess=(user)=>
+    {
+        console.log(user);
+        this.props.dispatch(OAuth(user.profileObj.name, user.profileObj.email))
     }
     render()
     {
@@ -162,6 +173,18 @@ class SignUp extends React.Component
                                     Submit
 								</button>
                             </form>
+                            <div className="mt-2" style={{fontWeight:'bolder'}}>
+                                OR
+                            </div>
+                            <div className="mt-2">
+							    <GoogleLogin
+    								clientId="1014305949901-lrutgs7it8n0mr8hqh3456cqsv14lusl.apps.googleusercontent.com"
+    								onSuccess={this.handleGoogleOnSuccess}
+    								onFailure={this.handleGoogleOnFailure}
+                                    cookiePolicy={"single_host_origin"}
+                                    theme={'dark'}
+    							/>
+							</div>
                         </div>
                     </div>
                 </div>
