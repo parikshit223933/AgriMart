@@ -382,9 +382,7 @@ class Home extends React.Component {
 						<div className="upper-nav d-flex flex-sm-row flex-col justify-content-center align-items-center flex-wrap justify-content-sm-between align-items-sm-center">
 							<div className="logo pl-2 pr-4">Agrimart</div>
 							<form className="my-2 my-lg-0 d-flex flex-row justify-content-center align-items-center">
-								<div className="search-bar-container ml-2 mr-2">
-									<Search/>
-								</div>
+								<Search/>
 								<div>
 									<button
 										className="btn btn-success my-2 my-sm-0"
