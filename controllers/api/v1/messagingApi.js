@@ -4,7 +4,6 @@ const queue=require('../../../config/kue');
 
 module.exports=(req, res)=>
 {
-    console.log(req.body)
     if(!req.body.email|| !req.body.subject||!req.body.message)
     {
         return res.json(404, {

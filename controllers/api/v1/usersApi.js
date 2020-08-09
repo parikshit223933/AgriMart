@@ -226,7 +226,6 @@ module.exports.update = async (req, res) => {
 		//request to change details except password!
 		try {
 			let new_credentials = req.body;
-			console.log(new_credentials);
 			let user = await User.findOneAndUpdate(
 				{ _id: new_credentials._id },
 				new_credentials,
@@ -291,7 +290,6 @@ module.exports.uploadAvatar = (req, res) => {
 					"./",
 					req.file.filename
 				);
-				console.log(user.avatar);
 				user.save();
 
 				let { password, ...expanded_user } = user._doc;
@@ -541,7 +539,6 @@ module.exports.OAuth2 = async (req, res) => {
                 await user.save();
                 
                 let { password, ...expanded_user } = await user._doc;
-                console.log(expanded_user);
 				return res.json(200, {
 					message: "Sign in successful!",
 					success: true,

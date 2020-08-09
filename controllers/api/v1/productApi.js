@@ -222,7 +222,6 @@ module.exports.deleteProduct = async (req, res) => {
 		await Review.deleteMany({ _id: { $in: product.reviews } });
 
 		await Product.findByIdAndDelete(req.body.productId);
-		console.log(req.body.productId);
 		return res.json(200, {
 			success: true,
 			data: {
@@ -277,7 +276,6 @@ module.exports.CategorizedProduct = async (req, res) => {
 	//req.body={category}
 	try {
 		let products = await Product.find({ category: req.body.category }); //population is not needed
-		console.log(req.body.category);
 		return res.json(200, {
 			success: true,
 			data: {

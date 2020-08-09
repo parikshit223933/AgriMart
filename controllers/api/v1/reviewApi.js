@@ -189,8 +189,6 @@ module.exports.updateReview = async (req, res) =>
 
         let previous_rating = await review.rating;
 
-        console.log("PREVIOUS RATING", previous_rating);
-
         if (req.body.userId != review.author)
         {
             return res.json(401, {
@@ -278,7 +276,6 @@ module.exports.updateReview = async (req, res) =>
             2
         );
         await product.save();
-        console.log(product);
         return res.json(200, {
             success: true,
             data: {
