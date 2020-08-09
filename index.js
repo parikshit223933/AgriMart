@@ -11,21 +11,24 @@ const session               = require('express-session');
 const passport              = require('passport');
 const passportLocal         = require('./config/passport_local_strategy');
 const passportJwt           =require('./config/passport-jwt-strategy');
-const flash                 = require('connect-flash');
+// const flash                 = require('connect-flash');
 const mongoStore            = require('connect-mongo')(session);/* connect mongo is used to store the session information in the database so that the session information dosen't get lost if the server is restarted. */
-const sassMiddleware        = require('node-sass-middleware');
+// const sassMiddleware        = require('node-sass-middleware');
 const cors                  = require('cors');
+const path=require('path');
 
 /* conversion of sass to css */
-app.use(sassMiddleware(
-    {
-        src:'./assets/scss',
-        dest:'./assets/css',
-        debug:true,
-        outputStyle:'expanded',
-        prefix:'/css'
-    }
-));
+// app.use(sassMiddleware(
+//     {
+//         // src:'./assets/scss',
+//         src:path.join(__dirname, env.asset_path, 'scss')
+//         dest:'./assets/css',
+//         debug:true,
+//         outputStyle:'expanded',
+//         prefix:'/css'
+//     }
+// ));
+/* since it is a react application we do not need scss */
 /* This is the express session, created during setting up of passport local strategy. we need to create a session for the user. */
 app.use(session(
     {
@@ -68,7 +71,7 @@ app.use(passport.setAuthenticatedUser);//An authentication check will be made on
 
 app.use(cors());//for cross origin data sharing
 app.use('/', routes);
-app.use(express.static('./assets'));
+// app.use(express.static('./assets'));
 app.use('/uploads', express.static(__dirname+'/uploads'));
 //now the uploads folder will be available to use at localhost:8000/uploads
 
