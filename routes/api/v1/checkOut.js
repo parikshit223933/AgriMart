@@ -5,7 +5,7 @@ const checkOutApi = require("../../../controllers/api/v1/checkOut");
 
 router.post(
 	"/createPayment",
-	/* passport.authenticate("jwt", { session: false }), */
+	passport.authenticate("jwt", { session: false }),
 	checkOutApi.createPayment
 );
 
