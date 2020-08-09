@@ -32,6 +32,7 @@ import PrivateRoute from './Routes/PrivateRoute';
 import RestrictedRoute from './Routes/RestrictedRoute';
 import ForgotPassword from './AuthenticationComponent/ForgotPassword';
 import ResetPassword from './AuthenticationComponent/ResetPassword';
+import Search from './HomeComponent/Search';
 
 export
 {
@@ -68,5 +69,6 @@ export
     PrivateRoute,
     RestrictedRoute,
     ForgotPassword,
-    ResetPassword
+    ResetPassword,
+    Search
 };

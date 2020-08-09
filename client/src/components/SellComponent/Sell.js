@@ -69,10 +69,10 @@ class Sell extends React.Component {
 		if (!isLoggedIn) {
 			return <Redirect to="/sign-in" />;
 		}
-		if (this.props.product.success === "Product Created Successfully!") {
-			//if the product is created successfully, the user should be redirected to home component!
-			return <Redirect to="/" />;
-		}
+		// if (this.props.product.success === "Product Created Successfully!") {
+		// 	//if the product is created successfully, the user should be redirected to home component!
+		// 	return <Redirect to="/" />;
+		// }
 		if (this.props.product.inProgress || this.props.auth.inProgress) {
 			return (
 				<div
@@ -213,7 +213,7 @@ class Sell extends React.Component {
 								<div className="form-group">
 									<select
 										className="custom-select"
-                                        defaultValue="1"
+                                        defaultValue={this.state.category}
                                         required
 										onChange={(event) => {
 											this.formInputHandler(
