@@ -33,3 +33,4 @@ yarn-error.log*
 !uploads/users/avatars/.gitkeep
 
 config/environment.js
+production_logs/*

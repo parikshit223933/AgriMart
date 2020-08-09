@@ -17,6 +17,7 @@ const mongoStore            = require('connect-mongo')(session);/* connect mongo
 const cors                  = require('cors');
 const path=require('path');
 const env=require('./config/environment');
+const logger=require('morgan');
 
 /* conversion of sass to css */
 // app.use(sassMiddleware(
@@ -31,6 +32,11 @@ const env=require('./config/environment');
 // ));
 /* since it is a react application we do not need scss */
 /* This is the express session, created during setting up of passport local strategy. we need to create a session for the user. */
+
+
+/* LOGGER MIDDLEWARE */
+app.use(logger(env.morgan.mode, env.morgan.options));
+
 app.use(session(
     {
         name:'AgriMart',
