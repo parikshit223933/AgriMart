@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { searchProduct } from "../../actions/product";
 import { API_URLS } from "../../helpers/urls";
 import { getFormBody } from "../../helpers/utils";
 
@@ -36,7 +35,9 @@ class Search extends React.Component {
 					.then((data) => {
 						if (data.success) {
                             console.log(data.data.products);
-                            this.state.products=data.data.products
+                            this.setState({
+                                products:data.data.products
+                            })
 						} else {
 							console.log(data.message);
 						}
@@ -45,7 +46,6 @@ class Search extends React.Component {
 		);
 	};
 	render() {
-		console.log(this.state.searchtext);
 		return (
 			<input
 				className="form-control mr-sm-2"

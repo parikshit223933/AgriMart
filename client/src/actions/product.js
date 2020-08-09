@@ -59,9 +59,6 @@ import {
     DOWNVOTE_START,
     DOWNVOTE_SUCCESS,
     DOWNVOTE_FAILURE,
-    SEARCH_PRODUCTS_START,
-    SEARCH_PRODUCTS_SUCCESS,
-    SEARCH_PRODUCTS_FAILURE
 } from "./actionTypes";
 
 export function createProductStart() {
