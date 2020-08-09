@@ -42,9 +42,85 @@
 .search-bar-container {
 	width: 20vw;
 	min-width: 150px;
+    position:relative;
+}
+@media screen and (max-width:1268px)
+{
+    .search-bar-container
+    {
+        width:30vw;
+    }
+}
+@media screen and (max-width:787px)
+{
+    .search-bar-container
+    {
+        width:30vw;
+    }
+}
+@media screen and (max-width:560px)
+{
+    .search-bar-container
+    {
+        width:50vw;
+    }
+}
+@media screen and (max-width:500px)
+{
+    .search-bar-container
+    {
+        width:70vw;
+    }
+}
+.search-ico
+{
+    position:absolute;
+    color:white;
+    top:8px;
+    left:7px;
+}
+.search-results
+{
+    position:absolute;
+    width:100%;
+    max-height:300px;
+    min-height:50px;
+    background-color:white;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding:5px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow-wrap: break-word;
+}
+.search-results>a
+{
+    width:100%;
 }
 .search-bar-container > input {
-	border-radius: 2px;
+    border-radius: 2px;
+    background-color: transparent;
+    border-top:0px;
+    border-left:0px;
+    border-right:0px;
+    padding-left:30px;
+    color:white;
+}
+.search-bar-container>input::placeholder
+{
+    text-align: center;
+    font-weight: bolder;
+    color:white;
+}
+.search-bar-container>input:focus
+{
+    background-color:transparent;
+    box-shadow: none;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    color:white;
 }
 .search-bar-container ~ div > button {
 	border-radius: 2px !important;

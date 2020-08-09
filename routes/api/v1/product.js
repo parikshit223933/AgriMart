@@ -37,5 +37,6 @@ router.post("/categorized-products", productApi.CategorizedProduct);
 
 router.get("/get-random-products", productApi.getRandomProds);
 
+router.post('/search-products', productApi.searchProduct);
 //since i dont want the session cookies to be generated so i have written session:false
 module.exports = router;
