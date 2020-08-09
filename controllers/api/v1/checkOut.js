@@ -1,5 +1,6 @@
-const STRIPE_SECRET_KEY = 'sk_test_51H9F89HyvUiMKHjeXM6hg3SfXh1cXrknjsEMavZ1XDcQPy63T5lk3EjEwDyPfMIehwadZvSj4CiffzVLBFA9bswU00dvPXvrkq';
-const STRIPE_PUBLISH_KEY = 'pk_test_51H9F89HyvUiMKHjejfcy7c0VYxb3a7AvYvCwQ9H7zx00NJpIThu90qwueiPRXsH9j0bfe7sGHWKTe1JWDDAU0ked00l1v3ppVd'
+const env=require('../../../config/environment');
+const STRIPE_SECRET_KEY = env.stripe_secret_key;
+const STRIPE_PUBLISH_KEY = env.stripe_publish_key;
 const stripe = require('stripe')(STRIPE_SECRET_KEY);
 const User = require("../../../models/userModel");
 const Product = require("../../../models/productModel");

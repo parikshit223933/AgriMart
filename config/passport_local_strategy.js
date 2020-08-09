@@ -12,7 +12,7 @@ passport.use(new LocalStrategy({
     {
         if(error)
         {
-            console.log('Unable tto find the user in the database: Passport-local-strategy', error);
+            console.log('Unable to find the user in the database: Passport-local-strategy', error);
             return done(error);
         }
         if(!user||user.password!=password)//if the user is not found in the database or the password entered by the user does not match with that in the database

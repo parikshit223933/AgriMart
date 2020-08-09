@@ -5,7 +5,8 @@ const fs = require("fs");
 const bcrypt = require("bcrypt");
 const Token = require("../../../models/tokenModel");
 const cryptoRandomString = require("crypto-random-string");
-const saltRound = 10;
+const env=require('../../../config/environment');
+const saltRound = env.salt_round;
 const queue = require("../../../config/kue");
 const authMailer = require("../../../mailers/authMailer");
 const signUpMailer = require("../../../mailers/signUpMailer");
@@ -58,7 +59,7 @@ module.exports.create_session = async (req, res) => {
 			message: "Sign in successful!",
 			success: true,
 			data: {
-				token: jwt.sign(expanded_user, "secret"), //secret key should be same as used in the passport jwt strategy config.
+				token: jwt.sign(expanded_user, env.jwt_secret), //secret key should be same as used in the passport jwt strategy config.
 				user: expanded_user //Not sharing the password
 			}
 		});
@@ -197,7 +198,7 @@ module.exports.update = async (req, res) => {
 				);
 				new_user.save();
 				let { password, ...expanded_user } = new_user._doc;
-				let new_token = await jwt.sign(expanded_user, "secret");
+				let new_token = await jwt.sign(expanded_user, env.jwt_secret);
 				return res.json(200, {
 					message: "Update successful!",
 					success: true,
@@ -233,7 +234,7 @@ module.exports.update = async (req, res) => {
 			);
 			user.save();
 			let { password, ...expanded_user } = user._doc;
-			let newToken = await jwt.sign(expanded_user, "secret");
+			let newToken = await jwt.sign(expanded_user, env.jwt_secret);
 
 			return res.json(200, {
 				message: "Update successful!",
@@ -294,7 +295,7 @@ module.exports.uploadAvatar = (req, res) => {
 				user.save();
 
 				let { password, ...expanded_user } = user._doc;
-				let new_token = jwt.sign(expanded_user, "secret");
+				let new_token = jwt.sign(expanded_user, env.jwt_secret);
 
 				return res.json(200, {
 					message: "Update successful!",
@@ -518,7 +519,7 @@ module.exports.OAuth2 = async (req, res) => {
 				message: "Sign in successful!",
 				success: true,
 				data: {
-					token: jwt.sign(expanded_user, "secret"),
+					token: jwt.sign(expanded_user, env.jwt_secret),
 					user: expanded_user
 				}
 			});
@@ -545,7 +546,7 @@ module.exports.OAuth2 = async (req, res) => {
 					message: "Sign in successful!",
 					success: true,
 					data: {
-						token: jwt.sign(expanded_user, "secret"),
+						token: jwt.sign(expanded_user, env.jwt_secret),
 						user: expanded_user
 					}
 				});

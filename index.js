@@ -16,6 +16,7 @@ const mongoStore            = require('connect-mongo')(session);/* connect mongo
 // const sassMiddleware        = require('node-sass-middleware');
 const cors                  = require('cors');
 const path=require('path');
+const env=require('./config/environment');
 
 /* conversion of sass to css */
 // app.use(sassMiddleware(
@@ -33,7 +34,7 @@ const path=require('path');
 app.use(session(
     {
         name:'AgriMart',
-        secret:'something',/* this secret is used to encode and decode the key's value in the cookie during creation of the session. */
+        secret:env.session_cookie_key,/* this secret is used to encode and decode the key's value in the cookie during creation of the session. */
         /* we will encrypt user id. this secret is for that*/
         /* TODO: change the secret in the production mode. */
         saveUninitialized:false,/* whenever there is a request which is not innitialized, which means that a session which is not initialized which further means that the user has not logged in, i.e. the id is not established, in that case do I want to save extra dummy data in the session cookie? NO OBVIOUSLY NOT! that is why it is set to false. */

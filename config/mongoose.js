@@ -1,10 +1,11 @@
 const mongoose=require('mongoose');
+const env=require('./environment');
+const LOCAL_DB=`mongodb://localhost/${env.db}`;
+// const ONLINE_DB=env.db_online;
 
-const LOCAL_DB='mongodb://localhost/agrimart_development';
-const onlineDbName='dbAgrimart';
-const onlineDbPassword='password@123agrimart';
-const ONLINE_DB=`mongodb+srv://dbAgrimart:${onlineDbPassword}@agrimart.r5grp.mongodb.net/${onlineDbName}?retryWrites=true&w=majority`;
-
+/**
+ * @WARNING : WE DO NOT NEED ONLINE DB NOW. DB WILL BE CREATED ON AWS ITSELF. PRODUCT TESTING IS ALREADY DONE. REMOVE IT IF YOU WANT TO.
+ */
 
 mongoose.connect(LOCAL_DB, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 const db=mongoose.connection;
