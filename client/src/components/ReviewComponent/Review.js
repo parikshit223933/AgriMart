@@ -32,7 +32,6 @@ class Review extends React.Component {
 		);
 	};
 	handleDelete = () => {
-		console.log(this.props.review.product, this.props.review._id);
 		this.props.dispatch(
 			deleteReview(
 				this.props.review.product,

@@ -17,7 +17,6 @@ class SingleProduct extends React.Component
     }
     handleDeleteProduct = (productId) =>
     {
-        console.log(productId);
         this.props.dispatch(deleteProduct(productId, this.props.auth.user._id));
     };
     handleproductImages = () =>

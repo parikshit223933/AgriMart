@@ -90,7 +90,6 @@ class Cart extends React.Component
 			);
         }
         const { cart } = this.props.product;
-        console.log(cart);
         return (
             <div className="container-fluid cart-component">
                 <div className="row">

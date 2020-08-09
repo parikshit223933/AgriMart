@@ -45,14 +45,13 @@ class SignIn extends React.Component {
 			this.props.dispatch(clearAuthState());
 		}
     }
-    handleGoogleOnFailure=(error, details)=>
+    handleGoogleLoginOnFailure=(error, details)=>
     {
         console.log(error, details);
         return;
     }
-    handleGoogleOnSuccess=(user)=>
+    handleGoogleLoginOnSuccess=(user)=>
     {
-        console.log(user);
         this.props.dispatch(OAuth(user.profileObj.name, user.profileObj.email))
     }
 	render() {
@@ -129,8 +128,8 @@ class SignIn extends React.Component {
 							<div className="mt-2">
 							    <GoogleLogin
     								clientId="1014305949901-lrutgs7it8n0mr8hqh3456cqsv14lusl.apps.googleusercontent.com"
-    								onSuccess={this.handleGoogleOnSuccess}
-    								onFailure={this.handleGoogleOnFailure}
+    								onSuccess={this.handleGoogleLoginOnSuccess}
+    								onFailure={this.handleGoogleLoginOnFailure}
                                     cookiePolicy={"single_host_origin"}
                                     theme={'dark'}
     							/>

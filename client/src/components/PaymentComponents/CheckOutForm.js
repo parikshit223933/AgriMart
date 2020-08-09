@@ -39,12 +39,10 @@ const CheckOutForm = (props) =>
                 })
                 .then(res =>
                 {
-                    console.log(res);
                     return res.json();
                 })
                 .then(data =>
                 {
-                    console.log(data);
                     setClientSecret(data.clientSecret);
                     setAmount(data.amount);
                 });

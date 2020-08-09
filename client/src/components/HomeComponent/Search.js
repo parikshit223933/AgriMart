@@ -38,19 +38,15 @@ class Search extends React.Component {
 					.then((response) => response.json())
 					.then((data) => {
 						if (data.success) {
-							console.log(data.data.products);
 							this.setState({
 								products: data.data.products
 							});
-						} else {
-							console.log(data.message);
-						}
+						} return;
 					});
 			}
 		);
 	};
 	render() {
-		console.log(this.state.products);
 		return (
 			<div className="search-bar-container ml-2 mr-2">
 				<input

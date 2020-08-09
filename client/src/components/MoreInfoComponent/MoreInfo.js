@@ -48,7 +48,6 @@ class MoreInfo extends React.Component
     }
     render()
     {
-        console.log(this.state);
         return (
             <div className="more-info-component">
                 <div className="container-fluid p-0">

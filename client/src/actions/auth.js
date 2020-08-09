@@ -137,7 +137,6 @@ export function signUp(name, email, password, confirm_password)
             .then((response) => response.json())
             .then((data) =>
             {
-                console.log(data);
                 if (data.success)
                 {
                     dispatch(login(email, password));
@@ -232,7 +231,6 @@ export function uploadAvatar(data)
             })
             .then((res) =>
             {
-                console.log(res.data);
                 if (res.data.success)
                 {
                     localStorage.setItem('token', res.data.data.token)

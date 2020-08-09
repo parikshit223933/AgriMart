@@ -9,9 +9,7 @@ class MultiProductContainer extends React.Component {
     {
         if(prevProps.products.length!==this.props.products.length)
         {
-            console.log(prevProps.products.length, this.props.products.length)
             const {deleteSuccess, deleteError}=this.props;
-            console.log(deleteSuccess, deleteError)
             if(deleteSuccess)
             {
                 showNotification(deleteSuccess, 1500, 'success');
