@@ -383,14 +383,6 @@ class Home extends React.Component {
 							<div className="logo pl-2 pr-4">Agrimart</div>
 							<form className="my-2 my-lg-0 d-flex flex-row justify-content-center align-items-center">
 								<Search/>
-								<div>
-									<button
-										className="btn btn-success my-2 my-sm-0"
-										type="submit"
-									>
-										<i className="fas fa-search"></i> Search
-									</button>
-								</div>
 							</form>
 						</div>
 						{/* this was the upper nav bar */}

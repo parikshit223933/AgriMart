@@ -56,11 +56,12 @@ class Search extends React.Component {
 				<input
 					className="form-control mr-sm-2"
 					type="search"
-					placeholder="Search"
+					placeholder="Search Products"
 					aria-label="Search"
 					onChange={this.handleSearch}
 					value={this.state.searchtext}
 				/>
+                <div className="search-ico"><i class="fas fa-search"></i></div>
 				{this.state.products.length ? (
 					<div className="search-results">
 						{this.state.products.map((product) => {
