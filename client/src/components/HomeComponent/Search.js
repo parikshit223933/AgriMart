@@ -57,7 +57,7 @@ class Search extends React.Component {
 					onChange={this.handleSearch}
 					value={this.state.searchtext}
 				/>
-                <div className="search-ico"><i class="fas fa-search"></i></div>
+                <div className="search-ico"><i className="fas fa-search"></i></div>
 				{this.state.products.length ? (
 					<div className="search-results">
 						{this.state.products.map((product) => {

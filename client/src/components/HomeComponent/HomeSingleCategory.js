@@ -78,9 +78,9 @@ class HomeSingleCategory extends React.Component
 							className="card-img-top"
 							alt={product.category}
 						/> */}
-                        <div className="card-body text-capitalize">
-                            <h5>{product.name}</h5>
-                            <p className="card-text">
+                        <div className="card-body text-capitalize bottom-side-of-card">
+                            <h5 key={product._id}>{product.name}</h5>
+                            <p key={`${product._id}-details`} className="card-text">
                                 <b>Rs. {product.price}</b>
                             </p>
                         </div>

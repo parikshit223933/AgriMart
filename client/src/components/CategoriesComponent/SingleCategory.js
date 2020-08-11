@@ -213,7 +213,7 @@ class SingleCategory extends React.Component {
 				<div className="row">
 					<div className="col-md-3 pt-4">
 						<h4>Filters</h4>
-						<div className="accordion" id="accordionExample">
+						<div className="accordion" style={{boxShadow:'0px 0px 5px 1px rgb(194, 194, 194)'}} id="accordionExample">
 							<div className="card">
 								<div className="card-header" id="headingOne">
 									<h2 className="mb-0">
