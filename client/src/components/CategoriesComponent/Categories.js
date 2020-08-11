@@ -7,7 +7,7 @@ class Categories extends React.Component
     render()
     {
         return (
-            <div className="container-fluid category-component bg-warning">
+            <div className="container-fluid category-component">
                 <div className="row">
                     <div className="col-md-10 offset-md-1 pt-4 bg-light">
                         <h1 className="all-categories-heading text-center">

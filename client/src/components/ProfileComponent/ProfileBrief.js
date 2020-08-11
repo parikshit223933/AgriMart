@@ -7,7 +7,7 @@ class ProfileBrief extends React.Component
 {
     render()
     {
-        const profilePicture = API_URLS.profilePictureRoot();
+        const profilePicture = API_URLS.serverRoot();
         const { user } = this.props.auth;
         return (
             <div className="col-sm-5 col-lg-4">

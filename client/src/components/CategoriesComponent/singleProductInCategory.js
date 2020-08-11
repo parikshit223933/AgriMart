@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/product";
+import { API_URLS } from "../../helpers/urls";
 
 class SingleProductInCategory extends React.Component {
 	handleAddToCart = (productId) => {
@@ -23,7 +24,7 @@ class SingleProductInCategory extends React.Component {
 					style={{
 						width: 286,
 						height: 286,
-						backgroundImage: `url('http://localhost:8000/uploads/products/coverImage-${
+						backgroundImage: `url('${API_URLS.productImageRoot()}${
 							product.coverImage.split("-")[1]
 						}')`,
 						backgroundSize: "contain",
@@ -31,11 +32,6 @@ class SingleProductInCategory extends React.Component {
 						backgroundRepeat: "no-repeat"
 					}}
 				>
-					{/* <img
-                src={`http://localhost:8000/${product.coverImage}`}
-                className="card-img-top"
-                alt="CoverImg"
-            /> */}
 				</Link>
 				<div className="card-body">
 					<Link

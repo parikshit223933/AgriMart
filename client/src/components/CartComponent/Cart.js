@@ -6,6 +6,7 @@ import { getAuthTokenFromStorage, showNotification } from "../../helpers/utils";
 import jwtDecode from "jwt-decode";
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
+import { API_URLS } from "../../helpers/urls";
 
 class Cart extends React.Component
 {
@@ -146,7 +147,7 @@ class Cart extends React.Component
                                                         width: 100,
                                                         height: 100,
                                                         backgroundImage:
-                                                            `url("http://localhost:8000/uploads/products/coverImage-${item.product.coverImage.split('-').pop()}")`,
+                                                            `url("${API_URLS.productImageRoot()}${item.product.coverImage.split('-').pop()}")`,
                                                         backgroundSize: "cover",
                                                         backgroundPosition:
                                                             "center"

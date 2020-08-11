@@ -212,6 +212,10 @@
 	width: 100%;
 	height: 100%;
 	padding-left: 5rem;
+	background-color: #ffffff;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 100 60'%3E%3Cg fill-opacity='0.34'%3E%3Crect fill='%23ffffff' width='11' height='11'/%3E%3Crect fill='%23fffcfb' x='10' width='11' height='11'/%3E%3Crect fill='%23fff9f6' y='10' width='11' height='11'/%3E%3Crect fill='%23fff5f2' x='20' width='11' height='11'/%3E%3Crect fill='%23fff2ed' x='10' y='10' width='11' height='11'/%3E%3Crect fill='%23ffefe9' y='20' width='11' height='11'/%3E%3Crect fill='%23ffece5' x='30' width='11' height='11'/%3E%3Crect fill='%23ffe8e0' x='20' y='10' width='11' height='11'/%3E%3Crect fill='%23ffe5dc' x='10' y='20' width='11' height='11'/%3E%3Crect fill='%23ffe2d7' y='30' width='11' height='11'/%3E%3Crect fill='%23ffdfd3' x='40' width='11' height='11'/%3E%3Crect fill='%23ffdbcf' x='30' y='10' width='11' height='11'/%3E%3Crect fill='%23ffd8ca' x='20' y='20' width='11' height='11'/%3E%3Crect fill='%23ffd5c6' x='10' y='30' width='11' height='11'/%3E%3Crect fill='%23ffd2c2' y='40' width='11' height='11'/%3E%3Crect fill='%23ffcebe' x='50' width='11' height='11'/%3E%3Crect fill='%23ffcbb9' x='40' y='10' width='11' height='11'/%3E%3Crect fill='%23ffc8b5' x='30' y='20' width='11' height='11'/%3E%3Crect fill='%23ffc5b1' x='20' y='30' width='11' height='11'/%3E%3Crect fill='%23ffc1ad' x='10' y='40' width='11' height='11'/%3E%3Crect fill='%23ffbea8' y='50' width='11' height='11'/%3E%3Crect fill='%23ffbba4' x='60' width='11' height='11'/%3E%3Crect fill='%23ffb7a0' x='50' y='10' width='11' height='11'/%3E%3Crect fill='%23ffb49c' x='40' y='20' width='11' height='11'/%3E%3Crect fill='%23ffb198' x='30' y='30' width='11' height='11'/%3E%3Crect fill='%23ffad94' x='20' y='40' width='11' height='11'/%3E%3Crect fill='%23ffaa90' x='10' y='50' width='11' height='11'/%3E%3Crect fill='%23ffa68b' x='70' width='11' height='11'/%3E%3Crect fill='%23ffa387' x='60' y='10' width='11' height='11'/%3E%3Crect fill='%23ffa083' x='50' y='20' width='11' height='11'/%3E%3Crect fill='%23ff9c7f' x='40' y='30' width='11' height='11'/%3E%3Crect fill='%23ff997b' x='30' y='40' width='11' height='11'/%3E%3Crect fill='%23ff9577' x='20' y='50' width='11' height='11'/%3E%3Crect fill='%23ff9273' x='80' width='11' height='11'/%3E%3Crect fill='%23ff8e6f' x='70' y='10' width='11' height='11'/%3E%3Crect fill='%23ff8b6b' x='60' y='20' width='11' height='11'/%3E%3Crect fill='%23ff8767' x='50' y='30' width='11' height='11'/%3E%3Crect fill='%23ff8363' x='40' y='40' width='11' height='11'/%3E%3Crect fill='%23ff805f' x='30' y='50' width='11' height='11'/%3E%3Crect fill='%23ff7c5b' x='90' width='11' height='11'/%3E%3Crect fill='%23ff7857' x='80' y='10' width='11' height='11'/%3E%3Crect fill='%23ff7453' x='70' y='20' width='11' height='11'/%3E%3Crect fill='%23ff714f' x='60' y='30' width='11' height='11'/%3E%3Crect fill='%23ff6d4b' x='50' y='40' width='11' height='11'/%3E%3Crect fill='%23ff6947' x='40' y='50' width='11' height='11'/%3E%3Crect fill='%23ff6443' x='90' y='10' width='11' height='11'/%3E%3Crect fill='%23ff603f' x='80' y='20' width='11' height='11'/%3E%3Crect fill='%23ff5c3b' x='70' y='30' width='11' height='11'/%3E%3Crect fill='%23ff5737' x='60' y='40' width='11' height='11'/%3E%3Crect fill='%23ff5333' x='50' y='50' width='11' height='11'/%3E%3Crect fill='%23ff4e2f' x='90' y='20' width='11' height='11'/%3E%3Crect fill='%23ff492b' x='80' y='30' width='11' height='11'/%3E%3Crect fill='%23ff4426' x='70' y='40' width='11' height='11'/%3E%3Crect fill='%23ff3e22' x='60' y='50' width='11' height='11'/%3E%3Crect fill='%23ff381d' x='90' y='30' width='11' height='11'/%3E%3Crect fill='%23ff3119' x='80' y='40' width='11' height='11'/%3E%3Crect fill='%23ff2a13' x='70' y='50' width='11' height='11'/%3E%3Crect fill='%23ff210d' x='90' y='40' width='11' height='11'/%3E%3Crect fill='%23ff1506' x='80' y='50' width='11' height='11'/%3E%3Crect fill='%23ff0000' x='90' y='50' width='11' height='11'/%3E%3C/g%3E%3C/svg%3E");
+background-attachment: fixed;
+background-size: cover;
 }
 .sell-intro {
 	height: 100vh;
@@ -345,10 +349,9 @@
 	.sign-up {
 		padding-top: 20px;
 		padding-left: 0px;
-    }
-    .forgot-password
-    {
+	}
+	.forgot-password {
 		padding-top: 50px;
-        padding-left:0px;
-    }
+		padding-left: 0px;
+	}
 }

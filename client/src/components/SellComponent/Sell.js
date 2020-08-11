@@ -91,7 +91,7 @@ class Sell extends React.Component {
 		}
 		return (
 			<div className="sell-component">
-				<div className="container-fluid bg-warning">
+				<div className="container-fluid">
 					<div className="row">
 						<div className="col-sm-10 small-screen-query offset-sm-1 col-md-8 offset-md-2 col-xl-6 offset-xl-3 bg-light my-5 p-5">
 							<h1 className="text-center pb-4">

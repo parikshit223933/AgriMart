@@ -1,5 +1,7 @@
 let API_ROOT = "http://localhost:8000/api/v1";
-let USER_PROFILE_PICTURE_ROOT = "http://localhost:8000";
+let SERVER_ROOT = "http://localhost:8000";
+let PRODUCT_IMAGE_ROOT='http://localhost:8000/uploads/products/coverImage-';
+
 export const API_URLS = {
 	login: () => `${API_ROOT}/users/create-session`,
     signUp: () => `${API_ROOT}/users/create`,
@@ -9,7 +11,8 @@ export const API_URLS = {
 	uploadAvatar: () => `${API_ROOT}/users/upload-avatar`,
 	forgotPassword: () => `${API_ROOT}/users/forgot-password`,
 	resetPassword: () => `${API_ROOT}/users/reset-password`,
-	profilePictureRoot: () => USER_PROFILE_PICTURE_ROOT,
+    serverRoot: () => SERVER_ROOT,
+    productImageRoot:()=>PRODUCT_IMAGE_ROOT,
 	getProducts: () => `${API_ROOT}/product/get-products`,
 	getBoughtProducts: () => `${API_ROOT}/product/get-bought-items`,
 	editProduct: () => `${API_ROOT}/product/edit-product`,
@@ -31,4 +34,5 @@ export const API_URLS = {
 	upvote: () => `${API_ROOT}/users/upvote`,
     downvote: () => `${API_ROOT}/users/downvote`,
     searchProducts:()=>`${API_ROOT}/product/search-products`,
+    
 };
