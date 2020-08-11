@@ -8,6 +8,7 @@ import
     useElements
 } from "@stripe/react-stripe-js";
 import '../../checkOutForm.css';
+import { API_URLS } from "../../helpers/urls";
 
 const CheckOutForm = (props) =>
 {
@@ -30,7 +31,7 @@ const CheckOutForm = (props) =>
         if (userEmail)
             // Create PaymentIntent as soon as the page loads
             window
-                .fetch("http://localhost:8000/api/v1/checkout/createPayment", {
+                .fetch(API_URLS.checkoutProduct, {
                     method: "POST",
                     headers: {
                         "Content-Type": 'application/json'

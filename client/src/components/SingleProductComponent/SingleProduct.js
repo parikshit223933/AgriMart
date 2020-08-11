@@ -60,7 +60,7 @@ class SingleProduct extends React.Component {
 							<div className="left-wrapper sticky-top">
 								<div className="product-image">
 									<img
-										src={`${API_URLS.profilePictureRoot()}/${
+										src={`${API_URLS.serverRoot()}/${
 											this.props.product.singleProduct
 												.coverImage
 										}`}

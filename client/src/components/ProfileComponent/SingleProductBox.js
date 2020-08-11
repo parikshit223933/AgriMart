@@ -25,7 +25,7 @@ class SingleProduct extends React.Component
         {
             const { product } = this.props;
             let firstPart =
-                API_URLS.profilePictureRoot() + "/uploads/products/coverImage-";
+                API_URLS.serverRoot() + "/uploads/products/coverImage-";
             let secondPart = product.coverImage.split("-")[
                 product.coverImage.split("-").length - 1
             ];

@@ -2,6 +2,7 @@ import React from "react";
 import ScrollMenu from "react-horizontal-scrolling-menu";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { API_URLS } from "../../helpers/urls";
 
 const MenuItem = ({ text }) =>
 {
@@ -67,17 +68,12 @@ class HomeSingleCategory extends React.Component
                         <div
                             style={{
                                 height: 200,
-                                backgroundImage: `url('http://localhost:8000/uploads/products/coverImage-${product.coverImage.split('-')[1]}')`,
+                                backgroundImage: `url('${API_URLS.productImageRoot()}${product.coverImage.split('-')[1]}')`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat",
                             }}
                         ></div>
-                        {/* <img
-							src={`http://localhost:8000/${product.coverImage}`}
-							className="card-img-top"
-							alt={product.category}
-						/> */}
                         <div className="card-body text-capitalize bottom-side-of-card">
                             <h5 key={product._id}>{product.name}</h5>
                             <p key={`${product._id}-details`} className="card-text">
