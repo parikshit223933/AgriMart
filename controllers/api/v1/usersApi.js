@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const Token = require("../../../models/tokenModel");
 const cryptoRandomString = require("crypto-random-string");
 const env=require('../../../config/environment');
+const authValidation = require('../../../validations/authValidation');
 const saltRound = env.salt_round;
 const queue = require("../../../config/kue");
 const authMailer = require("../../../mailers/authMailer");
@@ -74,7 +75,21 @@ module.exports.create_session = async (req, res) => {
 };
 
 /* action for signing up */
-module.exports.createUser = (req, res) => {
+module.exports.createUser = async (req, res) => {
+    //validate user details
+    const data = {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        confirPass: req.body.confirm_password
+    }
+    const errMsg = await authValidation.userRegisterValidation (data);
+    if (errMsg.error != null) {
+        return res.json(404, {
+            success: false,
+            message: errMsg.error.details[0].message 
+        })
+    }
 	if (
 		!req.body.password ||
 		!req.body.confirm_password ||
