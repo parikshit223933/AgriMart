@@ -103,7 +103,7 @@ class EditProduct extends React.Component
         {
             return (
 				<div
-					style={{ height: "100vh", width: "100vh" }}
+					style={{ height: "100vh", width: "100%" }}
 					className="d-flex flex-column justify-content-center align-items-center ml-auto mr-auto"
 				>
 					<div

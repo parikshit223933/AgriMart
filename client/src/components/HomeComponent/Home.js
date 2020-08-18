@@ -362,7 +362,7 @@ class Home extends React.Component {
 		if (this.props.product.inProgress || this.props.auth.inProgress) {
 			return (
 				<div
-					style={{ height: "100vh", width: "100vh" }}
+					style={{ height: "100vh", width: "100%" }}
 					className="d-flex flex-column justify-content-center align-items-center ml-auto mr-auto"
 				>
 					<div
