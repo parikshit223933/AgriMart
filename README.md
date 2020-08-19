@@ -181,59 +181,323 @@ A few of the things you can do with Agrimart:
 
 <br/>
 
-## Component Structure
+## File Structure
 ```
-Root:.
-├───client
-│   ├───build
-│   │   └───static
-│   │       ├───css
-│   │       ├───js
-│   │       └───media
-│   ├───public
-│   └───src
-│       ├───actions
-│       ├───components
-│       │   ├───AuthenticationComponent
-│       │   ├───CartComponent
-│       │   ├───CategoriesComponent
-│       │   ├───HomeComponent
-│       │   ├───MAIN_APP
-│       │   ├───MoreInfoComponent
-│       │   ├───NavbarComponent
-│       │   ├───Page404Component
-│       │   ├───PaymentComponents
-│       │   ├───ProfileComponent
-│       │   ├───ReviewComponent
-│       │   ├───Routes
-│       │   ├───SellComponent
-│       │   └───SingleProductComponent
-│       ├───helpers
-│       ├───images
-│       ├───reducers
-│       └───store
-├───config
-├───controllers
-│   └───api
-│       └───v1
-├───mailers
-├───models
-├───production_logs
-├───routes
-│   └───api
-│       └───v1
-├───uploads
-│   ├───products
-│   └───users
-│       └───avatars
-├───validations
-├───views
-│   ├───mailers
-│   │   ├───auth
-│   │   ├───product
-│   │   └───selfMailer
-│   ├───products
-│   └───review
-└───workers
+ROOT:.
+�   .gitignore
+�   index.js
+�   output.txt
+�   package-lock.json
+�   package.json
+�   README.md
+�   tree
+�   
+����client
+�   �   .gitignore
+�   �   package-lock.json
+�   �   package.json
+�   �   README.md
+�   �   
+�   ����build
+�   �   �   asset-manifest.json
+�   �   �   favicon.ico
+�   �   �   index.html
+�   �   �   logo192.png
+�   �   �   logo512.png
+�   �   �   manifest.json
+�   �   �   precache-manifest.ada22f7a7cac8bbc52af3dbaa6c6ee02.js
+�   �   �   robots.txt
+�   �   �   seedling.png
+�   �   �   service-worker.js
+�   �   �   
+�   �   ����static
+�   �       ����css
+�   �       �       2.60eec0d8.chunk.css
+�   �       �       2.60eec0d8.chunk.css.map
+�   �       �       main.4c4ec34b.chunk.css
+�   �       �       main.4c4ec34b.chunk.css.map
+�   �       �       
+�   �       ����js
+�   �       �       2.275c495f.chunk.js
+�   �       �       2.275c495f.chunk.js.LICENSE.txt
+�   �       �       2.275c495f.chunk.js.map
+�   �       �       main.1ce2a21a.chunk.js
+�   �       �       main.1ce2a21a.chunk.js.map
+�   �       �       runtime-main.09b85ec0.js
+�   �       �       runtime-main.09b85ec0.js.map
+�   �       �       
+�   �       ����media
+�   �               chandra.1b611657.jpg
+�   �               parikshit.42711121.jpg
+�   �               tushar.dd7fb070.jpg
+�   �                        
+�   ����public
+�   �       favicon.ico
+�   �       index.html
+�   �       logo192.png
+�   �       logo512.png
+�   �       manifest.json
+�   �       robots.txt
+�   �       seedling.png
+�   �       
+�   ����src
+�       �   App.css
+�       �   cart.css
+�       �   category.css
+�       �   checkOutForm.css
+�       �   home.css
+�       �   index.css
+�       �   index.js
+�       �   info.css
+�       �   Profile.css
+�       �   singleProduct.css
+�       �   
+�       ����actions
+�       �       actionTypes.js
+�       �       auth.js
+�       �       product.js
+�       �       
+�       ����components
+�       �   �   index.js
+�       �   �   
+�       �   ����AuthenticationComponent
+�       �   �       ForgotPassword.js
+�       �   �       ResetPassword.js
+�       �   �       SignIn.js
+�       �   �       SignUp.js
+�       �   �       
+�       �   ����CartComponent
+�       �   �       Cart.js
+�       �   �       
+�       �   ����CategoriesComponent
+�       �   �       Categories.js
+�       �   �       SingleCategory.js
+�       �   �       singleProductInCategory.js
+�       �   �       
+�       �   ����HomeComponent
+�       �   �       Home.js
+�       �   �       HomeSingleCategory.js
+�       �   �       Search.js
+�       �   �       
+�       �   ����MAIN_APP
+�       �   �       App.js
+�       �   �       
+�       �   ����MoreInfoComponent
+�       �   �       MoreInfo.js
+�       �   �       
+�       �   ����NavbarComponent
+�       �   �       Navbar.js
+�       �   �       
+�       �   ����Page404Component
+�       �   �       Page404.js
+�       �   �       
+�       �   ����PaymentComponents
+�       �   �       CheckOutForm.js
+�       �   �       CheckOutForm2.js
+�       �   �       stylesCheckout.css
+�       �   �       
+�       �   ����ProfileComponent
+�       �   �       ChangePassword.js
+�       �   �       ChangeProfilePicture.js
+�       �   �       EditProduct.js
+�       �   �       MultiProductContainer.js
+�       �   �       Profile.js
+�       �   �       ProfileBrief.js
+�       �   �       ProfileProductHistory.js
+�       �   �       ProfileSettings.js
+�       �   �       ProfileSoldItems.js
+�       �   �       ProfileSummary.js
+�       �   �       ProfileUnsoldItems.js
+�       �   �       SingleProductBox.js
+�       �   �       
+�       �   ����ReviewComponent
+�       �   �       Review.js
+�       �   �       ReviewCreator.js
+�       �   �       ReviewHeader.js
+�       �   �       
+�       �   ����Routes
+�       �   �       PrivateRoute.js
+�       �   �       RestrictedRoute.js
+�       �   �       
+�       �   ����SellComponent
+�       �   �       Sell.js
+�       �   �       
+�       �   ����SingleProductComponent
+�       �           SingleProduct.js
+�       �           
+�       ����helpers
+�       �       urls.js
+�       �       utils.js
+�       �       
+�       ����images
+�       �       chandra.jpg
+�       �       parikshit.jpg
+�       �       sc1.PNG
+�       �       sc2.PNG
+�       �       sc3.png
+�       �       sc4.png
+�       �       sc5.png
+�       �       sc6.png
+�       �       tushar.jpg
+�       �       
+�       ����reducers
+�       �       auth.js
+�       �       index.js
+�       �       product.js
+�       �       
+�       ����store
+�               index.js
+�               
+����config
+�       environment.js
+�       kue.js
+�       mongoose.js
+�       nodemailer.js
+�       passport-jwt-strategy.js
+�       passport_local_strategy.js
+�       
+����controllers
+�   �   home_controller.js
+�   �   product_controller.js
+�   �   review_controller.js
+�   �   users_controller.js
+�   �   
+�   ����api
+�       ����v1
+�               cartApi.js
+�               checkOut.js
+�               homeApi.js
+�               messagingApi.js
+�               productApi.js
+�               reviewApi.js
+�               usersApi.js
+�               
+����mailers
+�       authMailer.js
+�       checkoutMailer.js
+�       newProductMailer.js
+�       sendMessageMailer.js
+�       signUpMailer.js
+�       tokenMailer.js
+�       
+����models
+�       productModel.js
+�       reviewModel.js
+�       tokenModel.js
+�       userModel.js
+�                   
+����production_logs
+�       20200812-0000-01-access.log
+�       access.log
+�       
+����routes
+�   �   index.js
+�   �   new_product_router.js
+�   �   review_route.js
+�   �   users.js
+�   �   
+�   ����api
+�       �   index.js
+�       �   
+�       ����v1
+�               cart.js
+�               checkOut.js
+�               contact.js
+�               home.js
+�               index.js
+�               product.js
+�               review.js
+�               users.js
+�               
+����uploads
+�   ����products
+�   �       .gitkeep
+�   �       coverImage-1596314211862
+�   �       coverImage-1596314212132
+�   �       coverImage-1596314212436
+�   �       coverImage-1596314212581
+�   �       coverImage-1596314212739
+�   �       coverImage-1596314212900
+�   �       coverImage-1596314213061
+�   �       coverImage-1596314213203
+�   �       coverImage-1596314213366
+�   �       coverImage-1596314213541
+�   �       coverImage-1596314213683
+�   �       coverImage-1596314213860
+�   �       coverImage-1596314214004
+�   �       coverImage-1596314214182
+�   �       coverImage-1596314214324
+�   �       coverImage-1596314214469
+�   �       coverImage-1596314214611
+�   �       coverImage-1596314214741
+�   �       coverImage-1596559270944
+�   �       coverImage-1596559366196
+�   �       coverImage-1596559380383
+�   �       coverImage-1596723844993
+�   �       coverImage-1596725073781
+�   �       coverImage-1596808508338
+�   �       coverImage-1596808676110
+�   �       coverImage-1596812272982
+�   �       coverImage-1596812539220
+�   �       coverImage-1596887647266
+�   �       coverImage-1596922604112
+�   �       coverImage-1596927994151
+�   �       coverImage-1596928010336
+�   �       coverImage-1596928042778
+�   �       coverImage-1596928053107
+�   �       coverImage-1596928061091
+�   �       coverImage-1596928068901
+�   �       coverImage-1596928221971
+�   �       coverImage-1596928239947
+�   �       coverImage-1596928246067
+�   �       coverImage-1597169023687
+�   �       coverImage-1597171189305
+�   �       
+�   ����users
+�       ����avatars
+�               .gitkeep
+�               file-1596306071571
+�               
+����validations
+�       authValidation.js
+�       
+����views
+�   �   home.ejs
+�   �   layout.ejs
+�   �   sign_in.ejs
+�   �   sign_up.ejs
+�   �   user_profile.ejs
+�   �   _footer.ejs
+�   �   _header.ejs
+�   �   
+�   ����mailers
+�   �   ����auth
+�   �   �       forgotPassword.ejs
+�   �   �       login.ejs
+�   �   �       signUp.ejs
+�   �   �       
+�   �   ����product
+�   �   �       checkout.ejs
+�   �   �       createProduct.ejs
+�   �   �       
+�   �   ����selfMailer
+�   �           sendMessageToAgrimart.ejs
+�   �           sendMessageToClient.ejs
+�   �           
+�   ����products
+�   �       editProduct.ejs
+�   �       newProduct.ejs
+�   �       showPageProduct.ejs
+�   �       
+�   ����review
+�           updateReviewpage.ejs
+�           
+����workers
+        checkoutMailerWorker.js
+        forgotPasswordWorker.js
+        loginMailWorker.js
+        newProductMailWorker.js
+        selfMailWorker.js
+        signUpMailWorker.js
 ```
 
