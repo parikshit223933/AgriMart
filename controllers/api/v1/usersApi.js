@@ -81,7 +81,7 @@ module.exports.createUser = async (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        confirPass: req.body.confirm_password
+        confirmPass: req.body.confirm_password
     }
     const errMsg = await authValidation.userRegisterValidation (data);
     if (errMsg.error != null) {
