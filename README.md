@@ -411,52 +411,11 @@ ROOT:.
 �               
 ����uploads
 �   ����products
-�   �       .gitkeep
-�   �       coverImage-1596314211862
-�   �       coverImage-1596314212132
-�   �       coverImage-1596314212436
-�   �       coverImage-1596314212581
-�   �       coverImage-1596314212739
-�   �       coverImage-1596314212900
-�   �       coverImage-1596314213061
-�   �       coverImage-1596314213203
-�   �       coverImage-1596314213366
-�   �       coverImage-1596314213541
-�   �       coverImage-1596314213683
-�   �       coverImage-1596314213860
-�   �       coverImage-1596314214004
-�   �       coverImage-1596314214182
-�   �       coverImage-1596314214324
-�   �       coverImage-1596314214469
-�   �       coverImage-1596314214611
-�   �       coverImage-1596314214741
-�   �       coverImage-1596559270944
-�   �       coverImage-1596559366196
-�   �       coverImage-1596559380383
-�   �       coverImage-1596723844993
-�   �       coverImage-1596725073781
-�   �       coverImage-1596808508338
-�   �       coverImage-1596808676110
-�   �       coverImage-1596812272982
-�   �       coverImage-1596812539220
-�   �       coverImage-1596887647266
-�   �       coverImage-1596922604112
-�   �       coverImage-1596927994151
-�   �       coverImage-1596928010336
-�   �       coverImage-1596928042778
-�   �       coverImage-1596928053107
-�   �       coverImage-1596928061091
-�   �       coverImage-1596928068901
-�   �       coverImage-1596928221971
-�   �       coverImage-1596928239947
-�   �       coverImage-1596928246067
-�   �       coverImage-1597169023687
-�   �       coverImage-1597171189305
+�   �       (Cover Images of products)
 �   �       
 �   ����users
 �       ����avatars
-�               .gitkeep
-�               file-1596306071571
+�               (user's Avatars)
 �               
 ����validations
 �       authValidation.js
