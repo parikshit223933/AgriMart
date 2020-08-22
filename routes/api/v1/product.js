@@ -30,7 +30,6 @@ router.post(
 );
 router.post(
 	"/get-single-product",
-	passport.authenticate("jwt", { session: false }),
 	productApi.getSingleProduct
 );
 router.post("/categorized-products", productApi.CategorizedProduct);
