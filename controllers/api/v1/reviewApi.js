@@ -94,9 +94,9 @@ module.exports.deleteReview = async (req, res) =>
     {
         let product = await Product.findById(req.body.productId);
         let review = await Review.findById(req.body.reviewId);
-        console.log(req.body.userId, product.seller);
+        console.log(req.body.userId, review.author);
 
-        if (req.body.userId != product.seller)
+        if (req.body.userId != review.author)
         {
             return res.json(401, {
                 success: false,
