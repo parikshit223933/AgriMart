@@ -181,282 +181,74 @@ A few of the things you can do with Agrimart:
 
 <br/>
 
-## File Structure
-```
-ROOT:.
-�   .gitignore
-�   index.js
-�   output.txt
-�   package-lock.json
-�   package.json
-�   README.md
-�   tree
-�   
-����client
-�   �   .gitignore
-�   �   package-lock.json
-�   �   package.json
-�   �   README.md
-�   �   
-�   ����build
-�   �   �   asset-manifest.json
-�   �   �   favicon.ico
-�   �   �   index.html
-�   �   �   logo192.png
-�   �   �   logo512.png
-�   �   �   manifest.json
-�   �   �   precache-manifest.ada22f7a7cac8bbc52af3dbaa6c6ee02.js
-�   �   �   robots.txt
-�   �   �   seedling.png
-�   �   �   service-worker.js
-�   �   �   
-�   �   ����static
-�   �       ����css
-�   �       �       2.60eec0d8.chunk.css
-�   �       �       2.60eec0d8.chunk.css.map
-�   �       �       main.4c4ec34b.chunk.css
-�   �       �       main.4c4ec34b.chunk.css.map
-�   �       �       
-�   �       ����js
-�   �       �       2.275c495f.chunk.js
-�   �       �       2.275c495f.chunk.js.LICENSE.txt
-�   �       �       2.275c495f.chunk.js.map
-�   �       �       main.1ce2a21a.chunk.js
-�   �       �       main.1ce2a21a.chunk.js.map
-�   �       �       runtime-main.09b85ec0.js
-�   �       �       runtime-main.09b85ec0.js.map
-�   �       �       
-�   �       ����media
-�   �               chandra.1b611657.jpg
-�   �               parikshit.42711121.jpg
-�   �               tushar.dd7fb070.jpg
-�   �                        
-�   ����public
-�   �       favicon.ico
-�   �       index.html
-�   �       logo192.png
-�   �       logo512.png
-�   �       manifest.json
-�   �       robots.txt
-�   �       seedling.png
-�   �       
-�   ����src
-�       �   App.css
-�       �   cart.css
-�       �   category.css
-�       �   checkOutForm.css
-�       �   home.css
-�       �   index.css
-�       �   index.js
-�       �   info.css
-�       �   Profile.css
-�       �   singleProduct.css
-�       �   
-�       ����actions
-�       �       actionTypes.js
-�       �       auth.js
-�       �       product.js
-�       �       
-�       ����components
-�       �   �   index.js
-�       �   �   
-�       �   ����AuthenticationComponent
-�       �   �       ForgotPassword.js
-�       �   �       ResetPassword.js
-�       �   �       SignIn.js
-�       �   �       SignUp.js
-�       �   �       
-�       �   ����CartComponent
-�       �   �       Cart.js
-�       �   �       
-�       �   ����CategoriesComponent
-�       �   �       Categories.js
-�       �   �       SingleCategory.js
-�       �   �       singleProductInCategory.js
-�       �   �       
-�       �   ����HomeComponent
-�       �   �       Home.js
-�       �   �       HomeSingleCategory.js
-�       �   �       Search.js
-�       �   �       
-�       �   ����MAIN_APP
-�       �   �       App.js
-�       �   �       
-�       �   ����MoreInfoComponent
-�       �   �       MoreInfo.js
-�       �   �       
-�       �   ����NavbarComponent
-�       �   �       Navbar.js
-�       �   �       
-�       �   ����Page404Component
-�       �   �       Page404.js
-�       �   �       
-�       �   ����PaymentComponents
-�       �   �       CheckOutForm.js
-�       �   �       CheckOutForm2.js
-�       �   �       stylesCheckout.css
-�       �   �       
-�       �   ����ProfileComponent
-�       �   �       ChangePassword.js
-�       �   �       ChangeProfilePicture.js
-�       �   �       EditProduct.js
-�       �   �       MultiProductContainer.js
-�       �   �       Profile.js
-�       �   �       ProfileBrief.js
-�       �   �       ProfileProductHistory.js
-�       �   �       ProfileSettings.js
-�       �   �       ProfileSoldItems.js
-�       �   �       ProfileSummary.js
-�       �   �       ProfileUnsoldItems.js
-�       �   �       SingleProductBox.js
-�       �   �       
-�       �   ����ReviewComponent
-�       �   �       Review.js
-�       �   �       ReviewCreator.js
-�       �   �       ReviewHeader.js
-�       �   �       
-�       �   ����Routes
-�       �   �       PrivateRoute.js
-�       �   �       RestrictedRoute.js
-�       �   �       
-�       �   ����SellComponent
-�       �   �       Sell.js
-�       �   �       
-�       �   ����SingleProductComponent
-�       �           SingleProduct.js
-�       �           
-�       ����helpers
-�       �       urls.js
-�       �       utils.js
-�       �       
-�       ����images
-�       �       chandra.jpg
-�       �       parikshit.jpg
-�       �       sc1.PNG
-�       �       sc2.PNG
-�       �       sc3.png
-�       �       sc4.png
-�       �       sc5.png
-�       �       sc6.png
-�       �       tushar.jpg
-�       �       
-�       ����reducers
-�       �       auth.js
-�       �       index.js
-�       �       product.js
-�       �       
-�       ����store
-�               index.js
-�               
-����config
-�       environment.js
-�       kue.js
-�       mongoose.js
-�       nodemailer.js
-�       passport-jwt-strategy.js
-�       passport_local_strategy.js
-�       
-����controllers
-�   �   home_controller.js
-�   �   product_controller.js
-�   �   review_controller.js
-�   �   users_controller.js
-�   �   
-�   ����api
-�       ����v1
-�               cartApi.js
-�               checkOut.js
-�               homeApi.js
-�               messagingApi.js
-�               productApi.js
-�               reviewApi.js
-�               usersApi.js
-�               
-����mailers
-�       authMailer.js
-�       checkoutMailer.js
-�       newProductMailer.js
-�       sendMessageMailer.js
-�       signUpMailer.js
-�       tokenMailer.js
-�       
-����models
-�       productModel.js
-�       reviewModel.js
-�       tokenModel.js
-�       userModel.js
-�                   
-����production_logs
-�       20200812-0000-01-access.log
-�       access.log
-�       
-����routes
-�   �   index.js
-�   �   new_product_router.js
-�   �   review_route.js
-�   �   users.js
-�   �   
-�   ����api
-�       �   index.js
-�       �   
-�       ����v1
-�               cart.js
-�               checkOut.js
-�               contact.js
-�               home.js
-�               index.js
-�               product.js
-�               review.js
-�               users.js
-�               
-����uploads
-�   ����products
-�   �       (Cover Images of products)
-�   �       
-�   ����users
-�       ����avatars
-�               (user's Avatars)
-�               
-����validations
-�       authValidation.js
-�       
-����views
-�   �   home.ejs
-�   �   layout.ejs
-�   �   sign_in.ejs
-�   �   sign_up.ejs
-�   �   user_profile.ejs
-�   �   _footer.ejs
-�   �   _header.ejs
-�   �   
-�   ����mailers
-�   �   ����auth
-�   �   �       forgotPassword.ejs
-�   �   �       login.ejs
-�   �   �       signUp.ejs
-�   �   �       
-�   �   ����product
-�   �   �       checkout.ejs
-�   �   �       createProduct.ejs
-�   �   �       
-�   �   ����selfMailer
-�   �           sendMessageToAgrimart.ejs
-�   �           sendMessageToClient.ejs
-�   �           
-�   ����products
-�   �       editProduct.ejs
-�   �       newProduct.ejs
-�   �       showPageProduct.ejs
-�   �       
-�   ����review
-�           updateReviewpage.ejs
-�           
-����workers
-        checkoutMailerWorker.js
-        forgotPasswordWorker.js
-        loginMailWorker.js
-        newProductMailWorker.js
-        selfMailWorker.js
-        signUpMailWorker.js
+## Component Structure
+```  
+Root:.
+│   index.js
+│
+├───AuthenticationComponent
+│       ForgotPassword.js
+│       ResetPassword.js
+│       SignIn.js
+│       SignUp.js
+│
+├───CartComponent
+│       Cart.js
+│
+├───CategoriesComponent
+│       Categories.js
+│       SingleCategory.js
+│       singleProductInCategory.js
+│
+├───HomeComponent
+│       Home.js
+│       HomeSingleCategory.js
+│       Search.js
+│
+├───MAIN_APP
+│       App.js
+│
+├───MoreInfoComponent
+│       MoreInfo.js
+│
+├───NavbarComponent
+│       Navbar.js
+│
+├───Page404Component
+│       Page404.js
+│
+├───PaymentComponents
+│       CheckOutForm.js
+│       CheckOutForm2.js
+│       stylesCheckout.css
+│
+├───ProfileComponent
+│       ChangePassword.js
+│       ChangeProfilePicture.js
+│       EditProduct.js
+│       MultiProductContainer.js
+│       Profile.js
+│       ProfileBrief.js
+│       ProfileProductHistory.js
+│       ProfileSettings.js
+│       ProfileSoldItems.js
+│       ProfileSummary.js
+│       ProfileUnsoldItems.js
+│       SingleProductBox.js
+│
+├───ReviewComponent
+│       Review.js
+│       ReviewCreator.js
+│       ReviewHeader.js
+│
+├───Routes
+│       PrivateRoute.js
+│       RestrictedRoute.js
+│
+├───SellComponent
+│       Sell.js
+│
+└───SingleProductComponent
+        SingleProduct.js         SingleProduct.js  
 ```
 
