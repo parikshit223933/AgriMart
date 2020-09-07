@@ -1,5 +1,6 @@
 <h1 align="center"> Agrimart </h1>
-<p align="center">http://agrimart.tech/</p><br>
+<p align="center"> <b> Main Website:</b> http://agrimart.tech/</p>
+<p align="center"> <b> Website Stats:</b> * https://parikshit223933.github.io/AgriMart/</p><br/>
 <p align="center">
   <a href="http://agrimart.tech">
     <img alt="Agrimart" title="Agrimart" src="https://www.pinclipart.com/picdir/big/141-1414730_flower-stem-template-1-buy-clip-art-seedling.png" width="150">
