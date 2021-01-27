@@ -32,5 +32,6 @@ yarn-error.log*
 /uploads/users/avatars/*
 !uploads/users/avatars/.gitkeep
 
-config/environment.js
+# config/environment.js
 production_logs/*
+dump.rdb
