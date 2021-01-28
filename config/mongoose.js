@@ -1,20 +1,28 @@
-const mongoose=require('mongoose');
-const env=require('./environment');
-const LOCAL_DB=`mongodb://localhost/${env.db}`;
+const mongoose = require('mongoose')
+const env = require('./environment')
+const LOCAL_DB = `mongodb://mongodb-server:27017/${env.db}`
 // const ONLINE_DB=env.db_online;
 
 /**
  * @WARNING : WE DO NOT NEED ONLINE DB NOW. DB WILL BE CREATED ON AWS ITSELF. PRODUCT TESTING IS ALREADY DONE. REMOVE IT IF YOU WANT TO.
  */
 
-mongoose.connect(LOCAL_DB, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
-const db=mongoose.connection;
+mongoose
+    .connect(LOCAL_DB, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        reconnectTries: Number.MAX_VALUE,
+        reconnectInterval: 500,
+        connectTimeoutMS: 10000,
+    })
+    .then(function () {
+        console.log('MongoDB is connected')
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 
-db.on('error', console.log.bind('Error in connecting to the Database'));
+const db = mongoose.connection
 
-db.once('open', function()
-{
-    console.log('Connected to the Database!');
-});
-
-module.exports=db;
+module.exports = db
