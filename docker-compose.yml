@@ -1,12 +1,25 @@
 version: '3'
 services:
-  redis-server: 
+  redis-server:
     image: 'redis'
+    container_name: redis_server
   mongodb-server:
     image: 'mongo'
     ports:
-      - "27017:27017"
+      - '27017:27017'
+    volumes:
+    # created a vol agrimart_mongo_data
+    # mongo data being stored in /data/db inside the container
+      - agrimart_mongo_data:/data/db
+    container_name: mongodb_server 
   node-app:
     image: 'parikshit223933/agrimart'
     ports:
-      - "8000:8000"
+      - '8000:8000'
+    depends_on:
+      - 'mongodb-server'
+      - 'redis-server'
+    container_name: agrimart_backend
+
+volumes:
+  agrimart_mongo_data:
