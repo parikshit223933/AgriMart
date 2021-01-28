@@ -19,6 +19,8 @@ services:
     depends_on:
       - 'mongodb-server'
       - 'redis-server'
+    environment:
+      - NODE_ENV=production
     container_name: agrimart_backend
 
 volumes:

@@ -9,7 +9,7 @@
 		"f-install": "npm install --prefix client",
 		"frontEnd": "npm start --prefix client",
 		"app": "concurrently \"npm run start\" \"npm run frontEnd\"",
-		"prod_start": "concurrently \"SET NODE_ENV=production\" \"node index.js\""
+		"prod_start": "node index.js"
 	},
 	"repository": {
 		"type": "git",
