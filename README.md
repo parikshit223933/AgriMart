@@ -121,8 +121,8 @@ Welcome to Agrimart, your number one source for all your agricultural needs. We'
         <img height="64px" src="https://cdn.svgporn.com/logos/git-icon.svg">
       </td>
       <td width="25%" align="center">
-        <span> <b>WebPack</b> </span><br><br>
-        <img height="64px" src="https://cdn.svgporn.com/logos/webpack.svg">
+        <span> <b>Docker</b> </span><br><br>
+        <img height="64px" src="https://cdn.svgporn.com/logos/docker-icon.svg">
       </td>
       <td width="25%" align="center">
         <span> <b>AWS EC2</b> </span><br><br>
