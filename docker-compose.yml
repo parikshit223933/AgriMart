@@ -13,7 +13,7 @@ services:
       - agrimart_mongo_data:/data/db
     container_name: mongodb_server 
   node-app:
-    image: 'parikshit223933/agrimart'
+    build: .
     ports:
       - '8000:8000'
     depends_on:
