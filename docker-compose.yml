@@ -7,6 +7,6 @@ services:
     ports:
       - "27017:27017"
   node-app:
-    build: .
+    image: 'parikshit223933/agrimart'
     ports:
       - "8000:8000"
