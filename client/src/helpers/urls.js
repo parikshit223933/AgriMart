@@ -1,6 +1,6 @@
-let API_ROOT = "http://localhost:8000/api/v1";
-let SERVER_ROOT = "http://localhost:8000";
-let PRODUCT_IMAGE_ROOT='http://localhost:8000/uploads/products/coverImage-';
+let API_ROOT = "http://100.26.178.219:8000/api/v1";
+let SERVER_ROOT = "http://100.26.178.219:8000";
+let PRODUCT_IMAGE_ROOT='http://100.26.178.219:8000/uploads/products/coverImage-';
 
 export const API_URLS = {
 	login: () => `${API_ROOT}/users/create-session`,
